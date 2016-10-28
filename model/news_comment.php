@@ -4,19 +4,23 @@ class NewsComment extends Connector{
 	public $attr_connector;
 	public $table_name;
 	public $news_com_comment;
+	public $news_com_comment_en;
 	public $news_com_date;
 	public $news_com_id;
 	public $news_com_news_id;
 	public $news_com_user_id;
 
-	public function __construct($news_com_comment,$news_com_date,$news_com_id,$news_com_news_id,$news_com_user_id){
+	public function __construct($news_com_comment,$news_com_comment_en,$news_com_date,$news_com_id,$news_com_news_id,$news_com_user_id){
 		$connector = Connector::ConexionBD();
 		$this->attr_connector = $connector['conexion'];
 		$this->table_name ="news_comment";
 		$seleccion;
-		if($news_com_comment != null || $news_com_date != null || $news_com_id != null || $news_com_news_id != null || $news_com_user_id != null ){
+		if($news_com_comment != null || $news_com_comment_en != null || $news_com_date != null || $news_com_id != null || $news_com_news_id != null || $news_com_user_id != null ){
 			if(!is_null($news_com_comment)){
 				$seleccion = array("news_com_comment",$news_com_comment);
+			}
+			if(!is_null($news_com_comment_en)){
+				$seleccion = array("news_com_comment_en",$news_com_comment_en);
 			}
 			if(!is_null($news_com_date)){
 				$seleccion = array("news_com_date",$news_com_date);
@@ -42,6 +46,13 @@ class NewsComment extends Connector{
 		}
 	public function setNewsComComment($news_com_comment){
 			$this->news_comment['news_com_comment'] = $news_com_comment;
+		}
+	public function getNewsComCommenten(){
+			$this->news_comment['news_com_comment_en'] = $this->objeto['contenido'][0]['news_com_comment_en'];
+			return $this->news_com_comment_en['news_com_comment_en'];
+		}
+	public function setNewsComCommenten($news_com_comment_en){
+			$this->news_comment['news_com_comment_en'] = $news_com_comment_en;
 		}
 	public function getNewsComDate(){
 			$this->news_comment['news_com_date'] = $this->objeto['contenido'][0]['news_com_date'];

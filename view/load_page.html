@@ -12,28 +12,30 @@
     			selectMonths: true,
     			selectYear: 10
     		});
-    		
-
-    		//format content and send to page procesor to storaga
-    		$('#send').click(function(){
-    			var html_art = $('#news').html();
-    			var src_attr = $(html_art).contents().find("img").attr("src");
-    			var text_attr = $('#news').text();
-    			//Create downloable element
-    			var image = document.createElement('a');
-    			$.ajax({
-    				method:"POST",
-    				url: "get_files.php",
-    				data: {url_image:src_attr}
-    			});
-    		});
     	});
+    	//Sending news to database
+    	function SaveNews(){
+    		//var news_body_es = $('#news_body_es').text();
+    		//$.post( "../controller/news_detail_controller.php", { news: text_attr } );
+    		var html_text = $('#news_body_es').html();
+    		var html_img = $(html_text).contents().find("img").attr("src");
+    		console.log(html_img);
+    		console.log($('#news_body_es').text());
+    	};
     	//show comment panel
     	function ShowCommentPanel(){
-    			if ($('#comment_panel').css('display') == "none") {
-    				$('#comment_panel').show();
+    			if ($('#comment_panel_es').css('display') == "none") {
+    				$('#comment_panel_es').show();
     			}else{
-    				$('#comment_panel').hide();
+    				$('#comment_panel_es').hide();
+    			}
+    		};
+    	//show english settings panel
+    	function ShowEnglishSettingPanel(){
+    			if ($('#english_content').css('display') == "none") {
+    				$('#english_content').show();
+    			}else{
+    				$('#english_content').hide();
     			}
     		};
     </script>
@@ -46,39 +48,69 @@
 	<div class="container col s8">
 		<div class="row">
 			<div class="row">
-				<div class="row" id="news" name="news" contenteditable="true" style="width: 100%; height: 50%; border-style: solid; color: grey;"> Here</div>
-			    <label for="news">NEWS:</label>
+				<input type="text" class="validate" id="news_title_es"></input>
+				<label for="news_title_es">SPANISH TITLE</label>
+			</div>
+			<div class="row">
+				<div class="row" id="news_body_es" name="news_body_es" contenteditable="true" style="width: 100%; height: 50%; border-style: solid; color: grey;"> Here</div>
+			    <label for="news_body_es">NEWS:</label>
 			</div>		
 			<div class="row">
-				<div class="container col s4">
+				<div class="container col s2">
 					<input type="date" class="datepicker" id="news_date"></input>
 					<label for="news_date">NEWS DATE</label> 
 				</div>
-				<div class="container col s5">
+				<div class="container col s4">
 					<input class="validate" id="news_source"></input>
 					<label for="new_source">NEWS SOURCE</label>
 				</div>
 				<div class="container col s2" style="margin-left: 7%; align-content: right;">
-					<div class="switch" id="add_comment">
+					<div class="switch" id="add_comment_es">
 						<label>
 							NO
-							<input type="checkbox" onchange="ShowCommentPanel()" id="select_comment"></input>
+							<input type="checkbox" onchange="ShowCommentPanel()" id="select_comment_es"></input>
 							<span class="lever"></span>
 							YES
 						</label>
 					</div>
-					<label for="add_comment">ADD COMMENT</label>
+					<label for="add_comment_es">ADD COMMENT</label>
+				</div>
+				<div class="container col s2" style="margin-left: 7%; align-content: right;">
+					<div class="switch" id="english_content_panel">
+						<label>
+							NO
+							<input type="checkbox" onchange="ShowEnglishSettingPanel()" id="select_english_panel"></input>
+							<span class="lever"></span>
+							YES
+						</label>
+					</div>
+					<label for="english_content_panel">ENGLISH VERSION</label>
 				</div>
 			</div>
 		</div>
-		<div class="row" id="comment_panel" style="display: none;">
+		<div class="row" id="comment_panel_es" style="display: none;">
 			<div class="row">
-				<textarea class="materialize-textarea" id="news_comment"></textarea>
-				<label for="news_comment">COMMENT</label>
+				<textarea class="materialize-textarea" id="news_comment_es"></textarea>
+				<label for="news_comment_es">COMMENT</label>
+			</div>
+		</div>
+		<!--Display english setting news-->
+		<div class="row" id="english_content" style="display: none;">
+			<div class="row">
+				<input type="text" class="validate" id="news_title_en"></input>
+				<label for="news_title_en">ENGLISH TITLE</label>
+			</div>
+			<div class="row">
+				<div class="row" id="news_body_en" name="news_body_en" contenteditable="true" style="width: 100%; height: 50%; border-style: solid; color: grey;"> Here</div>
+			    <label for="news_boy_en">NEWS ENGLISH VERSION:</label>
+			</div>					
+			<div class="row">
+				<textarea class="materialize-textarea" id="news_comment_en"></textarea>
+				<label for="news_comment_en">COMMENT ENGLISH VERSION</label>
 			</div>
 		</div>
 		<div class="row">
-			<button class="btn  col s5" id="save">SAVE</button>
+			<button class="btn  col s5" id="save" onclick="SaveNews()">SAVE</button>
 			<button class="btn  col s5" id="cancel" style="margin-left: 15%">CANCEL</button>
 		</div>	
 	</div>
