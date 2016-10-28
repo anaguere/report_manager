@@ -15,12 +15,19 @@
     	});
     	//Sending news to database
     	function SaveNews(){
-    		//var news_body_es = $('#news_body_es').text();
-    		//$.post( "../controller/news_detail_controller.php", { news: text_attr } );
-    		var html_text = $('#news_body_es').html();
-    		var html_img = $(html_text).contents().find("img").attr("src");
-    		console.log(html_img);
-    		console.log($('#news_body_es').text());
+    		var news_body_html = $('#news_body_es').html();
+    		var news_img = $(news_body_html).contents().find("img").attr("src");
+    		var news_body_es = $('#news_body_es').text();
+    		$.post( "../controller/news_detail_create_controller.php", { news_title_es: $('#news_title_es').val(), 
+    			news_img: news_img,
+    			news_body_es: news_body_es,
+    			news_date: $('#news_date').val(),
+    			news_source: $('#news_source').val(),
+    			news_comment_es : $('#news_comment_es').val(),
+    			news_title_en : $('#news_title_en').val(),
+    			news_body_en : $('#news_body_en').val(),
+    			news_comment_en : $('#news_comment_en').val()
+    		 } );
     	};
     	//show comment panel
     	function ShowCommentPanel(){
@@ -41,7 +48,12 @@
     </script>
 </head>
 <body>
-<div class="row">
+<nav>
+	<div class="nav-wrapper">
+		<a href="#" class="brand-logo left">LOGO</a>
+	</div>
+</nav>
+<div class="row" style="margin-top: 2%">
 	<div class="container col s3">
 		<div class="row">index</div>
 	</div>
@@ -61,7 +73,7 @@
 					<label for="news_date">NEWS DATE</label> 
 				</div>
 				<div class="container col s4">
-					<input class="validate" id="news_source"></input>
+					<input type="url" class="validate" id="news_source"></input>
 					<label for="new_source">NEWS SOURCE</label>
 				</div>
 				<div class="container col s2" style="margin-left: 7%; align-content: right;">
@@ -101,7 +113,7 @@
 				<label for="news_title_en">ENGLISH TITLE</label>
 			</div>
 			<div class="row">
-				<div class="row" id="news_body_en" name="news_body_en" contenteditable="true" style="width: 100%; height: 50%; border-style: solid; color: grey;"> Here</div>
+			 	<textarea class="materialize-textarea" id="news_body_en" name="news_body_en"></textarea>
 			    <label for="news_boy_en">NEWS ENGLISH VERSION:</label>
 			</div>					
 			<div class="row">
