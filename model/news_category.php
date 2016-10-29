@@ -1,5 +1,4 @@
 <?php
-require('connector.php');
 class NewsCategory extends Connector{
 	public $attr_connector;
 	public $table_name;
@@ -57,7 +56,10 @@ class NewsCategory extends Connector{
 			return Connector::UpdateIn($this->attr_connector,$this->table_name,$this->news_category,$news_cat_id);
 		}
 	public function deleteNewsCategory($news_cat_id){
-			return Connector::DeleteIn($this->attr_connector,$this->table,"news_cat_id",$news_cat_id);
+			return Connector::DeleteIn($this->attr_connector,$this->table_name,"news_cat_id",$news_cat_id);
 		}
+	public function selectAllNewsCategory(){
+		 return Connector::SelectIn($this->attr_connector,$this->table_name,false);
+}
 }
 ?>

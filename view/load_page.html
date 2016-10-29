@@ -12,22 +12,43 @@
     			selectMonths: true,
     			selectYear: 10
     		});
+   		    $('select').material_select();
+   		    //Categories list
+   		    $.post("../controller/news_detail_controller.php",
+   		    	{router : "list" }).done(function(data){
+   		    		var selects = JSON.parse(data);	
+   		    		categories = selects.category.contenido;
+   		    		clients = selects.client.contenido;
+   		    		for(i =0; i < categories.length ; i++){
+   		    			$('#news_category').append("<option value="+categories[i].news_cat_id+">"+categories[i].news_cat_name+"</option>");
+   		    		}
+   		    		for(j =0; j < categories.length ; j++){
+   		    			$('#news_client').append("<option value="+categories[j].cli_lis_id+">"+categories[j].cli_lis_name+"</option>");
+   		    		}
+   		    	});
     	});
     	//Sending news to database
     	function SaveNews(){
     		var news_body_html = $('#news_body_es').html();
     		var news_img = $(news_body_html).contents().find("img").attr("src");
     		var news_body_es = $('#news_body_es').text();
-    		$.post( "../controller/news_detail_create_controller.php", { news_title_es: $('#news_title_es').val(), 
+    		$.post( "../controller/news_detail_controller.php", { 
+    			router : "create",
+    			news_title_es: $('#news_title_es').val(), 
     			news_img: news_img,
     			news_body_es: news_body_es,
     			news_date: $('#news_date').val(),
     			news_source: $('#news_source').val(),
+    			news_comment_date : $('#comment_date').val(),
     			news_comment_es : $('#news_comment_es').val(),
     			news_title_en : $('#news_title_en').val(),
     			news_body_en : $('#news_body_en').val(),
-    			news_comment_en : $('#news_comment_en').val()
-    		 } );
+    			news_comment_en : $('#news_comment_en').val(),
+    			news_category : $('#news_category').val(),
+    			news_client : $('#news_client').val()
+    		 }).done(function(message){
+    		 	var message = message;
+    		 });
     	};
     	//show comment panel
     	function ShowCommentPanel(){
@@ -62,6 +83,18 @@
 			<div class="row">
 				<input type="text" class="validate" id="news_title_es"></input>
 				<label for="news_title_es">SPANISH TITLE</label>
+			</div>
+			<div class="row">
+				<div class="input-fiels col s6">
+					<select id="news_category">
+					</select>
+					<label>CATEGORY</label>
+				</div>
+				<div class="input-fiels col s6">
+					<select id="news_client">
+					</select>
+					<label>CLIENT</label>
+				</div>
 			</div>
 			<div class="row">
 				<div class="row" id="news_body_es" name="news_body_es" contenteditable="true" style="width: 100%; height: 50%; border-style: solid; color: grey;"> Here</div>
@@ -101,6 +134,12 @@
 			</div>
 		</div>
 		<div class="row" id="comment_panel_es" style="display: none;">
+			<div class="row">
+				<div class="container col s2">
+					<input type="date" class="datepicker" id="comment_date"></input>
+					<label for="news_date">COMMENT DATE</label> 
+				</div>
+			</div>
 			<div class="row">
 				<textarea class="materialize-textarea" id="news_comment_es"></textarea>
 				<label for="news_comment_es">COMMENT</label>
