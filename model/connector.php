@@ -113,6 +113,32 @@ class Connector
             return $this->resultado;
         }
     }
+    #------------------------------- SELECCIONAR REGISTRO POR TIPO-------------------------------------------
+
+    final public function SelectType($conn, $tableName, $filed_name)
+    {
+        $query;
+        $sentence_exec;
+        $main_table_result;
+        $this->tableName  = $tableName;
+        $this->conn       = $conn;
+        $this->filed_name = $filed_name;
+        try {
+            $this->query             = "SELECT ".$filed_name." FROM ".$this->tableName.";";
+            $this->main_table_result = pg_fetch_all(pg_query($this->conn, $this->query));
+            if (!$this->main_table_result) {
+                throw new Exception("Error al acceder a la tabla".$this->tableName);
+            }
+            $this->resultado['conexion']  = true;
+            $this->resultado['contenido'] = $this->main_table_result;
+            return $this->resultado;
+        } catch (Exception $e) {
+            $this->resultado['conexion'] = false;
+            $this->resultado['mensaje']  = $e->getMessage();
+            return $this->resultado;
+        }
+    }
+
     #------------------------------- CREAR NUEVO REGISTRO -------------------------------------------
     final public function InsertIn($conn, $tableName, $column_name)
     {

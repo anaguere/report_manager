@@ -13,13 +13,13 @@ class NewsCategory extends Connector{
 		$seleccion;
 		if($news_cat_avaliable != null || $news_cat_id != null || $news_cat_name != null ){
 			if(!is_null($news_cat_avaliable)){
-				$seleccion = array("news_cat_avaliable",$news_cat_avaliable);
+					$seleccion = array("news_cat_avaliable",$news_cat_avaliable);
 			}
 			if(!is_null($news_cat_id)){
-				$seleccion = array("news_cat_id",$news_cat_id);
+					$seleccion = array("news_cat_id",$news_cat_id);
 			}
 			if(!is_null($news_cat_name)){
-				$seleccion = array("news_cat_name",$news_cat_name);
+					$seleccion = array("news_cat_name",$news_cat_name);
 			}
 			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $seleccion);
 		}
@@ -60,6 +60,9 @@ class NewsCategory extends Connector{
 		}
 	public function selectAllNewsCategory(){
 		 return Connector::SelectIn($this->attr_connector,$this->table_name,false);
+}
+	public function selectOneTypeNewsCategory($field_name){
+		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);
 }
 }
 ?>

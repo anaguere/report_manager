@@ -13,13 +13,13 @@ class NewsFiles extends Connector{
 		$seleccion;
 		if($news_file_archive != null || $news_file_id != null || $news_file_name != null ){
 			if(!is_null($news_file_archive)){
-				$seleccion = array("news_file_archive",$news_file_archive);
+					$seleccion = array("news_file_archive",$news_file_archive);
 			}
 			if(!is_null($news_file_id)){
-				$seleccion = array("news_file_id",$news_file_id);
+					$seleccion = array("news_file_id",$news_file_id);
 			}
 			if(!is_null($news_file_name)){
-				$seleccion = array("news_file_name",$news_file_name);
+					$seleccion = array("news_file_name",$news_file_name);
 			}
 			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $seleccion);
 		}
@@ -60,6 +60,9 @@ class NewsFiles extends Connector{
 		}
 	public function selectAllNewsFiles(){
 		 return Connector::SelectIn($this->attr_connector,$this->table_name,false);
+}
+	public function selectOneTypeNewsFiles($field_name){
+		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);
 }
 }
 ?>

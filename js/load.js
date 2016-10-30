@@ -35,9 +35,9 @@
             }
         };
         //Load index view
-        function IndexView(){
+        function IndexViewTitles(){
             $.post("../controller/news_detail_controller.php",
-                {router: "view_index"}).done(function(data){
+                {router: "view_index_titles"}).done(function(data){
                     console.log(JSON.parse(data));
                 });
             };
@@ -90,4 +90,3 @@
                 $('#pdf_view').attr('src',path);
             });
         }
-        

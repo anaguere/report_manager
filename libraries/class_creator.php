@@ -62,7 +62,7 @@ foreach ($json_db as $clave => $valor) {
     $class_define .= "){".$bl;
     foreach ($valor as $const_def => $const_val) {
         $class_define .= "\t\t\tif(!is_null(\$".$const_def.")){".$bl;
-        $class_define .= "\t\t\t\t\$seleccion = array(\"".$const_def."\",\$".$const_def.");".$bl;
+        $class_define .= "\t\t\t\t\t\$seleccion = array(\"".$const_def."\",\$".$const_def.");".$bl;
         $class_define .= "\t\t\t}".$bl;
     }
     $class_define .= "\t\t\t\$this->objeto = Connector::SelectIn(\$this->attr_connector, \$this->table_name, \$seleccion);".$bl;
@@ -100,6 +100,9 @@ foreach ($json_db as $clave => $valor) {
     $class_define .= "\t\t}".$bl;
     $class_define .= "\tpublic function selectAll".$class_name."(){".$bl;
     $class_define .= "\t\t return Connector::SelectIn(\$this->attr_connector,\$this->table_name,false);".$bl;
+    $class_define .= "}".$bl;
+    $class_define .= "\tpublic function selectOneType".$class_name."(\$field_name){".$bl;
+    $class_define .= "\t\t return Connector::SelectType(\$this->attr_connector,\$this->table_name,\$field_name);".$bl;
     $class_define .= "}".$bl;
     $class_define .= "}".$bl;
     $class_define .= "?>";

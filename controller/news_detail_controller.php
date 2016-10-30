@@ -5,10 +5,11 @@ require '../model/news_detail.php';
 require '../model/news_comment.php';
 require '../model/news_category.php';
 require '../model/client_list.php';
+require '../model/news_type.php';
 
 if ($_POST['router'] == 'create') {
     $content     = new GetContents();
-    $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null);
+    $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
     $title_es    = $content->GetPostContent("news_title_es");
     $tmp_img     = $content->GetPostContent("news_img");
     if (empty($tmp_img)) {
@@ -50,11 +51,21 @@ if ($_POST['router'] == 'create') {
 if ($_POST['router'] == "list") {
     $category = new NewsCategory(null, null, null);
     $client   = new ClientList(null, null, null);
-    echo json_encode(array("client" => $client->selectAllClientList(), "category" => $category->selectAllNewsCategory()));
+    $type     = new NewsType(null, null, null);
+
+    echo json_encode(array("client" => $client->selectAllClientList(),
+            "category"                    => $category->selectAllNewsCategory(),
+            "type"                        => $type->selectAllNewsType()
+        ));
 }
 
-if ($_POST['router'] == "view_index") {
-    $news_list = new NewsDetail(null, null, null, null, null, null, null, null, null, null);
-    echo json_encode($news_list->selectAllNewsDetail());
+if ($_POST['router'] == "view_index_titles") {
+    $news_list    = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
+    $title_es     = $news_list->selectOneTypeNewsDetail("news_det_tit");
+    $title_en     = $news_list->selectOneTypeNewsDetail("news_det_tit_en");
+    $array_titles = array("title_es" => $title_es['contenido'],
+        "title_en"                      => $title_es['contenido'],
+    );
+    echo json_encode($array_titles);
 }
 
