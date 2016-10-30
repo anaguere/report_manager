@@ -7,10 +7,15 @@ require '../model/news_category.php';
 require '../model/client_list.php';
 
 if ($_POST['router'] == 'create') {
-    $content      = new GetContents();
-    $news_detail  = new NewsDetail(null, null, null, null, null, null, null, null, null, null);
-    $title_es     = $content->GetPostContent("news_title_es");
-    $img          = base64_encode(file_get_contents($content->GetPostContent("news_img")));
+    $content     = new GetContents();
+    $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null);
+    $title_es    = $content->GetPostContent("news_title_es");
+    $tmp_img     = $content->GetPostContent("news_img");
+    if (empty($tmp_img)) {
+        $img = "N/E";
+    } else {
+        $img = base64_encode(file_get_contents());
+    }
     $body_es      = $content->GetPostContent("news_body_es");
     $date         = $content->GetPostContent("news_date");
     $source       = $content->GetPostContent("news_source");
@@ -46,5 +51,10 @@ if ($_POST['router'] == "list") {
     $category = new NewsCategory(null, null, null);
     $client   = new ClientList(null, null, null);
     echo json_encode(array("client" => $client->selectAllClientList(), "category" => $category->selectAllNewsCategory()));
+}
+
+if ($_POST['router'] == "view_index") {
+    $news_list = new NewsDetail(null, null, null, null, null, null, null, null, null, null);
+    echo json_encode($news_list->selectAllNewsDetail());
 }
 

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="../js/jquery.js"></script>
+	<script src="../js/materialize.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
+    <script type="text/javascript">
+    $(document).ready(function(){
+    		//init datepicker component
+    		$('.datepicker').pickadate({
+    			selectMonths: true,
+    			selectYear: 10
+    		});
+
+    		$('select').material_select();
+    	});
+    	//Sending news to database
+
+    	//show comment panel
+
+
+    	$(document).ready(function(){
+            $('#container002').hide();
+
+            $(".bottom0010").sideNav();
+
+
+            $( "#bottom0001" ).click(function() {
+             $('#container002').hide();
+             $('#panel0003').hide();
+             $('#container001').show();
+
+         });
+
+            $( "#bottom0002" ).click(function() {
+             $('#container001').hide();
+             $('#panel0003').hide();
+             $('#container002').show();
+         });
+
+            $( "#bottom0003" ).click(function() {
+             $('#panel0001').hide();
+             $('#panel0002').hide();
+             $('#panel0003').show();
+         });    		
+
+            $( "#bottom0004" ).click(function() {
+             $('#panel0005').hide();
+             $('#panel0004').show();
+         });   
+
+            $( "#bottom0005" ).click(function() {
+             $('#panel0004').hide();
+             $('#panel0005').show();
+
+         });     
+
+
+        });
+
+
+
+        $(function () {
+
+            $(document).ready(function () {
+
+        // Build the chart
+        $('#container001').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Grafico Estadistico 1'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Cluuf C.A',
+                    y: 56.33
+                }, {
+                    name: 'ProVen C.A',
+                    y: 24.03,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'PlayCar C.A',
+                    y: 10.38
+                }, {
+                    name: 'Safari Corp',
+                    y: 4.77
+                }, {
+                    name: 'ManTa C.A.',
+                    y: 0.91
+                }]
+            }]
+        });
+});
+});
+
+$(function () {
+    // Create the chart
+    $('#container002').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Browser market shares. January, 2015 to May, 2015'
+        },
+        subtitle: {
+            text: 'Click the columns to view versions. Source: <a href="http://netmarketshare.com">netmarketshare.com</a>.'
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+            title: {
+                text: 'Total percent market share'
+            }
+
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        },
+
+        series: [{
+            name: 'Category A',
+            colorByPoint: true,
+            data: [{
+                name: 'Microsoft Internet Explorer',
+                y: 56.33,
+                drilldown: 'Microsoft Internet Explorer'
+            }, {
+                name: 'Category B',
+                y: 24.03,
+                drilldown: 'Chrome'
+            }, {
+                name: 'Category C',
+                y: 10.38,
+                drilldown: 'Firefox'
+            }, {
+                name: 'Category D',
+                y: 4.77,
+                drilldown: 'Safari'
+            }, {
+                name: 'Category E',
+                y: 0.91,
+                drilldown: 'Opera'
+            }, {
+                name: 'Category F',
+                y: 0.2,
+                drilldown: null
+            }]
+        }],
+        drilldown: {
+            series: [{
+                name: 'Category A',
+                id: 'Microsoft Internet Explorer',
+                data: [
+                [
+                'v11.0',
+                24.13
+                ],
+                [
+                'v8.0',
+                17.2
+                ],
+                [
+                'v9.0',
+                8.11
+                ],
+                [
+                'v10.0',
+                5.33
+                ],
+                [
+                'v6.0',
+                1.06
+                ],
+                [
+                'v7.0',
+                0.5
+                ]
+                ]
+            }, {
+                name: 'Category B',
+                id: 'Chrome',
+                data: [
+                [
+                'v40.0',
+                5
+                ],
+                [
+                'v41.0',
+                4.32
+                ],
+                [
+                'v42.0',
+                3.68
+                ],
+                [
+                'v39.0',
+                2.96
+                ],
+                [
+                'v36.0',
+                2.53
+                ],
+                [
+                'v43.0',
+                1.45
+                ],
+                [
+                'v31.0',
+                1.24
+                ],
+                [
+                'v35.0',
+                0.85
+                ],
+                [
+                'v38.0',
+                0.6
+                ],
+                [
+                'v32.0',
+                0.55
+                ],
+                [
+                'v37.0',
+                0.38
+                ],
+                [
+                'v33.0',
+                0.19
+                ],
+                [
+                'v34.0',
+                0.14
+                ],
+                [
+                'v30.0',
+                0.14
+                ]
+                ]
+            }, {
+                name: 'Category C',
+                id: 'Firefox',
+                data: [
+                [
+                'v35',
+                2.76
+                ],
+                [
+                'v36',
+                2.32
+                ],
+                [
+                'v37',
+                2.31
+                ],
+                [
+                'v34',
+                1.27
+                ],
+                [
+                'v38',
+                1.02
+                ],
+                [
+                'v31',
+                0.33
+                ],
+                [
+                'v33',
+                0.22
+                ],
+                [
+                'v32',
+                0.15
+                ]
+                ]
+            }, {
+                name: 'Category D',
+                id: 'Safari',
+                data: [
+                [
+                'v8.0',
+                2.56
+                ],
+                [
+                'v7.1',
+                0.77
+                ],
+                [
+                'v5.1',
+                0.42
+                ],
+                [
+                'v5.0',
+                0.3
+                ],
+                [
+                'v6.1',
+                0.29
+                ],
+                [
+                'v7.0',
+                0.26
+                ],
+                [
+                'v6.2',
+                0.17
+                ]
+                ]
+            }, {
+                name: 'Category E',
+                id: 'Opera',
+                data: [
+                [
+                'v12.x',
+                0.34
+                ],
+                [
+                'v28',
+                0.24
+                ],
+                [
+                'v27',
+                0.17
+                ],
+                [
+                'v29',
+                0.16
+                ]
+                ]
+            }]
+        }
+    });
+});
+</script>
+</head>
+<body>
+
+   <nav>
+
+
+      <div class="nav-wrapper" style="padding-right:100px; padding-left:100px;      padding-top: 10px; background:#0B0B3B"><span class="livicon"  style=""   data-hovercolor="white"
+        data-color="white" data-name="home" data-size="34">
+    </span>
+    <a href="#" class="brand-logo left" style="margin-top:-10px"> &nbsp;&nbsp;Home</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down" >
+
+
+        <li><a href="#">      
+            <span class="livicon"  style=""   data-hovercolor="white"
+            data-color="white" data-name="question" data-size="34">
+        </span></a></li>
+
+
+        <li><a href="#" data-activates="slide-out" class="bottom0010">      
+           <span class="livicon"  style=""   data-hovercolor="white"
+           data-color="white" data-name="folders" data-size="34">
+       </span></a></li>
+
+       <li><a href="user.html" >      
+        <span class="livicon"  style=""   data-hovercolor="white"
+        data-color="white" data-name="users-add" data-size="34">
+    </span></a></li>
+
+    <li><a href="load.html" >      
+        <span class="livicon"  style=""   data-hovercolor="white"
+        data-color="white" data-name="notebook" data-size="34">
+    </span></a></li>
+
+
+    <li><a href="#">      
+        <span class="livicon"  style=""   data-hovercolor="white"
+        data-color="white" data-name="sign-out" data-size="34">
+    </span></a></li>
+
+
+
+
+
+</ul>
+</div>
+
+</nav>
+
+
+
+<div class="row" style="">
+
+
+   <div class="container col s6" style="padding:30px">
+
+      <div class="container col s12">
+         <ul class="tabs" style="">
+            <li class="tab col s6"><a id="bottom0001" class="active"  href="#">Empresas</a></li>
+            <li class="tab col s6"><a id="bottom0002"   href="#">Category</a></li>
+        </ul>
+    </div>
+
+
+    <div  id="panel0001" class="container col s12" style="margin-top:10px; font-weight:bold; color:#000 ">
+        <div  id="container001" class="  card-panel   grey lighten-4"  style="height:526px">
+
+        </div>
+
+        <div  id="container002" class="  card-panel   grey lighten-4"  style="height:526px">
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+<div class="container col s6" style="padding:30px; margin-top:-10px">
+
+  <div class="container col s12">
+     <ul class="tabs" style="">
+        <li class="tab col s3"><a id="bottom0004" class="active"  href="#"> 
+           PRIVATE</a></li>
+           <li class="tab col s3"><a id="bottom0005"  href="#">PUBLIC</a></li>
+           <li class="tab col s3"><a id="bottom0006" href="#"> </a></li>
+       </ul>
+   </div>
+
+
+
+   <div id="panel0004" class="  card-panel   grey lighten-4"  style="height:530px; margin-top:65px;">
+
+
+    <div class="row" style="padding:30px;padding-top:0px">
+
+       <div  id="news_body_es" name="news_body_es" contenteditable="true" > 
+
+        <table class="striped" >
+            <thead>
+              <tr>
+                  <th data-field="id">Date</th>
+                  <th data-field="name">News</th>
+              </tr>
+          </thead>
+
+          <tbody>
+              <tr>
+                
+                <td>22/10/2016</td>
+                <td>Antonio D&iacute;az logr&oacute; bronce en Campeonato Mundial de Karate</td>
+            </tr>
+
+            <tr>
+                <td>20/10/2016</td>
+                <td>Lanzan dolares a Blatter en plena rueda de prensa (+Video)</td>
+
+            </tr>
+
+
+            <tr>
+                <td>28/10/2016</td>
+                <td>Roger Federer clasific&oacute; a semifinales de Winbledon en &eacute;pico partido
+                </td>
+
+            </tr>
+
+              <tr>
+                
+                <td>22/10/2016</td>
+                <td>Antonio D&iacute;az logr&oacute; bronce en Campeonato Mundial de Karate</td>
+            </tr>
+
+            <tr>
+                <td>20/10/2016</td>
+                <td>Lanzan dolares a Blatter en plena rueda de prensa (+Video)</td>
+
+            </tr>
+
+
+            <tr>
+                <td>28/10/2016</td>
+                <td>Roger Federer clasific&oacute; a semifinales de Winbledon en &eacute;pico partido
+                </td>
+
+            </tr>
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+
+
+</div>
+
+
+</div>
+</div>
+
+
+<div  id="panel0005" class="  card-panel   grey lighten-4"  style="display:none; height:530px; margin-top:65px;">
+
+
+    <div class="row" style="padding:30px;padding-top:0px">
+
+        <div  id="news_body_es" name="news_body_es" contenteditable="true" > 
+
+            <table class="striped" >
+                <thead>
+                  <tr>
+                      <th data-field="id">Full Name</th>
+                      <th data-field="name">Perfil</th>
+                      <th data-field="name">Company</th>
+                      <th data-field="price">Estatu</th>
+                  </tr>
+              </thead>
+
+              <tbody>
+
+                  <tr>
+                    <td>Rafael Alvarez</td>
+                    <td>Viewer</td>
+                    <td>cluuf C.A.</td>
+                    <td>Inactive</td>
+                </tr>
+                <tr>
+                    <td>Carla Sanz</td>
+                    <td>Editor</td>
+                    <td>PlayCard C.A</td>
+                    <td>Active</td>
+                </tr>                             
+                <tr>
+                    <td>Carlo Lopez</td>
+                    <td>Editor</td>
+                    <td>PlayCard C.A</td>
+                    <td>Active</td>
+                </tr>                            
+                <tr>
+                    <td>Eduardo Jimenez</td>
+                    <td>Viewer</td>
+                    <td>PlayCard C.A</td>
+                    <td>Active</td>
+                </tr>                              
+                <tr>
+                    <td>Anais Quintero</td>
+                    <td>Editor</td>
+                    <td>ProVeN C.A</td>
+                    <td>Active</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+</div>
+</div>
+
+
+</div>
+
+
+<div id="slide-out" class="side-nav">
+
+ <div class="container col s12">
+    <ul class="tabs" style="">
+       <li class="tab col s3"><a id="bottom0001" class="active"  href="#">A-Z</a></li>
+       <li class="tab col s3"><a id="bottom0002"  href="#">Category</a></li>
+       <li class="tab col s3"><a id="bottom0003" href="#">Latest Recents</a></li>
+   </ul>
+</div>
+
+<ul class="collapsible" data-collapsible="accordion">
+    <li>
+       <div class="collapsible-header">First</div>
+       <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+   </li>
+   <li>
+       <div class="collapsible-header">Second</div>
+       <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+   </li>
+   <li>
+       <div class="collapsible-header">Third</div>
+       <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+   </li>
+</ul>
+
+
+</div>
+
+
+
+</div>
+<script src="../js/raphael-min.js"></script>
+<script src="../js/livicons-customizer-1.4.js"></script>
+<script src="../js/customizer.js"></script>
+
+</body>
+</html>
