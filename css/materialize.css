@@ -8298,4 +8298,7 @@ body{
 
 .color_nav{
   background: #810d0d;
+  padding-right:100px; 
+  padding-left:100px;  
+     padding-top: 10px;
 }
