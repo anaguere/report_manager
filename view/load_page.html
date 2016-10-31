@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="../js/jquery.js"></script>
+	<script src="../js/materialize.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		//init datepicker component
+    		$('.datepicker').pickadate({
+    			selectMonths: true,
+    			selectYear: 10
+    		});
+   		    $('select').material_select();
+   		    //Categories list
+   		    $.post("../controller/news_detail_controller.php",
+   		    	{router : "list" }).done(function(data){
+   		    		var selects = JSON.parse(data);	
+   		    		categories = selects.category.contenido;
+   		    		clients = selects.client.contenido;
+   		    		for(i =0; i < categories.length ; i++){
+   		    			$('#news_category').append("<option value="+categories[i].news_cat_id+">"+categories[i].news_cat_name+"</option>");
+   		    		}
+   		    		for(j =0; j < categories.length ; j++){
+   		    			$('#news_client').append("<option value="+categories[j].cli_lis_id+">"+categories[j].cli_lis_name+"</option>");
+   		    		}
+   		    	});
+    	});
+    	//Sending news to database
+    	function SaveNews(){
+    		var news_body_html = $('#news_body_es').html();
+    		var news_img = $(news_body_html).contents().find("img").attr("src");
+    		var news_body_es = $('#news_body_es').text();
+    		$.post( "../controller/news_detail_controller.php", { 
+    			router : "create",
+    			news_title_es: $('#news_title_es').val(), 
+    			news_img: news_img,
+    			news_body_es: news_body_es,
+    			news_date: $('#news_date').val(),
+    			news_source: $('#news_source').val(),
+    			news_comment_date : $('#comment_date').val(),
+    			news_comment_es : $('#news_comment_es').val(),
+    			news_title_en : $('#news_title_en').val(),
+    			news_body_en : $('#news_body_en').val(),
+    			news_comment_en : $('#news_comment_en').val(),
+    			news_category : $('#news_category').val(),
+    			news_client : $('#news_client').val()
+    		 }).done(function(message){
+    		 	var message = message;
+    		 });
+    	};
+    	//show comment panel
+    	function ShowCommentPanel(){
+    			if ($('#comment_panel_es').css('display') == "none") {
+    				$('#comment_panel_es').show();
+    			}else{
+    				$('#comment_panel_es').hide();
+    			}
+    		};
+    	//show english settings panel
+    	function ShowEnglishSettingPanel(){
+    			if ($('#english_content').css('display') == "none") {
+    				$('#english_content').show();
+    			}else{
+    				$('#english_content').hide();
+    			}
+    		};
+    </script>
+</head>
+<body>
+<nav>
+	<div class="nav-wrapper">
+		<a href="#" class="brand-logo left">LOGO</a>
+	</div>
+</nav>
+<div class="row" style="margin-top: 2%">
+	<div class="container col s3">
+		<div class="row">index</div>
+	</div>
+	<div class="container col s8">
+		<div class="row">
+			<div class="row">
+				<input type="text" class="validate" id="news_title_es"></input>
+				<label for="news_title_es">SPANISH TITLE</label>
+			</div>
+			<div class="row">
+				<div class="input-fiels col s6">
+					<select id="news_category">
+					</select>
+					<label>CATEGORY</label>
+				</div>
+				<div class="input-fiels col s6">
+					<select id="news_client">
+					</select>
+					<label>CLIENT</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="row" id="news_body_es" name="news_body_es" contenteditable="true" style="width: 100%; height: 50%; border-style: solid; color: grey;"> Here</div>
+			    <label for="news_body_es">NEWS:</label>
+			</div>		
+			<div class="row">
+				<div class="container col s2">
+					<input type="date" class="datepicker" id="news_date"></input>
+					<label for="news_date">NEWS DATE</label> 
+				</div>
+				<div class="container col s4">
+					<input type="url" class="validate" id="news_source"></input>
+					<label for="new_source">NEWS SOURCE</label>
+				</div>
+				<div class="container col s2" style="margin-left: 7%; align-content: right;">
+					<div class="switch" id="add_comment_es">
+						<label>
+							NO
+							<input type="checkbox" onchange="ShowCommentPanel()" id="select_comment_es"></input>
+							<span class="lever"></span>
+							YES
+						</label>
+					</div>
+					<label for="add_comment_es">ADD COMMENT</label>
+				</div>
+				<div class="container col s2" style="margin-left: 7%; align-content: right;">
+					<div class="switch" id="english_content_panel">
+						<label>
+							NO
+							<input type="checkbox" onchange="ShowEnglishSettingPanel()" id="select_english_panel"></input>
+							<span class="lever"></span>
+							YES
+						</label>
+					</div>
+					<label for="english_content_panel">ENGLISH VERSION</label>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="comment_panel_es" style="display: none;">
+			<div class="row">
+				<div class="container col s2">
+					<input type="date" class="datepicker" id="comment_date"></input>
+					<label for="news_date">COMMENT DATE</label> 
+				</div>
+			</div>
+			<div class="row">
+				<textarea class="materialize-textarea" id="news_comment_es"></textarea>
+				<label for="news_comment_es">COMMENT</label>
+			</div>
+		</div>
+		<!--Display english setting news-->
+		<div class="row" id="english_content" style="display: none;">
+			<div class="row">
+				<input type="text" class="validate" id="news_title_en"></input>
+				<label for="news_title_en">ENGLISH TITLE</label>
+			</div>
+			<div class="row">
+			 	<textarea class="materialize-textarea" id="news_body_en" name="news_body_en"></textarea>
+			    <label for="news_boy_en">NEWS ENGLISH VERSION:</label>
+			</div>					
+			<div class="row">
+				<textarea class="materialize-textarea" id="news_comment_en"></textarea>
+				<label for="news_comment_en">COMMENT ENGLISH VERSION</label>
+			</div>
+		</div>
+		<div class="row">
+			<button class="btn  col s5" id="save" onclick="SaveNews()">SAVE</button>
+			<button class="btn  col s5" id="cancel" style="margin-left: 15%">CANCEL</button>
+		</div>	
+	</div>
+</div>
+
+</body>
+</html>
