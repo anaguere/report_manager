@@ -115,16 +115,24 @@ class Connector
     }
     #------------------------------- SELECCIONAR REGISTRO POR TIPO-------------------------------------------
 
-    final public function SelectType($conn, $tableName, $filed_name)
+    final public function SelectType($conn, $tableName, $field_name)
     {
         $query;
         $sentence_exec;
         $main_table_result;
         $this->tableName  = $tableName;
         $this->conn       = $conn;
-        $this->filed_name = $filed_name;
+        $this->field_name = $field_name;
         try {
-            $this->query             = "SELECT ".$filed_name." FROM ".$this->tableName.";";
+            $i = 0;
+            while ($i < count($this->field_name)) {
+                $fiels .= $this->field_name[$i];
+                $i++;
+                if ($i > 0 && $i < count($this->field_name)) {
+                    $fiels .= ", ";
+                }
+            }
+            $this->query             = "SELECT ".$fiels." FROM ".$this->tableName.";";
             $this->main_table_result = pg_fetch_all(pg_query($this->conn, $this->query));
             if (!$this->main_table_result) {
                 throw new Exception("Error al acceder a la tabla".$this->tableName);
