@@ -16,24 +16,30 @@ class NewsComment extends Connector{
 		$seleccion;
 		if($news_com_comment != null || $news_com_comment_en != null || $news_com_date != null || $news_com_id != null || $news_com_news_id != null || $news_com_user_id != null ){
 			if(!is_null($news_com_comment)){
-					$seleccion = array("news_com_comment",$news_com_comment);
+					$field = "news_com_comment";
+					$value = $news_com_comment;
 			}
 			if(!is_null($news_com_comment_en)){
-					$seleccion = array("news_com_comment_en",$news_com_comment_en);
+					$field = "news_com_comment_en";
+					$value = $news_com_comment_en;
 			}
 			if(!is_null($news_com_date)){
-					$seleccion = array("news_com_date",$news_com_date);
+					$field = "news_com_date";
+					$value = $news_com_date;
 			}
 			if(!is_null($news_com_id)){
-					$seleccion = array("news_com_id",$news_com_id);
+					$field = "news_com_id";
+					$value = $news_com_id;
 			}
 			if(!is_null($news_com_news_id)){
-					$seleccion = array("news_com_news_id",$news_com_news_id);
+					$field = "news_com_news_id";
+					$value = $news_com_news_id;
 			}
 			if(!is_null($news_com_user_id)){
-					$seleccion = array("news_com_user_id",$news_com_user_id);
+					$field = "news_com_user_id";
+					$value = $news_com_user_id;
 			}
-			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $seleccion);
+			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $field, $value);
 		}
 		else{
 			$this->objeto = null;
@@ -92,7 +98,7 @@ class NewsComment extends Connector{
 			return Connector::DeleteIn($this->attr_connector,$this->table_name,"news_com_id",$news_com_id);
 		}
 	public function selectAllNewsComment(){
-		 return Connector::SelectIn($this->attr_connector,$this->table_name,false);
+		 return Connector::SelectIn($this->attr_connector,$this->table_name,$this->field,$this->value);
 }
 	public function selectOneTypeNewsComment($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);

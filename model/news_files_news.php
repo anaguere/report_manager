@@ -13,15 +13,18 @@ class NewsFilesnews extends Connector{
 		$seleccion;
 		if($news_files_id != null || $news_files_news_id != null || $news_news_id != null ){
 			if(!is_null($news_files_id)){
-					$seleccion = array("news_files_id",$news_files_id);
+					$field = "news_files_id";
+					$value = $news_files_id;
 			}
 			if(!is_null($news_files_news_id)){
-					$seleccion = array("news_files_news_id",$news_files_news_id);
+					$field = "news_files_news_id";
+					$value = $news_files_news_id;
 			}
 			if(!is_null($news_news_id)){
-					$seleccion = array("news_news_id",$news_news_id);
+					$field = "news_news_id";
+					$value = $news_news_id;
 			}
-			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $seleccion);
+			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $field, $value);
 		}
 		else{
 			$this->objeto = null;
@@ -59,7 +62,7 @@ class NewsFilesnews extends Connector{
 			return Connector::DeleteIn($this->attr_connector,$this->table_name,"news_news_id",$news_news_id);
 		}
 	public function selectAllNewsFilesnews(){
-		 return Connector::SelectIn($this->attr_connector,$this->table_name,false);
+		 return Connector::SelectIn($this->attr_connector,$this->table_name,$this->field,$this->value);
 }
 	public function selectOneTypeNewsFilesnews($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);

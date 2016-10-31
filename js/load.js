@@ -45,7 +45,7 @@
                             <div class='collapsible-header' id='header_"+cant+"'>"+i.toUpperCase()+"</div>");
                         if(n.length != 0){
                             $.each(n,function(j,v){
-                                $("#header_"+cant).after("<div class='collapsible-body' style='height:auto; line-height:26px'><a>"+v[1]+"</a></div>");
+                                $("#header_"+cant).after("<div class='collapsible-body' style='height:auto; line-height:26px'><a onclick='searchNews("+v[0]+")'>"+v[1]+"</a></div>");
                             });
                             $("#header_"+cant).after("</li>");
                         }
@@ -53,6 +53,17 @@
                     });
                 });
             };
+
+        //Searching detail news
+        function searchNews(news_id){
+            console.log(news_id);
+            $.post("../controller/news_detail_controller.php",
+                {router:"news_view",
+                 news_id : news_id
+            }).done(function(data){
+                    console.log(JSON.parse(data));
+                });
+        }
 
         //Sending news to database
         function SaveNews(){

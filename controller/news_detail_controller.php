@@ -85,3 +85,9 @@ if ($_POST['router'] == "view_index_titles") {
     echo json_encode(array("spanish_list" => $spanish_list, "english_list" => $english_list));
 }
 
+if ($_POST['router'] == "news_view") {
+    $content = new GetContents();
+    $news    = new NewsDetail(null, null, null, $content->GetPostContent("news_id"), null, null, null, null, null, null, null, null);
+    echo json_encode($news->selectAllNewsDetail());
+}
+

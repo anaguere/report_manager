@@ -13,15 +13,18 @@ class ClientList extends Connector{
 		$seleccion;
 		if($cli_lis_avaliable != null || $cli_lis_id != null || $cli_lis_name != null ){
 			if(!is_null($cli_lis_avaliable)){
-					$seleccion = array("cli_lis_avaliable",$cli_lis_avaliable);
+					$field = "cli_lis_avaliable";
+					$value = $cli_lis_avaliable;
 			}
 			if(!is_null($cli_lis_id)){
-					$seleccion = array("cli_lis_id",$cli_lis_id);
+					$field = "cli_lis_id";
+					$value = $cli_lis_id;
 			}
 			if(!is_null($cli_lis_name)){
-					$seleccion = array("cli_lis_name",$cli_lis_name);
+					$field = "cli_lis_name";
+					$value = $cli_lis_name;
 			}
-			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $seleccion);
+			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $field, $value);
 		}
 		else{
 			$this->objeto = null;
@@ -59,7 +62,7 @@ class ClientList extends Connector{
 			return Connector::DeleteIn($this->attr_connector,$this->table_name,"cli_lis_id",$cli_lis_id);
 		}
 	public function selectAllClientList(){
-		 return Connector::SelectIn($this->attr_connector,$this->table_name,false);
+		 return Connector::SelectIn($this->attr_connector,$this->table_name,$this->field,$this->value);
 }
 	public function selectOneTypeClientList($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);

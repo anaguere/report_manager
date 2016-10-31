@@ -13,15 +13,18 @@ class NewsCategory extends Connector{
 		$seleccion;
 		if($news_cat_avaliable != null || $news_cat_id != null || $news_cat_name != null ){
 			if(!is_null($news_cat_avaliable)){
-					$seleccion = array("news_cat_avaliable",$news_cat_avaliable);
+					$field = "news_cat_avaliable";
+					$value = $news_cat_avaliable;
 			}
 			if(!is_null($news_cat_id)){
-					$seleccion = array("news_cat_id",$news_cat_id);
+					$field = "news_cat_id";
+					$value = $news_cat_id;
 			}
 			if(!is_null($news_cat_name)){
-					$seleccion = array("news_cat_name",$news_cat_name);
+					$field = "news_cat_name";
+					$value = $news_cat_name;
 			}
-			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $seleccion);
+			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $field, $value);
 		}
 		else{
 			$this->objeto = null;
@@ -59,7 +62,7 @@ class NewsCategory extends Connector{
 			return Connector::DeleteIn($this->attr_connector,$this->table_name,"news_cat_id",$news_cat_id);
 		}
 	public function selectAllNewsCategory(){
-		 return Connector::SelectIn($this->attr_connector,$this->table_name,false);
+		 return Connector::SelectIn($this->attr_connector,$this->table_name,$this->field,$this->value);
 }
 	public function selectOneTypeNewsCategory($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);
