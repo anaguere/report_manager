@@ -59,30 +59,28 @@ if ($_POST['router'] == "list") {
         ));
 }
 
-#if ($_POST['router'] == "view_index_titles") {
-#_____________________________Selection spanish list___________________________________
-$news_list_es = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
-$title_es     = $news_list_es->selectOneTypeNewsDetail(array("news_det_tit", "news_det_id"));
-for ($i = 97; $i <= 122; $i++) {
-    $spanish_list[chr($i)] = array();
-    foreach ($title_es['contenido'] as $title => $text) {
-        $tmp = array_filter(mb_split('[\W+\s]', strtolower($text['news_det_tit'])));
-        if (substr($tmp[0], 0, 1) == chr($i)) {
-            array_push($spanish_list[chr($i)], array($text['news_det_id'], $text['news_det_tit']));
-        }
-    }}
-#_____________________________Selection english list___________________________________
-$news_list_en = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
-$title_es     = $news_list_en->selectOneTypeNewsDetail(array("news_det_tit_en", "news_det_id"));
-for ($i = 97; $i <= 122; $i++) {
-    $english_list[chr($i)] = array();
-    foreach ($title_es['contenido'] as $title => $text) {
-        $tmp = array_filter(mb_split('[\W+\s]', strtolower($text['news_det_tit_en'])));
-        if (substr($tmp[0], 0, 1) == chr($i)) {
-            array_push($english_list[chr($i)], array($text['news_det_id'], $text['news_det_tit_en']));
-        }
-    }}
-echo "<pre>";
-print_r($english_list);
-#}
+if ($_POST['router'] == "view_index_titles") {
+    #_____________________________Selection spanish list___________________________________
+    $news_list_es = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
+    $title_es     = $news_list_es->selectOneTypeNewsDetail(array("news_det_tit", "news_det_id"));
+    for ($i = 97; $i <= 122; $i++) {
+        $spanish_list[chr($i)] = array();
+        foreach ($title_es['contenido'] as $title => $text) {
+            $tmp = array_filter(mb_split('[\W+\s]', strtolower($text['news_det_tit'])));
+            if (substr($tmp[0], 0, 1) == chr($i)) {
+                array_push($spanish_list[chr($i)], array($text['news_det_id'], $text['news_det_tit']));
+            }
+        }}
+    #_____________________________Selection english list___________________________________
+    $news_list_en = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
+    $title_es     = $news_list_en->selectOneTypeNewsDetail(array("news_det_tit_en", "news_det_id"));
+    for ($i = 97; $i <= 122; $i++) {
+        $english_list[chr($i)] = array();
+        foreach ($title_es['contenido'] as $title => $text) {
+            $tmp = array_filter(mb_split('[\W+\s]', strtolower($text['news_det_tit_en'])));
+            if (substr($tmp[0], 0, 1) == chr($i)) {
+                array_push($english_list[chr($i)], array($text['news_det_id'], $text['news_det_tit_en']));
+            }
+        }}
+}
 
