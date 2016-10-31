@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+  <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
+  <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.css" />
+  <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.skinFlat.css" />
+
+</head>
+<select id="news_category">
+
+</select>
+<body>
+
+  <nav>
+
+
+    <div class="nav-wrapper" style="padding-right:100px; padding-left:100px;      padding-top: 10px; background:#0B0B3B">
+      <a href="#" class="brand-logo left" style="margin-top:-10px">Load Info</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down" >
+
+
+        <li><a href="#">      
+          <span class="livicon"  style=""   data-hovercolor="white"
+          data-color="white" data-name="question" data-size="34">
+        </span></a></li>
+
+
+        <li><a href="#" data-activates="slide-out" class="bottom0010">      
+         <span class="livicon"  style=""   data-hovercolor="white"
+         data-color="white" data-name="folders" data-size="34">
+       </span></a></li>
+
+       <li><a href="#" onclick="SaveNews()"  >
+
+         <span class="livicon"  style=""   data-hovercolor="white"
+         data-color="white" data-name="save" data-size="34">
+       </span>
+
+     </a></li>
+
+
+
+     <li><a href="home.html">      
+      <span class="livicon"  style=""   data-hovercolor="white"
+      data-color="white" data-name="remove" data-size="34">
+    </span></a></li>
+
+
+
+
+
+  </ul>
+</div>
+
+</nav>
+
+
+
+<div class="row" style="">
+
+
+ <div class="container col s6" style="padding:30px">
+
+  <div class="container col s12">
+   <ul class="tabs" style="">
+    <li class="tab col s3"><a id="bottom0001" class="active"  href="#">Info Basic</a></li>
+    <li class="tab col s3"><a id="bottom0002"  href="#">Comment</a></li>
+  </ul>
+</div>
+
+
+<div  id="panel0001" class="container col s12" style="margin-top:10px; font-weight:bold; color:#000 ">
+ <div class="  card-panel   grey lighten-4"  style="height:526px">
+
+
+  <div class="input-field  col s12 form01" style="margin-top:0px">
+   <input type="text" class="validate" id="news_title_es"></input>
+   <label for="news_title_es">SPANISH TITLE</label>
+ </div>
+
+
+ <div class="input-field  col s12 form01">
+   <input type="date" class="datepicker" id="news_date"></input>
+   <label for="news_date">NEWS DATE</label> 
+ </div>
+
+
+ <div class="input-field  col s12 form01" >
+   <input type="url" class="validate" id="news_source"></input>
+   <label for="new_source">FUENTE</label>
+ </div>
+
+ <div class="input-field col s6 form01">
+   <select id="news_category">
+
+   </select>
+   <label>CATEGORY</label>
+ </div>
+
+
+
+ <div class="input-field col s5 form01" style="margin-left:25px">
+   <select id="#">
+    <option value="Ley">LEY</option>
+  </select>
+  <label>MODE</label>
+</div>
+
+
+
+
+</div>
+</div>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+
+
+    <div class="input-field  col s12 form01" style="">
+     <textarea class="materialize-textarea" id="news_comment_es_add"></textarea>
+     <label for="news_comment_es">COMMENT</label>
+   </div>
+
+ </div>
+ <div class="modal-footer">
+  <a  id="addComment" class="waves-effect waves-light btn right modal-close ">ADD</a>
+  <a  style="margin-right:10px;" class=" modal-close waves-effect waves-light btn right">Close</a>
+</div>
+</div>
+
+
+<div  id="panel0002" class="container col s12" style="display:none; height:700px;  margin-top:30px; font-weight:bold; color:#000 ">
+
+ <div class="  card-panel   grey lighten-4"  style="height:526px">
+
+<a  id="botonmodal1" class="waves-effect waves-light btn" href="#modal1">ADD </a>
+
+<textarea id="news_comment_es"  style="margin-top:20px; height:400px; border:none; font-size:14px; overflow:scroll; font-weight:400" class=" col s12 " ></textarea>
+
+
+</div>
+</div>
+
+
+
+
+</div>
+
+
+
+<div class="container col s6" style="padding:30px; margin-top:-10px">
+
+  <div class="container col s12">
+   <ul class="tabs" style="">
+    <li class="tab col s3"><a id="bottom0005"  href="#">Files</a></li>
+    <li class="tab col s3"><a id="bottom0006" href="#"> Viewer </a></li>
+  </ul>
+</div>
+
+
+<div id="panel0005" class="  card-panel   grey lighten-4"  style="display:none; height:530px; margin-top:65px;">
+
+  <form enctype="multipart/form-data" id="formuploadajax" method="post">
+
+
+
+    <div class="input-field  col s12 form01" style="margin-top:0px">
+     <input type="text" class="validate" id="news_title_es"></input>
+     <label for="news_title_es">TITLE FILE</label>
+   </div>
+
+   <BR><BR>
+
+    <div class="input-field  col s12 form01" style="margin-top:0px">
+      <input  type="file" id="archivo1" name="archivo1"/>
+    </div>
+
+    <BR><BR>  <br>
+
+      <div class="input-field  col s12 form01" style="margin-top:0px">
+        <input type="submit" value="UPLOAD"/>
+      </div>
+
+
+    </form>
+    <div id="mensaje"></div>
+  </div>
+
+
+  <div id="panel0006" class="  card-panel   grey lighten-4"  style="display:none; height:530px; margin-top:65px;">
+
+    RRRRR
+
+    <div class="carousel carousel-slider center" data-indicators="true">
+
+      <div class="carousel-item red white-text" href="#one!">
+        <h2>First Panel</h2>
+        <p class="white-text">This is your first panel</p>
+      </div>
+      <div class="carousel-item amber white-text" href="#two!">
+        <h2>Second Panel</h2>
+        <p class="white-text">This is your second panel</p>
+      </div>
+      <div class="carousel-item green white-text" href="#three!">
+        <h2>Third Panel</h2>
+        <p class="white-text">This is your third panel</p>
+      </div>
+      <div class="carousel-item blue white-text" href="#four!">
+        <h2>Fourth Panel</h2>
+        <p class="white-text">This is your fourth panel</p>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>
+
+
+<div id="slide-out" class="side-nav">
+
+ <div class="container col s12">
+  <ul class="tabs" style="">
+   <li class="tab col s3"><a id="bottom0001" class="active"  href="#">A-Z</a></li>
+   <li class="tab col s3"><a id="bottom0002"  href="#">Category</a></li>
+   <li class="tab col s3"><a id="bottom0003" href="#">Latest Recents</a></li>
+ </ul>
+</div>
+
+<ul class="collapsible" data-collapsible="accordion">
+  <li>
+   <div class="collapsible-header">First</div>
+   <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+ </li>
+ <li>
+   <div class="collapsible-header">Second</div>
+   <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+ </li>
+ <li>
+   <div class="collapsible-header">Third</div>
+   <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+ </li>
+</ul>
+
+
+</div>
+
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script src="../js/load.js"></script>
+<script src="../js/raphael-min.js"></script>
+<script src="../js/livicons-customizer-1.4.js"></script>
+<script src="../js/customizer.js"></script>
+<script src="../ionRangeSliderDemo/js/ion.rangeSlider.js"></script>
+<script>
+
+$(function () {
+
+  $("#range").ionRangeSlider({
+    hide_min_max: true,
+    keyboard: true,
+    min: 0,
+    max: 5,
+    from: 0,
+    to: 4,
+    step: 1,
+    prefix: "",
+    grid: true
+  });
+
+});
+</script>
+
+
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
+
+$(document).ready(function(){
+
+
+  DatePicker();
+  InitSelect();
+  PDFViewer();
+  IndexViewTitles();
+
+
+  $("#addComment").click(function() {
+  
+   valor = $("#news_comment_es_add").val();
+   $("#news_comment_es_add").val("");
+   valor1 = '- '+valor+"\n\n"+$("#news_comment_es").val();
+
+
+   $("#news_comment_es").val(valor1);
+
+ });
+
+
+  $(".bottom0010").sideNav();
+
+  $( "#bottom0001" ).click(function() {
+   $('#panel0002').hide();
+   $('#panel0003').hide();
+   $('#panel0001').show();
+ });
+
+  $( "#bottom0002" ).click(function() {
+   $('#panel0001').hide();
+   $('#panel0003').hide();
+   $('#panel0002').show();
+ });
+
+  $( "#bottom0003" ).click(function() {
+   $('#panel0001').hide();
+   $('#panel0002').hide();
+   $('#panel0003').show();
+ });        
+
+
+  $( "#bottom0004" ).click(function() {
+   $('#panel0005').hide();
+   $('#panel0006').hide();
+   $('#panel0004').show();
+ });   
+
+  $( "#bottom0005" ).click(function() {
+   $('#panel0004').hide();
+   $('#panel0006').hide();
+   $('#panel0005').show();
+
+ });        
+
+  $( "#bottom0006" ).click(function() {
+   $('#panel0004').hide();
+   $('#panel0005').hide();
+   $('#panel0006').show();
+
+ });    
+
+
+
+ });
+
+
+
+
+
+</script>
+</body>
+</html>
