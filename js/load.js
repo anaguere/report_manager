@@ -38,7 +38,19 @@
         function IndexViewTitles(){
             $.post("../controller/news_detail_controller.php",
                 {router: "view_index_titles"}).done(function(data){
-                    console.log(JSON.parse(data));
+                    var titles = JSON.parse(data);
+                    var cant = 0;
+                    $.each(titles.spanish_list,function(i,n){
+                        $("#abc_index").append("<li>\
+                            <div class='collapsible-header' id='header_"+cant+"'>"+i.toUpperCase()+"</div>");
+                        if(n.length != 0){
+                            $.each(n,function(j,v){
+                                $("#header_"+cant).after("<div class='collapsible-body' style='height:auto; line-height:26px'><a>"+v[1]+"</a></div>");
+                            });
+                            $("#header_"+cant).after("</li>");
+                        }
+                        cant++;
+                    });
                 });
             };
 

@@ -82,5 +82,6 @@ if ($_POST['router'] == "view_index_titles") {
                 array_push($english_list[chr($i)], array($text['news_det_id'], $text['news_det_tit_en']));
             }
         }}
+    echo json_encode(array("spanish_list" => $spanish_list, "english_list" => $english_list));
 }
 
