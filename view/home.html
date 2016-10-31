@@ -3,7 +3,7 @@
 <head>
 	<title></title>
 	<script src="../js/jquery.js"></script>
-	<script src="../js/materialize.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
@@ -117,6 +117,17 @@
         });
 });
 });
+
+
+ $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal({   
+          dismissible: true, // Modal can be dismissed by clicking outside of the modal
+          opacity: 1
+      });
+  });
+
+
 
 $(function () {
     // Create the chart
@@ -402,7 +413,7 @@ $(function () {
         data-color="white" data-name="users-add" data-size="34">
     </span></a></li>
 
-    <li><a href="load.html" >      
+    <li><a href="#modal1" >      
         <span class="livicon"  style=""   data-hovercolor="white"
         data-color="white" data-name="notebook" data-size="34">
     </span></a></li>
@@ -605,6 +616,58 @@ $(function () {
 
 
 </div>
+
+
+
+<div id="modal1" class="modal blue-grey lighten-2" style="height:320px; overflow:hidden">
+  <div class="modal-content">
+
+
+    <div class="  col s4 " style="height:300px; text-align:center">  
+   
+            <a href="load.html" class="waves-effect waves-light btn   red darken-4" style=" width:200px; height:200px">
+                <br>
+
+                <span class="livicon"  style=""   data-hovercolor="white"
+                data-color="white" data-name="notebook" data-size="64">
+                    </span><br>
+               <h5>NEWS</h5>
+            </a>
+
+    </div>
+
+    <div class="  col s4  " style="height:300px; text-align:center">  
+   
+            <a href="ley.html" class="waves-effect waves-light btn b red darken-4 " style=" width:200px; height:200px">
+                <br>
+
+                <span class="livicon"  style=""   data-hovercolor="white"
+                data-color="white" data-name="balance" data-size="64">
+                    </span><br>
+               <h5>LEYES</h5>
+            </a>
+
+    </div>
+
+    <div class="  col s4 " style="height:300px; text-align:center">  
+   
+            <a class="waves-effect waves-light btn  red darken-4 " style=" width:200px; height:200px">
+                <br>
+
+                <span class="livicon"  style=""   data-hovercolor="white"
+                data-color="white" data-name="linechart" data-size="64">
+                    </span><br>
+               <h5>FINANZAS</h5>
+            </a>
+
+    </div>
+
+ </div>
+
+
+</div>
+
+
 
 
 <div id="slide-out" class="side-nav">
