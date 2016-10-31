@@ -3,7 +3,6 @@ class NewsDetail extends Connector{
 	public $attr_connector;
 	public $table_name;
 	public $news_det_category;
-	public $news_det_client;
 	public $news_det_date;
 	public $news_det_id;
 	public $news_det_image;
@@ -15,19 +14,15 @@ class NewsDetail extends Connector{
 	public $news_det_tit_en;
 	public $news_det_type;
 
-	public function __construct($news_det_category,$news_det_client,$news_det_date,$news_det_id,$news_det_image,$news_det_priority,$news_det_source,$news_det_text,$news_det_text_en,$news_det_tit,$news_det_tit_en,$news_det_type){
+	public function __construct($news_det_category,$news_det_date,$news_det_id,$news_det_image,$news_det_priority,$news_det_source,$news_det_text,$news_det_text_en,$news_det_tit,$news_det_tit_en,$news_det_type){
 		$connector = Connector::ConexionBD();
 		$this->attr_connector = $connector['conexion'];
 		$this->table_name ="news_detail";
 		$seleccion;
-		if($news_det_category != null || $news_det_client != null || $news_det_date != null || $news_det_id != null || $news_det_image != null || $news_det_priority != null || $news_det_source != null || $news_det_text != null || $news_det_text_en != null || $news_det_tit != null || $news_det_tit_en != null || $news_det_type != null ){
+		if($news_det_category != null || $news_det_date != null || $news_det_id != null || $news_det_image != null || $news_det_priority != null || $news_det_source != null || $news_det_text != null || $news_det_text_en != null || $news_det_tit != null || $news_det_tit_en != null || $news_det_type != null ){
 			if(!is_null($news_det_category)){
 					$field = "news_det_category";
 					$value = $news_det_category;
-			}
-			if(!is_null($news_det_client)){
-					$field = "news_det_client";
-					$value = $news_det_client;
 			}
 			if(!is_null($news_det_date)){
 					$field = "news_det_date";
@@ -81,13 +76,6 @@ class NewsDetail extends Connector{
 		}
 	public function setNewsDetCategory($news_det_category){
 			$this->news_detail['news_det_category'] = $news_det_category;
-		}
-	public function getNewsDetClient(){
-			$this->news_detail['news_det_client'] = $this->objeto['contenido'][0]['news_det_client'];
-			return $this->news_det_client['news_det_client'];
-		}
-	public function setNewsDetClient($news_det_client){
-			$this->news_detail['news_det_client'] = $news_det_client;
 		}
 	public function getNewsDetDate(){
 			$this->news_detail['news_det_date'] = $this->objeto['contenido'][0]['news_det_date'];
