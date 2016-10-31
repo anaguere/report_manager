@@ -3,7 +3,6 @@ class NewsDetail extends Connector{
 	public $attr_connector;
 	public $table_name;
 	public $news_det_category;
-	public $news_det_client;
 	public $news_det_date;
 	public $news_det_id;
 	public $news_det_image;
@@ -15,49 +14,57 @@ class NewsDetail extends Connector{
 	public $news_det_tit_en;
 	public $news_det_type;
 
-	public function __construct($news_det_category,$news_det_client,$news_det_date,$news_det_id,$news_det_image,$news_det_priority,$news_det_source,$news_det_text,$news_det_text_en,$news_det_tit,$news_det_tit_en,$news_det_type){
+	public function __construct($news_det_category,$news_det_date,$news_det_id,$news_det_image,$news_det_priority,$news_det_source,$news_det_text,$news_det_text_en,$news_det_tit,$news_det_tit_en,$news_det_type){
 		$connector = Connector::ConexionBD();
 		$this->attr_connector = $connector['conexion'];
 		$this->table_name ="news_detail";
 		$seleccion;
-		if($news_det_category != null || $news_det_client != null || $news_det_date != null || $news_det_id != null || $news_det_image != null || $news_det_priority != null || $news_det_source != null || $news_det_text != null || $news_det_text_en != null || $news_det_tit != null || $news_det_tit_en != null || $news_det_type != null ){
+		if($news_det_category != null || $news_det_date != null || $news_det_id != null || $news_det_image != null || $news_det_priority != null || $news_det_source != null || $news_det_text != null || $news_det_text_en != null || $news_det_tit != null || $news_det_tit_en != null || $news_det_type != null ){
 			if(!is_null($news_det_category)){
-					$seleccion = array("news_det_category",$news_det_category);
-			}
-			if(!is_null($news_det_client)){
-					$seleccion = array("news_det_client",$news_det_client);
+					$field = "news_det_category";
+					$value = $news_det_category;
 			}
 			if(!is_null($news_det_date)){
-					$seleccion = array("news_det_date",$news_det_date);
+					$field = "news_det_date";
+					$value = $news_det_date;
 			}
 			if(!is_null($news_det_id)){
-					$seleccion = array("news_det_id",$news_det_id);
+					$field = "news_det_id";
+					$value = $news_det_id;
 			}
 			if(!is_null($news_det_image)){
-					$seleccion = array("news_det_image",$news_det_image);
+					$field = "news_det_image";
+					$value = $news_det_image;
 			}
 			if(!is_null($news_det_priority)){
-					$seleccion = array("news_det_priority",$news_det_priority);
+					$field = "news_det_priority";
+					$value = $news_det_priority;
 			}
 			if(!is_null($news_det_source)){
-					$seleccion = array("news_det_source",$news_det_source);
+					$field = "news_det_source";
+					$value = $news_det_source;
 			}
 			if(!is_null($news_det_text)){
-					$seleccion = array("news_det_text",$news_det_text);
+					$field = "news_det_text";
+					$value = $news_det_text;
 			}
 			if(!is_null($news_det_text_en)){
-					$seleccion = array("news_det_text_en",$news_det_text_en);
+					$field = "news_det_text_en";
+					$value = $news_det_text_en;
 			}
 			if(!is_null($news_det_tit)){
-					$seleccion = array("news_det_tit",$news_det_tit);
+					$field = "news_det_tit";
+					$value = $news_det_tit;
 			}
 			if(!is_null($news_det_tit_en)){
-					$seleccion = array("news_det_tit_en",$news_det_tit_en);
+					$field = "news_det_tit_en";
+					$value = $news_det_tit_en;
 			}
 			if(!is_null($news_det_type)){
-					$seleccion = array("news_det_type",$news_det_type);
+					$field = "news_det_type";
+					$value = $news_det_type;
 			}
-			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $seleccion);
+			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $field, $value);
 		}
 		else{
 			$this->objeto = null;
@@ -69,13 +76,6 @@ class NewsDetail extends Connector{
 		}
 	public function setNewsDetCategory($news_det_category){
 			$this->news_detail['news_det_category'] = $news_det_category;
-		}
-	public function getNewsDetClient(){
-			$this->news_detail['news_det_client'] = $this->objeto['contenido'][0]['news_det_client'];
-			return $this->news_det_client['news_det_client'];
-		}
-	public function setNewsDetClient($news_det_client){
-			$this->news_detail['news_det_client'] = $news_det_client;
 		}
 	public function getNewsDetDate(){
 			$this->news_detail['news_det_date'] = $this->objeto['contenido'][0]['news_det_date'];
@@ -158,7 +158,7 @@ class NewsDetail extends Connector{
 			return Connector::DeleteIn($this->attr_connector,$this->table_name,"news_det_id",$news_det_id);
 		}
 	public function selectAllNewsDetail(){
-		 return Connector::SelectIn($this->attr_connector,$this->table_name,false);
+		 return Connector::SelectIn($this->attr_connector,$this->table_name,$this->field,$this->value);
 }
 	public function selectOneTypeNewsDetail($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);

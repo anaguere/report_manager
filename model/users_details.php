@@ -16,24 +16,30 @@ class UsersDetails extends Connector{
 		$seleccion;
 		if($user_inf_full_name != null || $user_inf_id != null || $user_inf_login != null || $user_inf_mail != null || $user_inf_national_ID != null || $user_inf_password != null ){
 			if(!is_null($user_inf_full_name)){
-					$seleccion = array("user_inf_full_name",$user_inf_full_name);
+					$field = "user_inf_full_name";
+					$value = $user_inf_full_name;
 			}
 			if(!is_null($user_inf_id)){
-					$seleccion = array("user_inf_id",$user_inf_id);
+					$field = "user_inf_id";
+					$value = $user_inf_id;
 			}
 			if(!is_null($user_inf_login)){
-					$seleccion = array("user_inf_login",$user_inf_login);
+					$field = "user_inf_login";
+					$value = $user_inf_login;
 			}
 			if(!is_null($user_inf_mail)){
-					$seleccion = array("user_inf_mail",$user_inf_mail);
+					$field = "user_inf_mail";
+					$value = $user_inf_mail;
 			}
 			if(!is_null($user_inf_national_ID)){
-					$seleccion = array("user_inf_national_ID",$user_inf_national_ID);
+					$field = "user_inf_national_ID";
+					$value = $user_inf_national_ID;
 			}
 			if(!is_null($user_inf_password)){
-					$seleccion = array("user_inf_password",$user_inf_password);
+					$field = "user_inf_password";
+					$value = $user_inf_password;
 			}
-			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $seleccion);
+			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $field, $value);
 		}
 		else{
 			$this->objeto = null;
@@ -92,7 +98,7 @@ class UsersDetails extends Connector{
 			return Connector::DeleteIn($this->attr_connector,$this->table_name,"user_inf_id",$user_inf_id);
 		}
 	public function selectAllUsersDetails(){
-		 return Connector::SelectIn($this->attr_connector,$this->table_name,false);
+		 return Connector::SelectIn($this->attr_connector,$this->table_name,$this->field,$this->value);
 }
 	public function selectOneTypeUsersDetails($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);

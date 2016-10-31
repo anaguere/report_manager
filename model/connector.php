@@ -67,22 +67,22 @@ class Connector
 
     #------------------------------- SELECCIONAR REGISTRO -------------------------------------------
 
-    final public function SelectIn($conn, $tableName, $array_insertion)
+    final public function SelectIn($conn, $tableName, $field, $value)
     {
         $query;
         $sentence_exec;
         $main_table_result;
-        $this->tableName       = $tableName;
-        $this->conn            = $conn;
-        $this->array_insertion = $array_insertion;
+        $this->tableName = $tableName;
+        $this->conn      = $conn;
+        $this->field     = $field;
+        $this->value     = $value;
         $foreign_keys;
         try {
-            if (!$this->array_insertion) {
+            if (!isset($this->field)) {
                 $this->query = "SELECT * FROM ".$this->tableName.";";
             } else {
-                $this->query = "SELECT * FROM ".$this->tableName." WHERE ".$this->array_insertion[0]."='".$this->array_insertion[1]."';";
+                $this->query = "SELECT * FROM ".$this->tableName." WHERE ".$this->field." in(".$this->value.")";
             }
-
             $this->main_table_result = pg_fetch_all(pg_query($this->conn, $this->query));
             if (!$this->main_table_result) {
                 throw new Exception("Error al acceder a la tabla".$this->tableName);

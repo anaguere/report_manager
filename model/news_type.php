@@ -13,15 +13,18 @@ class NewsType extends Connector{
 		$seleccion;
 		if($news_type_avaliable != null || $news_type_id != null || $news_type_name != null ){
 			if(!is_null($news_type_avaliable)){
-					$seleccion = array("news_type_avaliable",$news_type_avaliable);
+					$field = "news_type_avaliable";
+					$value = $news_type_avaliable;
 			}
 			if(!is_null($news_type_id)){
-					$seleccion = array("news_type_id",$news_type_id);
+					$field = "news_type_id";
+					$value = $news_type_id;
 			}
 			if(!is_null($news_type_name)){
-					$seleccion = array("news_type_name",$news_type_name);
+					$field = "news_type_name";
+					$value = $news_type_name;
 			}
-			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $seleccion);
+			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $field, $value);
 		}
 		else{
 			$this->objeto = null;
@@ -59,7 +62,7 @@ class NewsType extends Connector{
 			return Connector::DeleteIn($this->attr_connector,$this->table_name,"news_type_id",$news_type_id);
 		}
 	public function selectAllNewsType(){
-		 return Connector::SelectIn($this->attr_connector,$this->table_name,false);
+		 return Connector::SelectIn($this->attr_connector,$this->table_name,$this->field,$this->value);
 }
 	public function selectOneTypeNewsType($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);

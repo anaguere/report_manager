@@ -65,10 +65,7 @@
 
         </script>
     </head>
-     <select id="news_category">
-
-     </select>
-<body>
+  <body>
 
   <nav>
 
@@ -147,7 +144,7 @@
 
  <div class="input-field  col s12 form01" >
    <input type="url" class="validate" id="news_source"></input>
-   <label for="new_source">URL</label>
+   <label for="new_source">SOURCE</label>
  </div>
 
  <div class="input-field col s6 form01">
@@ -159,27 +156,16 @@
 
 
  <div class="input-field col s5 form01" style="margin-left:25px">
-   <select id="#">
-    <option value="National">National</option>
-    <option value="International">International</option>
+   <select id="news_type">
    </select>
-   <label>MODE</label>
+   <label>TYPE</label>
  </div>
 
 
  <div class="input-field col s6 form01">
-  <input type="text" id="range" value="" name="range" />
+  <input type="text" id="news_range" value="" name="range" />
      <label>RANGE</label>
 
-</div>
-
-
-
-<div class="input-field col s5 form01" style="margin-left:25px">
- <select id="news_client" >
-
- </select>
- <label>CLIENT</label>
 </div>
 
 </div>
@@ -242,7 +228,7 @@
 
   <div class="container col s12">
    <ul class="tabs" style="">
-    <li class="tab col s3"><a id="bottom0004" class="active"  href="#">New</a></li>
+    <li class="tab col s3"><a id="bottom0004" class="active"  href="#">News</a></li>
     <li class="tab col s3"><a id="bottom0005"  href="#">Files</a></li>
     <li class="tab col s3"><a id="bottom0006" href="#"> Viewer </a></li>
   </ul>
@@ -331,25 +317,8 @@
 </div>
 
 <ul class="collapsible" data-collapsible="accordion" id="abc_index">
-  <!--li>
-   <div class="collapsible-header">First</div>
-   <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
- </li>
- <li>
-   <div class="collapsible-header">Second</div>
-   <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
- </li>
- <li>
-   <div class="collapsible-header">Third</div>
-   <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
- </li-->
 </ul>
-
-
 </div>
-
-
-
 </div>
 <script src="../js/raphael-min.js"></script>
 <script src="../js/livicons-customizer-1.4.js"></script>
@@ -359,7 +328,7 @@
 
 $(function () {
 
-  $("#range").ionRangeSlider({
+  $("#news_range").ionRangeSlider({
     hide_min_max: true,
     keyboard: true,
     min: 0,
