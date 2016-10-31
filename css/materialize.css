@@ -8301,4 +8301,16 @@ body{
   padding-right:100px; 
   padding-left:100px;  
      padding-top: 10px;
+
+
+}
+
+
+.side-nav a {
+    color: #444;
+    display: block;
+    font-size: 1rem;
+    height: 64px;
+     line-height: 24px;
+    padding: 0 30px;
 }
