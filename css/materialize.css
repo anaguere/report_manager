@@ -8137,7 +8137,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .picker--time .picker__button--clear:focus {
   color: #000000;
   background: #b1dcfb;
-  background: #ee2200;
+  background: #f44336;
   border-color: #ee2200;
   cursor: pointer;
   color: #ffffff;
@@ -8258,10 +8258,12 @@ border-radius: 10px;
 
 .tabs{
 
-background:#610B0B; 
+background:#e57373; 
 padding:0px; 
 overflow:hidden; 
 height:50px;
+  font-weight: bold;
+
 }
 
 body{
@@ -8276,14 +8278,14 @@ body{
 
 .picker__date-display {
     text-align: center;
-    background-color: #0B0B3B;
+    background-color: #c62828;
     color: #fff;
     padding-bottom: 15px;
     font-weight: 300;
 }
 
 .picker__weekday-display {
-    background-color: #000;
+    background-color: #999;
     color: white;
     padding: 10px;
     font-weight: bold;
@@ -8313,4 +8315,33 @@ body{
     height: 64px;
      line-height: 24px;
     padding: 0 30px;
+}
+
+
+.nav_color{
+  background:#c62828;
+  padding-right:100px; 
+  padding-left:100px;      
+  padding-top: 10px; 
+}
+
+
+.btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #c62828;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+}
+
+.btn:hover, .btn-large:hover {
+    background-color: #ee6e73;
+}
+
+
+input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #c62828;
+    box-shadow: 0 1px 0 0 #c62828;
 }

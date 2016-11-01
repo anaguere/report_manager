@@ -4,74 +4,69 @@
 	<title></title>
 	<script src="../js/jquery.js"></script>
   <script src="../js/materialize.js"></script>
-	<script src="../js/load.js"></script>
-	<link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
+  <script src="../js/load.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
   <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.css" />
   <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.skinFlat.css" />
-        <script type="text/javascript">
+  <script type="text/javascript">
 
-        $(document).ready(function(){
-          DatePicker();
-          InitSelect();
-          PDFViewer();
-          IndexViewTitles();
-
-
-          $(".bottom0010").sideNav();
-
-          $( "#bottom0001" ).click(function() {
-           $('#panel0002').hide();
-           $('#panel0003').hide();
-           $('#panel0001').show();
-          });
-
-          $( "#bottom0002" ).click(function() {
-           $('#panel0001').hide();
-           $('#panel0003').hide();
-           $('#panel0002').show();
-          });
-
-          $( "#bottom0003" ).click(function() {
-           $('#panel0001').hide();
-           $('#panel0002').hide();
-           $('#panel0003').show();
-          });    		
+  $(document).ready(function(){
+    DatePicker();
+    InitSelect();
+    PDFViewer();
+    IndexViewTitles();
 
 
-          $( "#bottom0004" ).click(function() {
-           $('#panel0005').hide();
-           $('#panel0006').hide();
-           $('#panel0004').show();
-          });   
+    $(".bottom0010").sideNav();
 
-          $( "#bottom0005" ).click(function() {
-           $('#panel0004').hide();
-           $('#panel0006').hide();
-           $('#panel0005').show();
-
-       });        
-
-          $( "#bottom0006" ).click(function() {
-           $('#panel0004').hide();
-           $('#panel0005').hide();
-           $('#panel0006').show();
-
-       });    
-       $(".carousel.carousel-slider").carousel({full_width: true});
+    $( "#bottom0001" ).click(function() {
+     $('#panel0002').hide();
+     $('#panel0003').hide();
+     $('#panel0001').show();
+   });
 
 
-      });
+    $( "#bottom0003" ).click(function() {
+     $('#panel0001').hide();
+     $('#panel0002').hide();
+     $('#panel0003').show();
+   });    		
 
 
-        </script>
-    </head>
-  <body>
+    $( "#bottom0004" ).click(function() {
+     $('#panel0005').hide();
+     $('#panel0006').hide();
+     $('#panel0004').show();
+   });   
+
+    $( "#bottom0005" ).click(function() {
+     $('#panel0004').hide();
+     $('#panel0006').hide();
+     $('#panel0005').show();
+
+   });        
+
+    $( "#bottom0006" ).click(function() {
+     $('#panel0004').hide();
+     $('#panel0005').hide();
+     $('#panel0006').show();
+
+   });    
+    $(".carousel.carousel-slider").carousel({full_width: true});
+
+
+  });
+
+
+</script>
+</head>
+<body>
 
   <nav>
 
 
-    <div class="nav-wrapper" style="padding-right:100px; padding-left:100px;      padding-top: 10px; background:#0B0B3B">
-      <a href="#" class="brand-logo left" style="margin-top:-10px">Load Info</a>
+    <div class="nav-wrapper nav_color" style="">
+      <a href="#" class="brand-logo left" style="margin-top:-10px">News Info</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down" >
 
 
@@ -120,7 +115,6 @@
   <div class="container col s12">
    <ul class="tabs" style="">
     <li class="tab col s3"><a id="bottom0001" class="active"  href="#">Info Basic</a></li>
-    <li class="tab col s3"><a id="bottom0002"  href="#">Comment</a></li>
     <li class="tab col s3"><a id="bottom0003" href="#">English Version</a></li>
   </ul>
 </div>
@@ -147,7 +141,7 @@
    <label for="new_source">SOURCE</label>
  </div>
 
- <div class="input-field col s6 form01">
+ <div class="input-field col s12 form01">
    <select id="news_category">
 
    </select>
@@ -155,45 +149,15 @@
  </div>
 
 
- <div class="input-field col s5 form01" style="margin-left:25px">
-   <select id="news_type">
-   </select>
-   <label>TYPE</label>
- </div>
 
-
- <div class="input-field col s6 form01">
+ <div class="input-field col s12 form01">
   <input type="text" id="news_range" value="" name="range" />
-     <label>RANGE</label>
+  <label>RANGE</label>
 
 </div>
 
 </div>
 </div>
-
-
-
-
-<div  id="panel0002" class="container col s12" style="display:none; margin-top:30px; font-weight:bold; color:#000 ">
- <div class="  card-panel   grey lighten-4"  style="height:526px">
-
-
-  <div class="input-field  col s12 form01">
-   <input type="date" class="datepicker" id="comment_date"></input>
-   <label for="news_date">DATE COMMENT</label> 
- </div>
-
-
- <div class="input-field  col s12 form01" style="">
-   <textarea class="materialize-textarea" id="news_comment_es"></textarea>
-   <label for="news_comment_es">COMMENT</label>
- </div>
-
-
-
-</div>
-</div>
-
 
 
 <div  id="panel0003" class="container col s12" style="display:none; margin-top:30px; font-weight:bold; color:#000 ">
@@ -306,18 +270,73 @@
 </div>
 
 
-<div id="slide-out" class="side-nav">
+<div id="slide-out" class="side-nav" style="width:800px">
 
  <div class="container col s12">
-  <ul class="tabs" style="">
+  <ul class="tabs" style="padding-top:10px">
    <li class="tab col s3"><a id="bottom0001" class="active"  href="#">A-Z</a></li>
    <li class="tab col s3"><a id="bottom0002"  href="#">Category</a></li>
    <li class="tab col s3"><a id="bottom0003" href="#">Latest Recents</a></li>
+   <li class="tab col s3"><a id="bottom0003" href="#">Rango de Fecha</a></li>
  </ul>
 </div>
 
-<ul class="collapsible" data-collapsible="accordion" id="abc_index">
+<div class="container col s12" style="margin:30px; margin-bottom:10px">
+
+  <script>
+
+
+  $( "#index_english" ).click(function() {
+   $('#abc_index_spanish').hide();
+   $('#category_index').hide();
+   $('#recents_index').hide();
+   $('#range_index').hide();
+   $('#abc_index').show();
+ }); 
+
+  $( "#index_spanish" ).click(function() {
+   $('#category_index').hide();
+   $('#recents_index').hide();
+   $('#range_index').hide();
+   $('#abc_index').hide();
+   $('#abc_index_spanish').hide();
+ }); 
+
+
+
+
+  </script>
+
+  <div class="container col s4">
+    <a  id="index_english" class="waves-effect waves-light btn " href="#" style="height:30px">English  Version  </a>
+
+  </div>
+
+  <div class="container col s4">
+    <a  id="index_spanish" class="waves-effect waves-light btn"  href="#" style="height:30px">Spanish  Version  </a>
+  </div>
+
+</div>
+
+
+<ul class="collapsible" data-collapsible="accordion" id="abc_index">1
 </ul>
+
+<ul class="collapsible" data-collapsible="accordion" id="abc_index_spanish" style="display:none">2
+</ul>
+
+
+<ul class="collapsible" data-collapsible="accordion" id="category_index" style="display:none">
+</ul>
+
+<ul class="collapsible" data-collapsible="accordion" id="recents_index" style="display:none">
+</ul>
+
+<ul class="collapsible" data-collapsible="accordion" id="range_index" style="display:none">
+</ul>
+
+
+
 </div>
 </div>
 <script src="../js/raphael-min.js"></script>
