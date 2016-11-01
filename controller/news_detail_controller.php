@@ -86,9 +86,15 @@ if ($_POST['router'] == "view_index_titles") {
     echo json_encode(array("spanish_list" => $spanish_list, "english_list" => $english_list));
 }
 
-if ($_POST['router'] == "news_view") {
-    $content = new GetContents();
-    $news    = new NewsDetail(null, null, null, $content->GetPostContent("news_id"), null, null, null, null, null, null, null, null);
-    echo json_encode($news->selectAllNewsDetail());
-}
+#if ($_POST['router'] == "news_view") {
+$content = new GetContents();
+
+#$news = new NewsDetail(null, null, $content->GetPostContent("news_id"), null, null, null, null, null, null, null, null);
+$news = new NewsDetail(null, null, 22, null, null, null, null, null, null, null, null);
+#echo json_encode($news->selectAllNewsDetail());
+$array_res = $news->selectAllNewsDetail();
+echo base64_decode($array_res['contenido'][0]['news_det_image']);
+echo "<img src='".base64_decode($array_res['contenido'][0]['news_det_image'])."' heigth='50%' width='50%'></img>";
+#print_r($array_res['contenido']['news_det_image']);
+#}
 
