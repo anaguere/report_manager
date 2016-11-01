@@ -80,16 +80,13 @@
                 news_body_es: news_body_es,
                 news_date: ne($('#news_date').val()),
                 news_source: ne($('#news_source').val()),
-                news_comment_date : ne($('#comment_date').val()),
-                news_comment_es : ne($('#news_comment_es').val()),
                 news_title_en : ne($('#news_title_en').val()),
                 news_body_en : ne($('#news_body_en').val()),
-                news_comment_en : ne($('#news_comment_en').val()),
                 news_category : ne($('#news_category').val()),
-                news_type : ne($('#news_type').val()),
                 news_range : ne($('#news_range').val())
             }).done(function(message){
-                if(message == 1){
+                message = JSON.parse(message);
+                if(message.conexion){
                     location.reload();
                 }else{
                     alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
