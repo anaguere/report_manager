@@ -69,6 +69,28 @@
                 });
                 });
         }
+        function preview(){
+            $('#news_body_es').focusout(function(){
+                var news_body_html = $(this).html();
+                var news_img = $(news_body_html).contents().find("img").attr("src");
+                $('#new_img_prev').attr('src',news_img);
+                $('#news_body_prev').text($(this).text());
+            });
+            $('#news_title_es').focusout(function(){
+                $('#news_title_prev').text($(this).val());
+            });
+            $('#news_date').change(function(){
+                var d = new Date($('#news_date').val());
+                var date = $('#news_date').val();
+                date = date.split(" ");
+               $('#news_month_prev').text(date[1]+date[2]+".-");
+               $('#news_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
+            });
+            $('#news_source').focusout(function(){
+                $('#news_source_prev').text($(this).val());
+            });
+
+        }
         //Sending news to database
         function SaveNews(){
             var news_body_html = $('#news_body_es').html();
