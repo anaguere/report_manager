@@ -68,56 +68,23 @@
 
   <div class="container col s12">
    <ul class="tabs" style="">
-    <li class="tab col s3"><a id="bottom0001" class="active"  href="#">Info Basic</a></li>
-    <li class="tab col s3"><a id="bottom0002"  href="#">Comment</a></li>
+    <li class="tab col s3" ><a  id="bottom0002"  class="active"   href="#">Comment</a></li>
   </ul>
 </div>
 
 
-<div  id="panel0001" class="container col s12" style="margin-top:10px; font-weight:bold; color:#000 ">
+
+
+<div  id="panel0001" class="container col s12" style="margin-top:10px; display:none; font-weight:bold; color:#000 ">
  <div class="  card-panel   grey lighten-4"  style="height:1000px">
-
-
-  <div class="input-field  col s12 form01" style="margin-top:0px">
-   <input type="text" class="validate" id="news_title_es"></input>
-   <label for="news_title_es">SPANISH TITLE</label>
  </div>
-
-
- <div class="input-field  col s12 form01">
-   <input type="date" class="datepicker" id="news_date"></input>
-   <label for="news_date">NEWS DATE</label> 
- </div>
-
-
- <div class="input-field  col s12 form01" >
-   <input type="text" class="validate" id="news_source"></input>
-   <label for="new_source">FUENTE</label>
- </div>
-
- <div class="input-field col s6 form01">
-   <select id="news_category">
-
-   </select>
-   <label>CATEGORY</label>
- </div>
-
-
-
- <div class="input-field col s5 form01" style="margin-left:25px">
-   <select id="#">
-    <option value="Ley">LEY</option>
-  </select>
-  <label>MODE</label>
 </div>
 
 
 
-
-</div>
-</div>
 
 <div id="modal1" class="modal">
+
   <div class="modal-content">
 
    <div class="input-field col s12 form01" >
@@ -134,16 +101,16 @@
    <label for="news_comment_es">COMMENT</label>
  </div>
 
-
-
-
 </div>
+
+
 <div class="modal-footer">
   <a  id="addComment" class="waves-effect waves-light btn right modal-close ">ADD</a>
   <a  style="margin-right:10px;" class=" modal-close waves-effect waves-light btn right">Close</a>
 </div>
 
 </div>
+
 
 
 <div id="modal2" class="modal">
@@ -183,15 +150,34 @@
 
 
 
-<div  id="panel0002" class="container col s12" style="display:none; height:1000px;  margin-top:30px; font-weight:bold; color:#000 ">
+<div  id="panel0002" class="container col s12" style="display:inline-block; height:1500px;  margin-top:30px; font-weight:bold; color:#000 ">
 
- <div class="  card-panel   grey lighten-4"  style="height:900px">
+ <div class="  card-panel   grey lighten-4"  style="height:1400px">
+
+  <div class="row s12" style="border-bottom:2px solid #c5c5c5; padding-bottom:20px;">
+
+   <div class="input-field  col s4 ">
+     <input type="date" class="datepicker" id="news_date"></input>
+     <label for="news_date">Date</label> 
+   </div>
+
+
+
+   <div class="input-field  col s7 "  style="margin-left:10px">
+     <input type="text" class="validate" id="news_source"></input>
+     <label for="new_source">N Gaceta</label>
+   </div>
+   <br><br>
+ </div>
+
+
+ <div class="row s12" style="border-top:#f5f5f5 1px solid" >
 
   <a  id="botonmodal1" class="waves-effect waves-light btn" href="#modal1">ADD </a>
 
   <div id="news_comment_es" style='margin-top:30px;' ></div>
 
-
+</div>
 </div>
 </div>
 
@@ -206,13 +192,12 @@
 
   <div class="container col s12">
    <ul class="tabs" style="">
-    <li class="tab col s3"><a id="bottom0005"  href="#">Files</a></li>
-    <li class="tab col s3"><a id="bottom0006" href="#"> Viewer </a></li>
+    <li class="tab col s3"><a id="bottom0005"  href="#" class="active">Files</a></li>
   </ul>
 </div>
 
 
-<div id="panel0005" class="  card-panel   grey lighten-4"  style="display:none; height:530px; margin-top:65px;">
+<div id="panel0005" class="  card-panel   grey lighten-4"  style="height:1500px; margin-top:65px;">
 
   <form enctype="multipart/form-data" id="formuploadajax" method="post">
 
@@ -222,27 +207,33 @@
      <input type="text" class="validate" id="news_title_es"></input>
      <label for="news_title_es">TITLE FILE</label>
    </div>
+   <div class="input-field  col s12 form01" style="margin-top:0px">
+    <input  type="file" id="archivo1" name="archivo1"/>
+  </div>
+  <div class="input-field  col s12 form01" style="margin-top:10px; margin-bottom:10px">
+    <input type="submit" value="UPLOAD"/>
+  </div>
 
-   <BR><BR>
+  <iframe src="" id="pdf_view" width="100%" height="1000px" style="border:none" ></iframe>
 
-    <div class="input-field  col s12 form01" style="margin-top:0px">
-      <input  type="file" id="archivo1" name="archivo1"/>
-    </div>
+
+  <BR><BR>
+
+
 
     <BR><BR>  <br>
 
-      <div class="input-field  col s12 form01" style="margin-top:0px">
-        <input type="submit" value="UPLOAD"/>
-      </div>
+
 
 
     </form>
     <div id="mensaje"></div>
+
+
   </div>
 
 
   <div id="panel0006" class="  card-panel   grey lighten-4"  style="display:none; height:530px; margin-top:65px;">
-    <iframe src="" id="pdf_view" width="90%" height="90%"></iframe>
 
     RRRRR
 
