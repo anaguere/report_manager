@@ -58,7 +58,7 @@
   });
 
 
-</script>
+  </script>
 </head>
 <body>
 
@@ -286,92 +286,118 @@
   <script>
 
 
+  function void_menu(){
+   $('#panel_menu0001_1').css("display","none");
+   $('#panel_menu0001_2').css("display","none");
+   $('#panel_menu0002').css("display","none");
+   $('#panel_menu0003').css("display","none");
+   $('#panel_menu0004').css("display","none");
+   $('#panel_menu0005').css("display","none");
+ }
+
+
+ $(document).ready(function(){
+
+
 
   $( "#menu0002" ).click(function() {
     $('#index_english').css("display","none");
     $('#index_spanish').css("display","none");
+    void_menu();
+
   }); 
 
   $( "#menu0004" ).click(function() {
     $('#index_english').css("display","none");
     $('#index_spanish').css("display","none");
+    void_menu();
   }); 
 
-    $( "#menu0003" ).click(function() {
+  $( "#menu0003" ).click(function() {
     $('#index_english').css("display","none");
     $('#index_spanish').css("display","none");
+    void_menu();
   }); 
 
 
-   $( "#menu0001" ).click(function() {
+  $( "#menu0001" ).click(function() {
     $('#index_english').css("display","inline-block");
     $('#index_spanish').css("display","inline-block");
   });
 
 
-   $("#index_english" ).click(function(){
-      console.log('ssssssss');
- //   $('#panel_menu0001_1').css("display","block");
-   // $('#panel_menu0001_2').css("display","none");
-  });
 
-   $("#index_spanish").click(function(){
+  $("#index_english" ).click(function(){
+   $('#panel_menu0001_1').css("display","block");
+   $('#panel_menu0001_2').css("display","none");
+ });
+
+
+
+
+  $("#index_spanish").click(function(){
     $('#panel_menu0001_1').css("display","none");
-    $('#panel_menu0001_2').css("display","none");
+    $('#panel_menu0001_2').css("display","block");
   });
-  /*
-
-  $( "#index_spanish" ).click(function() {
-   $('#category_index').hide();
-   $('#recents_index').hide();
-   $('#range_index').hide();
-   $('#abc_index').hide();
-   $('#abc_index_spanish').hide();
- }); 
-
-*/
+  
 
 
-  </script>
+});
+ </script>
 
-  <div class="container col s5">
-    <a  id="index_english" class="waves-effect waves-light btn " href="#" style="height:30px">
-      English  Version  
-    </a>
-
-  </div>
-
-  <div class="container col s5">
-    <a  id="index_spanish" class="waves-effect waves-light btn"  href="#" style="height:30px">
-      Spanish  Version  
-    </a>
-  </div>
+ <div class="container col s5">
+  <a  id="index_english" class="waves-effect waves-light btn " href="#" style="height:30px">
+    English  Version  
+  </a>
 
 </div>
+
+<div class="container col s5">
+  <a  id="index_spanish" class="waves-effect waves-light btn"  href="#" style="height:30px">
+    Spanish  Version  
+  </a>
+</div>
+
+</div>
+
+
+
 
 <div id="panel_menu0001_1" style="display:none">
-<ul class="collapsible" data-collapsible="accordion" id="abc_index" >1
-</ul>
+  <ul class="collapsible" data-collapsible="accordion" id="abc_index" >
+  </ul>
 </div>
+
+
+
 
 <div id="panel_menu0001_2" style="display:none">
-<ul class="collapsible" data-collapsible="accordion" id="abc_index_spanish" >2
-</ul>
+  <ul class="collapsible" data-collapsible="accordion" id="abc_index_spanish" >
+  </ul>
 </div>
+
+
+
+
 
 <div id="panel_menu0002"  style="display:none" >
-<ul class="collapsible" data-collapsible="accordion" id="category_index" >
-</ul>
+  <ul class="collapsible" data-collapsible="accordion" id="category_index" >
+  </ul>
 </div>
+
+
+
 
 <div id="panel_menu0003"  style="display:none">
-<ul class="collapsible" data-collapsible="accordion" id="recents_index" >
-</ul>
+  <ul class="collapsible" data-collapsible="accordion" id="recents_index" >
+  </ul>
 </div>
 
+
+
 <div id="panel_menu0004"  style="display:none">
-<ul class="collapsible" data-collapsible="accordion" id="range_index" >
-</ul>
+  <ul class="collapsible" data-collapsible="accordion" id="range_index" >
+  </ul>
 </div>
 
 
