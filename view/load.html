@@ -17,6 +17,19 @@
     IndexViewTitles();
 
 
+
+    $( "#close_vistaprevia" ).click(function() {
+     $('#panel_vistaprevia').hide();
+     $('#container_principal').show();
+   });
+
+
+    $( "#vista_previa" ).click(function() {
+     $('#panel_vistaprevia').show();
+     $('#container_principal').hide();
+   });
+
+
     $(".bottom0010").sideNav();
 
     $( "#bottom0001" ).click(function() {
@@ -69,6 +82,10 @@
       <a href="#" class="brand-logo left" style="margin-top:-10px">News Info</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down" >
 
+        <li><a id="vista_previa" href="#">      
+          <span class="livicon"  style=""   data-hovercolor="white"
+          data-color="white" data-name="eye-open" data-size="34">
+        </span></a></li>
 
         <li><a href="#">      
           <span class="livicon"  style=""   data-hovercolor="white"
@@ -104,13 +121,84 @@
 </div>
 
 </nav>
+<div class="row s12" style="margin: 0 auto; width:100%; display:none" id="panel_vistaprevia" >
+ <div class="container col s12" style="height:30px;  text-align:right; " >
+<a id="close_vistaprevia" style="font-size:28px; color: red; font-weight:bold" href="#"> CLOSE     
+      <span class="livicon"  style=""   data-hovercolor="white"
+      data-color="red" data-name="remove" data-size="34">
+    </span></a>
+ </div>
+
+ <div class="container col s12" style="padding:30px;  " >
+
+
+      <div class="col s8" style="border-right:2px solid #999; background:white; height:1000px; padding:40px;">
+
+
+                      <h3>China CAMC Engineering Co., Ltd</h3>
+
+                      <img src="cancilleria.jpg">
+
+
+                                <p>14/06/09.- El presidente de General Motors Venezolana (GMV), Ronaldo Znidarsis, dijo a la prensa que el
+
+                        gobierno le informó a la mayor ensambladora del país que entre junio y diciembre &quot;teníamos derecho a
+
+                        430 millones de dólares&quot; para cubrir sus importaciones. Znidarsis indicó que el monto de divisas aprobado
+
+                        &quot;no resuelve el problema&quot; de la deuda de 1.150 millones de dólares que mantiene GMV con sus
+
+                        proveedores internacionales, y solo le permitiría mantener uno de los tres turnos de sus dos plantas de
+
+                        producción de vehículos y camiones. Entre mayo y junio pasado el gobierno le entregó a GMV 120 millones
+
+                        de dólares para cancelar parte de las obligaciones que mantenía con sus proveedores internacionales, lo
+
+                        que le permitió reducir su deuda total a 1.150 millones de dólares, precisó el directivo. &quot;A los proveedores
+
+                        internacionales mientras nosotros no les presentemos un plan de pago de la deuda vencida concreto no
+
+                        nos van a despachar más material&quot;, afirmó Znidarsis a la salida de una reunión con los integrantes de la
+
+                        Comisión de Desarrollo Económico de la Asamblea Nacional, donde se analizó el cese de operaciones de la
+
+                        ensambladora que genera la mitad de los vehículos del país.GMV paralizó el 19 de junio la producción de
+
+                        vehículos de pasajeros por unos tres meses debido a la falta de piezas generada por el atrasado del
+
+                        gobierno en la entrega de los dólares para importarlas.
+
+                        PDVSA &quot;culminó exitosamente&quot; la nacionalización</p>
+      </div>
+
+      <div class="col s4" style="border:2px solid #f5f5f5; background:white;height:1000px; padding:40px; font-size:14px; line-height:24px;">
+
+        <h5>Saab: trabajadores del sector público no deben ser despedidos por razones políticas</h5>
+
+        <div >
+               <p>Los trabajadores de la administración pública no deben ser despedidos por razones políticas, aseveró este martes el defensor del Pueblo, Tarek William Saab luego de ser consultado sobre los señalamientos de Jorge Rodríguez y los cargos de libre remoción. Reiteró que la evaluación de cualquier funcionario público, debe ser en base a su desempeño laboral, y aclaró que hasta la fecha no han recibido denuncias referente a despidos injustificados. De igual manera, emplazó a la administración pública a respetar el derecho al trabajo."El trabajador debe ser evaluado por su eficiencia independientemente si tiene cargo de libre remoción o no (...) el criterio de la Defensoría siempre será que el derecho al trabajo debe ser respetado sea de la Mesa de la Unidad o del partido gubernamental, la evaluación debe ser en base a sus competencia y desempeño", afirmó /GV</p>
+        </div>
+      
 
 
 
-<div class="row" style="">
+      </div>
 
 
- <div class="container col s6" style="padding:30px">
+</div>
+
+
+</div>
+
+
+<div class="row" style="" id="container_principal">
+
+
+
+
+
+
+ <div class="container col s6" style="padding:30px" >
 
   <div class="container col s12">
    <ul class="tabs" style="">
@@ -233,7 +321,6 @@
         <input type="submit" value="UPLOAD"/>
       </div>
 
-
     </form>
     <div id="mensaje"></div>
   </div>
@@ -241,27 +328,6 @@
 
   <div id="panel0006" class="  card-panel   grey lighten-4"  style="display:none; height:530px; margin-top:65px;">
 
-    RRRRR
-
-    <div class="carousel carousel-slider center" data-indicators="true">
-
-      <div class="carousel-item red white-text" href="#one!">
-        <h2>First Panel</h2>
-        <p class="white-text">This is your first panel</p>
-      </div>
-      <div class="carousel-item amber white-text" href="#two!">
-        <h2>Second Panel</h2>
-        <p class="white-text">This is your second panel</p>
-      </div>
-      <div class="carousel-item green white-text" href="#three!">
-        <h2>Third Panel</h2>
-        <p class="white-text">This is your third panel</p>
-      </div>
-      <div class="carousel-item blue white-text" href="#four!">
-        <h2>Fourth Panel</h2>
-        <p class="white-text">This is your fourth panel</p>
-      </div>
-    </div>
 
 
 
