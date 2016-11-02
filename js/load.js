@@ -73,6 +73,11 @@
             $('#news_body_es').focusout(function(){
                 var news_body_html = $(this).html();
                 var news_img = $(news_body_html).contents().find("img").attr("src");
+                if (news_img != null) {
+                    $('#h5_title').after("<img id='new_img_prev' src='"+news_img+"' style='margin-left: 5%;' width='90%' height='35%'> ");
+                }else{
+                    $('#h5_title').after("<hr></hr>");
+                }
                 $('#new_img_prev').attr('src',news_img);
                 $('#news_body_prev').text($(this).text());
             });
