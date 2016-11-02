@@ -58,15 +58,39 @@
 
         //Searching detail news
         function searchNews(news_id){
-            console.log(news_id);
             $.post("../controller/news_detail_controller.php",
-                   {router:"news_view",
-                   news_id : news_id
-               }).done(function(data){
-                console.log(JSON.parse(data));
+                {router:"news_view",
+                 news_id : news_id
+            }).done(function(data){
+                var news_det = JSON.parse(data);
+                $.each(news_det.contenido,function(i,n){
+                    $('#img_test').attr('src','data:image/png;base64,'+n.news_det_image);
+                    //console.log();
+                });
+                });
+        }
+        function preview(){
+            $('#news_body_es').focusout(function(){
+                var news_body_html = $(this).html();
+                var news_img = $(news_body_html).contents().find("img").attr("src");
+                $('#new_img_prev').attr('src',news_img);
+                $('#news_body_prev').text($(this).text());
             });
-           }
+            $('#news_title_es').focusout(function(){
+                $('#news_title_prev').text($(this).val());
+            });
+            $('#news_date').change(function(){
+                var d = new Date($('#news_date').val());
+                var date = $('#news_date').val();
+                date = date.split(" ");
+               $('#news_month_prev').text(date[1]+date[2]+".-");
+               $('#news_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
+            });
+            $('#news_source').focusout(function(){
+                $('#news_source_prev').text($(this).val());
+            });
 
+        }
         //Sending news to database
         function SaveNews(){
             var news_body_html = $('#news_body_es').html();
@@ -79,16 +103,13 @@
                 news_body_es: news_body_es,
                 news_date: ne($('#news_date').val()),
                 news_source: ne($('#news_source').val()),
-                news_comment_date : ne($('#comment_date').val()),
-                news_comment_es : ne($('#news_comment_es').val()),
                 news_title_en : ne($('#news_title_en').val()),
                 news_body_en : ne($('#news_body_en').val()),
-                news_comment_en : ne($('#news_comment_en').val()),
                 news_category : ne($('#news_category').val()),
-                news_type : ne($('#news_type').val()),
                 news_range : ne($('#news_range').val())
             }).done(function(message){
-                if(message == 1){
+                message = JSON.parse(message);
+                if(message.conexion){
                     location.reload();
                 }else{
                     alert('Ha ocurrido un error al procesar la información, intente nuevamente!');

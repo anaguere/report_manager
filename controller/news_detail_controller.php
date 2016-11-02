@@ -9,7 +9,7 @@ require '../model/news_type.php';
 
 if ($_POST['router'] == 'create') {
     $content     = new GetContents();
-    $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
+    $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null);
     $title_es    = $content->GetPostContent("news_title_es");
     $tmp_img     = $content->GetPostContent("news_img");
     if (empty($tmp_img)) {
@@ -17,17 +17,13 @@ if ($_POST['router'] == 'create') {
     } else {
         $img = base64_encode(file_get_contents($tmp_img));
     }
-    $body_es      = $content->GetPostContent("news_body_es");
-    $date         = $content->GetPostContent("news_date");
-    $source       = $content->GetPostContent("news_source");
-    $comment_es   = $content->GetPostContent("news_comment_es");
-    $title_en     = $content->GetPostContent("news_title_en");
-    $body_en      = $content->GetPostContent("news_body_en");
-    $comment_en   = $content->GetPostContent("news_comment_en");
-    $comment_date = $content->GetPostContent("news_comment_date");
-    $category     = $content->GetPostContent("news_category");
-    $type         = $content->GetPostContent("news_type");
-    $range        = $content->GetPostContent("news_range");
+    $body_es  = $content->GetPostContent("news_body_es");
+    $date     = $content->GetPostContent("news_date");
+    $source   = $content->GetPostContent("news_source");
+    $title_en = $content->GetPostContent("news_title_en");
+    $body_en  = $content->GetPostContent("news_body_en");
+    $category = $content->GetPostContent("news_category");
+    $range    = $content->GetPostContent("news_range");
 
     $news_detail->setNewsDetDate($date);
     $news_detail->setNewsDetImage($img);
@@ -37,18 +33,11 @@ if ($_POST['router'] == 'create') {
     $news_detail->setNewsDetTit($title_es);
     $news_detail->setNewsDetTiten($title_en);
     $news_detail->setNewsDetCategory($category);
-    $news_detail->setNewsDetType($type);
     $news_detail->setNewsDetPriority($range);
 
     $news_id = $news_detail->saveNewsDetail();
 
-    $news_comment = new NewsComment(null, null, null, null, null, null);
-    $news_comment->setNewsComComment($comment_es);
-    $news_comment->setNewsComCommenten($comment_en);
-    $news_comment->setNewsComDate($comment_date);
-    $news_comment->setNewsComNewsid($news_id['contenido']['news_det_id']);
-    $saveNewsComment = $news_comment->saveNewsComment();
-    echo $saveNewsComment['conexion'];
+    echo json_encode($news_id);
 }
 
 if ($_POST['router'] == "list") {
@@ -88,7 +77,7 @@ if ($_POST['router'] == "view_index_titles") {
 
 if ($_POST['router'] == "news_view") {
     $content = new GetContents();
-    $news    = new NewsDetail(null, null, null, $content->GetPostContent("news_id"), null, null, null, null, null, null, null, null);
+    $news    = new NewsDetail(null, null, $content->GetPostContent("news_id"), null, null, null, null, null, null, null, null);
     echo json_encode($news->selectAllNewsDetail());
 }
 

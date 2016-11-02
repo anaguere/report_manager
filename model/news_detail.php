@@ -12,14 +12,13 @@ class NewsDetail extends Connector{
 	public $news_det_text_en;
 	public $news_det_tit;
 	public $news_det_tit_en;
-	public $news_det_type;
 
-	public function __construct($news_det_category,$news_det_date,$news_det_id,$news_det_image,$news_det_priority,$news_det_source,$news_det_text,$news_det_text_en,$news_det_tit,$news_det_tit_en,$news_det_type){
+	public function __construct($news_det_category,$news_det_date,$news_det_id,$news_det_image,$news_det_priority,$news_det_source,$news_det_text,$news_det_text_en,$news_det_tit,$news_det_tit_en){
 		$connector = Connector::ConexionBD();
 		$this->attr_connector = $connector['conexion'];
 		$this->table_name ="news_detail";
 		$seleccion;
-		if($news_det_category != null || $news_det_date != null || $news_det_id != null || $news_det_image != null || $news_det_priority != null || $news_det_source != null || $news_det_text != null || $news_det_text_en != null || $news_det_tit != null || $news_det_tit_en != null || $news_det_type != null ){
+		if($news_det_category != null || $news_det_date != null || $news_det_id != null || $news_det_image != null || $news_det_priority != null || $news_det_source != null || $news_det_text != null || $news_det_text_en != null || $news_det_tit != null || $news_det_tit_en != null ){
 			if(!is_null($news_det_category)){
 					$field = "news_det_category";
 					$value = $news_det_category;
@@ -59,10 +58,6 @@ class NewsDetail extends Connector{
 			if(!is_null($news_det_tit_en)){
 					$field = "news_det_tit_en";
 					$value = $news_det_tit_en;
-			}
-			if(!is_null($news_det_type)){
-					$field = "news_det_type";
-					$value = $news_det_type;
 			}
 			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $field, $value);
 		}
@@ -139,13 +134,6 @@ class NewsDetail extends Connector{
 		}
 	public function setNewsDetTiten($news_det_tit_en){
 			$this->news_detail['news_det_tit_en'] = $news_det_tit_en;
-		}
-	public function getNewsDetType(){
-			$this->news_detail['news_det_type'] = $this->objeto['contenido'][0]['news_det_type'];
-			return $this->news_det_type['news_det_type'];
-		}
-	public function setNewsDetType($news_det_type){
-			$this->news_detail['news_det_type'] = $news_det_type;
 		}
 	public function saveNewsDetail(){
 			return Connector::InsertIn($this->attr_connector,$this->table_name,$this->news_detail);
