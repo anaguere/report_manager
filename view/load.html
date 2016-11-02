@@ -373,10 +373,12 @@
 
   }); 
 
+
   $( "#menu0004" ).click(function() {
     $('#index_english').css("display","none");
     $('#index_spanish').css("display","none");
     void_menu();
+    $('#panel_menu0004').css("display","block");    
   }); 
 
   $( "#menu0003" ).click(function() {
@@ -464,6 +466,35 @@
 <div id="panel_menu0004"  style="display:none">
   <ul class="collapsible" data-collapsible="accordion" id="range_index" >
   </ul>
+
+<div class="input-field  col s4 form01" style="margin-top:0px; margin-left:30px">
+     <input type="text" class="validate" id="news_title_es"></input>
+     <label for="news_title_es">Desde</label>
+   </div>
+
+
+<div class="input-field  col s4 form01" style="margin-top:0px; margin-left:30px">
+     <input type="text" class="validate" id="news_title_es"></input>
+     <label for="news_title_es">Hasta</label>
+   </div>
+
+
+
+<div class="input-field  col s3 form01" style="margin-top:0px; text-align:right">
+
+  <a  id="index_english" class="waves-effect waves-light btn " href="#" style="height:30px">
+    
+    Search 
+
+  </a>
+
+   </div>
+
+
+
+
+
+
 </div>
 
 
