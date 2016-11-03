@@ -2,15 +2,12 @@
 <html>
 <head>
 	<title></title>
-
   <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
   <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.css" />
   <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.skinFlat.css" />
   <script src="https://use.fontawesome.com/7b58a9f209.js"></script>
   <script type="text/javascript">
-
-  var xxx = 0;
-
+    var nl = 0;
   </script>
 </head>
 
@@ -68,7 +65,7 @@
 
   <div class="container col s12">
    <ul class="tabs" style="">
-    <li class="tab col s3" ><a  id="bottom0002"  class="active"   href="#">Comment</a></li>
+    <li class="tab col s3" ><a  id="bottom0002"  class="active"   href="#">New law</a></li>
   </ul>
 </div>
 
@@ -88,7 +85,7 @@
   <div class="modal-content">
 
    <div class="input-field col s12 form01" >
-     <select id="news_comment_es_add_selected">
+     <select id="law_type">
       <option value="tipo1">TIPO1</option>
       <option value="tipo2">TIPO2</option>
       <option value="tipo3">TIPO3</option>
@@ -97,8 +94,8 @@
   </div>
 
   <div class="input-field  col s12 form01" style="">
-   <textarea class="materialize-textarea" id="news_comment_es_add"></textarea>
-   <label for="news_comment_es">COMMENT</label>
+   <textarea class="materialize-textarea" id="law_name"></textarea>
+   <label for="law_name">Law name</label>
  </div>
 
 </div>
@@ -110,61 +107,43 @@
 </div>
 
 </div>
-
-
-
 <div id="modal2" class="modal">
   <div class="modal-content">
-
-    <input type="hidden" id="news_comment_es_edit_value" >
-    <input type="hidden" id="news_comment_es_edit_value_selected" >
-    <input type="hidden" id="code" >
-
-
     <div class="input-field col s12 form01" >
-     <select id="news_comment_es_edit_selected">
+     <select id="law_type_edit">
       <option value="" selected></option>
       <option value="tipo1">TIPO1</option>
       <option value="tipo2">TIPO2</option>
       <option value="tipo3">TIPO3</option>
     </select>
-    <label>MODE</label>
+    <label>Law type</label>
   </div>
 
   <div class="input-field  col s12 form01" style="">
-   <textarea class="materialize-textarea" id="news_comment_es_edit"></textarea>
-   <label for="news_comment_es">COMMENT</label>
+   <textarea class="materialize-textarea" id="law_name_edit" style="margin-top: 20px;"></textarea>
+   <label for="law_name_edit">Law Name</label>
  </div>
-
-
-
-
 </div>
 <div class="modal-footer">
-  <a  href='#' onclick="save()" class="waves-effect waves-light btn right modal-close ">Save </a>
+  <a  href='#' onclick="saveLawEdit()" class="waves-effect waves-light btn right modal-close ">Save </a>
   <a  style="margin-right:10px;" class=" modal-close waves-effect waves-light btn right">Close</a>
 </div>
-
 </div>
+<div  id="panel0002" class="container col s12" style="display:inline-block; height:1500px;  margin-top:30px; font-weight:bold; color:#000;">
 
-
-
-
-<div  id="panel0002" class="container col s12" style="display:inline-block; height:1500px;  margin-top:30px; font-weight:bold; color:#000 ">
-
- <div class="  card-panel   grey lighten-4"  style="height:1400px">
+ <div class="  card-panel   grey lighten-4"  style="height:1400px;">
 
   <div class="row s12" style="border-bottom:2px solid #c5c5c5; padding-bottom:20px;">
 
    <div class="input-field  col s4 ">
-     <input type="date" class="datepicker" id="news_date"></input>
-     <label for="news_date">Date</label> 
+     <input type="date" class="datepicker" id="law_date"></input>
+     <label for="law_date">Date</label> 
    </div>
 
 
 
    <div class="input-field  col s7 "  style="margin-left:10px">
-     <input type="text" class="validate" id="news_source"></input>
+     <input type="text" class="validate" id="law_gaceta"></input>
      <label for="new_source">N Gaceta</label>
    </div>
    <br><br>
@@ -192,7 +171,7 @@
 
   <div class="container col s12">
    <ul class="tabs" style="">
-    <li class="tab col s3"><a id="bottom0005"  href="#" class="active">Files</a></li>
+    <li class="tab col s3"><a id="bottom0005"  href="#" class="active">preview</a></li>
   </ul>
 </div>
 
@@ -203,29 +182,24 @@
 
 
 
-    <div class="input-field  col s12 form01" style="margin-top:0px">
+  <div class="input-field  col s12 form01" style="margin-top:0px">
      <input type="text" class="validate" id="news_title_es"></input>
      <label for="news_title_es">TITLE FILE</label>
-   </div>
-   <div class="input-field  col s12 form01" style="margin-top:0px">
+  </div>
+  <div class="input-field  col s12 form01" style="margin-top:0px">
     <input  type="file" id="archivo1" name="archivo1"/>
   </div>
-  <div class="input-field  col s12 form01" style="margin-top:10px; margin-bottom:10px">
-    <input type="submit" value="UPLOAD"/>
+  <div id="law_preview">
+    <div>
+      <h4 style="text-align: center;">PRESIDENCIA DE LA REP&Uacute;BLICA DECRETOS CON RANGO, VALOR Y FUERZA DE LEY</h4>
+      <p id="law_year" style="text-align: center"></p>
+      <div class="row" id="law_detail_prev">
+        <p id="law_gaceta_prev" class="col s2"></p>
+        <p id="law_date_prev" class="col s4"></p>        
+      </div>
+    </div>
   </div>
-
   <iframe src="" id="pdf_view" width="100%" height="1000px" style="border:none" ></iframe>
-
-
-  <BR><BR>
-
-
-
-    <BR><BR>  <br>
-
-
-
-
     </form>
     <div id="mensaje"></div>
 
@@ -298,6 +272,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 <script src="../js/load.js"></script>
+<script src="../js/law.js"></script>
 <script src="../js/raphael-min.js"></script>
 <script src="../js/livicons-customizer-1.4.js"></script>
 <script src="../js/customizer.js"></script>
@@ -324,41 +299,14 @@ $(function () {
 
 
 <script type="text/javascript">
-
 $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
-  });
-
-$(document).ready(function(){
-
-
-
-
-  DatePicker();
-  InitSelect();
-  PDFViewer();
-  IndexViewTitles();
-
-
-  $("#addComment").click(function() {
-
-
-   valor = $("#news_comment_es_add").val();
-
-   $("#news_comment_es_add").val(" ");
-
-   tipo = $("#news_comment_es_add_selected").val();
-
-
-   xxx = xxx + 1 ; 
-   $("#news_comment_es").append("<textarea readonly style=';border:none; font-size:12px; font-weight:400; width:100%; height:60px;' id='text"+xxx+"'   >"+valor+"</textarea><div class='col s12' id='div"+xxx+"' style='margin-bottom:20px; border-top:1px solid #999; height:40px; padding-top:10px'><a href=\"#modal2\" onclick='edit(\"#text"+xxx+"\",\"#selected"+xxx+"\","+xxx+")'><i style='font-size:22px' class='fa fa-edit'></i></a> &nbsp; <a onclick='delete2(\"#text"+xxx+"\",\"#div"+xxx+"\")' href='#'><i   style='font-size:22px' class='fa fa-trash'></i></a> &nbsp;<input type='hidden' id='selected"+xxx+"' value='"+tipo+"' ><label id='label"+xxx+"'>"+tipo+"</label></div><br><br>");
- });
-
-
-
-
-
+    DatePicker();
+    InitSelect();
+    PDFViewer();
+    IndexViewTitles();
+    addComment();
+    preView();
 
   $(".bottom0010").sideNav();
 

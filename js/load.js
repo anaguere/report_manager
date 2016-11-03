@@ -179,41 +179,10 @@
                 $('#english_content').hide();
             }
         };
-        //View PDF preview
-        function PDFViewer(){
-            $(this).change(
-                           function(event){
-                            var path = URL.createObjectURL(event.target.files[0]);
-                            $('#pdf_view').attr('src',path);
-                        });
-        }
+        
+      
 
 
 
 
-        function edit(x,y,z){
-
-            $('#news_comment_es_edit').val($(x).val());
-            $('#news_comment_es_edit_value').val(x);
-            $('#news_comment_es_edit_value_selected').val(y);
-            $('#code').val(z);
-       }
-
-
-
-       function save(){
-        g =  $('#news_comment_es_edit_value_selected').val();
-        $(g).val( $('#news_comment_es_edit_selected').val() );
-        z =$('#news_comment_es_edit_selected').val();
-        if(z.length>1){
-        $('#label'+$('#code').val()).text( $('#news_comment_es_edit_selected').val() );
-        }else{
-        }
-        x =  $('#news_comment_es_edit_value').val();
-        $(x).val( $('#news_comment_es_edit').val() );
-    }
-
-    function delete2(x,y){
-       $(x).remove();
-       $(y).remove();
-   }
+    
