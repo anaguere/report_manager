@@ -64,12 +64,8 @@
                    {router:"news_view",
                    news_id : news_id
                }).done(function(data){
-
-
                    var news_det = JSON.parse(data);
-
                    $.each(news_det.contenido,function(i,n){
-
                     $("#news_title_es").val(n.news_det_tit);
                     $("#news_date").val(n.news_det_date);
                     $(".div_news_category :input ").val(n.news_det_category);                
@@ -81,13 +77,8 @@
                 $("#news_title_en").val(n.news_det_tit_en);
                 $("#news_comment_en").val(n.news_det_text_en);
                 $("#news_title_es").val(n.news_det_text);
-
-
                 $.each(n.news_det_category,function(x,z){
-                   
                     $(".div_news_category :input ").val( z.news_cat_name );        
-
-
                 });
 
             });

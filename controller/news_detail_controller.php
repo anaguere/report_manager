@@ -56,7 +56,7 @@ if ($_POST['router'] == "view_index_titles") {
     for ($i = 97; $i <= 122; $i++) {
         $spanish_list[chr($i)] = array();
         foreach ($title_es['contenido'] as $title => $text) {
-            $tmp = array_filter(mb_split('[\W+\s]', strtolower($text['news_det_tit'])));
+            $tmp = array_filter(arg, callback, use_keys)(mb_split('[\W+\s]', strtolower($text['news_det_tit'])));
             if (substr($tmp[0], 0, 1) == chr($i)) {
                 array_push($spanish_list[chr($i)], array($text['news_det_id'], $text['news_det_tit']));
             }
