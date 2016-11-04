@@ -64,8 +64,8 @@
             }).done(function(data){
                 var news_det = JSON.parse(data);
                 $.each(news_det.contenido,function(i,n){
-                    $('#img_test').attr('src','data:image/png;base64,'+n.news_det_image);
-                    //console.log();
+                    //$('#img_test').attr('src','data:image/png;base64,'+n.news_det_image);
+                    console.log(n.new_source);
                 });
                 });
         }
@@ -118,15 +118,18 @@
         };
 
         //Searching detail news
-        function searchNews(news_id){
+        /*function searchNews(news_id){
             console.log(news_id);
             $.post("../controller/news_detail_controller.php",
                    {router:"news_view",
                    news_id : news_id
                }).done(function(data){
-                console.log(JSON.parse(data));
+                var res = JSON.parse(data);
+                $.each(res.contenido, function(i,n){
+                    console.log(i);
+                })
             });
-           }
+           }*/
 
         //Sending news to database
 
