@@ -2,13 +2,63 @@
 <html>
 <head>
 	<title></title>
+  <script src="../js/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script src="../js/law.js"></script>
+  <script src="../js/load.js"></script>
+  <script src="../js/raphael-min.js"></script>
+  <script src="../js/livicons-customizer-1.4.js"></script>
+  <script src="../js/customizer.js"></script>
+  <script src="../ionRangeSliderDemo/js/ion.rangeSlider.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
   <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.css" />
   <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.skinFlat.css" />
   <script src="https://use.fontawesome.com/7b58a9f209.js"></script>
   <script type="text/javascript">
+$(document).ready(function(){
+    $('.modal').modal();
+    DatePicker();
+    InitSelector();
+    IndexViewTitles();
+    addComment();
+    preView();
+  $(".bottom0010").sideNav();
+  $( "#bottom0001" ).click(function() {
+   $('#panel0002').hide();
+   $('#panel0003').hide();
+   $('#panel0001').show();
+ });
+  $( "#bottom0002" ).click(function() {
+   $('#panel0001').hide();
+   $('#panel0003').hide();
+   $('#panel0002').show();
+ });
+  $( "#bottom0003" ).click(function() {
+   $('#panel0001').hide();
+   $('#panel0002').hide();
+   $('#panel0003').show();
+ });        
+  $( "#bottom0004" ).click(function() {
+   $('#panel0005').hide();
+   $('#panel0006').hide();
+   $('#panel0004').show();
+ });   
+  $( "#bottom0005" ).click(function() {
+   $('#panel0004').hide();
+   $('#panel0006').hide();
+   $('#panel0005').show();
+
+ });        
+  $( "#bottom0006" ).click(function() {
+   $('#panel0004').hide();
+   $('#panel0005').hide();
+   $('#panel0006').show();
+
+ });    
+});
+  
     var nl = 0;
-  </script>
+</script>
 </head>
 
 <body>
@@ -85,12 +135,8 @@
   <div class="modal-content">
 
    <div class="input-field col s12 form01" >
-     <select id="law_type">
-      <option value="tipo1">TIPO1</option>
-      <option value="tipo2">TIPO2</option>
-      <option value="tipo3">TIPO3</option>
-    </select>
-    <label>MODE</label>
+     <select id="law_type"><select>
+    <label>Type</label>
   </div>
 
   <div class="input-field  col s12 form01" style="">
@@ -111,10 +157,6 @@
   <div class="modal-content">
     <div class="input-field col s12 form01" >
      <select id="law_type_edit">
-      <option value="" selected></option>
-      <option value="tipo1">TIPO1</option>
-      <option value="tipo2">TIPO2</option>
-      <option value="tipo3">TIPO3</option>
     </select>
     <label>Law type</label>
   </div>
@@ -187,7 +229,7 @@
      <label for="news_title_es">TITLE FILE</label>
   </div>
   <div class="input-field  col s12 form01" style="margin-top:0px">
-    <input  type="file" id="archivo1" name="archivo1"/>
+    <input  type="file" id="archivo1" name="archivo1" onclick="PDFViewer()" />
   </div>
   <div id="law_preview">
     <div>
@@ -205,36 +247,6 @@
 
 
   </div>
-
-
-  <div id="panel0006" class="  card-panel   grey lighten-4"  style="display:none; height:530px; margin-top:65px;">
-
-    RRRRR
-
-    <div class="carousel carousel-slider center" data-indicators="true">
-
-      <div class="carousel-item red white-text" href="#one!">
-        <h2>First Panel</h2>
-        <p class="white-text">This is your first panel</p>
-      </div>
-      <div class="carousel-item amber white-text" href="#two!">
-        <h2>Second Panel</h2>
-        <p class="white-text">This is your second panel</p>
-      </div>
-      <div class="carousel-item green white-text" href="#three!">
-        <h2>Third Panel</h2>
-        <p class="white-text">This is your third panel</p>
-      </div>
-      <div class="carousel-item blue white-text" href="#four!">
-        <h2>Fourth Panel</h2>
-        <p class="white-text">This is your fourth panel</p>
-      </div>
-    </div>
-
-
-
-  </div>
-
 </div>
 
 
@@ -269,95 +281,8 @@
 
 
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-<script src="../js/load.js"></script>
-<script src="../js/law.js"></script>
-<script src="../js/raphael-min.js"></script>
-<script src="../js/livicons-customizer-1.4.js"></script>
-<script src="../js/customizer.js"></script>
-<script src="../ionRangeSliderDemo/js/ion.rangeSlider.js"></script>
-<script>
-
-$(function () {
-
-  $("#range").ionRangeSlider({
-    hide_min_max: true,
-    keyboard: true,
-    min: 0,
-    max: 5,
-    from: 0,
-    to: 4,
-    step: 1,
-    prefix: "",
-    grid: true
-  });
-
-});
-</script>
 
 
-
-<script type="text/javascript">
-$(document).ready(function(){
-    $('.modal').modal();
-    DatePicker();
-    InitSelect();
-    PDFViewer();
-    IndexViewTitles();
-    addComment();
-    preView();
-
-  $(".bottom0010").sideNav();
-
-  $( "#bottom0001" ).click(function() {
-   $('#panel0002').hide();
-   $('#panel0003').hide();
-   $('#panel0001').show();
-
-
- });
-
-
-
-
-
-
-  $( "#bottom0002" ).click(function() {
-   $('#panel0001').hide();
-   $('#panel0003').hide();
-   $('#panel0002').show();
- });
-
-  $( "#bottom0003" ).click(function() {
-   $('#panel0001').hide();
-   $('#panel0002').hide();
-   $('#panel0003').show();
- });        
-
-
-  $( "#bottom0004" ).click(function() {
-   $('#panel0005').hide();
-   $('#panel0006').hide();
-   $('#panel0004').show();
- });   
-
-  $( "#bottom0005" ).click(function() {
-   $('#panel0004').hide();
-   $('#panel0006').hide();
-   $('#panel0005').show();
-
- });        
-
-  $( "#bottom0006" ).click(function() {
-   $('#panel0004').hide();
-   $('#panel0005').hide();
-   $('#panel0006').show();
-
- });    
-
-
-});
 
 
 

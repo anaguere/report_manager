@@ -1,3 +1,24 @@
+function DatePicker(){
+            $('.datepicker').pickadate({
+                selectMonths: true,
+                selectYears: true,
+                selectYear: 10
+
+            });
+        };
+function InitSelector(){
+	$.post("../controller/law_detail_controller.php",
+		{router :"law_types"}).done(function(e){
+			var data = JSON.parse(e);
+			$.each(data,function(i,n){
+				$.each(n.contenido,function(y,f){
+					$('#law_type').append("<option value="+f.law_type_id+">"+f.law_type_name+"</option>");
+					$('select').material_select();
+				});
+			});
+		});
+	}
+
 function addComment(){
 	 $("#addComment").click(function() {
 	 	law_name = $("#law_name").val();

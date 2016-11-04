@@ -18,9 +18,6 @@ if ($_POST['create']) {
     $law_file_id = $files->saveNewsFiles();
 
     $file_id = $files->selectAllNewsFiles();
-    echo "<echo>";
-    print_r($test);
-    die();
     #echo "<iframe src='data:application/pdf;base64,".$test['contenido'][0]['news_file_id']."' width='200px' height='500px'></iframe>";
     $law_det_date   = $content->GetPostContent('law_date');
     $law_det_name   = $content->GetPostContent('law_name');
@@ -35,5 +32,10 @@ if ($_POST['create']) {
     $laws->setLawGacetaNumber($law_det_gaceta);
 
     echo json_encode($laws->saveLawDetail());
+}
+
+if ($_POST['router'] == "law_types") {
+    $law_type = new LawType(null, null, null);
+    echo json_encode(array($law_type->selectAllLawType()));
 }
 
