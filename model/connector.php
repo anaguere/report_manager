@@ -85,7 +85,7 @@ class Connector
             }
             $this->main_table_result = pg_fetch_all(pg_query($this->conn, $this->query));
             if (!$this->main_table_result) {
-                throw new Exception("Error al acceder a la tabla".$this->tableName);
+                throw new Exception("Error al acceder a la tabla ".$this->tableName);
             }
 
             $this->foreign_keys = $this->ForeignKeys($this->tableName, $this->conn);

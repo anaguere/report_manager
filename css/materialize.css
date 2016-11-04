@@ -8345,3 +8345,9 @@ input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]),
   border-bottom: 1px solid #c62828;
   box-shadow: 0 1px 0 0 #c62828;
 }
+
+#law_preview{
+
+margin-top:40px;
+
+}
