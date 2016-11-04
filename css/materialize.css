@@ -8351,3 +8351,19 @@ input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]),
 margin-top:40px;
 
 }
+
+#abc_index a{
+padding-top: 10px;
+cursor: pointer;
+color:black;
+font-weight: 400;
+}
+
+
+#abc_index a:hover{
+padding-top: 10px;
+cursor: pointer;
+background: #f4ff81;
+color:black;
+font-weight: 400;
+}
