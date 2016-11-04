@@ -83,19 +83,40 @@ function preView(){
 
 function saveLaw(){
 	var law_list = new Array();
-	var ll = new Array();
-	for (var i = 0; i < nl; i++) {
-		ll.law_name = $('#law_name_'+i).text();
-		ll.law_type = $('#law_type_text_'+i).attr('data-type_'+i);
-		law_list.push(ll);
-	}
-	$.post("../controller/law_detail_controller.php",
-		{
-			router :"create",
-			law_date : $('#law_date').val(),
-			law_gaceta : $('#law_gaceta').val(),
-			laws : law_list,
-			law_file_title : $('#law_file_title').val(),
-			law_file : window.path
-		});
+
+	var xhr = new XMLHttpRequest;
+	xhr.responseType = 'blob';
+
+	xhr.onload = function() {
+	   var recoveredBlob = xhr.response;
+
+	   var reader = new FileReader;
+
+	   reader.onload = function() {
+	    var blobAsDataUrl = reader.result;
+	    //window.path_complete = blobAsDataUrl;
+	    for (var i = 0; i < nl; i++) {
+			var ll = new Array();
+			ll[0] = $('#law_name_'+i).text();
+			ll[1] = $('#law_type_text_'+i).attr('data-type_'+i);
+			law_list.push(ll);
+		}
+		$.post("../controller/law_detail_controller.php",
+			{
+				router :"create",
+				law_date : $('#law_date').val(),
+				law_gaceta : $('#law_gaceta').val(),
+				'laws[]' : law_list,
+				law_file_title : $('#law_file_title').val(),
+				//law_file : blobAsDataUrl
+			});
+	   };
+
+	 reader.readAsDataURL(recoveredBlob);
+	};
+
+	xhr.open('GET', path);
+	xhr.send();
+
+	
 	}
