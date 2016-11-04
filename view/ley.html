@@ -1,15 +1,213 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
    <title></title>
 
    <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
    <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.css" />
    <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.skinFlat.css" />
    
+=======
+	<title></title>
+  <script src="../js/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script src="../js/law.js"></script>
+  <script src="../js/load.js"></script>
+  <script src="../js/raphael-min.js"></script>
+  <script src="../js/livicons-customizer-1.4.js"></script>
+  <script src="../js/customizer.js"></script>
+  <script src="../ionRangeSliderDemo/js/ion.rangeSlider.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
+  <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.css" />
+  <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.skinFlat.css" />
+  <script src="https://use.fontawesome.com/7b58a9f209.js"></script>
+  <script type="text/javascript">
+$(document).ready(function(){
+    $('.modal').modal();
+    DatePicker();
+    InitSelector();
+    IndexViewTitles();
+    addComment();
+    preView();
+
+  $(".bottom0010").sideNav();
+  $( "#bottom0001" ).click(function() {
+   $('#panel0002').hide();
+   $('#panel0003').hide();
+   $('#panel0001').show();
+ });
+  $( "#bottom0002" ).click(function() {
+   $('#panel0001').hide();
+   $('#panel0003').hide();
+   $('#panel0002').show();
+ });
+  $( "#bottom0003" ).click(function() {
+   $('#panel0001').hide();
+   $('#panel0002').hide();
+   $('#panel0003').show();
+ });        
+  $( "#bottom0004" ).click(function() {
+   $('#panel0005').hide();
+   $('#panel0006').hide();
+   $('#panel0004').show();
+ });   
+  $( "#bottom0005" ).click(function() {
+   $('#panel0004').hide();
+   $('#panel0006').hide();
+   $('#panel0005').show();
+
+ });        
+  $( "#bottom0006" ).click(function() {
+   $('#panel0004').hide();
+   $('#panel0005').hide();
+   $('#panel0006').show();
+
+ });    
+});
+  
+    var nl = 0;
+    var path;
+</script>
+>>>>>>> 0fda90d798f80150dcd8de6effc966053205ed7e
 </head>
 <body>
 
+<<<<<<< HEAD
+=======
+  <nav>
+    <div class="nav-wrapper nav_color" style="">
+      <a href="#" class="brand-logo left" style="margin-top:-10px">Load Info</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down" >
+
+
+        <li><a href="#">      
+          <span class="livicon"  style=""   data-hovercolor="white"
+          data-color="white" data-name="question" data-size="34">
+        </span></a></li>
+
+
+        <li><a href="#" data-activates="slide-out" class="bottom0010">      
+         <span class="livicon"  style=""   data-hovercolor="white"
+         data-color="white" data-name="folders" data-size="34">
+       </span></a></li>
+
+       <li><a href="#" onclick="SaveLey()"  >
+
+         <span class="livicon"  style=""   data-hovercolor="white"
+         data-color="white" data-name="save" data-size="34">
+       </span>
+
+     </a></li>
+
+
+
+     <li><a href="home.html">      
+      <span class="livicon"  style=""   data-hovercolor="white"
+      data-color="white" data-name="remove" data-size="34">
+    </span></a></li>
+  </ul>
+</div>
+
+</nav>
+
+
+
+<div class="row" style="">
+
+
+ <div class="container col s6" style="padding:30px">
+
+  <div class="container col s12">
+   <ul class="tabs" style="">
+    <li class="tab col s3" ><a  id="bottom0002"  class="active"   href="#">New law</a></li>
+  </ul>
+</div>
+
+
+
+
+<div  id="panel0001" class="container col s12" style="margin-top:10px; display:none; font-weight:bold; color:#000 ">
+ <div class="  card-panel   grey lighten-4"  style="height:1000px">
+ </div>
+</div>
+
+
+
+
+<div id="modal1" class="modal">
+
+  <div class="modal-content">
+
+   <div class="input-field col s12 form01" >
+     <select id="law_type"><select>
+    <label>Type</label>
+  </div>
+
+  <div class="input-field  col s12 form01" style="">
+   <textarea class="materialize-textarea" id="law_name"></textarea>
+   <label for="law_name">Law name</label>
+ </div>
+
+</div>
+
+
+<div class="modal-footer">
+  <a  id="addComment" class="waves-effect waves-light btn right modal-close ">ADD</a>
+  <a  style="margin-right:10px;" class=" modal-close waves-effect waves-light btn right">Close</a>
+</div>
+
+</div>
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <div class="input-field col s12 form01" >
+     <select id="law_type_edit">
+    </select>
+    <label>Law type</label>
+  </div>
+
+  <div class="input-field  col s12 form01" style="">
+   <textarea class="materialize-textarea" id="law_name_edit" style="margin-top: 20px;"></textarea>
+   <label for="law_name_edit">Law Name</label>
+ </div>
+</div>
+<div class="modal-footer">
+  <a  href='#' onclick="saveLawEdit()" class="waves-effect waves-light btn right modal-close ">Save </a>
+  <a  style="margin-right:10px;" class=" modal-close waves-effect waves-light btn right">Close</a>
+</div>
+</div>
+<div  id="panel0002" class="container col s12" style="display:inline-block; height:1500px;  margin-top:30px; font-weight:bold; color:#000;">
+
+ <div class="  card-panel   grey lighten-4"  style="height:1400px;">
+
+  <div class="row s12" style="border-bottom:2px solid #c5c5c5; padding-bottom:20px;">
+
+   <div class="input-field  col s4 ">
+     <input type="date" class="datepicker" id="law_date"></input>
+     <label for="law_date">Date</label> 
+   </div>
+
+
+
+   <div class="input-field  col s7 "  style="margin-left:10px">
+     <input type="text" class="validate" id="law_gaceta"></input>
+     <label for="new_source">N Gaceta</label>
+   </div>
+   <br><br>
+ </div>
+
+
+ <div class="row s12" style="border-top:#f5f5f5 1px solid" >
+
+  <a  id="botonmodal1" class="waves-effect waves-light btn" href="#modal1">ADD </a> 
+  <a  id="" onclick="saveLaw()" class="waves-effect waves-light btn" href="#">SAVE TEST </a>
+  <div id="news_comment_es" style='margin-top:30px;' ></div>
+
+</div>
+</div>
+</div>
+
+>>>>>>> 0fda90d798f80150dcd8de6effc966053205ed7e
 
    <nav>
       <div class="nav-wrapper nav_color" style="">
@@ -48,7 +246,54 @@
 
 
 
+<<<<<<< HEAD
       </div>
+=======
+
+
+<div class="container col s6" style="padding:30px; margin-top:-10px">
+
+  <div class="container col s12">
+   <ul class="tabs" style="">
+    <li class="tab col s3"><a id="bottom0005"  href="#" class="active">preview</a></li>
+  </ul>
+</div>
+
+
+<div id="panel0005" class="  card-panel   grey lighten-4"  style="height:1500px; margin-top:65px;">
+
+  <form enctype="multipart/form-data" id="formuploadajax" method="post">
+
+
+
+  <div class="input-field  col s12 form01" style="margin-top:0px">
+     <input type="text" class="validate" id="law_file_title"></input>
+     <label for="news_title_es">TITLE FILE</label>
+  </div>
+  <div class="input-field  col s12 form01" style="margin-top:0px">
+    <input  type="file" id="law_file" name="archivo1" onclick="PDFViewer()" />
+  </div>
+  <div id="law_preview">
+    <div>
+      <h4 style="text-align: center;">PRESIDENCIA DE LA REP&Uacute;BLICA DECRETOS CON RANGO, VALOR Y FUERZA DE LEY</h4>
+      <p id="law_year" style="text-align: center"></p>
+      <div class="row" id="law_detail_prev">
+        <p id="law_gaceta_prev" class="col s2"></p>
+        <p id="law_date_prev" class="col s4"></p>        
+      </div>
+    </div>
+  </div>
+  <iframe src="" id="pdf_view" width="100%" height="1000px" style="border:none" ></iframe>
+    </form>
+    <div id="mensaje"></div>
+
+
+  </div>
+</div>
+
+
+<div id="slide-out" class="side-nav">
+>>>>>>> 0fda90d798f80150dcd8de6effc966053205ed7e
 
 
 
@@ -93,6 +338,7 @@
                </div>
 
 
+<<<<<<< HEAD
 
                <div id="modal2" class="modal">
                   <div class="modal-content">
@@ -177,6 +423,9 @@
             </div>
          </div>
 
+=======
+</div>
+>>>>>>> 0fda90d798f80150dcd8de6effc966053205ed7e
 
 
 
