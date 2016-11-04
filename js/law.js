@@ -62,7 +62,7 @@ function saveLawEdit(){
 //View PDF preview
 function PDFViewer(){
     $(this).change(function(event){
-        var path = URL.createObjectURL(event.target.files[0]);
+        window.path = URL.createObjectURL(event.target.files[0]);
         $('#pdf_view').attr('src',path);
     });
 }
@@ -80,3 +80,22 @@ function preView(){
 		$('#law_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
 	});
 }
+
+function saveLaw(){
+	var law_list = new Array();
+	var ll = new Array();
+	for (var i = 0; i < nl; i++) {
+		ll.law_name = $('#law_name_'+i).text();
+		ll.law_type = $('#law_type_text_'+i).attr('data-type_'+i);
+		law_list.push(ll);
+	}
+	$.post("../controller/law_detail_controller.php",
+		{
+			router :"create",
+			law_date : $('#law_date').val(),
+			law_gaceta : $('#law_gaceta').val(),
+			laws : law_list,
+			law_file_title : $('#law_file_title').val(),
+			law_file : window.path
+		});
+	}

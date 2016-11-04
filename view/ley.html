@@ -22,6 +22,7 @@ $(document).ready(function(){
     IndexViewTitles();
     addComment();
     preView();
+
   $(".bottom0010").sideNav();
   $( "#bottom0001" ).click(function() {
    $('#panel0002').hide();
@@ -58,14 +59,13 @@ $(document).ready(function(){
 });
   
     var nl = 0;
+    var path;
 </script>
 </head>
 
 <body>
 
   <nav>
-
-
     <div class="nav-wrapper nav_color" style="">
       <a href="#" class="brand-logo left" style="margin-top:-10px">Load Info</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down" >
@@ -96,11 +96,6 @@ $(document).ready(function(){
       <span class="livicon"  style=""   data-hovercolor="white"
       data-color="white" data-name="remove" data-size="34">
     </span></a></li>
-
-
-
-
-
   </ul>
 </div>
 
@@ -194,8 +189,8 @@ $(document).ready(function(){
 
  <div class="row s12" style="border-top:#f5f5f5 1px solid" >
 
-  <a  id="botonmodal1" class="waves-effect waves-light btn" href="#modal1">ADD </a>
-
+  <a  id="botonmodal1" class="waves-effect waves-light btn" href="#modal1">ADD </a> 
+  <a  id="" onclick="saveLaw()" class="waves-effect waves-light btn" href="#">SAVE TEST </a>
   <div id="news_comment_es" style='margin-top:30px;' ></div>
 
 </div>
@@ -225,11 +220,11 @@ $(document).ready(function(){
 
 
   <div class="input-field  col s12 form01" style="margin-top:0px">
-     <input type="text" class="validate" id="news_title_es"></input>
+     <input type="text" class="validate" id="law_file_title"></input>
      <label for="news_title_es">TITLE FILE</label>
   </div>
   <div class="input-field  col s12 form01" style="margin-top:0px">
-    <input  type="file" id="archivo1" name="archivo1" onclick="PDFViewer()" />
+    <input  type="file" id="law_file" name="archivo1" onclick="PDFViewer()" />
   </div>
   <div id="law_preview">
     <div>
