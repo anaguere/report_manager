@@ -25,7 +25,7 @@ if ($_POST['router'] == "create") {
         $laws->setLawDetDate($law_det_date);
         $laws->setLawDetName($law_details[0]);
         $laws->setLawDetType($law_details[1]);
-        $laws->setLawFileId($file_id['contenido'][0]['news_file_id']);
+        $laws->setLawFileId($law_file_id['contenido']['news_file_id']);
         $laws->setLawGacetaNumber($law_det_gaceta);
         $resul = $laws->saveLawDetail();
     }
@@ -82,7 +82,7 @@ if ($_POST['router'] == "conditionalSearch") {
   $fields = array();
   $fields[law_det_type] = (int)$categoria;
   $fields[law_gaceta_number] = $gaceta;
-  if(var_dump($desde) != null && var_dump($hasta) != null){
+  if($desde != "" && $hasta != ""){
     $fields[law_det_date] = array ($desde,$hasta);
   }
   echo json_encode($law->RangeSearchLawDetail($fields));

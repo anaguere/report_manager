@@ -18,7 +18,7 @@
                   </a>
                </li>
                <li>
-                  <a id="ver_registro" href="#" >
+                  <a id="ver_registro" href="ley.html" >
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="plus" data-size="34"></span>
                   </a>
@@ -113,6 +113,8 @@
                <a  style="margin-right:10px;" class=" modal-close waves-effect waves-light btn right">Close</a>
                </div>
             </div>
+
+
             <div id="modal2" class="modal">
             <div class="modal-content">
             <div class="input-field col s12 form01" >
@@ -130,15 +132,17 @@
             <a  style="margin-right:10px;" class=" modal-close waves-effect waves-light btn right">Close</a>
             </div>
             </div>
+
+
             <div  id="panel0002" class="container col s12" style="display:inline-block; height:1500px;  margin-top:10px; font-weight:bold; color:#000;">
                <div class="  card-panel   grey lighten-4"  style="height:1400px;">
                   <div class="row s12" style="">
                      <div class="input-field  col s4 ">
-                        <input type="date" class="datepicker" id="law_date"></input>
+                        <input placeholder="*" type="date" class="datepicker" id="law_date"></input>
                         <label for="law_date">Date</label>
                      </div>
                      <div class="input-field  col s7 "  style="margin-left:10px">
-                        <input type="text" class="validate" id="law_gaceta"></input>
+                        <input placeholder="*"  type="text" class="validate" id="law_gaceta"></input>
                         <label for="new_source">N Gaceta</label>
                      </div>
                      <br><br>
@@ -160,7 +164,7 @@
                <form enctype="multipart/form-data" id="formuploadajax" method="post">
                   <div class="container col s12">
                      <div class="input-field  col s12 form01" style="margin-top:0px">
-                        <input type="text" class="validate" id="law_file_title"></input>
+                        <input placeholder="*" type="text" class="validate" id="law_file_title"></input>
                         <label for="news_title_es">TITLE FILE</label>
                      </div>
                      <div class="input-field  col s12 form01" style="margin-top:0px">
@@ -178,7 +182,8 @@
                         </div>
                      </div>
                   </div>
-                  <iframe src="" id="pdf_view" width="100%" height="1000px" style="border:none" ></iframe>
+                  <br><br>
+                  <iframe src="" id="pdf_view" width="100%" height="1000px" style="margin-top:50px; border:none" ></iframe>
                </form>
                <div id="mensaje"></div>
             </div>

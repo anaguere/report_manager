@@ -17,7 +17,8 @@ function InitSelect(){
     for(i =0; i < categories.length ; i++){
       $('#news_category').append("<option value="+categories[i].news_cat_id+">"+categories[i].news_cat_name+"</option>");
       $('select').material_select();
-
+      $('#categoria').append("<option value="+categories[i].news_cat_id+">"+categories[i].news_cat_name+"</option>");
+      $('select').material_select();
     }
     for(j =0; j < types.length ; j++){
       $('#news_type').append("<option value="+types[j].news_type_id+">"+types[j].news_type_name+"</option>");
@@ -68,6 +69,100 @@ function IndexViewTitles(){
     });
   });
 };
+
+
+
+function addSearch(){
+
+	 $("#searchButtom").click(function() {
+
+              var desde =  $("#desde").val();
+              var hasta = $("#hasta").val();
+              var categoria = $("#categoria").val();
+
+              $("#desde").val("");
+              $("#hasta").val("");
+              $("#categoria").val("");
+
+
+               $.post( "../controller/news_detail_controller.php", {
+                 router : "conditionalSearch",
+                 desde: desde,
+                 hasta: hasta,
+                 categoria: categoria
+               }).done(function(e){
+
+                 var news = JSON.parse(e);
+
+                 print_tableNews(news.contenido);
+
+               });
+
+   });
+
+}
+
+
+function print_tableNews(news){
+
+  $("#bodyTable tr").remove();
+
+    $.each(news,function(i,l){
+				$("#bodyTable").append("<tr style='width:100px' id="+l.news_det_id+" ><td>"+l.news_det_date+"</td><td>"+l.news_category+"</td><td>"+l.law_det_text+"</td><td style='width:150px'><a  onclick='editar_news("+l.new_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='vista_previa_news("+l.news_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+l.news_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+
+		});
+	}
+
+
+function vista_previa_news(law_id){
+
+    $("#container_principal").hide();
+    $("#consulta").hide();
+    $("#ver_registro").show();
+    $("#ver_consulta").show();
+    $("#ver_save").hide();
+    $("#vistaprevia").show();
+
+
+    $.post("../controller/law_detail_controller.php",{
+      router : "law_view",
+      law_id : law_id
+    }).done(function(e){
+      var law_detail = JSON.parse(e);
+
+      $.each(law_detail.contenido, function(i,n){
+
+            console.log(n);
+
+        		d = new Date(n.law_det_date);
+        		$('#law_gaceta_prev_001').text(n.law_gaceta_number);
+        		$('#law_date_prev_001').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
+  		      $('#law_year_001').text(d.getFullYear());
+  		      $('#law_comentario_prev_001').text(n.law_det_name);
+
+
+
+
+            $.each(n.law_file_id, function(x,y){
+            $('#pdf_view_1').attr('src','data:application/pdf;base64,'+y.news_file_archive);
+          //  console.log(y.news_file_archive);
+            });
+      });
+    });
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -232,4 +327,34 @@ function ShowCategories(){
       console.log(n.news_cat_name);
     });
   });
+}
+
+
+function verSearch(){
+
+  $("#ver_registro").hide();
+
+	 $("#ver_consulta").click(function() {
+       $("#container_principal").hide();
+       $("#consulta").show();
+       $("#ver_registro").show();
+       $("#ver_consulta").hide();
+       $("#ver_save").hide();
+       $("#vistaprevia").hide();
+
+   });
+
+
+   $("#ver_registro").click(function() {
+       $("#container_principal").show();
+       $("#consulta").hide();
+       $("#ver_registro").hide();
+       $("#ver_consulta").show();
+       $("#ver_save").show();
+       $("#vistaprevia").hide();
+
+   });
+
+
+
 }
