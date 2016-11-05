@@ -102,21 +102,6 @@ function preView(){
 	});
 }
 
-
-function preView001(json){
-
-
-		$('#law_year').text();
-		d = new Date($('#law_date').val());
-		$('#law_gaceta_prev').text($(this).val());
-		$('#law_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
-
-}
-
-
-
-
-
 function saveLaw(){
 	var law_list = new Array();
 
@@ -174,6 +159,41 @@ function searchLaws(law_id){
 }
 
 
+function vista_previa_ley(law_id){
+
+  $("#registro").hide();
+  $("#consulta").hide();
+  $("#ver_registro").show();
+  $("#ver_consulta").show();
+  $("#ver_save").hide();
+  $("#vistaprevia").show();
+
+
+  $.post("../controller/law_detail_controller.php",{
+    router : "law_view",
+    law_id : law_id
+  }).done(function(e){
+    var law_detail = JSON.parse(e);
+
+    $.each(law_detail.contenido, function(i,n){
+
+
+
+      		d = new Date(n.law_det_date);
+      		$('#law_gaceta_prev_001').text(n.law_gaceta_number);
+      		$('#law_date_prev_001').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
+		      $('#law_year_001').text(d.getFullYear());
+		      $('#law_comentario_prev_001').text(n.law_det_name);
+
+          $.each(n.law_file_id, function(x,y){
+
+          $('#pdf_view_1').attr('src','data:application/pdf;base64,'+y.news_file_archive);
+          console.log(y.news_file_archive);
+          });
+    });
+  });
+
+}
 
 function searchLawNames(){
 	$.post("../controller/law_detail_controller.php",{
@@ -187,14 +207,11 @@ function searchLawNames(){
 	});
 }
 
-
-
 function print_tableLeyes(law){
     $.each(law,function(i,l){
-				$("#bodyTable").append("<tr id="+l.law_det_id+" ><td>"+l.law_det_id+"</td><td>"+l.law_gaceta_number+"</td><td>"+l.law_det_type+"</td><td>"+l.law_det_name+"</td><td><a  href='' class='fa fa-edit tam26'></a> <a  class='fa fa-eye tam26' href='#'></a> <a href='#'> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+				$("#bodyTable").append("<tr style='width:100px' id="+l.law_det_id+" ><td>"+l.law_det_id+"</td><td>"+l.law_gaceta_number+"</td><td>"+l.law_det_type+"</td><td>"+l.law_det_name+"</td><td style='width:150px'><a  onclick='editar_ley("+l.law_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='vista_previa_ley("+l.law_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+l.law_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
 		});
 	}
-
 
 
 function addSearch(){
@@ -235,8 +252,6 @@ function addSearch(){
 }
 
 
-
-
 function verSearch(){
 
   $("#ver_registro").hide();
@@ -247,6 +262,8 @@ function verSearch(){
        $("#ver_registro").show();
        $("#ver_consulta").hide();
        $("#ver_save").hide();
+       $("#vistaprevia").hide();
+
    });
 
 
@@ -255,7 +272,9 @@ function verSearch(){
        $("#consulta").hide();
        $("#ver_registro").hide();
        $("#ver_consulta").show();
-       $("#ver_save").show()
+       $("#ver_save").show();
+       $("#vistaprevia").hide();
+
    });
 
 
