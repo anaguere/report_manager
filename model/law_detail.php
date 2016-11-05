@@ -130,7 +130,11 @@ class LawDetail extends Connector
         if (is_array($value)) {
           $query .= $key." >= '".$value[0]."' and ".$key." <= '".$value[1]."'";
         }else{
-          $query .= $key."='".$value."'";
+          if(is_int($value)){
+            $query .= $key."=".$value;
+          }else{
+            $query .= $key."='".$value."'";
+          }
         }
         if($i > 1){
           $query .= " and ";
@@ -139,6 +143,7 @@ class LawDetail extends Connector
       $i--;
       }
       $query .= ";";
+      #echo $query;
        return Connector::Querys($this->attr_connector,$query);
     }
 }
