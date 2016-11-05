@@ -60,6 +60,5 @@ if ($_POST['router'] == "view_law_names") {
         $final['law_det_type']      = $type['contenido'][0]['law_type_name'];
         array_push($new, $final);
     }
-    echo json_encode($new);
+  echo json_encode($new);
 }
-
