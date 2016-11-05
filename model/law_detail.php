@@ -126,18 +126,19 @@ class LawDetail extends Connector
       $i = count($fields);
       $query = "select * from ".$this->table_name." where ";
       foreach ($fields as $key => $value) {
+      if (!$value == "") {
         if (is_array($value)) {
           $query .= $key." >= '".$value[0]."' and ".$key." <= '".$value[1]."'";
         }else{
-          $query .= $key."=".$value;
+          $query .= $key."='".$value."'";
         }
         if($i > 1){
           $query .= " and ";
         }
-        $i--;
+      }
+      $i--;
       }
       $query .= ";";
-      echo "<pre>";
-       print_r(Connector::Querys($this->attr_connector,$query));
+       return Connector::Querys($this->attr_connector,$query);
     }
 }

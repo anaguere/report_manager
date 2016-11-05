@@ -191,7 +191,7 @@ function searchLawNames(){
 
 function print_tableLeyes(law){
     $.each(law,function(i,l){
-				$("#bodyTable").append("<tr id="+l.law_det_id+" ><td>"+l.law_det_id+"</td><td>"+l.law_gaceta_number+"</td><td>"+l.law_det_type+"</td><td>"+l.law_det_name+"</td><td><a  href='' class='fa fa-edit tam26'></a> <a  class='fa fa-eye tam26' href='#'></a> <a href='#'> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+				$("#bodyTable").append("<tr id="+l.law_det_id+" ><td>"+l.law_det_date+"</td><td>"+l.law_gaceta_number+"</td><td>"+l.law_det_type+"</td><td>"+l.law_det_name+"</td><td><a  href='' class='fa fa-edit tam26'></a> <a  class='fa fa-eye tam26' href='#'></a> <a href='#'> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
 		});
 	}
 
@@ -206,18 +206,12 @@ function addSearch(){
       var gaceta = $("#gaceta").val();
       var categoria = $("#categoria").val();
 
-       if(hasta.length<5){
+    /*   if(hasta == ""){
          hasta = desde;
        }
-
-       console.log(desde);
-       console.log(hasta);
-       console.log(categoria);
-       console.log(gaceta);
-
-
-         $.post( "../controller/news_detail_controller.php", {
-           router : "filter",
+*/
+         $.post( "../controller/law_detail_controller.php", {
+           router : "conditionalSearch",
            desde: desde,
            hasta: hasta,
            gaceta: gaceta,
@@ -225,6 +219,7 @@ function addSearch(){
          }).done(function(e){
 
            var laws = JSON.parse(e);
+           console.log(laws);
            print_tableLeyes(laws);
 
          });

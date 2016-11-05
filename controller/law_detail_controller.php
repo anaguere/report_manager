@@ -54,7 +54,7 @@ if ($_POST['router'] == "law_view") {
 
 if ($_POST['router'] == "view_law_names") {
     $law       = new LawDetail(null, null, null, null, null, null);
-    $law_names = $law->selectOneTypeLawDetail(array("law_det_id", "law_det_name", "law_gaceta_number", "law_det_type"));
+    $law_names = $law->selectOneTypeLawDetail(array("law_det_id", "law_det_name", "law_gaceta_number", "law_det_type","law_det_date"));
     usort($law_names['contenido'], function ($a, $b)
     {
             return $a['law_det_name'] > $b['law_det_name'];
@@ -66,6 +66,7 @@ if ($_POST['router'] == "view_law_names") {
         $final['law_det_id']        = $val['law_det_id'];
         $final['law_det_name']      = $val['law_det_name'];
         $final['law_gaceta_number'] = $val['law_gaceta_number'];
+        $final['law_det_date'] = $val['law_det_date'];
         $final['law_det_type']      = $type['contenido'][0]['law_type_name'];
         array_push($new, $final);
     }
@@ -73,8 +74,14 @@ if ($_POST['router'] == "view_law_names") {
 }
 if ($_POST['router'] == "conditionalSearch") {
   $law       = new LawDetail(null, null, null, null, null, null);
+  $content = new GetContents();
+  $desde  = $content->GetPostContent('desde');
+  $hasta  = $content->GetPostContent('hasta');
+  $gaceta  = $content->GetPostContent('gaceta');
+  $categoria  = $content->GetPostContent('categoria');
   $fields = array();
-  $fields[law_det_type] = 1;
-  $fields[law_det_date] = array ("2016-11-01","2016-11-02");
-  echo $law->RangeSearchLawDetail($fields);
+  $fields[law_det_type] = $categoria;
+  $fields[law_gaceta_number] = $gaceta;
+  $fields[law_det_date] = array ($desde,$hasta);
+  echo json_encode($law->RangeSearchLawDetail($fields));
 }
