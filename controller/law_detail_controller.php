@@ -43,16 +43,22 @@ if ($_POST['router'] == "law_view") {
     $law     = new LawDetail(null, $law_id, null, null, null, null);
     echo json_encode($law->selectAllLawDetail());
 }
-
-#if ($_POST['router'] == "view_law_names") {
-$law       = new LawDetail(null, null, null, null, null, null);
-$law_names = $law->selectOneTypeLawDetail(array("law_det_name", "law_det_id", "law_gaceta_number", "law_det_type"));
-usort($law_names['contenido'], function ($a, $b)
-{
-        return $a['law_gaceta_number'] > $b['law_gaceta_number'];
-    });
-echo "<pre>";
-
-printR($law_names['contenido']);
-#}
-
+if ($_POST['router'] == "view_law_names") {
+    $law       = new LawDetail(null, null, null, null, null, null);
+    $law_names = $law->selectOneTypeLawDetail(array("law_det_id", "law_det_name", "law_gaceta_number", "law_det_type"));
+    usort($law_names['contenido'], function ($a, $b)
+    {
+            return $a['law_det_name'] > $b['law_det_name'];
+        });
+    $new = array();
+    foreach ($law_names['contenido'] as $det => $val) {
+        $law_type                   = new LawType(null, $val['law_det_type'], null);
+        $type                       = $law_type->selectAllLawType();
+        $final['law_det_id']        = $val['law_det_id'];
+        $final['law_det_name']      = $val['law_det_name'];
+        $final['law_gaceta_number'] = $val['law_gaceta_number'];
+        $final['law_det_type']      = $type['contenido'][0]['law_type_name'];
+        array_push($new, $final);
+    }
+  echo json_encode($new);
+}

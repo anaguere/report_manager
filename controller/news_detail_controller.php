@@ -3,8 +3,8 @@ require '../libraries/get_contents.php';
 require '../model/connector.php';
 require '../model/news_detail.php';
 require '../model/news_comment.php';
-require '../model/news_category.php';
 require '../model/client_list.php';
+require '../model/news_category.php';
 require '../model/news_type.php';
 
 if ($_POST['router'] == 'create') {
@@ -56,7 +56,7 @@ if ($_POST['router'] == "view_index_titles") {
     for ($i = 97; $i <= 122; $i++) {
         $spanish_list[chr($i)] = array();
         foreach ($title_es['contenido'] as $title => $text) {
-            $tmp = array_filter(arg, callback, use_keys)(mb_split('[\W+\s]', strtolower($text['news_det_tit'])));
+            $tmp = array_filter(mb_split('[\W+\s]', strtolower($text['news_det_tit'])));
             if (substr($tmp[0], 0, 1) == chr($i)) {
                 array_push($spanish_list[chr($i)], array($text['news_det_id'], $text['news_det_tit']));
             }
@@ -81,3 +81,22 @@ if ($_POST['router'] == "news_view") {
     echo json_encode($news->selectAllNewsDetail());
 }
 
+if ($_POST['router'] == "list_categories") {
+ $category = new NewsCategory(null, null, null);
+ $category_name = $category->selectOneTypeNewsCategory(array("news_cat_id","news_cat_name"));
+ $final = array();
+  usort($category_name['contenido'],function($a ,$b){
+    return $a['news_cat_name'] > $b['news_cat_name'];
+  });
+  foreach ($category_name['contenido'] as $ind => $val) {
+    $final[$val['news_cat_name']] = array();
+    $news = new NewsDetail($val['news_cat_id'],null,null,null,null,null,null,null,null,null);
+    $news_det = $news->selectAllNewsDetail();
+    foreach ($news_det[''] as $key => $value) {
+      echo $key."<br>";
+    }
+  }
+  echo "<pre>";
+  print_r($final);
+
+}
