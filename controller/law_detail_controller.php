@@ -7,9 +7,9 @@ require '../model/news_files.php';
 
 if ($_POST['router'] == "create") {
     $content = new GetContents();
-    $files   = new NewsFiles(null, 1, null);
+    $files   = new NewsFiles(null, null, null);
 
-    $file_archive = $content->GetPostContent('law_file');
+    $file_archive = "lol";#$content->GetPostContent('law_file');
     $file_name    = $content->GetPostContent('law_file_title');
     $files->setNewsFileArchive($file_archive);
     $files->setNewsFileName($file_name);
