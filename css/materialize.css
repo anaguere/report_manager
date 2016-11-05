@@ -8369,6 +8369,12 @@ font-weight: 400;
 }
 
 .tam26{
-  font-size: 26px;
+ font-size:22px !important;
   color: red;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.tam26:hover{
+  transform: scale(1.5);
 }
