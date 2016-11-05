@@ -62,3 +62,10 @@ if ($_POST['router'] == "view_law_names") {
     }
   echo json_encode($new);
 }
+if ($_POST['router'] == "conditionalSearch") {
+  $law       = new LawDetail(null, null, null, null, null, null);
+  $fields = array();
+  $fields[law_det_type] = 1;
+  $fields[law_det_date] = array ("2016-11-01","2016-11-02");
+  echo $law->RangeSearchLawDetail($fields);
+}

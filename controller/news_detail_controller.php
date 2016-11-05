@@ -81,7 +81,7 @@ if ($_POST['router'] == "news_view") {
     echo json_encode($news->selectAllNewsDetail());
 }
 
-if ($_POST['router'] == "list_categories") {
+if ($_POST['router'] == "range_search") {
  $category = new NewsCategory(null, null, null);
  $category_name = $category->selectOneTypeNewsCategory(array("news_cat_id","news_cat_name"));
  $final = array();

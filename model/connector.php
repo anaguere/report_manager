@@ -146,7 +146,29 @@ class Connector
             return $this->resultado;
         }
     }
+    #------------------------------- SENTENCIAS SQL VARIAS-------------------------------------------
 
+    final public function Querys($conn, $query)
+    {
+        $query;
+        $sentence_exec;
+        $main_table_result;
+        $this->conn       = $conn;
+        $this->query = $query;
+        try {
+            $this->main_table_result = pg_fetch_all(pg_query($this->conn, $this->query));
+            if (!$this->main_table_result) {
+                throw new Exception("Error al acceder al ejecutar la sentencia");
+            }
+            $this->resultado['conexion']  = true;
+            $this->resultado['contenido'] = $this->main_table_result;
+            return $this->resultado;
+        } catch (Exception $e) {
+            $this->resultado['conexion'] = "false";
+            $this->resultado['mensaje']  = $e->getMessage();
+            return $this->resultado;
+        }
+    }
     #------------------------------- CREAR NUEVO REGISTRO -------------------------------------------
     final public function InsertIn($conn, $tableName, $column_name)
     {
@@ -319,4 +341,3 @@ class Connector
         return $resultado;
     }
 };
-
