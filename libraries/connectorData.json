@@ -1,7 +1,7 @@
 {
 	"host":"localhost",
 	"port":"5432",
-	"dbname":"rpm",
-	"user":"postgres",
-	"password":"123456789"
+	"dbname":"report_manager",
+	"user":"report_manager",
+	"password":"123456"
 }
