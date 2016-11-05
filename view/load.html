@@ -9,16 +9,17 @@
    <body>
       <nav>
          <div class="nav-wrapper nav_color" style="">
-            <a href="#" class="brand-logo left" style="margin-top:-10px">News Info</a>
+            <a href="#" class="brand-logo left" style="margin-top:-10px">[ News ] </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down" >
 
 
 							<li>
 								 <a id="ver_consulta" href="#" class="">
 								 <span class="livicon"  style=""   data-hovercolor="white"
-										data-color="white" data-name="folders" data-size="34"></span>
+										data-color="white" data-name="search" data-size="34"></span>
 								 </a>
 							</li>
+
 
 							<li>
 						 		<a id="ver_registro" href="load.html" >
@@ -27,17 +28,19 @@
 						 		</a>
 						  </li>
 
-               <li><a href="#" data-activates="slide-out" class="bottom0010">
+               <li><a  id="ver_index" href="#" data-activates="slide-out" class="bottom0010">
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="folders" data-size="34">
                   </span></a>
                </li>
-               <li><a href="#" onclick="SaveNews()"  >
+
+               <li><a  id="ver_save" href="#" onclick="SaveNews()"  >
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="save" data-size="34">
                   </span>
                   </a>
                </li>
+
                <li><a href="home.html">
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="remove" data-size="34">
@@ -202,9 +205,6 @@
             <div class="container col s12">
                <ul class="tabs" style="padding-top:10px">
                   <li class="tab col s3"><a id="menu0001" class="active"  href="#">A-Z</a></li>
-                  <li class="tab col s3"><a id="menu0002"  href="#">Category</a></li>
-                  <li class="tab col s3"><a id="menu0003" href="#">Latest Recents</a></li>
-                  <li class="tab col s3"><a id="menu0004" href="#">Rango de Fecha</a></li>
                </ul>
             </div>
             <div class="container col s12" style="margin:30px; margin-bottom:10px">
@@ -212,11 +212,9 @@
                   function void_menu(){
                    $('#panel_menu0001_1').css("display","none");
                    $('#panel_menu0001_2').css("display","none");
-                   $('#panel_menu0002').css("display","none");
-                   $('#panel_menu0003').css("display","none");
-                   $('#panel_menu0004').css("display","none");
-                   $('#panel_menu0005').css("display","none");
                   }
+
+
 
 
                   function menuLoad(){
@@ -315,7 +313,7 @@
 
 			<div class="container " id="consulta" style="display:none; width: 90%" >
 				 <div class="row  s12 white" style="padding:10px;  margin-top:10px; ">
-						<div class="col s3 " style="padding:10px; padding-top:25px" >
+						<div class="col s2 " style="padding:10px; padding-top:25px" >
 							 <select name="categoria" id="categoria" ></select>
 						</div
 						>
@@ -332,14 +330,35 @@
 							 </div>
 						</div>
 						<div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
-							 <a  id="searchButtom" class="waves-effect waves-light btn red">Search</a>
+							 <a  id="searchButtom1" onclick="searchNews()" class="waves-effect waves-light btn red">Search</a>
 						</div>
+
+
+
 						<div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
-							 <a  id="searchButtomReporte" class="waves-effect waves-light btn red">Ver reporte</a>
+							 <a  id="ver_sem_english" class="waves-effect waves-light btn red">Sem. English</a>
 						</div>
+
+						<div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
+							 <a  id="ver_sem_spanish"   class="waves-effect waves-light btn orange">Sem. Spanish</a>
+						</div>
+
+            <div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
+            </div>
+
+            <div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
+							 <a  id="ver_tbl_english" class="waves-effect waves-light btn red">Table English</a>
+						</div>
+
+						<div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
+							 <a  id="ver_tbl_spanish"   class="waves-effect waves-light btn orange">Table Spanish</a>
+						</div>
+
+
 				 </div>
-				 <div class="row  s12 white" style="  padding:20px;" >
-						<table class="bordered"  >
+				 <div class="row  s12 white" style="  padding:20px;"  >
+           <div id="divTable" style="width:100%; padding:10px; border-bottom:2px solid #333"></div>
+						<table class="bordered" id="tableReporte"  >
 							 <thead>
 									<tr>
 										 <th data-field="date" style="width:150px">Date</th>
@@ -350,6 +369,9 @@
 							 </thead>
 							 <tbody id="bodyTable">
 							 </tbody>
+               <tbody id="bodyTable_spanish" style='display:none'>
+							 </tbody>
+
 						</table>
 				 </div>
 			</div>
@@ -357,32 +379,51 @@
 
 
 
-			<div class="row s12" id="vistaprevia" style=" width:90%; " >
+			<div class="row s12" id="vistaprevia" style=" width:100%; " >
 
-				 <div class="container col s12" style="padding:30px; margin-top:-10px">
-						<div class="container col s12">
-							 <ul class="tabs" style="">
-									<li class="tab col s3"><a id=""  href="#" class="active">Preview</a></li>
-							 </ul>
-						</div>
-						<div  class="  card-panel   white"  style="height:3000px; margin-top:65px;">
+				 <div class="container col s12" style=" margin-top:-10px; margin-left:100px;">
+
+						<div  class="  card-panel white"  style="margin-top:0px; float:left; margin: 0 auto;">
 
 
-									<div class="container col s12" style="margin-left: 40px" >
 
-													<div style="width:600px; border:1px solid #333; margin-right:20px; float:left" id="col_izquierda" >ss
+									<div class="container col s12" style="margin-left: 60px; margin-right: 40px;  height:auto;" >
 
+										<div style="width:100%;" >
+
+										 <h4>China CAMC Engineering Co., Ltd</h4>
+										 <HR style="margin-left:0px; width:90%">
+											<BR>	<BR>
+										</div>
+
+
+													<div style="width:650px; padding-top:20px; padding-left:20px; font-size:14px; padding-right:40px; border:0px solid #333; margin-right:20px; float:left" id="col_izquierda" >
 													</div>
 
-													<div style="width:400px;  border:1px solid #333; float:left" id="col_derecha" >sss
+													<div style="width:300px;   padding-top:20px;  padding-left:20px; font-size:14px; padding-right:20px; background:#FAFAFA;  border:1px solid #333; float:left" id="col_derecha" >
+													</div>
+
+
+                          <div style="width:650px; padding-top:20px; padding-left:20px; font-size:14px; padding-right:40px; border:0px solid #333; margin-right:20px; float:left; display:none" id="col_izquierda_spanish" >
+													</div>
+
+													<div style="width:300px;   padding-top:20px;  padding-left:20px; font-size:14px; padding-right:20px; background:#FAFAFA;  border:1px solid #333; float:left; display:none" id="col_derecha_spanish" >
 													</div>
 
 									</div>
 
-
 						</div>
+
+
+
 				 </div>
 			</div>
+
+
+
+
+
+
 
       <script src="../js/jquery.js"></script>
       <script src="../js/materialize.js"></script>
@@ -400,6 +441,7 @@
              menuLoad();
              preview();
  					  verSearch();
+						searchNews();
 
 
              $( "#close_vistaprevia" ).click(function() {

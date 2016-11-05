@@ -108,7 +108,6 @@ function print_tableNews(news){
   $("#bodyTable tr").remove();
 
     $.each(news,function(i,l){
-				$("#bodyTable").append("<tr style='width:100px' id="+l.news_det_id+" ><td>"+l.news_det_date+"</td><td>"+l.news_category+"</td><td>"+l.law_det_text+"</td><td style='width:150px'><a  onclick='editar_news("+l.new_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='vista_previa_news("+l.news_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+l.news_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
 
 		});
 	}
@@ -317,17 +316,102 @@ function ShowEnglishSettingPanel(){
   }
 };
 //show categories panel
-function searchNews(){
+
+
+
+function searchNews(idioma){
+
+  var idm = idioma;
+  var desde =  $("#desde").val();
+  var hasta = $("#hasta").val();
+  var categoria = $("#categoria").val();
+
+  $("#desde").val("");
+  $("#hasta").val("");
+  $("#categoria").val("");
+
   $.post("../controller/news_detail_controller.php",{
     router:"range_search",
-    desde :$('#desde').val(),
-    hasta : $('#hasta').val(),
-    categoria : $('#categoria').val()
+    desde : desde,//$('#desde').val(),
+    hasta : hasta,//$('#hasta').val(),
+    categoria : categoria//$('#categoria').val()
   }).done(function(e){
     var news = JSON.parse(e);
+    console.log(news.contenido);
     $.each(news.contenido,function(i,n){
-      console.log(n.news_cat_name);
-    });
+
+
+
+
+            $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='vista_previa_news("+n.news_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+
+                  if(n.news_det_priority>3){
+
+                    $("#col_derecha").append("\
+                    <div style='width:100%;margin-bottom:10px; font-size:20px; border-bottom: 2px solid #333; padding-bottom:15px; margin-bottom:15px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+                    <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><br><br>\
+                    ");
+                  }
+
+
+                  if(n.news_det_priority<=3){
+
+                            if(n.news_det_image==null){
+                              $("#col_izquierda").append("\
+                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+                              <hr>\
+                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><hr><br>\
+                              ");
+                            }else{
+                              $("#col_izquierda").append("\
+                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+                              <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><hr>\
+                              ");
+                            }
+
+                  }
+
+
+
+
+
+                $("#bodyTable_spanish").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='vista_previa_news("+n.news_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+
+                if(n.news_det_priority>3){
+
+                  $("#col_derecha_spanish").append("\
+                  <div style='width:100%;margin-bottom:10px; font-size:20px; border-bottom: 2px solid #333; padding-bottom:15px; margin-bottom:15px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+                  <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><br><br>\
+                  ");
+                }
+
+
+                  if(n.news_det_priority<=3){
+
+                            if(n.news_det_image==null){
+                              $("#col_izquierda_spanish").append("\
+                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+                              <hr>\
+                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr><br>\
+                              ");
+                            }else{
+                              $("#col_izquierda_spanish").append("\
+                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+                              <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr>\
+                              ");
+                            }
+
+                    }
+
+
+
+
+      });
+
+
+
   });
 }
 
@@ -335,6 +419,7 @@ function searchNews(){
 function verSearch(){
 
   $("#ver_registro").hide();
+  $("#vistaprevia").hide();
 
 	 $("#ver_consulta").click(function() {
        $("#container_principal").hide();
@@ -342,9 +427,57 @@ function verSearch(){
        $("#ver_registro").show();
        $("#ver_consulta").hide();
        $("#ver_save").hide();
+       $("#vistaprevia").show();
+
+       $("#ver_tbl_spanish").hide();
+       $("#ver_tbl_english").hide();
+       $("#ver_sem_spanish").hide();
+       $("#ver_sem_english").hide();
+       $("#tableReporte").hide();
        $("#vistaprevia").hide();
+       $("#ver_index").hide();
+
 
    });
+
+   $("#desde").change(function() {
+       $("#container_principal").hide();
+       $("#consulta").show();
+       $("#ver_registro").show();
+       $("#ver_consulta").hide();
+       $("#ver_save").hide();
+       $("#vistaprevia").show();
+
+       $("#ver_tbl_spanish").hide();
+       $("#ver_tbl_english").hide();
+       $("#ver_sem_spanish").hide();
+       $("#ver_sem_english").hide();
+       $("#tableReporte").hide();
+       $("#vistaprevia").hide();
+
+
+   });
+
+
+   $("#hasta").change(function() {
+       $("#container_principal").hide();
+       $("#consulta").show();
+       $("#ver_registro").show();
+       $("#ver_consulta").hide();
+       $("#ver_save").hide();
+       $("#vistaprevia").show();
+
+       $("#ver_tbl_spanish").hide();
+       $("#ver_tbl_english").hide();
+       $("#ver_sem_spanish").hide();
+       $("#ver_sem_english").hide();
+       $("#tableReporte").hide();
+       $("#vistaprevia").hide();
+
+
+   });
+
+
 
 
    $("#ver_registro").click(function() {
@@ -356,6 +489,115 @@ function verSearch(){
        $("#vistaprevia").hide();
 
    });
+
+
+   $("#searchButtom1").click(function() {
+
+     $("#ver_tbl_spanish").show();
+     $("#ver_tbl_english").show();
+     $("#ver_sem_spanish").show();
+     $("#ver_sem_english").show();
+     $("#ver_sem_english").show();
+     $("#container_principal").hide();
+     $("#consulta").show();
+     $("#ver_registro").hide();
+     $("#ver_consulta").show();
+     $("#ver_save").hide();
+     $("#vistaprevia").show();
+     $("#col_derecha_spanish").show();
+     $("#col_izquierda_spanish").show();
+     $("#bodyTable_spanish").hide();
+     $("#col_derecha").hide();
+     $("#col_izquierda").hide();
+     $("#bodyTable").hide();
+     $("#tableReporte").hide();
+     $('#divTable h4').remove();
+
+     $('#divTable').append("<h4> Resultados en Espa&ntilde;ol  ( Semanario )</h4>")
+
+   });
+
+
+
+   $("#ver_tbl_spanish").click(function() {
+       $("#container_principal").hide();
+       $("#consulta").show();
+       $("#ver_registro").hide();
+       $("#ver_consulta").show();
+       $("#ver_save").hide();
+       $("#vistaprevia").hide();
+       $("#col_derecha_spanish").hide();
+       $("#col_izquierda_spanish").hide();
+       $("#bodyTable_spanish").show();
+       $("#col_derecha").hide();
+       $("#col_izquierda").hide();
+       $("#bodyTable").hide();
+       $("#tableReporte").show();
+       $('#divTable h4').remove();
+       $('#divTable').append("<h4> Resultados en Espa&ntilde;ol ( Tabla )</h4>")
+
+   });
+
+   $("#ver_tbl_english").click(function() {
+       $("#container_principal").hide();
+       $("#consulta").show();
+       $("#ver_registro").hide();
+       $("#ver_consulta").show();
+       $("#ver_save").hide();
+       $("#vistaprevia").hide();
+       $("#col_derecha_spanish").hide();
+       $("#col_izquierda_spanish").hide();
+       $("#bodyTable_spanish").hide();
+       $("#col_derecha").hide();
+       $("#col_izquierda").hide();
+       $("#bodyTable").show();
+       $("#tableReporte").show();
+       $('#divTable h4').remove();
+
+       $('#divTable').append("<h4> Results in English ( Table )</h4>")
+
+   });
+
+   $("#ver_sem_spanish").click(function() {
+       $("#container_principal").hide();
+       $("#consulta").show();
+       $("#ver_registro").hide();
+       $("#ver_consulta").show();
+       $("#ver_save").hide();
+       $("#vistaprevia").show();
+       $("#col_derecha_spanish").show();
+       $("#col_izquierda_spanish").show();
+       $("#bodyTable_spanish").hide();
+       $("#col_derecha").hide();
+       $("#col_izquierda").hide();
+       $("#bodyTable").hide();
+       $("#tableReporte").hide();
+       $('#divTable h4').remove();
+
+       $('#divTable').append("<h4> Resultados en Espa&ntilde;ol  ( Semanario )</h4>")
+
+   });
+
+   $("#ver_sem_english").click(function() {
+     $("#container_principal").hide();
+     $("#consulta").show();
+     $("#ver_registro").hide();
+     $("#ver_consulta").show();
+     $("#ver_save").hide();
+     $("#vistaprevia").show();
+     $("#col_derecha_spanish").hide();
+     $("#col_izquierda_spanish").hide();
+     $("#bodyTable_spanish").hide();
+     $("#col_derecha").show();
+     $("#col_izquierda").show();
+     $("#bodyTable").hide();
+     $("#tableReporte").hide();
+     $('#divTable h4').remove();
+     $('#divTable').append("<h4> Results in English  ( Semanario )</h4>")
+
+   });
+
+
 
 
 

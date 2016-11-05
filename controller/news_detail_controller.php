@@ -84,9 +84,9 @@ if ($_POST['router'] == "view_index_titles") {
     if ($_POST['router'] == "range_search") {
       $news = new NewsDetail(null,null,null,null,null,null,null,null,null,null);
       $content = new GetContents();
-      $desde = "";#$content->GetPostContent('desde');
-      $hasta = "";#$content->GetPostContent('hasta');
-      $categoria = 1;#(int)$content->GetPostContent('categoria');
+      $desde = $content->GetPostContent('desde');
+      $hasta = $content->GetPostContent('hasta');
+      $categoria = (int)$content->GetPostContent('categoria');
       $field = array();
       $field['news_det_category'] = $categoria;
       if($desde != "" && $hasta != ""){

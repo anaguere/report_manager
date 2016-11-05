@@ -367,12 +367,13 @@ function verSearch(){
 
 	 $("#ver_consulta").click(function() {
        $("#registro").hide();
+       $("#registro_p1").hide();
+       $("#registro_p2").hide();
        $("#consulta").show();
        $("#ver_registro").show();
        $("#ver_consulta").hide();
        $("#ver_save").hide();
        $("#vistaprevia").hide();
-
    });
 
 

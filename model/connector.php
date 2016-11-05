@@ -346,7 +346,6 @@ class Connector
       $table_name = $table_name;
       $i = count($fields);
       $query = "select * from ".$table_name." where ";
-      print_r($fields);
       foreach ($fields as $key => $value) {
       if (!$value == "") {
         if (is_array($value)) {
