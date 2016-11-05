@@ -82,7 +82,7 @@ if ($_POST['router'] == "conditionalSearch") {
   $fields = array();
   $fields[law_det_type] = (int)$categoria;
   $fields[law_gaceta_number] = $gaceta;
-  if(var_dump($desde) != null && var_dump($hasta) != null){
+  if($desde != "" && $hasta != ""){
     $fields[law_det_date] = array ($desde,$hasta);
   }
   echo json_encode($law->RangeSearchLawDetail($fields));
