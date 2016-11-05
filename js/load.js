@@ -222,13 +222,15 @@ function ShowEnglishSettingPanel(){
   }
 };
 //show categories panel
-function ShowCategories(){
+function searchNews(){
   $.post("../controller/news_detail_controller.php",{
-    router:"list"
+    router:"range_search",
+    desde :$('#desde').val(),
+    hasta : $('#hasta').val(),
+    categoria : $('#categoria').val()
   }).done(function(e){
-    var categories = JSON.parse(e);
-    $.each(categories.category.contenido,function(i,n){
-
+    var news = JSON.parse(e);
+    $.each(news.contenido,function(i,n){
       console.log(n.news_cat_name);
     });
   });

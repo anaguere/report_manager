@@ -143,7 +143,6 @@ class LawDetail extends Connector
       $i--;
       }
       $query .= ";";
-      #echo $query;
        return Connector::Querys($this->attr_connector,$query);
     }
 }

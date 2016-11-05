@@ -340,4 +340,31 @@ class Connector
         }
         return $resultado;
     }
+    final public function RangeSearch($conn,$table_name, $fields)
+    {
+      $fields = $fields;
+      $table_name = $table_name;
+      $i = count($fields);
+      $query = "select * from ".$table_name." where ";
+      print_r($fields);
+      foreach ($fields as $key => $value) {
+      if (!$value == "") {
+        if (is_array($value)) {
+          $query .= $key." >= '".$value[0]."' and ".$key." <= '".$value[1]."'";
+        }else{
+          if(is_int($value)){
+            $query .= $key."=".$value;
+          }else{
+            $query .= $key."='".$value."'";
+          }
+        }
+        if($i > 1){
+          $query .= " and ";
+        }
+      }
+      $i--;
+      }
+      $query .= ";";
+       return $this->Querys($conn,$query);
+    }
 };
