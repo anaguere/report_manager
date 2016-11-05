@@ -186,7 +186,6 @@ function vista_previa_ley(law_id){
 		      $('#law_comentario_prev_001').text(n.law_det_name);
 
           $.each(n.law_file_id, function(x,y){
-
           $('#pdf_view_1').attr('src','data:application/pdf;base64,'+y.news_file_archive);
           console.log(y.news_file_archive);
           });
@@ -195,57 +194,141 @@ function vista_previa_ley(law_id){
 
 }
 
+
+
+function editar_ley(law_id){
+
+  $("#botonmodal1").hide();
+  $("#consulta").hide();
+  $("#registro").show();
+  $("#ver_consulta").show();
+  $("#ver_registro").hide();
+  $("#ver_save").show();
+  $("#vistaprevia").hide();
+
+
+  $.post("../controller/law_detail_controller.php",{
+    router : "law_view",
+    law_id : law_id
+  }).done(function(e){
+    var law_detail = JSON.parse(e);
+
+
+    $.each(law_detail.contenido, function(i,n){
+
+      		d = new Date(n.law_det_date);
+      		$('#law_gaceta_prev').text(n.law_gaceta_number);
+      		$('#law_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
+		      $('#law_year').text(d.getFullYear());
+		      $('#law_comentario_prev').text(n.law_det_name);
+
+		      $('#law_date').val(n.law_det_date);
+		      $('#law_gaceta').val(n.law_gaceta_number);
+
+
+          var nl = n.law_det_id;
+
+          $("#news_comment_es").append("<p font-size:12px; font-weight:400; width:95%; height:60px;' id='law_name_"+nl+"' data-law_name_="+nl+">"+n.law_det_name+"</p>\
+       			<div class='col s12' id='div"+nl+"' style='margin-bottom:20px; border-top:1px solid #999; height:40px; padding-top:10px'>\
+       			<div style='float:left; width:100px;height:40px'> <a href=\"#modal2\" onclick='editLawName(\"#law_name_"+nl+"\",\"#selected"+nl+"\","+nl+")'><i style='font-size:28px; color:green' class='fa fa-pencil-square'></i></a>\
+       			 &nbsp; \
+       			<a onclick='deleteLawName(\"#law_name_"+nl+"\",\"#div"+nl+"\",\"#vp"+nl+"\")' ><i   style='font-size:28px; color:red' class='fa fa-minus-square'></i></a></div>\
+       			 <div style='float: left;    width: 200px;    height: 40px;    letter-spacing: 1px;    font-size: 24px;    margin-top: -5px;    color: #666;  text-align: left;' id='law_type_text_"+nl+"' data-type_"+nl+"= "+n.law_det_id+">"+$("#law_type :selected").text()+"</div>\
+       			 </div><br><br>");
+
+       		  $('#law_detail_prev').after("<p id='vp"+nl+"' style='padding-left:20px'><br> "+n.law_det_name+"</p>");
+
+
+
+          $.each(n.law_file_id, function(x,y){
+          $('#pdf_view').attr('src','data:application/pdf;base64,'+y.news_file_archive);
+          console.log(y.news_file_archive);
+        });
+
+
+
+
+
+    });
+
+
+  });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function searchLawNames(){
+
+
 	$.post("../controller/law_detail_controller.php",{
 		router : "view_law_names"
 	}).done(function(e){
 
 		var laws = JSON.parse(e);
 
+    console.log(laws);
     print_tableLeyes(laws);
 
 	});
 }
 
 function print_tableLeyes(law){
+
+  $("#bodyTable tr").remove();
+
     $.each(law,function(i,l){
-				$("#bodyTable").append("<tr style='width:100px' id="+l.law_det_id+" ><td>"+l.law_det_id+"</td><td>"+l.law_gaceta_number+"</td><td>"+l.law_det_type+"</td><td>"+l.law_det_name+"</td><td style='width:150px'><a  onclick='editar_ley("+l.law_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='vista_previa_ley("+l.law_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+l.law_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+				$("#bodyTable").append("<tr style='width:100px' id="+l.law_det_id+" ><td>"+l.law_det_date+"</td><td>"+l.law_gaceta_number+"</td><td>"+l.law_det_type+"</td><td>"+l.law_det_name+"</td><td style='width:150px'><a  onclick='editar_ley("+l.law_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='vista_previa_ley("+l.law_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+l.law_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+
 		});
 	}
 
 
 function addSearch(){
 
+
+
 	 $("#searchButtom").click(function() {
 
-      var desde =  $("#desde").val();
-      var hasta = $("#hasta").val();
-      var gaceta = $("#gaceta").val();
-      var categoria = $("#categoria").val();
+              var desde =  $("#desde").val();
+              var hasta = $("#hasta").val();
+              var gaceta = $("#gaceta").val();
+              var categoria = $("#categoria").val();
 
-       if(hasta.length<5){
-         hasta = desde;
-       }
-
-       console.log(desde);
-       console.log(hasta);
-       console.log(categoria);
-       console.log(gaceta);
+              $("#desde").val("");
+              $("#hasta").val("");
+              $("#gaceta").val("");
+              $("#categoria").val("");
 
 
-         $.post( "../controller/news_detail_controller.php", {
-           router : "filter",
-           desde: desde,
-           hasta: hasta,
-           gaceta: gaceta,
-           categoria: categoria
-         }).done(function(e){
+               $.post( "../controller/law_detail_controller.php", {
+                 router : "conditionalSearch",
+                 desde: desde,
+                 hasta: hasta,
+                 gaceta: gaceta,
+                 categoria: categoria
+               }).done(function(e){
 
-           var laws = JSON.parse(e);
-           print_tableLeyes(laws);
+                 var laws = JSON.parse(e);
+                 console.log(laws);
 
-         });
+                 print_tableLeyes(laws.contenido);
 
+               });
 
    });
 

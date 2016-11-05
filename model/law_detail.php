@@ -121,5 +121,29 @@ class LawDetail extends Connector
     {
         return Connector::SelectType($this->attr_connector, $this->table_name, $field_name);
     }
+    public function RangeSearchLawDetail($fields)
+    {
+      $i = count($fields);
+      $query = "select * from ".$this->table_name." where ";
+      foreach ($fields as $key => $value) {
+      if (!$value == "") {
+        if (is_array($value)) {
+          $query .= $key." >= '".$value[0]."' and ".$key." <= '".$value[1]."'";
+        }else{
+          if(is_int($value)){
+            $query .= $key."=".$value;
+          }else{
+            $query .= $key."='".$value."'";
+          }
+        }
+        if($i > 1){
+          $query .= " and ";
+        }
+      }
+      $i--;
+      }
+      $query .= ";";
+      #echo $query;
+       return Connector::Querys($this->attr_connector,$query);
+    }
 }
-

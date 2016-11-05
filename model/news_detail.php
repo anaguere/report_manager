@@ -151,5 +151,10 @@ class NewsDetail extends Connector{
 	public function selectOneTypeNewsDetail($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);
 }
+/*public function rangeSearchNewsDetail($fields)
+{
+	$fields = array("")
+	$query = "select * from ".$this->table_name."where news_det_date >= '2016-10-28' and news_det_date <= '2016-10-31';";
+}*/
 }
 ?>
