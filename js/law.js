@@ -13,6 +13,7 @@ function InitSelector(){
 			$.each(data,function(i,n){
 				$.each(n.contenido,function(y,f){
 					$('#law_type').append("<option value="+f.law_type_id+">"+f.law_type_name+"</option>");
+          $('#categoria').append("<option value="+f.law_type_id+">"+f.law_type_name+"</option>");
 					$('select').material_select();
 				});
 			});
@@ -30,7 +31,7 @@ $("#law_name").val(" ");
 });
 
 
- 
+
 }
 
 
@@ -47,9 +48,9 @@ function addComment(){
    			 <div style='float: left;    width: 200px;    height: 40px;    letter-spacing: 1px;    font-size: 24px;    margin-top: -5px;    color: #666;  text-align: left;' id='law_type_text_"+nl+"' data-type_"+nl+"= "+law_type+">"+$("#law_type :selected").text()+"</div>\
    			 </div><br><br>");
 
-   		$('#law_detail_prev').after("<p id='vp"+nl+"' style='padding-left:20px'><br> "+law_name+"</p>");
+   		    $('#law_detail_prev').after("<p id='vp"+nl+"' style='padding-left:20px'><br> "+law_name+"</p>");
 
-		nl++; 
+		nl++;
  });
 }
 
@@ -100,6 +101,21 @@ function preView(){
 		$('#law_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
 	});
 }
+
+
+function preView001(json){
+
+
+		$('#law_year').text();
+		d = new Date($('#law_date').val());
+		$('#law_gaceta_prev').text($(this).val());
+		$('#law_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
+
+}
+
+
+
+
 
 function saveLaw(){
 	var law_list = new Array();
@@ -157,10 +173,91 @@ function searchLaws(law_id){
 	});
 }
 
+
+
 function searchLawNames(){
 	$.post("../controller/law_detail_controller.php",{
 		router : "view_law_names"
 	}).done(function(e){
+
 		var laws = JSON.parse(e);
+
+    print_tableLeyes(laws);
+
 	});
+}
+
+
+
+function print_tableLeyes(law){
+    $.each(law,function(i,l){
+				$("#bodyTable").append("<tr id="+l.law_det_id+" ><td>"+l.law_det_id+"</td><td>"+l.law_gaceta_number+"</td><td>"+l.law_det_type+"</td><td>"+l.law_det_name+"</td><td><a  href='' class='fa fa-edit tam26'></a> <a  class='fa fa-eye tam26' href='#'></a> <a href='#'> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+		});
+	}
+
+
+
+function addSearch(){
+
+	 $("#searchButtom").click(function() {
+
+      var desde =  $("#desde").val();
+      var hasta = $("#hasta").val();
+      var gaceta = $("#gaceta").val();
+      var categoria = $("#categoria").val();
+
+       if(hasta.length<5){
+         hasta = desde;
+       }
+
+       console.log(desde);
+       console.log(hasta);
+       console.log(categoria);
+       console.log(gaceta);
+
+
+         $.post( "../controller/news_detail_controller.php", {
+           router : "filter",
+           desde: desde,
+           hasta: hasta,
+           gaceta: gaceta,
+           categoria: categoria
+         }).done(function(e){
+
+           var laws = JSON.parse(e);
+           print_tableLeyes(laws);
+
+         });
+
+
+   });
+
+}
+
+
+
+
+function verSearch(){
+
+  $("#ver_registro").hide();
+
+	 $("#ver_consulta").click(function() {
+       $("#registro").hide();
+       $("#consulta").show();
+       $("#ver_registro").show();
+       $("#ver_consulta").hide();
+       $("#ver_save").hide();
+   });
+
+
+   $("#ver_registro").click(function() {
+       $("#registro").show();
+       $("#consulta").hide();
+       $("#ver_registro").hide();
+       $("#ver_consulta").show();
+       $("#ver_save").show()
+   });
+
+
+
 }

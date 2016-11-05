@@ -8258,9 +8258,9 @@ input[type=range]:focus::-ms-fill-upper {
 
 .tabs{
 
-  background:#e57373; 
-  padding:0px; 
-  overflow:hidden; 
+  background:#e57373;
+  padding:0px;
+  overflow:hidden;
   height:50px;
   font-weight: bold;
 
@@ -8300,8 +8300,8 @@ body{
 
 .color_nav{
   background: #810d0d;
-  padding-right:100px; 
-  padding-left:100px;  
+  padding-right:100px;
+  padding-left:100px;
   padding-top: 10px;
 
 
@@ -8320,9 +8320,9 @@ body{
 
 .nav_color{
   background:#c62828;
-  padding-right:100px; 
-  padding-left:100px;      
-  padding-top: 10px; 
+  padding-right:100px;
+  padding-left:100px;
+  padding-top: 10px;
 }
 
 
@@ -8366,4 +8366,9 @@ cursor: pointer;
 background: #f4ff81;
 color:black;
 font-weight: 400;
+}
+
+.tam26{
+  font-size: 26px;
+  color: red;
 }

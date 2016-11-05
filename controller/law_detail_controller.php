@@ -37,12 +37,21 @@ if ($_POST['router'] == "law_types") {
     echo json_encode(array($law_type->selectAllLawType()));
 }
 
+
+
+
+
 if ($_POST['router'] == "law_view") {
     $content = new GetContents();
     $law_id  = $content->GetPostContent('law_id');
     $law     = new LawDetail(null, $law_id, null, null, null, null);
     echo json_encode($law->selectAllLawDetail());
 }
+
+
+
+
+
 if ($_POST['router'] == "view_law_names") {
     $law       = new LawDetail(null, null, null, null, null, null);
     $law_names = $law->selectOneTypeLawDetail(array("law_det_id", "law_det_name", "law_gaceta_number", "law_det_type"));
