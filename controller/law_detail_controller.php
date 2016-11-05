@@ -7,9 +7,9 @@ require '../model/news_files.php';
 
 if ($_POST['router'] == "create") {
     $content = new GetContents();
-    $files   = new NewsFiles(null, 1, null);
+    $files   = new NewsFiles(null, null, null);
 
-    $file_archive = $content->GetPostContent('law_file');
+    $file_archive = "lol";#$content->GetPostContent('law_file');
     $file_name    = $content->GetPostContent('law_file_title');
     $files->setNewsFileArchive($file_archive);
     $files->setNewsFileName($file_name);
@@ -25,7 +25,7 @@ if ($_POST['router'] == "create") {
         $laws->setLawDetDate($law_det_date);
         $laws->setLawDetName($law_details[0]);
         $laws->setLawDetType($law_details[1]);
-        $laws->setLawFileId($file_id['contenido'][0]['news_file_id']);
+        $laws->setLawFileId($law_file_id['contenido']['news_file_id']);
         $laws->setLawGacetaNumber($law_det_gaceta);
         $resul = $laws->saveLawDetail();
     }
