@@ -87,3 +87,15 @@ if ($_POST['router'] == "conditionalSearch") {
   }
   echo json_encode($law->RangeSearchLawDetail($fields));
 }
+
+if ($_POST['router'] == 'update') {
+  $law       = new LawDetail(null, null, null, null, null, null);
+  $content = new GetContents();
+  $gaceta = $content->GetPostContent('gaceta_number');
+  $date = $content->GetPostContent('date');
+  $law = $content->GetPostContent('law_name');
+  $file_title = $content->GetPostContent('law_file_title');
+  $file = $content->GetPostContent('law_file');
+
+
+}
