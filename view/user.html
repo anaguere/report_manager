@@ -1,418 +1,287 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-	<script src="../js/jquery.js"></script>
-	<script src="../js/materialize.js"></script>
-	<link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
-	<script type="text/javascript">
-	$(document).ready(function(){
-    		//init datepicker component
-    		$('.datepicker').pickadate({
-    			selectMonths: true,
-    			selectYear: 10
-    		});
-    		$('select').material_select();
-    	});
-    	//Sending news to database
-    	function SaveNews(){
-    		var news_body_html = $('#news_body_es').html();
-    		var news_img = $(news_body_html).contents().find("img").attr("src");
-    		var news_body_es = $('#news_body_es').text();
-    		$.post( "../controller/news_detail_create_controller.php", { news_title_es: $('#news_title_es').val(), 
-    		       news_img: news_img,
-    		       news_body_es: news_body_es,
-    		       news_date: $('#news_date').val(),
-    		       news_source: $('#news_source').val(),
-    		       news_comment_es : $('#news_comment_es').val(),
-    		       news_title_en : $('#news_title_en').val(),
-    		       news_body_en : $('#news_body_en').val(),
-    		       news_comment_en : $('#news_comment_en').val()
-    		   } );
-    	};
-    	//show comment panel
-    	function ShowCommentPanel(){
-    		if ($('#comment_panel_es').css('display') == "none") {
-    			$('#comment_panel_es').show();
-    		}else{
-    			$('#comment_panel_es').hide();
-    		}
-    	};
-    	//show english settings panel
-    	function ShowEnglishSettingPanel(){
-    		if ($('#english_content').css('display') == "none") {
-    			$('#english_content').show();
-    		}else{
-    			$('#english_content').hide();
-    		}
-    	};
-
-
-    	function ShowEnglishSettingPanel(){
-    		if ($('#english_content').css('display') == "none") {
-    			$('#english_content').show();
-    		}else{
-    			$('#english_content').hide();
-    		}
-    	};
-
-    	$(document).ready(function(){
-
-    		$(".bottom0010").sideNav();
-
-
-    		$( "#bottom0001" ).click(function() {
-    			$('#panel0002').hide();
-    			$('#panel0003').hide();
-    			$('#panel0001').show();
-
-    		});
-
-    		$( "#bottom0002" ).click(function() {
-    			$('#panel0001').hide();
-    			$('#panel0003').hide();
-    			$('#panel0002').show();
-    		});
-
-    		$( "#bottom0003" ).click(function() {
-    			$('#panel0001').hide();
-    			$('#panel0002').hide();
-    			$('#panel0003').show();
-    		});    		
-
-          $( "#bottom0004" ).click(function() {
-           $('#panel0005').hide();
-           $('#panel0004').show();
-       });   
-
-          $( "#bottom0005" ).click(function() {
-           $('#panel0004').hide();
-           $('#panel0005').show();
-
-       });     
-
-    	});
-
-
-
-
-
-
-    	</script>
-    </head>
-    <body>
-    	
-    	<nav>
-
-
-    		<div class="nav-wrapper" style="padding-right:100px; padding-left:100px;      padding-top: 10px; background:#0B0B3B"><span class="livicon"  style=""   data-hovercolor="white"
-                        data-color="white" data-name="users-add" data-size="34">
-                    </span>
-                <a href="#" class="brand-logo left" style="margin-top:-10px">&nbsp;&nbsp;  User Info</a>
-    			<ul id="nav-mobile" class="right hide-on-med-and-down" >
-    				
-
-				<li><a href="#">      
-    				<span class="livicon"  style=""   data-hovercolor="white"
-    				data-color="white" data-name="question" data-size="34">
-    			</span></a></li>
-
-
-    				<li><a href="#" data-activates="slide-out" class="bottom0010">      
-    					<span class="livicon"  style=""   data-hovercolor="white"
-    					data-color="white" data-name="folders" data-size="34">
-    				</span></a></li>
-
-    	
-
-
-
-    			<li><a href="home.html">      
-    				<span class="livicon"  style=""   data-hovercolor="white"
-    				data-color="white" data-name="home" data-size="34">
-    			</span></a></li>
-
-                <li><a href="#">      
-                    <span class="livicon"  style=""   data-hovercolor="white"
-                    data-color="white" data-name="sign-out" data-size="34">
-                </span></a></li>
-
-
- 
-
-    		</ul>
-    	</div>
-
-    </nav>
-
-
-
-    <div class="row" style="">
-
-
-    	<div class="container col s6" style="padding:30px">
-
-    		<div class="container col s12">
-    			<ul class="tabs" style="">
-    				<li class="tab col s3"><a id="bottom0001" class="active"  href="#">Info Basic</a></li>
-    				<li class="tab col s6">
-
-
-    					</li>
-    				<li class="tab col s3"><a href="#" style="    margin-top: 5px;" onclick="SaveNews()"  >
-    					<span class="livicon"  style="padding-top:10px"   data-hovercolor="white"
-    					data-color="white" data-name="save" data-size="34">
-    				  </span>
-
-    			</a></li>
-    			</ul>
-    		</div>
-
-
-    		<div  id="panel0001" class="container col s12" style="margin-top:10px; font-weight:bold; color:#000 ">
-    			<div class="  card-panel   grey lighten-4"  style="height:526px">
-
-
-    				<div class="input-field  col s12 form01" style="margin-top:0px">
-    					<input type="text" class="validate" id="news_title_es"></input>
-    					<label for="news_title_es">Full Name</label>
-    				</div>
-
-    				<div class="input-field  col s12 form01" >
-    					<input type="text" class="validate" id="news_title_es"></input>
-    					<label for="news_title_es">Email</label>
-    				</div>
-
-
-    				<div class="input-field  col s12 form01" >
-    					<input type="text" class="validate" id="news_source"></input>
-    					<label for="new_source">National ID</label>
-    				</div>
-
-    				<div class="input-field  col s6 form01" >
-    					<input type="text" class="validate" id="news_source"></input>
-    					<label for="new_source">Login</label>
-    				</div>
-
-    				<div class="input-field  col s5 form01" style="margin-left:20px" >
-    					<input type="password" class="validate" id="news_source"></input>
-    					<label for="new_source">Password</label>
-    				</div>
-
-   				<div class="input-field col s12 form01" style="margin-top:40px">
-    					<select>
-    						<option value="1">Admin</option>
-    						<option value="2">Viewer</option>
-    						<option value="3">Editor</option>
-    					</select>
-    					<label>Perfil</label>
-    				</div>
-
-    			</div>
-    		</div>
-
-
-
-
-    		<div  id="panel0002" class="container col s12" style="display:none; margin-top:30px; font-weight:bold; color:#000 ">
-    			<div class="  card-panel   grey lighten-4"  style="height:526px">
-
-
-    				<div class="input-field  col s12 form01">
-    					<input type="date" class="datepicker" id="news_date"></input>
-    					<label for="news_date">DATE COMMENT</label> 
-    				</div>
-
-
-    				<div class="input-field  col s12 form01" style="">
-    					<textarea class="materialize-textarea" id="news_comment_es"></textarea>
-    					<label for="news_comment_es">COMMENT</label>
-    				</div>
-
-
-
-    			</div>
-    		</div>
-
-
-
-    		<div  id="panel0003" class="container col s12" style="display:none; margin-top:30px; font-weight:bold; color:#000 ">
-    			<div class="  card-panel   grey lighten-4"  style="height:526px">
-
-
-    				<div class="input-field  col s12 form01" style="">
-    					<input type="text" class="validate" id="news_title_en"></input>
-    					<label for="news_title_en">ENGLISH TITLE</label>
-    				</div>
-
-
-    				<div class="input-field  col s12 form01">
-    					<textarea class="materialize-textarea" id="news_body_en" name="news_body_en"></textarea>
-    					<label for="news_boy_en">NEWS ENGLISH VERSION:</label>
-    				</div>
-
-
-    				<div class="input-field  col s12 form01" style="margin-bottom:30px">
-    					<textarea class="materialize-textarea" id="news_comment_en"></textarea>
-    					<label for="news_comment_en">COMMENT ENGLISH VERSION</label>
-    				</div>
-    			</div>
-    		</div>
-
-
-    	</div>
-
-
-
-    	<div class="container col s6" style="padding:30px; margin-top:-10px">
-
-    		<div class="container col s12">
-    			<ul class="tabs" style="">
-    				<li class="tab col s3"><a id="bottom0004" class="active"  href="#"> 
-    					PRIVATE</a></li>
-    					<li class="tab col s3"><a id="bottom0005"  href="#">PUBLIC</a></li>
-    					<li class="tab col s3"><a id="bottom0006" href="#"> </a></li>
-    				</ul>
-    			</div>
-
-
-
-    			<div id="panel0004" class="  card-panel   grey lighten-4"  style="height:530px; margin-top:65px;">
-
-
-    				<div class="row" style="padding:30px;padding-top:0px">
-
-    					<div  id="news_body_es" name="news_body_es" contenteditable="true" > 
-
-                        <table class="striped" >
-                            <thead>
-                              <tr>
-                                  <th data-field="id">Full Name</th>
-                                  <th data-field="name">Perfil</th>
-                                  <th data-field="price">Estatu</th>
-                              </tr>
-                            </thead>
-
-                            <tbody>
-                              <tr>
-                                <td>Pedro Rojas</td>
-                                <td>Admin</td>
-                                <td>Active</td>
-                              </tr>
-                                           
-                              <tr>
-                                <td>Ana Guere</td>
-                                <td>Admin</td>
-                                <td>Active</td>
-                              </tr>
-                            </tbody>
-                          </table>
-
-
-                        </div>
-
-
-    				</div>
-    			</div>
-
-
-                <div  id="panel0005" class="  card-panel   grey lighten-4"  style="display:none; height:530px; margin-top:65px;">
-
-
-                    <div class="row" style="padding:30px;padding-top:0px">
-
-                        <div  id="news_body_es" name="news_body_es" contenteditable="true" > 
-
-                        <table class="striped" >
-                            <thead>
-                              <tr>
-                                  <th data-field="id">Full Name</th>
-                                  <th data-field="name">Perfil</th>
-                                  <th data-field="name">Company</th>
-                                  <th data-field="price">Estatu</th>
-                              </tr>
-                            </thead>
-
-                            <tbody>
-                             
-                              <tr>
-                                <td>Rafael Alvarez</td>
-                                <td>Viewer</td>
-                                <td>cluuf C.A.</td>
-                                <td>Inactive</td>
-                              </tr>
-                              <tr>
-                                <td>Carla Sanz</td>
-                                <td>Editor</td>
-                                <td>PlayCard C.A</td>
-                                <td>Active</td>
-                              </tr>                             
-                               <tr>
-                                <td>Carlo Lopez</td>
-                                <td>Editor</td>
-                                <td>PlayCard C.A</td>
-                                <td>Active</td>
-                              </tr>                            
-                                <tr>
-                                <td>Eduardo Jimenez</td>
-                                <td>Viewer</td>
-                                <td>PlayCard C.A</td>
-                                <td>Active</td>
-                              </tr>                              
-                              <tr>
-                                <td>Anais Quintero</td>
-                                <td>Editor</td>
-                                <td>ProVeN C.A</td>
-                                <td>Active</td>
-                              </tr>
-                            </tbody>
-                          </table>
-
-
-                        </div>
-
-
-                    </div>
-                </div>
-
-
-    		</div>
-
-
-    		<div id="slide-out" class="side-nav">
-    			
-    			<div class="container col s12">
-    				<ul class="tabs" style="">
-    					<li class="tab col s3"><a id="bottom0001" class="active"  href="#">A-Z</a></li>
-    					<li class="tab col s3"><a id="bottom0002"  href="#">Category</a></li>
-    					<li class="tab col s3"><a id="bottom0003" href="#">Latest Recents</a></li>
-    				</ul>
-    			</div>
-
-    			<ul class="collapsible" data-collapsible="accordion">
-    				<li>
-    					<div class="collapsible-header">First</div>
-    					<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    				</li>
-    				<li>
-    					<div class="collapsible-header">Second</div>
-    					<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    				</li>
-    				<li>
-    					<div class="collapsible-header">Third</div>
-    					<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    				</li>
-    			</ul>
-
-
-    		</div>
-
-
-
-    	</div>
-    	<script src="../js/raphael-min.js"></script>
-    	<script src="../js/livicons-customizer-1.4.js"></script>
-    	<script src="../js/customizer.js"></script>
-
-    </body>
-    </html>
+   <head>
+      <title></title>
+      <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
+      <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.css" />
+      <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.skinFlat.css" />
+   </head>
+   <body>
+      <nav>
+         <div class="nav-wrapper" style="padding-right:100px; padding-left:100px;      padding-top: 10px; background:#0B0B3B">
+            <span class="livicon"  style=""   data-hovercolor="white"
+               data-color="white" data-name="users-add" data-size="34">
+            </span>
+            <a href="#" class="brand-logo left" style="margin-top:-10px">&nbsp;&nbsp;  User Info</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down" >
+               <li><a  id="ver_save" href="#" onclick="guardar()"  >
+                  <span class="livicon"  style=""   data-hovercolor="white"
+                     data-color="white" data-name="save" data-size="34">
+                  </span>
+                  </a>
+               </li>
+               <li><a href="home.html">      
+                  <span class="livicon"  style=""   data-hovercolor="white"
+                     data-color="white" data-name="home" data-size="34">
+                  </span></a>
+               </li>
+               <li><a href="#">      
+                  <span class="livicon"  style=""   data-hovercolor="white"
+                     data-color="white" data-name="sign-out" data-size="34">
+                  </span></a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div class="row" style="">
+         <div class="container col s6" style="padding:30px">
+            <div class="container col s12">
+               <ul class="tabs" style="">
+                  <li class="tab col s3"><a id="bottom0001" class="active"  href="#">Info Basic</a></li>
+                  <li class="tab col s6">
+                  </li>
+                  <li class="tab col s3"><a href="#" style="    margin-top: 5px;" onclick="SaveNews()"  >
+                     <span class="livicon"  style="padding-top:10px"   data-hovercolor="white"
+                        data-color="white" data-name="save" data-size="34">
+                     </span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+            <div  id="panel0001" class="container col s12" style="margin-top:10px; font-weight:bold; color:#000 ">
+               <div class="  card-panel   grey lighten-4"  style="height:526px">
+                  <div class="input-field  col s12 form01" style="margin-top:0px">
+                     <input type="text" class="validate" id="user_inf_full_name"></input>
+                     <label for="user_inf_full_name">Full Name</label>
+                  </div>
+                  <div class="input-field  col s12 form01" >
+                     <input type="text" class="validate" id="user_inf_mail"></input>
+                     <label for="user_inf_mail">Email</label>
+                  </div>
+                  <div class="input-field  col s12 form01" >
+                     <input type="text" class="validate" id="user_inf_national_ID"></input>
+                     <label for="user_inf_national_ID">National ID</label>
+                  </div>
+                  <div class="input-field  col s6 form01" >
+                     <input type="text" class="validate" id="user_inf_login"></input>
+                     <label for="user_inf_login">Login</label>
+                  </div>
+                  <div class="input-field  col s5 form01" style="margin-left:20px" >
+                     <input type="password" class="validate" id="user_inf_password"></input>
+                     <label for="user_inf_password">Password</label>
+                  </div>
+                  <div class="input-field col s12 form01" style="margin-top:40px">
+                     <select id="user_inf_type">
+                        <option value="1">Admin</option>
+                        <option value="2">Viewer</option>
+                        <option value="3">Editor</option>
+                     </select>
+                     <label>Perfil</label>
+                  </div>
+               </div>
+            </div>
+            <div  id="panel0002" class="container col s12" style="display:none; margin-top:30px; font-weight:bold; color:#000 ">
+               <div class="  card-panel   grey lighten-4"  style="height:526px">
+                  <div class="input-field  col s12 form01">
+                     <input type="date" class="datepicker" id="news_date"></input>
+                     <label for="news_date">DATE COMMENT</label> 
+                  </div>
+                  <div class="input-field  col s12 form01" style="">
+                     <textarea class="materialize-textarea" id="news_comment_es"></textarea>
+                     <label for="news_comment_es">COMMENT</label>
+                  </div>
+               </div>
+            </div>
+            <div  id="panel0003" class="container col s12" style="display:none; margin-top:30px; font-weight:bold; color:#000 ">
+               <div class="  card-panel   grey lighten-4"  style="height:526px">
+                  <div class="input-field  col s12 form01" style="">
+                     <input type="text" class="validate" id="news_title_en"></input>
+                     <label for="news_title_en">ENGLISH TITLE</label>
+                  </div>
+                  <div class="input-field  col s12 form01">
+                     <textarea class="materialize-textarea" id="news_body_en" name="news_body_en"></textarea>
+                     <label for="news_boy_en">NEWS ENGLISH VERSION:</label>
+                  </div>
+                  <div class="input-field  col s12 form01" style="margin-bottom:30px">
+                     <textarea class="materialize-textarea" id="news_comment_en"></textarea>
+                     <label for="news_comment_en">COMMENT ENGLISH VERSION</label>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container col s6" style="padding:30px; margin-top:-10px">
+            <div class="container col s12">
+               <ul class="tabs" style="">
+                  <li class="tab col s3"><a id="bottom0004" class="active"  href="#"> 
+                     PRIVATE</a>
+                  </li>
+                  <li class="tab col s3"><a id="bottom0005"  href="#">PUBLIC</a></li>
+                  <li class="tab col s3"><a id="bottom0006" href="#"> </a></li>
+               </ul>
+            </div>
+            <div id="panel0004" class="  card-panel   grey lighten-4"  style="height:530px; margin-top:65px;">
+               <div class="row" style="padding:30px;padding-top:0px">
+                  <div  id="news_body_es" name="news_body_es" contenteditable="true" >
+                     <table class="striped" >
+                        <thead>
+                           <tr>
+                              <th data-field="id">Full Name</th>
+                              <th data-field="name">Perfil</th>
+                              <th data-field="price">Estatu</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>Pedro Rojas</td>
+                              <td>Admin</td>
+                              <td>Active</td>
+                           </tr>
+                           <tr>
+                              <td>Ana Guere</td>
+                              <td>Admin</td>
+                              <td>Active</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div  id="panel0005" class="  card-panel   grey lighten-4"  style="display:none; height:530px; margin-top:65px;">
+               <div class="row" style="padding:30px;padding-top:0px">
+                  <div  id="news_body_es" name="news_body_es" contenteditable="true" >
+                     <table class="striped" >
+                        <thead>
+                           <tr>
+                              <th data-field="id">Full Name</th>
+                              <th data-field="name">Perfil</th>
+                              <th data-field="name">Company</th>
+                              <th data-field="price">Estatu</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>Rafael Alvarez</td>
+                              <td>Viewer</td>
+                              <td>cluuf C.A.</td>
+                              <td>Inactive</td>
+                           </tr>
+                           <tr>
+                              <td>Carla Sanz</td>
+                              <td>Editor</td>
+                              <td>PlayCard C.A</td>
+                              <td>Active</td>
+                           </tr>
+                           <tr>
+                              <td>Carlo Lopez</td>
+                              <td>Editor</td>
+                              <td>PlayCard C.A</td>
+                              <td>Active</td>
+                           </tr>
+                           <tr>
+                              <td>Eduardo Jimenez</td>
+                              <td>Viewer</td>
+                              <td>PlayCard C.A</td>
+                              <td>Active</td>
+                           </tr>
+                           <tr>
+                              <td>Anais Quintero</td>
+                              <td>Editor</td>
+                              <td>ProVeN C.A</td>
+                              <td>Active</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="slide-out" class="side-nav">
+            <div class="container col s12">
+               <ul class="tabs" style="">
+                  <li class="tab col s3"><a id="bottom0001" class="active"  href="#">A-Z</a></li>
+                  <li class="tab col s3"><a id="bottom0002"  href="#">Category</a></li>
+                  <li class="tab col s3"><a id="bottom0003" href="#">Latest Recents</a></li>
+               </ul>
+            </div>
+            <ul class="collapsible" data-collapsible="accordion">
+               <li>
+                  <div class="collapsible-header">First</div>
+                  <div class="collapsible-body">
+                     <p>Lorem ipsum dolor sit amet.</p>
+                  </div>
+               </li>
+               <li>
+                  <div class="collapsible-header">Second</div>
+                  <div class="collapsible-body">
+                     <p>Lorem ipsum dolor sit amet.</p>
+                  </div>
+               </li>
+               <li>
+                  <div class="collapsible-header">Third</div>
+                  <div class="collapsible-body">
+                     <p>Lorem ipsum dolor sit amet.</p>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </div>
+
+
+     
+     
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+      <script src="../js/user.js"></script>
+      <script src="../js/raphael-min.js"></script>
+      <script src="../js/livicons-customizer-1.4.js"></script>
+      <script src="../js/customizer.js"></script>
+      <script src="../ionRangeSliderDemo/js/ion.rangeSlider.js"></script>
+      <script>
+
+         $(document).ready(function(){
+               $('select').material_select();
+
+         
+         });
+         
+
+        function guardar(){
+
+
+            $.post( "../controller/users_detail_controller.php", {
+                router : "create",
+                user_inf_full_name: ne($('#user_inf_full_name').val()),
+                user_inf_login: ne($('#user_inf_login').val()),
+                user_inf_mail: ne($('#user_inf_mail').val()),
+                user_inf_national_ID: ne($('#user_inf_national_ID').val()),
+                user_inf_password: ne($('#user_inf_password').val()),
+                user_inf_type: ne($('#user_inf_type').val())
+            }).done(function(message){
+                message = JSON.parse(message);
+                if(message.conexion){
+                }else{
+                    alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+                }
+            });
+        }
+
+
+
+
+          
+
+
+        function ne(x){
+            if(x.length<1){
+                return " ";
+            }else{
+                return x;
+            }
+        }
+
+
+  
+      </script>
+   </body>
+</html>

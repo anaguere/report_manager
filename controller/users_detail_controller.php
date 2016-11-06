@@ -3,7 +3,7 @@ require '../libraries/get_contents.php';
 require '../model/connector.php';
 require '../model/users_details.php';
 
-if($_POST̈́['router'] == 'create'){
+if($_POST['router'] == 'create'){
   $content = new GetContents();
   $user = new UsersDetails(null,null,null,null,null,null,null);
   $user_name = $content('user_inf_full_name');
@@ -23,6 +23,8 @@ if($_POST̈́['router'] == 'create'){
 
   echo json_encode($user_create);
 }
+
+
 
 if ($_POST['router'] == 'login_user') {
   $content = new GetContents();
