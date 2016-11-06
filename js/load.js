@@ -143,7 +143,7 @@ function vista_previa_news(law_id){
 
 
             $.each(n.law_file_id, function(x,y){
-            $('#pdf_view_1').attr('src','data:application/pdf;base64,'+y.news_file_archive);
+            $('#pdf_view_1').attr('src',y.news_file_archive);
           //  console.log(y.news_file_archive);
             });
       });
@@ -206,6 +206,7 @@ function preview(){
   $('#news_body_es').focusout(function(){
     var news_body_html = $(this).html();
     var news_img = $(news_body_html).contents().find("img").attr("src");
+    $('#h5_title + img').remove();
     if (news_img != null) {
       $('#h5_title').after("<img id='new_img_prev' src='"+news_img+"' style='margin-left: 5%;' width='90%' height='35%'> ");
     }else{
@@ -338,7 +339,7 @@ function searchNews(idioma){
   }).done(function(e){
     var news = JSON.parse(e);
     console.log(news.contenido);
-    $.each(news.contenido,function(i,n){
+    $.each(news,function(i,n){
 
 
 

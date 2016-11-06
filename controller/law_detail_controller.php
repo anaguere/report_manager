@@ -9,7 +9,7 @@ if ($_POST['router'] == "create") {
     $content = new GetContents();
     $files   = new NewsFiles(null, null, null);
 
-    $file_archive = "lol";#$content->GetPostContent('law_file');
+    $file_archive = $content->GetPostContent('law_file');
     $file_name    = $content->GetPostContent('law_file_title');
     $files->setNewsFileArchive($file_archive);
     $files->setNewsFileName($file_name);

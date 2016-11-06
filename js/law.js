@@ -205,7 +205,7 @@ function vista_previa_ley(law_id){
 
 
           $.each(n.law_file_id, function(x,y){
-          $('#pdf_view_1').attr('src','data:application/pdf;base64,'+y.news_file_archive);
+          $('#pdf_view_1').attr('src',y.news_file_archive);
         //  console.log(y.news_file_archive);
           });
     });

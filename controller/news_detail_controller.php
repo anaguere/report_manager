@@ -92,5 +92,18 @@ if ($_POST['router'] == "view_index_titles") {
       if($desde != "" && $hasta != ""){
         $field['news_det_date'] = array($desde,$hasta);
       }
-      echo json_encode($news->RangeSearchNewsDetail($field));
+      $result = $news->RangeSearchNewsDetail($field);
+      #-------------Searrch categories ----------------------------
+      $final = array();
+      foreach ($result['contenido'] as $key => $value) {
+        $array = array();
+        $category = new NewsCategory(null, $value['news_det_category'], null);
+        $cat_names =$category->selectAllNewsCategory();
+        $value['news_det_category'] = $cat_names['contenido'][0]['news_cat_name'];
+        foreach ($value as $det => $val) {
+          $array[$det] = ($det == "news_det_category") ? $cat_names['contenido'][0]['news_cat_name'] : $val ;
+        }
+        array_push($final,$array);
+      }
+      echo json_encode($final);
     }
