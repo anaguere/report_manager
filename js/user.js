@@ -33,7 +33,7 @@
             var news_body_es = $('#news_body_es').text();
 
 
-            $.post( "../controller/user_detail_controller.php", {
+            $.post( "../controller/users_detail_controller.php", {
                 router : "create",
                 user_inf_full_name: ne($('#user_inf_full_name').val()),
                 user_inf_login: ne($('#user_inf_login').val()),
@@ -50,3 +50,18 @@
                 }
             });
         };
+
+        function LoginUser(){
+          $.post("../controller/users_detail_controller.php",{
+            router : "login_user",
+            login_user : $('#user_inf_login').val();
+            user_password :$('#user_inf_password').val()
+          }).done(function (e) {
+            message = JSON.parse(e);
+            if(message.conexion){
+              console.log(message);
+            }else{
+              alert('User or password are wrong, please try again!');
+            }
+          });
+        }

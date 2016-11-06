@@ -9,7 +9,7 @@ if ($_POST['router'] == "create") {
     $content = new GetContents();
     $files   = new NewsFiles(null, null, null);
 
-    $file_archive = "lol";#$content->GetPostContent('law_file');
+    $file_archive = $content->GetPostContent('law_file');
     $file_name    = $content->GetPostContent('law_file_title');
     $files->setNewsFileArchive($file_archive);
     $files->setNewsFileName($file_name);
@@ -86,4 +86,16 @@ if ($_POST['router'] == "conditionalSearch") {
     $fields[law_det_date] = array ($desde,$hasta);
   }
   echo json_encode($law->RangeSearchLawDetail($fields));
+}
+
+if ($_POST['router'] == 'update') {
+  $law       = new LawDetail(null, null, null, null, null, null);
+  $content = new GetContents();
+  $gaceta = $content->GetPostContent('gaceta_number');
+  $date = $content->GetPostContent('date');
+  $law = $content->GetPostContent('law_name');
+  $file_title = $content->GetPostContent('law_file_title');
+  $file = $content->GetPostContent('law_file');
+
+
 }
