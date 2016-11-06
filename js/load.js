@@ -37,6 +37,8 @@ function ne(x){
     return x;
   }
 };
+
+
 //Load index view
 function IndexViewTitles(){
   $.post("../controller/news_detail_controller.php",
@@ -99,6 +101,8 @@ function addSearch(){
                });
 
    });
+
+
 
 }
 
