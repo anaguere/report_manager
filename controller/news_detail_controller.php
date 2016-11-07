@@ -118,7 +118,9 @@ if ($_POST['router'] == "view_index_titles") {
     }
 
     if ($_POST['router'] == 'update') {
-      $news = new NewsDetail(null,null,null,null,null,null,null,null,null,null,null);
+      $content = new GetContents();
+      $news_id = $content->GetPostContent('news_id');
+      $news = new NewsDetail(null,null,null,$news_id,null,null,null,null,null,null,null);
       $body_es  = $content->GetPostContent("news_body_es");
       $date     = $content->GetPostContent("news_date");
       $source   = $content->GetPostContent("news_source");
@@ -136,4 +138,11 @@ if ($_POST['router'] == "view_index_titles") {
       $news_detail->setNewsDetCategory($category);
       $news_detail->setNewsDetPriority($range);
       echo json_encode($news->updateNewsDetail($news_id));
+    }
+
+    if($_POST['router'] == 'delete'){
+      $news = new NewsDetail(null,null,null,null,null,null,null,null,null,null,null);
+      $content = new GetContents();
+      $news_id = $content->GetPostContent('news_id');
+      echo json_encode($news->deleteNewsDetail($news_id));
     }

@@ -720,11 +720,15 @@ function verSearch(){
 
    });
 
+ }
+
+
 function updateNews(news_id){
   var news_body_html = $('#news_body_es').html();
   var news_body_es = $('#news_body_es').text();
   $.post( "../controller/news_detail_controller.php", {
     router : "update",
+    news_id : news_id,
     news_title_es: ne($('#news_title_es').val()),
     news_body_es: news_body_es,
     news_date: ne($('#news_date').val()),
@@ -744,7 +748,17 @@ function updateNews(news_id){
   });
 }
 
-
-
-
+function deleteNews(news_id){
+  $.post( "../controller/news_detail_controller.php", {
+    router : "delete",
+    news_id : news_id,
+  }).done(function(message){
+    message = JSON.parse(message);
+    if(message.conexion){
+      alert('Deleted Success!');
+      location.reload();
+    }else{
+      alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+    }
+  });
 }
