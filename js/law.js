@@ -118,6 +118,8 @@ function preView(){
   });
 }
 
+
+
 function saveLaw(){
   var law_list = new Array();
 

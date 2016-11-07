@@ -105,6 +105,9 @@ foreach ($json_db as $clave => $valor) {
     $class_define .= "\tpublic function selectOneType".$class_name."(\$field_name){".$bl;
     $class_define .= "\t\t return Connector::SelectType(\$this->attr_connector,\$this->table_name,\$field_name);".$bl;
     $class_define .= "}".$bl;
+    $class_define .= "\tpublic function RangeSearch".$class_name."(\$fields){".$bl;
+    $class_define .= "\t\t return Connector::RangeSearch(\$this->attr_connector,\$this->table_name,\$fields);".$bl;
+    $class_define .= "}".$bl;
     $class_define .= "}".$bl;
     $class_define .= "?>";
     $class = fopen("../model/".$clave.".php", "w");
@@ -112,4 +115,3 @@ foreach ($json_db as $clave => $valor) {
     #echo "<pre>".$class_define;
     #exit;
 }
-

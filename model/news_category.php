@@ -67,5 +67,8 @@ class NewsCategory extends Connector{
 	public function selectOneTypeNewsCategory($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);
 }
+	public function RangeSearchNewsCategory($fields){
+		 return Connector::RangeSearch($this->attr_connector,$this->table_name,$fields);
+}
 }
 ?>

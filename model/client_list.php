@@ -67,5 +67,8 @@ class ClientList extends Connector{
 	public function selectOneTypeClientList($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);
 }
+	public function RangeSearchClientList($fields){
+		 return Connector::RangeSearch($this->attr_connector,$this->table_name,$fields);
+}
 }
 ?>

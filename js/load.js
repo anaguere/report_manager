@@ -39,6 +39,8 @@ function ne(x){
 };
 
 
+
+
 //Load index view
 function IndexViewTitles(){
   $.post("../controller/news_detail_controller.php",
@@ -207,7 +209,11 @@ $('.button-collapse').sideNav('hide');
 
 
 function preview(){
+
   $('#news_body_es').focusout(function(){
+
+    $('#encabezado_vistaprevia').show();
+
     var news_body_html = $(this).html();
     var news_img = $(news_body_html).contents().find("img").attr("src");
     $('#h5_title + img').remove();
@@ -220,9 +226,13 @@ function preview(){
     $('#news_body_prev').text($(this).text());
   });
   $('#news_title_es').focusout(function(){
+  $('#encabezado_vistaprevia').show();
+
     $('#news_title_prev').text($(this).val());
   });
   $('#news_date').change(function(){
+  $('#encabezado_vistaprevia').show();
+
     var d = new Date($('#news_date').val());
     var date = $('#news_date').val();
     date = date.split(" ");
@@ -230,34 +240,57 @@ function preview(){
     $('#news_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
   });
   $('#news_source').focusout(function(){
+  $('#encabezado_vistaprevia').show();
+
     $('#news_source_prev').text($(this).val());
   });
 
 }
 //Sending news to database
 function SaveNews(){
-  var news_body_html = $('#news_body_es').html();
-  var news_img = $(news_body_html).contents().find("img").attr("src");
-  var news_body_es = $('#news_body_es').text();
-  $.post( "../controller/news_detail_controller.php", {
-    router : "create",
-    news_title_es: ne($('#news_title_es').val()),
-    news_img: news_img,
-    news_body_es: news_body_es,
-    news_date: ne($('#news_date').val()),
-    news_source: ne($('#news_source').val()),
-    news_title_en : ne($('#news_title_en').val()),
-    news_body_en : ne($('#news_body_en').val()),
-    news_category : ne($('#news_category').val()),
-    news_range : ne($('#news_range').val())
-  }).done(function(message){
-    message = JSON.parse(message);
-    if(message.conexion){
-      location.reload();
-    }else{
-      alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
-    }
-  });
+  var law_list = new Array();
+
+  var xhr = new XMLHttpRequest;
+  xhr.responseType = 'blob';
+
+  xhr.onload = function() {
+    var recoveredBlob = xhr.response;
+
+    var reader = new FileReader;
+
+    reader.onload = function() {
+      var blobAsDataUrl = reader.result;
+      var news_body_html = $('#news_body_es').html();
+      var news_img = $(news_body_html).contents().find("img").attr("src");
+      var news_body_es = $('#news_body_es').text();
+      $.post( "../controller/news_detail_controller.php", {
+        router : "create",
+        news_title_es: ne($('#news_title_es').val()),
+        news_img: news_img,
+        news_body_es: news_body_es,
+        news_date: ne($('#news_date').val()),
+        news_source: ne($('#news_source').val()),
+        news_title_en : ne($('#news_title_en').val()),
+        news_body_en : ne($('#news_body_en').val()),
+        news_category : ne($('#news_category').val()),
+        news_range : ne($('#news_range').val()),
+        news_file :blobAsDataUrl
+      }).done(function(message){
+        message = JSON.parse(message);
+        if(message.conexion){
+          location.reload();
+        }else{
+          alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+        }
+      });
+    };
+
+    reader.readAsDataURL(recoveredBlob);
+  };
+
+  xhr.open('GET', path);
+  xhr.send();
+
 };
 
 //Searching detail news
@@ -275,33 +308,15 @@ console.log(i);
 }*/
 
 //Sending news to database
+function PDFViewer(){
+  $(this).change(function(event){
+    window.path = URL.createObjectURL(event.target.files[0]);
+    $('#pdf_view').attr('src',path);
 
 
+  });
+}
 
-function SaveLey(){
-
-  /* tratamiento de los comentarios de las leyes*/
-  var comment = new Array();
-  var type_comment = new Array();
-  y=0;
-  for (x = 1; x < 20; x++) {
-    if($('#text'+x).val()){
-      comment[y] = $('#text'+x).val();
-      type_comment[y] = $('#selected'+x).val();
-    }
-  };
-  /* fin del tratamiento de los comentarios de las leyes */
-
-
-  console.log( $('#news_title_es').val());
-  console.log($('#news_date').val());
-  console.log($('#new_source').val());
-  console.log($('#news_category').val());
-  console.log( comment[0]);
-  console.log(type_comment[0]  );
-
-
-};
 
 
 //show comment panel

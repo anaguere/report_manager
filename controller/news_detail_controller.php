@@ -6,10 +6,13 @@ require '../model/news_comment.php';
 require '../model/client_list.php';
 require '../model/news_category.php';
 require '../model/news_type.php';
+require '../model/news_files.php';
 
 if ($_POST['router'] == 'create') {
   $content     = new GetContents();
-  $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null);
+  $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null,null);
+  $files  = new NewsFiles(null,null,null);
+  $news_file = $content->GetPostContent('news_file');
   $title_es    = $content->GetPostContent("news_title_es");
   $tmp_img     = $content->GetPostContent("news_img");
   if (empty($tmp_img)) {
@@ -25,6 +28,10 @@ if ($_POST['router'] == 'create') {
   $category = $content->GetPostContent("news_category");
   $range    = $content->GetPostContent("news_range");
 
+  $files->setNewsFileName('news_'.$date);
+  $files->setNewsFileArchive($news_files);
+  $file_id = $files->saveNewsFiles();
+
   $news_detail->setNewsDetDate($date);
   $news_detail->setNewsDetImage($img);
   $news_detail->setNewsDetSource($source);
@@ -34,6 +41,7 @@ if ($_POST['router'] == 'create') {
   $news_detail->setNewsDetTiten($title_en);
   $news_detail->setNewsDetCategory($category);
   $news_detail->setNewsDetPriority($range);
+  $news_detail->setNewsDetFile($file_id['contenido']['news_file_id']);
 
   $news_id = $news_detail->saveNewsDetail();
 
@@ -62,7 +70,7 @@ if ($_POST['router'] == "view_index_titles") {
       }
     }}
     #_____________________________Selection english list___________________________________
-    $news_list_en = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
+    $news_list_en = new NewsDetail(null,null, null, null, null, null, null, null, null, null, null, null, null);
     $title_es     = $news_list_en->selectOneTypeNewsDetail(array("news_det_tit_en", "news_det_id"));
     for ($i = 97; $i <= 122; $i++) {
       $english_list[chr($i)] = array();
@@ -77,12 +85,12 @@ if ($_POST['router'] == "view_index_titles") {
 
     if ($_POST['router'] == "news_view") {
       $content = new GetContents();
-      $news    = new NewsDetail(null, null, $content->GetPostContent("news_id"), null, null, null, null, null, null, null, null);
+      $news    = new NewsDetail(null, null, null,null, $content->GetPostContent("news_id"), null, null, null, null, null, null, null);
       echo json_encode($news->selectAllNewsDetail());
     }
 
     if ($_POST['router'] == "range_search") {
-      $news = new NewsDetail(null,null,null,null,null,null,null,null,null,null);
+      $news = new NewsDetail(null,null,null,null,null,null,null,null,null,null,null);
       $content = new GetContents();
       $desde = $content->GetPostContent('desde');
       $hasta = $content->GetPostContent('hasta');
