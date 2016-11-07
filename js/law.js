@@ -210,6 +210,8 @@ function vista_previa_ley(law_id){
         $('#pdf_view_1').attr('src',y.news_file_archive);
         //  console.log(y.news_file_archive);
       });
+
+      
     });
   });
 
