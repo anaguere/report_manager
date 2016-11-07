@@ -67,5 +67,8 @@ class NewsFiles extends Connector{
 	public function selectOneTypeNewsFiles($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);
 }
+	public function RangeSearchNewsFiles($fields){
+		 return Connector::RangeSearch($this->attr_connector,$this->table_name,$fields);
+}
 }
 ?>

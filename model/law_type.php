@@ -67,5 +67,8 @@ class LawType extends Connector{
 	public function selectOneTypeLawType($field_name){
 		 return Connector::SelectType($this->attr_connector,$this->table_name,$field_name);
 }
+	public function RangeSearchLawType($fields){
+		 return Connector::RangeSearch($this->attr_connector,$this->table_name,$fields);
+}
 }
 ?>
