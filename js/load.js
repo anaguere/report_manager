@@ -39,6 +39,8 @@ function ne(x){
 };
 
 
+
+
 //Load index view
 function IndexViewTitles(){
   $.post("../controller/news_detail_controller.php",
@@ -207,7 +209,11 @@ $('.button-collapse').sideNav('hide');
 
 
 function preview(){
+
   $('#news_body_es').focusout(function(){
+ 
+    $('#encabezado_vistaprevia').show();
+
     var news_body_html = $(this).html();
     var news_img = $(news_body_html).contents().find("img").attr("src");
     $('#h5_title + img').remove();
@@ -220,9 +226,13 @@ function preview(){
     $('#news_body_prev').text($(this).text());
   });
   $('#news_title_es').focusout(function(){
+  $('#encabezado_vistaprevia').show();
+
     $('#news_title_prev').text($(this).val());
   });
   $('#news_date').change(function(){
+  $('#encabezado_vistaprevia').show();
+
     var d = new Date($('#news_date').val());
     var date = $('#news_date').val();
     date = date.split(" ");
@@ -230,6 +240,8 @@ function preview(){
     $('#news_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
   });
   $('#news_source').focusout(function(){
+  $('#encabezado_vistaprevia').show();
+    
     $('#news_source_prev').text($(this).val());
   });
 
@@ -275,33 +287,15 @@ console.log(i);
 }*/
 
 //Sending news to database
+function PDFViewer(){
+  $(this).change(function(event){
+    window.path = URL.createObjectURL(event.target.files[0]);
+    $('#pdf_view').attr('src',path);
 
 
+  });
+}
 
-function SaveLey(){
-
-  /* tratamiento de los comentarios de las leyes*/
-  var comment = new Array();
-  var type_comment = new Array();
-  y=0;
-  for (x = 1; x < 20; x++) {
-    if($('#text'+x).val()){
-      comment[y] = $('#text'+x).val();
-      type_comment[y] = $('#selected'+x).val();
-    }
-  };
-  /* fin del tratamiento de los comentarios de las leyes */
-
-
-  console.log( $('#news_title_es').val());
-  console.log($('#news_date').val());
-  console.log($('#new_source').val());
-  console.log($('#news_category').val());
-  console.log( comment[0]);
-  console.log(type_comment[0]  );
-
-
-};
 
 
 //show comment panel
