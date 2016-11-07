@@ -45,7 +45,7 @@ if ($_POST['router'] == "law_view") {
     $content = new GetContents();
     $law_id  = $content->GetPostContent('law_id');
     $law     = new LawDetail(null, $law_id, null, null, null, null);
-    echo json_encode($law->selectAllLawDetail());
+    print_r($law->selectAllLawDetail());
 }
 
 
