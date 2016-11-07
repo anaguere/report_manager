@@ -121,8 +121,8 @@ function preView(){
 
 
 function saveLaw(){
+  console.console.log("aqui");
   var law_list = new Array();
-
   var xhr = new XMLHttpRequest;
   xhr.responseType = 'blob';
 
@@ -139,6 +139,7 @@ function saveLaw(){
         ll[1] = $('#law_type_text_'+i).attr('data-type_'+i);
         law_list.push(ll);
       }
+      /*
       $.post("../controller/law_detail_controller.php",
       {
         router :"create",
@@ -154,7 +155,7 @@ function saveLaw(){
         }else{
           alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
         }
-      });
+      });*/
     };
 
     reader.readAsDataURL(recoveredBlob);
