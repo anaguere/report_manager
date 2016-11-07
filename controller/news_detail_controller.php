@@ -29,7 +29,7 @@ if ($_POST['router'] == 'create') {
   $range    = $content->GetPostContent("news_range");
 
   $files->setNewsFileName('news_'.$date);
-  $files->setNewsFileArchive($news_files);
+  $files->setNewsFileArchive($news_file);
   $file_id = $files->saveNewsFiles();
 
   $news_detail->setNewsDetDate($date);
@@ -85,7 +85,8 @@ if ($_POST['router'] == "view_index_titles") {
 
     if ($_POST['router'] == "news_view") {
       $content = new GetContents();
-      $news    = new NewsDetail(null, null, null,null, $content->GetPostContent("news_id"), null, null, null, null, null, null, null);
+      $news_id = (int)$content->GetPostContent("news_id");
+      $news    = new NewsDetail(null,null,null,$news_id,null,null,null,null,null,null,null);
       echo json_encode($news->selectAllNewsDetail());
     }
 

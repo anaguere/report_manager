@@ -312,6 +312,7 @@ function PDFViewer(){
   $(this).change(function(event){
     window.path = URL.createObjectURL(event.target.files[0]);
     $('#pdf_view').attr('src',path);
+    $('#modal1').modal('close');
 
 
   });
@@ -363,7 +364,7 @@ function searchNews(idioma){
 
 
 
-            $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='vista_previa_news("+n.news_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+            $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=delete_news("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
 
                   if(n.news_det_priority>3){
 
@@ -396,7 +397,7 @@ function searchNews(idioma){
 
 
 
-                $("#bodyTable_spanish").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='vista_previa_news("+n.news_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+                $("#bodyTable_spanish").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=delete_news("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a> </td></tr>");
 
                 if(n.news_det_priority>3){
 
@@ -434,6 +435,108 @@ function searchNews(idioma){
 
   });
 }
+
+
+function volver_atras_busqueda(){
+
+    $('#vistaprevia_individual').hide();
+
+    $('#divTable').show();
+    $('#vistaprevia').show();
+    $('#divTableTitle').show();
+    $('#botonesSearch').show();
+    $('#opcionesSearch').show();
+}
+
+
+
+
+function searchNewsIndividual(new_id){
+
+
+    $('#vistaprevia_individual').show();
+
+    $('#divTable').hide();
+    $('#vistaprevia').hide();
+    $('#divTableTitle').hide();
+    $('#botonesSearch').hide();
+    $('#opcionesSearch').hide();
+
+
+    $('#col_izquierda_individual div').remove();
+    $('#col_izquierda_spanish_individual div').remove();
+
+    $.post("../controller/news_detail_controller.php",{
+      router : "news_view",
+      news_id : new_id
+    }).done(function(e){
+      var news_detail = JSON.parse(e);
+
+                $.each(news_detail.contenido, function(i,n){
+
+
+
+                  console.log(n);
+
+                      //       $.each(n.law_file_id, function(x,y){
+                           // $('#pdf_vie').attr('src',y.news_file_archive);
+                          //  console.log(y.news_file_archive);
+                        //    });
+
+
+                            if(n.news_det_image==null){
+                              $("#col_izquierda_individual").append("\
+                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+                              \
+                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div>\
+                              ");
+                            }else{
+                              $("#col_izquierda_individual").append("\
+                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+                              <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div>\
+                              ");
+                            }
+
+
+                            if(n.news_det_image==null){
+                              $("#col_izquierda_spanish_individual").append("\
+                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+                              <hr>\
+                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr><br>\
+                              ");
+                            }else{
+                              $("#col_izquierda_spanish_individual").append("\
+                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+                              <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr>\
+                              ");
+                            }
+
+
+                });
+
+      });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function verSearch(){
@@ -531,9 +634,9 @@ function verSearch(){
      $("#col_izquierda").hide();
      $("#bodyTable").hide();
      $("#tableReporte").hide();
-     $('#divTable h4').remove();
+     $('#divTableTitle h4').remove();
 
-     $('#divTable').append("<h4> Resultados en Espa&ntilde;ol  ( Semanario )</h4>")
+     $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol  ( Semanario )</h4>")
 
    });
 
@@ -553,8 +656,8 @@ function verSearch(){
        $("#col_izquierda").hide();
        $("#bodyTable").hide();
        $("#tableReporte").show();
-       $('#divTable h4').remove();
-       $('#divTable').append("<h4> Resultados en Espa&ntilde;ol ( Tabla )</h4>")
+       $('#divTableTitle h4').remove();
+       $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol ( Tabla )</h4>")
 
    });
 
@@ -572,9 +675,9 @@ function verSearch(){
        $("#col_izquierda").hide();
        $("#bodyTable").show();
        $("#tableReporte").show();
-       $('#divTable h4').remove();
+       $('#divTableTitle h4').remove();
 
-       $('#divTable').append("<h4> Results in English ( Table )</h4>")
+       $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Results in English ( Table )</h4>")
 
    });
 
@@ -592,9 +695,9 @@ function verSearch(){
        $("#col_izquierda").hide();
        $("#bodyTable").hide();
        $("#tableReporte").hide();
-       $('#divTable h4').remove();
+       $('#divTableTitle h4').remove();
 
-       $('#divTable').append("<h4> Resultados en Espa&ntilde;ol  ( Semanario )</h4>")
+       $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol  ( Semanario )</h4>")
 
    });
 
@@ -612,8 +715,8 @@ function verSearch(){
      $("#col_izquierda").show();
      $("#bodyTable").hide();
      $("#tableReporte").hide();
-     $('#divTable h4').remove();
-     $('#divTable').append("<h4> Results in English  ( Semanario )</h4>")
+     $('#divTableTitle h4').remove();
+     $('#divTableTitle').append("<h4 style='font-size: 1.5rem;' >  Results in English  ( Semanario )</h4>")
 
    });
 

@@ -1,429 +1,409 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
-  <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
-  <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.css" />
-  <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.skinFlat.css" />
+   <title></title>
+   <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
+   <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.css" />
+   <link rel="stylesheet" href="../ionRangeSliderDemo/css/ion.rangeSlider.skinFlat.css" />
 </head>
 <body>
-  <nav>
-   <div class="nav-wrapper nav_color" style="">
-    <a href="#" class="brand-logo left" style="margin-top:-10px">[ News ] </a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down" >
-
-
-     <li>
-       <a id="ver_consulta" href="#" class="">
-         <span class="livicon"  style=""   data-hovercolor="white"
-         data-color="white" data-name="search" data-size="34"></span>
-       </a>
-     </li>
-
-
-     <li>
-      <a id="ver_registro" href="load.html" >
-        <span class="livicon"  style=""   data-hovercolor="white"
-        data-color="white" data-name="plus" data-size="34"></span>
+   <nav>
+      <div class="nav-wrapper nav_color" style="">
+         <a href="#" class="brand-logo left" style="margin-top:-10px">[ News ] </a>
+         <ul id="nav-mobile" class="right hide-on-med-and-down" >
+            <li>
+               <a href="consulta.html" class="">
+                  <span class="livicon"  style=""   data-hovercolor="white"
+                  data-color="white" data-name="search" data-size="34"></span>
+               </a>
+            </li>
+            <li>
+               <a id="ver_registro" href="load.html" >
+                  <span class="livicon"  style=""   data-hovercolor="white"
+                  data-color="white" data-name="plus" data-size="34"></span>
+               </a>
+            </li>
+            <li>
+               <a id="ver_upload"  class="modal-trigger waves-effect waves-light " href="#modal1"  >
+                  <span class="livicon"  style=""   data-hovercolor="white"
+                  data-color="white" data-name="cloud-down" data-size="34"></span>
+               </a>
+            </li>
+            <li><a  id="ver_index" href="#" data-activates="slide-out" class="bottom0010">
+               <span class="livicon"  style=""   data-hovercolor="white"
+               data-color="white" data-name="folders" data-size="34">
+            </span></a>
+         </li>
+         <li><a  id="ver_save" href="#" onclick="SaveNews()"  >
+            <span class="livicon"  style=""   data-hovercolor="white"
+            data-color="white" data-name="save" data-size="34">
+         </span>
       </a>
-    </li>
-
-    <li>
-     <a id="ver_upload"  class="modal-trigger waves-effect waves-light " href="#modal1"  >
-       <span class="livicon"  style=""   data-hovercolor="white"
-       data-color="white" data-name="cloud-down" data-size="34"></span>
-     </a>
    </li>
-
-   <li><a  id="ver_index" href="#" data-activates="slide-out" class="bottom0010">
-    <span class="livicon"  style=""   data-hovercolor="white"
-    data-color="white" data-name="folders" data-size="34">
-  </span></a>
-</li>
-
-<li><a  id="ver_save" href="#" onclick="SaveNews()"  >
-  <span class="livicon"  style=""   data-hovercolor="white"
-  data-color="white" data-name="save" data-size="34">
-</span>
-</a>
-</li>
-
-<li><a href="home.html">
-  <span class="livicon"  style=""   data-hovercolor="white"
-  data-color="white" data-name="remove" data-size="34">
-</span></a>
+   <li><a href="home.html">
+      <span class="livicon"  style=""   data-hovercolor="white"
+      data-color="white" data-name="remove" data-size="34">
+   </span></a>
 </li>
 </ul>
 </div>
 </nav>
-
-
 <!-- MODAL -->
 <div id="modal1" class="modal bottom-sheet"  style="max-height:60%;" >
-
- <div class="modal-content">
-
-   <div class="container s12" style="margin-top:5px; margin-bottom: 10px; ">
-    <span style="font-size: 18px; color:#666; font-weight: bold; "> Seleccione el archivo del ordenador </span>
-  </div>
-
-  <div class="container s12">
-
-    <div class="input-field col s12 form01" >
-      <form action="#">
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>File</span>
-            <input onclick="PDFViewer()" type="file">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>
-      </form>
-
-      <div class="progress">
-        <div class="determinate" style="width: 50%"></div>
+   <div class="modal-content">
+      <div class="container s12" style="margin-top:5px; margin-bottom: 10px; ">
+         <span style="font-size: 18px; color:#666; font-weight: bold; "> Seleccione el archivo del ordenador </span>
       </div>
-    </div>
-  </div>
-
-</div>
-<div class="modal-footer">
- <a  style="margin-right:10px;" class=" modal-close waves-effect waves-light btn right">Close</a>
-</div>
+      <div class="container s12">
+         <div class="input-field col s12 form01" >
+            <form action="#">
+               <div class="file-field input-field">
+                  <div class="btn">
+                     <span>File</span>
+                     <input onclick="PDFViewer()" type="file">
+                  </div>
+                  <div class="file-path-wrapper">
+                     <input class="file-path validate" type="text">
+                  </div>
+               </div>
+            </form>
+            <div class="progress">
+               <div class="determinate" style="width: 50%"></div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 </div>
 <!-- MODAL -->
-
-
-
 <div class="row" style="" id="container_principal">
-
-
- <div class="container col s12" style="padding:30px" >
-  <div class="container col s12">
-   <ul class="tabs" style="">
-    <li class="tab col s3"><a id="bottom0001" class="active"  href="#">Info Basic</a></li>
-    <li class="tab col s3"><a id="bottom0003" href="#">English Version</a></li>
-  </ul>
-</div>
-<div  id="panel0001" class="container col s12" style="margin-top:10px; font-weight:bold; color:#000 ">
- <div class="  card-panel   grey lighten-4"  style="height:300px">
-
-
-  <div class="input-field  col s5 "  style="margin-right: 10px ">
-   <textarea class="materialize-textarea" class="validate" id="news_title_es" ></textarea>
-   <label for="news_title_es">SPANISH TITLE</label>
- </div>
-  <div class="input-field  col s6 " >
-   <textarea class="materialize-textarea" class="validate" id="news_source" ></textarea>
-   <label for="new_source">SOURCE</label>
- </div>
- <div class="input-field  col s3 form01"  style="margin-right: 10px ">
-   <input type="date" class="datepicker" id="news_date"></input>
-   <label for="news_date">NEWS DATE</label>
- </div>
-
- <div class="input-field col s4 form01 div_news_category" style="margin-right: 10px ">
-   <select id="news_category">
-   </select>
-   <label>CATEGORY</label>
- </div>
- <div class="input-field col s4 form01 div_news_range">
-   <select id="news_range" >
-    <option value="5">5</option>
-    <option value="4">4</option>
-    <option value="3">3</option>
-    <option value="2">2</option>
-    <option value="1">1</option>
-  </select>
-  <label>PRIORITY</label>
-</div>
-</div>
-</div>
-<div  id="panel0003" class="container col s12" style="display:none; margin-top:30px; font-weight:bold; color:#000 ">
- <div class="  card-panel   grey lighten-4"  style="height:300px">
-  <div class="input-field  col s12 form01" style="">
-   <input type="text" class="validate" id="news_title_en"></input>
-   <label for="news_title_en">ENGLISH TITLE</label>
- </div>
- <div class="input-field  col s12 form01">
-   <textarea class="materialize-textarea" id="news_body_en" name="news_body_en"></textarea>
-   <label for="news_boy_en">NEWS ENGLISH VERSION:</label>
- </div>
+   <div class="container col s12" style="padding:30px" >
+      <div class="container col s12">
+         <ul class="tabs" style="">
+            <li class="tab col s3"><a id="bottom0001" class="active"  href="#">Info Basic</a></li>
+            <li class="tab col s3"><a id="bottom0003" href="#">English Version</a></li>
+         </ul>
+      </div>
+      <div  id="panel0001" class="container col s12" style="margin-top:10px; font-weight:bold; color:#000 ">
+         <div class="  card-panel   grey lighten-4"  style="height:300px">
+            <div class="input-field  col s5 "  style="margin-right: 10px ">
+               <textarea class="materialize-textarea" class="validate" id="news_title_es" ></textarea>
+               <label for="news_title_es">SPANISH TITLE</label>
+            </div>
+            <div class="input-field  col s6 " >
+               <textarea class="materialize-textarea" class="validate" id="news_source" ></textarea>
+               <label for="new_source">SOURCE</label>
+            </div>
+            <div class="input-field  col s3 form01"  style="margin-right: 10px ">
+               <input type="date" class="datepicker" id="news_date"></input>
+               <label for="news_date">NEWS DATE</label>
+            </div>
+            <div class="input-field col s4 form01 div_news_category" style="margin-right: 10px ">
+               <select id="news_category">
+               </select>
+               <label>CATEGORY</label>
+            </div>
+            <div class="input-field col s4 form01 div_news_range">
+               <select id="news_range" >
+                  <option value="5">5</option>
+                  <option value="4">4</option>
+                  <option value="3">3</option>
+                  <option value="2">2</option>
+                  <option value="1">1</option>
+               </select>
+               <label>PRIORITY</label>
+            </div>
+         </div>
+      </div>
+      <div  id="panel0003" class="container col s12" style="display:none; margin-top:30px; font-weight:bold; color:#000 ">
+         <div class="  card-panel   grey lighten-4"  style="height:300px">
+            <div class="input-field  col s12 form01" style="">
+               <input type="text" class="validate" id="news_title_en"></input>
+               <label for="news_title_en">ENGLISH TITLE</label>
+            </div>
+            <div class="input-field  col s12 form01">
+               <textarea class="materialize-textarea" id="news_body_en" name="news_body_en"></textarea>
+               <label for="news_boy_en">NEWS ENGLISH VERSION:</label>
+            </div>
                   <!--div class="input-field  col s12 form01" style="margin-bottom:30px">
                      <textarea class="materialize-textarea" id="news_comment_en"></textarea>
                      <label for="news_comment_en">COMMENT ENGLISH VERSION</label>
-                   </div-->
-                 </div>
+                  </div-->
                </div>
-             </div>
-
-
-
-
-
-
-
-             <div class="container col s12" style="padding:30px; margin-top:-10px">
-              <div class="container col s12">
+            </div>
+         </div>
+         <div class="container col s12" style="padding:30px; margin-top:-10px">
+            <div class="container col s12">
                <ul class="tabs" style="">
-                <li class="tab col s3"><a id="bottom0004"   href="#">Paste [ News ]</a></li>
-                <!--li class="tab col s3"><a id="bottom0005"  href="#">Files</a></li-->
-                <li class="tab col s3"><a id="bottom0006"  href="#" class="active"> Viewer </a></li>
-              </ul>
+                  <li class="tab col s3"><a id="bottom0004"   href="#">Paste [ News ]</a></li>
+                  <!--li class="tab col s3"><a id="bottom0005"  href="#">Files</a></li-->
+                  <li class="tab col s3"><a id="bottom0006"  href="#" class="active"> Viewer </a></li>
+               </ul>
             </div>
-
-
-
-
             <div id="panel0004" class="  card-panel   grey lighten-4"  style="display:none; height:2000px; margin-top:65px;">
-             <div class="row" style="padding:30px;padding-top:0px">
-              <div  id="news_body_es" name="news_body_es" contenteditable="true" >
-              </div>
+               <div class="row" style="padding:30px;padding-top:0px">
+                  <div  id="news_body_es" name="news_body_es" contenteditable="true" >
+                  </div>
+               </div>
             </div>
-          </div>
+            <div id="panel0006" class=" card-panel   grey lighten-4"  style=" height:2000px; margin-top:65px;">
+               <div id="encabezado_vistaprevia" >
+                  <p  id="news_month_prev" style="text-align: left; margin-left: 5%;"></p>
+                  <h5  id ="h5_title" style="text-align: left; font-family: arial; margin-left: 5%;"><b id="news_title_prev"></b></h5>
+                  <figure align="justify" style="margin-left: 5%; font-size: 10px; margin-right: 5%;">
+                     <b id="news_date_prev"style="text-align: left; font-size: 10px"></b>
+                     <p id="news_body_prev" contenteditable="true"></p>
+                     <p id="news_source_prev"></p>
+                  </figure>
+               </div>
+               <iframe src="" id="pdf_view" width="100%" height="1000px" style="margin-top:50px; border:none" ></iframe>
+            </div>
+         </div>
+         <div id="slide-out" class="side-nav" style="width:800px">
+            <div class="container col s12">
+               <ul class="tabs" style="padding-top:10px">
+                  <li class="tab col s3"><a id="menu0001" class="active"  href="#">A-Z</a></li>
+               </ul>
+            </div>
+            <div class="container col s12" style="margin:30px; margin-bottom:10px">
+               <script>
+                  function void_menu(){
+                    $('#panel_menu0001_1').css("display","none");
+                    $('#panel_menu0001_2').css("display","none");
+                 }
 
 
 
 
-          <div id="panel0006" class=" card-panel   grey lighten-4"  style=" height:2000px; margin-top:65px;">
+                 function menuLoad(){
 
-            <div id="encabezado_vistaprevia" >
-              <p  id="news_month_prev" style="text-align: left; margin-left: 5%;"></p>
-              <h5  id ="h5_title" style="text-align: left; font-family: arial; margin-left: 5%;"><b id="news_title_prev"></b></h5>
-              <figure align="justify" style="margin-left: 5%; font-size: 10px; margin-right: 5%;">
-                <b id="news_date_prev"style="text-align: left; font-size: 10px"></b>
-                <p id="news_body_prev" contenteditable="true"></p>
-                <p id="news_source_prev"></p>
-              </figure>
+
+
+                  $( "#menu0002" ).click(function() {
+                   $('#index_english').css("display","none");
+                   $('#index_spanish').css("display","none");
+                   void_menu();
+
+                });
+
+
+                  $( "#menu0004" ).click(function() {
+                   $('#index_english').css("display","none");
+                   $('#index_spanish').css("display","none");
+                   void_menu();
+                   $('#panel_menu0004').css("display","block");
+                });
+
+                  $( "#menu0003" ).click(function() {
+                   $('#index_english').css("display","none");
+                   $('#index_spanish').css("display","none");
+                   void_menu();
+                });
+
+
+                  $( "#menu0001" ).click(function() {
+                   $('#index_english').css("display","inline-block");
+                   $('#index_spanish').css("display","inline-block");
+                });
+
+
+
+                  $("#index_english" ).click(function(){
+                    $('#panel_menu0001_1').css("display","block");
+                    $('#panel_menu0001_2').css("display","none");
+                 });
+
+
+
+
+                  $("#index_spanish").click(function(){
+                   $('#panel_menu0001_1').css("display","none");
+                   $('#panel_menu0001_2').css("display","block");
+                });
+               }
+            </script>
+            <div class="container col s5">
+               <a  id="index_english" class="waves-effect waves-light btn " href="#" style="height:30px">
+                  English  Version
+               </a>
+            </div>
+            <div class="container col s5">
+               <a  id="index_spanish" class="waves-effect waves-light btn"  href="#" style="height:30px">
+                  Spanish  Version
+               </a>
+            </div>
+         </div>
+         <div id="panel_menu0001_1" style="display:none">
+            <ul class="collapsible" data-collapsible="accordion" id="abc_index" >
+            </ul>
+         </div>
+         <div id="panel_menu0001_2" style="display:none">
+            <ul class="collapsible" data-collapsible="accordion" id="abc_index_spanish" >
+            </ul>
+         </div>
+         <div id="panel_menu0002"  style="display:none" >
+            <ul class="collapsible" data-collapsible="accordion" id="category_index" >
+            </ul>
+         </div>
+         <div id="panel_menu0003"  style="display:none">
+            <ul class="collapsible" data-collapsible="accordion" id="recents_index" >
+            </ul>
+         </div>
+         <div id="panel_menu0004"  style="display:none">
+            <ul class="collapsible" data-collapsible="accordion" id="range_index" >
+            </ul>
+            <div class="input-field  col s4 form01" style="margin-top:0px; margin-left:30px">
+               <input type="text" class="validate" id="news_title_es"></input>
+               <label for="news_title_es">Desde</label>
+            </div>
+            <div class="input-field  col s4 form01" style="margin-top:0px; margin-left:30px">
+               <input type="text" class="validate" id="news_title_es"></input>
+               <label for="news_title_es">Hasta</label>
+            </div>
+            <div class="input-field  col s3 form01" style="margin-top:0px; text-align:right">
+               <a  id="index_english" class="waves-effect waves-light btn " href="#" style="height:30px">
+                  Search
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+
+
+
+
+
+
+   <div class="container " id="consulta" style="display:none; width: 90%" >
+
+
+
+      <div class="row  s12 white" style="padding:10px;  margin-top:10px; ">
+
+
+         <div class="row" style="padding-left: 10px;">
+
+            <div class="col s2 " style="padding:10px; padding-top:25px" >
+               <select name="categoria" id="categoria" ></select>
             </div>
 
-            <iframe src="" id="pdf_view" width="100%" height="1000px" style="margin-top:50px; border:none" ></iframe>
-          </div>
-
-
-        </div>
-
-
-        <div id="slide-out" class="side-nav" style="width:800px">
-          <div class="container col s12">
-           <ul class="tabs" style="padding-top:10px">
-            <li class="tab col s3"><a id="menu0001" class="active"  href="#">A-Z</a></li>
-          </ul>
-        </div>
-        <div class="container col s12" style="margin:30px; margin-bottom:10px">
-         <script>
-          function void_menu(){
-           $('#panel_menu0001_1').css("display","none");
-           $('#panel_menu0001_2').css("display","none");
-         }
-
-
-
-
-         function menuLoad(){
-
-
-
-          $( "#menu0002" ).click(function() {
-            $('#index_english').css("display","none");
-            $('#index_spanish').css("display","none");
-            void_menu();
-
-          });
-
-
-          $( "#menu0004" ).click(function() {
-            $('#index_english').css("display","none");
-            $('#index_spanish').css("display","none");
-            void_menu();
-            $('#panel_menu0004').css("display","block");
-          });
-
-          $( "#menu0003" ).click(function() {
-            $('#index_english').css("display","none");
-            $('#index_spanish').css("display","none");
-            void_menu();
-          });
-
-
-          $( "#menu0001" ).click(function() {
-            $('#index_english').css("display","inline-block");
-            $('#index_spanish').css("display","inline-block");
-          });
-
-
-
-          $("#index_english" ).click(function(){
-           $('#panel_menu0001_1').css("display","block");
-           $('#panel_menu0001_2').css("display","none");
-         });
-
-
-
-
-          $("#index_spanish").click(function(){
-            $('#panel_menu0001_1').css("display","none");
-            $('#panel_menu0001_2').css("display","block");
-          });
-        }
-      </script>
-      <div class="container col s5">
-        <a  id="index_english" class="waves-effect waves-light btn " href="#" style="height:30px">
-          English  Version
-        </a>
-      </div>
-      <div class="container col s5">
-        <a  id="index_spanish" class="waves-effect waves-light btn"  href="#" style="height:30px">
-          Spanish  Version
-        </a>
-      </div>
-    </div>
-    <div id="panel_menu0001_1" style="display:none">
-     <ul class="collapsible" data-collapsible="accordion" id="abc_index" >
-     </ul>
-   </div>
-   <div id="panel_menu0001_2" style="display:none">
-     <ul class="collapsible" data-collapsible="accordion" id="abc_index_spanish" >
-     </ul>
-   </div>
-   <div id="panel_menu0002"  style="display:none" >
-     <ul class="collapsible" data-collapsible="accordion" id="category_index" >
-     </ul>
-   </div>
-   <div id="panel_menu0003"  style="display:none">
-     <ul class="collapsible" data-collapsible="accordion" id="recents_index" >
-     </ul>
-   </div>
-   <div id="panel_menu0004"  style="display:none">
-     <ul class="collapsible" data-collapsible="accordion" id="range_index" >
-     </ul>
-     <div class="input-field  col s4 form01" style="margin-top:0px; margin-left:30px">
-      <input type="text" class="validate" id="news_title_es"></input>
-      <label for="news_title_es">Desde</label>
-    </div>
-    <div class="input-field  col s4 form01" style="margin-top:0px; margin-left:30px">
-      <input type="text" class="validate" id="news_title_es"></input>
-      <label for="news_title_es">Hasta</label>
-    </div>
-    <div class="input-field  col s3 form01" style="margin-top:0px; text-align:right">
-      <a  id="index_english" class="waves-effect waves-light btn " href="#" style="height:30px">
-        Search
-      </a>
-    </div>
-  </div>
-</div>
-</div>
+            <div class="col s2 " style="padding:10px; padding-top:25px" >
+               <select name="year" id="year" >
+                  <option value="2008" >2008</option>
+                  <option value="2009" >2009</option>
+                  <option value="2010" >2010</option>
+                  <option value="2011" >2011</option>
+                  <option value="2012" >2012</option>
+                  <option value="2013" >2013</option>
+                  <option value="2014" >2014</option>
+                  <option value="2015" >2015</option>
+                  <option value="2016" >2016</option>
 
-<div class="container " id="consulta" style="display:none; width: 90%" >
- <div class="row  s12 white" style="padding:10px;  margin-top:10px; ">
-  <div class="col s2 " style="padding:10px; padding-top:25px" >
-    <select name="categoria" id="categoria" ></select>
-    </div
-    >
-    <div class="col s2 " style="padding:10px" >
-      <div class="input-field  col s12 " style="">
-       <input  type="date" class="datepicker"  id="desde"></input>
-       <label for="desde">DESDE</label>
-     </div>
-   </div>
-   <div class="col s2 " style="padding:10px" >
-    <div class="input-field  col s12 " style="">
-     <input type="date" class="datepicker" id="hasta"></input>
-     <label for="hasta">HASTA</label>
-   </div>
- </div>
- <div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
-  <a  id="searchButtom1" onclick="searchNews()" class="waves-effect waves-light btn red">Search</a>
-</div>
+               </select>
+            </div>
 
+            <div class="col s2 " style="padding:10px" >
+               <div class="input-field  col s12 " style="">
+                  <input  type="date" class="datepicker"  id="desde"></input>
+                  <label for="desde">DESDE</label>
+               </div>
+            </div>
 
 
-<div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
-  <a  id="ver_sem_english" class="waves-effect waves-light btn red">Sem. English</a>
-</div>
+            <div class="col s2 " style="padding:10px" >
+               <div class="input-field  col s12 " style="">
+                  <input type="date" class="datepicker" id="hasta"></input>
+                  <label for="hasta">HASTA</label>
+               </div>
+            </div>
 
-<div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
-  <a  id="ver_sem_spanish"   class="waves-effect waves-light btn orange">Sem. Spanish</a>
-</div>
 
-<div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
-</div>
+            <div class="col s4 "  style="padding-top:25px; padding-left:10px"  >
+               <a  id="searchButtom1" onclick="searchNews()" class="waves-effect waves-light btn red">Search</a>
+            </div>
 
-<div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
-  <a  id="ver_tbl_english" class="waves-effect waves-light btn red">Table English</a>
-</div>
+         </div>
 
-<div class="col s2 "  style="padding-top:25px; padding-left:10px"  >
-  <a  id="ver_tbl_spanish"   class="waves-effect waves-light btn orange">Table Spanish</a>
-</div>
 
+         <div class="row" style="background: #999999; height: 100px; padding-top:30px">
 
-</div>
-<div class="row  s12 white" style="  padding:20px;"  >
- <div id="divTable" style="width:100%; padding:10px; border-bottom:2px solid #333"></div>
- <table class="bordered" id="tableReporte"  >
-  <thead>
-   <tr>
-     <th data-field="date" style="width:150px">Date</th>
-     <th data-field="category" style="width:150px">Category</th>
-     <th data-field="detalle">Comentary</th>
-     <th data-field="actions">Acciones</th>
-   </tr>
- </thead>
- <tbody id="bodyTable">
- </tbody>
- <tbody id="bodyTable_spanish" style='display:none'>
- </tbody>
+            <div class="col s3 "  style=" padding-left:10px"  >
+               <a  id="ver_sem_english" class="waves-effect waves-light btn red">Sem. English</a>
+            </div>
 
-</table>
-</div>
-</div>
 
+            <div class="col s3 "  style=" padding-left:10px"  >
+               <a  id="ver_sem_spanish"   class="waves-effect waves-light btn orange">Sem. Spanish</a>
+            </div>
 
 
+            <div class="col s3 "  style="padding-left:10px"  >
+               <a  id="ver_tbl_english" class="waves-effect waves-light btn red">Table English</a>
+            </div>
 
-<div class="row s12" id="vistaprevia" style=" width:100%; " >
+            <div class="col s3 "  style=" padding-left:10px"  >
+               <a  id="ver_tbl_spanish"   class="waves-effect waves-light btn orange">Table Spanish</a>
+            </div>
 
- <div class="container col s12" style=" margin-top:-10px; margin-left:100px;">
+         </div>
 
-  <div  class="  card-panel white"  style="margin-top:0px; float:left; margin: 0 auto;">
 
 
+         <div id="divTableTitle" style="background: #fff; color: #333; letter-spacing: 1px; height: 50px; padding-top:1px; padding-left: 5px; margin-top: -10px "></div>
 
-   <div class="container col s12" style="margin-left: 60px; margin-right: 40px;  height:auto;" >
 
-    <div style="width:100%;" >
 
-     <h4>China CAMC Engineering Co., Ltd</h4>
-     <HR style="margin-left:0px; width:90%">
-       <BR>	<BR>
-       </div>
+         <div id="divTable" style="width:100%; padding:10px; margin-top: -20px; border-bottom:2px solid #777">
 
 
-       <div style="width:650px; padding-top:20px; padding-left:20px; font-size:14px; padding-right:40px; border:0px solid #333; margin-right:20px; float:left" id="col_izquierda" >
-       </div>
 
-       <div style="width:300px;   padding-top:20px;  padding-left:20px; font-size:14px; padding-right:20px; background:#FAFAFA;  border:1px solid #333; float:left" id="col_derecha" >
-       </div>
 
+            <table class="bordered" id="tableReporte"  >
+               <thead>
+                  <tr>
+                     <th data-field="date" style="width:150px">Date</th>
+                     <th data-field="category" style="width:150px">Category</th>
+                     <th data-field="detalle">Comentary</th>
+                     <th data-field="actions">Acciones</th>
+                  </tr>
+               </thead>
+               <tbody id="bodyTable">
+               </tbody>
+               <tbody id="bodyTable_spanish" style='display:none'>
+               </tbody>
+            </table>
 
-       <div style="width:650px; padding-top:20px; padding-left:20px; font-size:14px; padding-right:40px; border:0px solid #333; margin-right:20px; float:left; display:none" id="col_izquierda_spanish" >
-       </div>
+         </div>
 
-       <div style="width:300px;   padding-top:20px;  padding-left:20px; font-size:14px; padding-right:20px; background:#FAFAFA;  border:1px solid #333; float:left; display:none" id="col_derecha_spanish" >
-       </div>
 
-     </div>
 
-   </div>
+         <div class="row s12" id="vistaprevia" style=" width:100%; " >
 
+            <div class="container col s12" >
+               <div  class="  card-panel white"  style="margin-top:0px; float:left; margin: 0 auto;">
 
 
- </div>
-</div>
+                  <div class="container col s12" style="margin-left: 60px; margin-right: 40px;  height:auto;" >
+                     <div style="width:100%;" >
+                        <h4>China CAMC Engineering Co., Ltd</h4>
+                        <HR style="margin-left:0px; width:90%">
+                           <BR> <BR>
+                           </div>
+                           <div style="width:500px; padding-top:20px; padding-left:20px; font-size:14px; padding-right:40px; border:0px solid #333; margin-right:20px; float:left" id="col_izquierda" >
+                           </div>
+                           <div style="width:300px;   padding-top:20px;  padding-left:20px; font-size:14px; padding-right:20px; background:#FAFAFA;  border:1px solid #333; float:left" id="col_derecha" >
+                           </div>
+                           <div style="width:500px; padding-top:20px; padding-left:20px; font-size:14px; padding-right:40px; border:0px solid #333; margin-right:20px; float:left; display:none" id="col_izquierda_spanish" >
+                           </div>
+                           <div style="width:300px;   padding-top:20px;  padding-left:20px; font-size:14px; padding-right:20px; background:#FAFAFA;  border:1px solid #333; float:left; display:none" id="col_derecha_spanish" >
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
 
 
 
@@ -431,106 +411,128 @@
 
 
 
-<script src="../js/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-<script src="../js/load.js"></script>
-<script src="../js/raphael-min.js"></script>
-<script src="../js/livicons-customizer-1.4.js"></script>
-<script src="../js/customizer.js"></script>
-<script type="text/javascript">
- $(document).ready(function(){
-   DatePicker();
-   InitSelect();
-             //PDFViewer();
-             IndexViewTitles();
-             menuLoad();
-             preview();
-             verSearch();
-						//searchNews();
 
 
+            </div>
 
-            $('.modal').modal({
-                dismissible: true, // Modal can be dismissed by clicking outside of the modal
-                opacity: 1, // Opacity of modal background
-                in_duration: 300, // Transition in duration
-                out_duration: 200, // Transition out duration
-                starting_top: '10%', // Starting top style attribute
-                ending_top: '10%', // Ending top style attribute
-                ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
 
-                  console.log(modal, trigger);
-                },
-                complete: function() {
 
-                } // Callback for Modal close
-              }
-              );
 
-            $( "#close_vistaprevia" ).click(function() {
-              $('#panel_vistaprevia').hide();
-              $('#container_principal').show();
-            });
 
 
-            $( "#vista_previa" ).click(function() {
-              $('#panel_vistaprevia').show();
-              $('#container_principal').hide();
-            });
 
 
-            $( "#ver_upload" ).click(function() {
 
-              $('#panel0004').hide();
-              $('#encabezado_vistaprevia').hide();
-              $('#panel0006').show();
 
-            });
 
 
 
 
 
-            $(".bottom0010").sideNav();
 
-            $( "#bottom0001" ).click(function() {
-              $('#panel0002').hide();
-              $('#panel0003').hide();
-              $('#panel0001').show();
-            });
 
+            <script src="../js/jquery.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+            <script src="../js/load.js"></script>
+            <script src="../js/raphael-min.js"></script>
+            <script src="../js/livicons-customizer-1.4.js"></script>
+            <script src="../js/customizer.js"></script>
+            <script type="text/javascript">
+               $(document).ready(function(){
+                DatePicker();
+                InitSelect();
+                     //PDFViewer();
+                     IndexViewTitles();
+                     menuLoad();
+                     preview();
+                     verSearch();
+                  //searchNews();
 
-            $( "#bottom0003" ).click(function() {
-              $('#panel0001').hide();
-              $('#panel0002').hide();
-              $('#panel0003').show();
-            });
 
 
-            $( "#bottom0004" ).click(function() {
-              $('#panel0005').hide();
-              $('#panel0006').hide();
-              $('#panel0004').show();
-            });
+                  $('.modal').modal({
+                        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                        opacity: 1, // Opacity of modal background
+                        in_duration: 300, // Transition in duration
+                        out_duration: 200, // Transition out duration
+                        starting_top: '10%', // Starting top style attribute
+                        ending_top: '10%', // Ending top style attribute
+                        ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
 
-            $( "#bottom0005" ).click(function() {
-              $('#panel0004').hide();
-              $('#panel0006').hide();
-              $('#panel0005').show();
+                         console.log(modal, trigger);
+                      },
+                      complete: function() {
 
-            });
 
-            $( "#bottom0006" ).click(function() {
-              $('#panel0004').hide();
-              $('#panel0005').hide();
-              $('#panel0006').show();
+                        } // Callback for Modal close
+                     }
+                     );
 
-            });
-            $(".carousel.carousel-slider").carousel({full_width: true});
+                  $( "#close_vistaprevia" ).click(function() {
+                    $('#panel_vistaprevia').hide();
+                    $('#container_principal').show();
+                 });
 
 
-          });
+                  $( "#vista_previa" ).click(function() {
+                    $('#panel_vistaprevia').show();
+                    $('#container_principal').hide();
+                 });
 
-        </script>
-      </body>
-      </html>
+
+                  $( "#ver_upload" ).click(function() {
+
+                    $('#panel0004').hide();
+                    $('#encabezado_vistaprevia').hide();
+                    $('#panel0006').show();
+
+                 });
+
+
+
+
+
+                  $(".bottom0010").sideNav();
+
+                  $( "#bottom0001" ).click(function() {
+                    $('#panel0002').hide();
+                    $('#panel0003').hide();
+                    $('#panel0001').show();
+                 });
+
+
+                  $( "#bottom0003" ).click(function() {
+                    $('#panel0001').hide();
+                    $('#panel0002').hide();
+                    $('#panel0003').show();
+                 });
+
+
+                  $( "#bottom0004" ).click(function() {
+                    $('#panel0005').hide();
+                    $('#panel0006').hide();
+                    $('#panel0004').show();
+                 });
+
+                  $( "#bottom0005" ).click(function() {
+                    $('#panel0004').hide();
+                    $('#panel0006').hide();
+                    $('#panel0005').show();
+
+                 });
+
+                  $( "#bottom0006" ).click(function() {
+                    $('#panel0004').hide();
+                    $('#panel0005').hide();
+                    $('#panel0006').show();
+
+                 });
+                  $(".carousel.carousel-slider").carousel({full_width: true});
+
+
+               });
+
+
+            </script>
+         </body>
+         </html>
