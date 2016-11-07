@@ -720,6 +720,29 @@ function verSearch(){
 
    });
 
+function updateNews(news_id){
+  var news_body_html = $('#news_body_es').html();
+  var news_body_es = $('#news_body_es').text();
+  $.post( "../controller/news_detail_controller.php", {
+    router : "update",
+    news_title_es: ne($('#news_title_es').val()),
+    news_body_es: news_body_es,
+    news_date: ne($('#news_date').val()),
+    news_source: ne($('#news_source').val()),
+    news_title_en : ne($('#news_title_en').val()),
+    news_body_en : ne($('#news_body_en').val()),
+    news_category : ne($('#news_category').val()),
+    news_range : ne($('#news_range').val()),
+  }).done(function(message){
+    message = JSON.parse(message);
+    if(message.conexion){
+      alert('Update Success!');
+      location.reload();
+    }else{
+      alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+    }
+  });
+}
 
 
 
