@@ -217,7 +217,7 @@ class Connector
 
     #------------------------------- ELIMINAR REGISTRO -------------------------------------------
 
-    final public function DeleteIt($conn, $table_name, $column_name, $value)
+    final public function DeleteIn($conn, $table_name, $column_name, $value)
     {
         $query_delete;
         $query_select;

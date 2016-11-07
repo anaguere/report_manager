@@ -117,8 +117,11 @@ if ($_POST['router'] == "view_index_titles") {
       echo json_encode($final);
     }
 
-    if ($_POST['router'] == 'update') {
-      $news = new NewsDetail(null,null,null,null,null,null,null,null,null,null,null);
+    if ($_POST['router'] == "update") {
+      $content = new GetContents();
+      $news_id = $content->GetPostContent('news_id');
+      $news = new NewsDetail(null,null,null,$news_id,null,null,null,null,null,null,null);
+      $title_es = $content->GetPostContent("news_title_es");
       $body_es  = $content->GetPostContent("news_body_es");
       $date     = $content->GetPostContent("news_date");
       $source   = $content->GetPostContent("news_source");
@@ -127,13 +130,20 @@ if ($_POST['router'] == "view_index_titles") {
       $category = $content->GetPostContent("news_category");
       $range    = $content->GetPostContent("news_range");
 
-      $news_detail->setNewsDetDate($date);
-      $news_detail->setNewsDetSource($source);
-      $news_detail->setNewsDetText($body_es);
-      $news_detail->setNewsDetTexten($body_en);
-      $news_detail->setNewsDetTit($title_es);
-      $news_detail->setNewsDetTiten($title_en);
-      $news_detail->setNewsDetCategory($category);
-      $news_detail->setNewsDetPriority($range);
+      $news->setNewsDetDate($date);
+      $news->setNewsDetSource($source);
+      $news->setNewsDetText($body_es);
+      $news->setNewsDetTexten($body_en);
+      $news->setNewsDetTit($title_es);
+      $news->setNewsDetTiten($title_en);
+      $news->setNewsDetCategory($category);
+      $news->setNewsDetPriority($range);
       echo json_encode($news->updateNewsDetail($news_id));
+    }
+
+    if($_POST['router'] == 'delete'){
+      $news = new NewsDetail(null,null,null,null,null,null,null,null,null,null,null);
+      $content = new GetContents();
+      $news_id = $content->GetPostContent('news_id');
+      echo json_encode($news->deleteNewsDetail($news_id));
     }

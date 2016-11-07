@@ -10,22 +10,22 @@ function DatePicker(){
 function InitSelect(){
   //Categories list
   $.post("../controller/news_detail_controller.php",
-  {router : "list" }).done(function(data){
-    var selects = JSON.parse(data);
-    categories = selects.category.contenido;
-    types = selects.type.contenido;
-    for(i =0; i < categories.length ; i++){
-      $('#news_category').append("<option value="+categories[i].news_cat_id+">"+categories[i].news_cat_name+"</option>");
-      $('select').material_select();
-      $('#categoria').append("<option value="+categories[i].news_cat_id+">"+categories[i].news_cat_name+"</option>");
-      $('select').material_select();
-    }
-    for(j =0; j < types.length ; j++){
-      $('#news_type').append("<option value="+types[j].news_type_id+">"+types[j].news_type_name+"</option>");
-      $('select').material_select();
-    }
-  });
-}
+    {router : "list" }).done(function(data){
+      var selects = JSON.parse(data);
+      categories = selects.category.contenido;
+      types = selects.type.contenido;
+      for(i =0; i < categories.length ; i++){
+        $('#news_category').append("<option value="+categories[i].news_cat_id+">"+categories[i].news_cat_name+"</option>");
+        $('select').material_select();
+        $('#categoria').append("<option value="+categories[i].news_cat_id+">"+categories[i].news_cat_name+"</option>");
+        $('select').material_select();
+      }
+      for(j =0; j < types.length ; j++){
+        $('#news_type').append("<option value="+types[j].news_type_id+">"+types[j].news_type_name+"</option>");
+        $('select').material_select();
+      }
+    });
+  }
 //init datepicker component
 
 
@@ -44,25 +44,25 @@ function ne(x){
 //Load index view
 function IndexViewTitles(){
   $.post("../controller/news_detail_controller.php",
-  {router: "view_index_titles"}).done(function(data){
-    var titles = JSON.parse(data);
-    var cant = 0;
-    $.each(titles.spanish_list,function(i,n){
-      $("#abc_index_spanish").append("<li>\
-      <div class='collapsible-header' id='header_"+cant+"'>"+i.toUpperCase()+"</div>");
-      if(n.length != 0){
-        $.each(n,function(j,v){
-          $("#header_"+cant).after("<div class='collapsible-body' style='height:auto; line-height:26px'><a onclick='searchNews("+v[0]+")'>"+v[1]+"</a></div>");
-        });
-        $("#header_"+cant).after("</li>");
-      }
-      cant++;
-    });
+    {router: "view_index_titles"}).done(function(data){
+      var titles = JSON.parse(data);
+      var cant = 0;
+      $.each(titles.spanish_list,function(i,n){
+        $("#abc_index_spanish").append("<li>\
+          <div class='collapsible-header' id='header_"+cant+"'>"+i.toUpperCase()+"</div>");
+        if(n.length != 0){
+          $.each(n,function(j,v){
+            $("#header_"+cant).after("<div class='collapsible-body' style='height:auto; line-height:26px'><a onclick='searchNews("+v[0]+")'>"+v[1]+"</a></div>");
+          });
+          $("#header_"+cant).after("</li>");
+        }
+        cant++;
+      });
     // List English titles
     var cant_en = 0;
     $.each(titles.english_list,function(i, n){
       $("#abc_index").append("<li>\
-      <div  class='collapsible-header' id='header_"+cant_en+"'>"+i.toUpperCase()+"</div>");
+        <div  class='collapsible-header' id='header_"+cant_en+"'>"+i.toUpperCase()+"</div>");
       if(n.length != 0){
         $.each(n,function(j,k){
           $("#header_"+cant_en).after("<div class='collapsible-body' style='height:auto; line-height:26px'><a onclick='searchNews("+k[0]+")'>"+k[1]+"</a></div>");
@@ -72,52 +72,54 @@ function IndexViewTitles(){
       cant_en++;
     });
   });
-};
+  };
 
 
 
-function addSearch(){
+  function addSearch(){
 
-	 $("#searchButtom").click(function() {
+    $("#searchButtom").click(function() {
 
-              var desde =  $("#desde").val();
-              var hasta = $("#hasta").val();
-              var categoria = $("#categoria").val();
+      var desde =  $("#desde").val();
+      var hasta = $("#hasta").val();
+      var categoria = $("#categoria").val();
 
-              $("#desde").val("");
-              $("#hasta").val("");
-              $("#categoria").val("");
+      $("#desde").val("");
+      $("#hasta").val("");
+      $("#categoria").val("");
 
 
-               $.post( "../controller/news_detail_controller.php", {
-                 router : "conditionalSearch",
-                 desde: desde,
-                 hasta: hasta,
-                 categoria: categoria
-               }).done(function(e){
+      $.post( "../controller/news_detail_controller.php", {
+       router : "conditionalSearch",
+       desde: desde,
+       hasta: hasta,
+       categoria: categoria
+     }).done(function(e){
 
-                 var news = JSON.parse(e);
+       var news = JSON.parse(e);
 
-                 print_tableNews(news.contenido);
+       print_tableNews(news.contenido);
 
-               });
+     });
 
    });
 
-}
+  }
 
 
-function print_tableNews(news){
+  function print_tableNews(news){
 
-  $("#bodyTable tr").remove();
+    $("#bodyTable tr").remove();
 
     $.each(news,function(i,l){
 
-		});
-	}
+    });
+  }
 
 
-function vista_previa_news(law_id){
+
+
+  function vista_previa_news(law_id){
 
     $("#container_principal").hide();
     $("#consulta").hide();
@@ -135,21 +137,21 @@ function vista_previa_news(law_id){
 
       $.each(law_detail.contenido, function(i,n){
 
-            console.log(n);
+        console.log(n);
 
-        		d = new Date(n.law_det_date);
-        		$('#law_gaceta_prev_001').text(n.law_gaceta_number);
-        		$('#law_date_prev_001').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
-  		      $('#law_year_001').text(d.getFullYear());
-  		      $('#law_comentario_prev_001').text(n.law_det_name);
-
-
+        d = new Date(n.law_det_date);
+        $('#law_gaceta_prev_001').text(n.law_gaceta_number);
+        $('#law_date_prev_001').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
+        $('#law_year_001').text(d.getFullYear());
+        $('#law_comentario_prev_001').text(n.law_det_name);
 
 
-            $.each(n.law_file_id, function(x,y){
-            $('#pdf_view_1').attr('src',y.news_file_archive);
+
+
+        $.each(n.law_file_id, function(x,y){
+          $('#pdf_view_1').attr('src',y.news_file_archive);
           //  console.log(y.news_file_archive);
-            });
+        });
       });
     });
 
@@ -174,17 +176,17 @@ function searchNews(news_id){
 
 
   $.post("../controller/news_detail_controller.php",
-  {router:"news_view",
-  news_id : news_id
-}).done(function(data){
-  var news_det = JSON.parse(data);
-  $.each(news_det.contenido,function(i,n){
-    $("#news_title_es").val(n.news_det_tit);
-    $("#news_date").val(n.news_det_date);
-    $(".div_news_category :input ").val(n.news_det_category);
-    $(".div_news_range :input ").val(n.news_det_priority);
-    $("#news_title_es").val(n.news_det_id);
-    $("#news_source").val(n.news_det_source);
+    {router:"news_view",
+    news_id : news_id
+  }).done(function(data){
+    var news_det = JSON.parse(data);
+    $.each(news_det.contenido,function(i,n){
+      $("#news_title_es").val(n.news_det_tit);
+      $("#news_date").val(n.news_det_date);
+      $(".div_news_category :input ").val(n.news_det_category);
+      $(".div_news_range :input ").val(n.news_det_priority);
+      $("#news_title_es").val(n.news_det_id);
+      $("#news_source").val(n.news_det_source);
     //    $("#news_title_es").val(n.news_det_category);
     //    $("#news_title_es").val(n.news_det_image);
     $("#news_title_en").val(n.news_det_tit_en);
@@ -197,10 +199,10 @@ function searchNews(news_id){
   });
 
 
-});
+  });
 
 
-$('.button-collapse').sideNav('hide');
+  $('.button-collapse').sideNav('hide');
 
 
 }
@@ -208,7 +210,10 @@ $('.button-collapse').sideNav('hide');
 
 
 
+
 function preview(){
+
+
 
   $('#news_body_es').focusout(function(){
 
@@ -216,22 +221,28 @@ function preview(){
 
     var news_body_html = $(this).html();
     var news_img = $(news_body_html).contents().find("img").attr("src");
+
     $('#h5_title + img').remove();
+
     if (news_img != null) {
       $('#h5_title').after("<img id='new_img_prev' src='"+news_img+"' style='margin-left: 5%;' width='90%' height='35%'> ");
     }else{
       $('#h5_title').after("<hr></hr>");
     }
+
+
     $('#new_img_prev').attr('src',news_img);
     $('#news_body_prev').text($(this).text());
   });
+
+
   $('#news_title_es').focusout(function(){
-  $('#encabezado_vistaprevia').show();
+    $('#encabezado_vistaprevia').show();
 
     $('#news_title_prev').text($(this).val());
   });
   $('#news_date').change(function(){
-  $('#encabezado_vistaprevia').show();
+    $('#encabezado_vistaprevia').show();
 
     var d = new Date($('#news_date').val());
     var date = $('#news_date').val();
@@ -240,7 +251,7 @@ function preview(){
     $('#news_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
   });
   $('#news_source').focusout(function(){
-  $('#encabezado_vistaprevia').show();
+    $('#encabezado_vistaprevia').show();
 
     $('#news_source_prev').text($(this).val());
   });
@@ -248,48 +259,68 @@ function preview(){
 }
 //Sending news to database
 function SaveNews(){
-  var law_list = new Array();
 
-  var xhr = new XMLHttpRequest;
-  xhr.responseType = 'blob';
 
-  xhr.onload = function() {
-    var recoveredBlob = xhr.response;
 
-    var reader = new FileReader;
 
-    reader.onload = function() {
-      var blobAsDataUrl = reader.result;
-      var news_body_html = $('#news_body_es').html();
-      var news_img = $(news_body_html).contents().find("img").attr("src");
-      var news_body_es = $('#news_body_es').text();
-      $.post( "../controller/news_detail_controller.php", {
-        router : "create",
-        news_title_es: ne($('#news_title_es').val()),
-        news_img: news_img,
-        news_body_es: news_body_es,
-        news_date: ne($('#news_date').val()),
-        news_source: ne($('#news_source').val()),
-        news_title_en : ne($('#news_title_en').val()),
-        news_body_en : ne($('#news_body_en').val()),
-        news_category : ne($('#news_category').val()),
-        news_range : ne($('#news_range').val()),
-        news_file :blobAsDataUrl
-      }).done(function(message){
-        message = JSON.parse(message);
-        if(message.conexion){
-          location.reload();
-        }else{
-          alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
-        }
-      });
+  /* SI TRAE EL ID DE EDICION ENTONCES EJECUTA OTRA FUNCION */
+
+  if(localStorage.getItem("new_id")>0){
+
+    updateNews();
+
+    /* SINO TRAE ID ENTONCES JECUTA EL REGISTRO COMO NUEVO  */
+
+  }else{
+
+    var law_list = new Array();
+
+    var xhr = new XMLHttpRequest;
+    xhr.responseType = 'blob';
+
+    xhr.onload = function() {
+      var recoveredBlob = xhr.response;
+
+      var reader = new FileReader;
+
+      reader.onload = function() {
+        var blobAsDataUrl = reader.result;
+        var news_body_html = $('#news_body_es').html();
+        var news_img = $(news_body_html).contents().find("img").attr("src");
+        var news_body_es = $('#news_body_es').text();
+        $.post( "../controller/news_detail_controller.php", {
+          router : "create",
+          news_title_es: ne($('#news_title_es').val()),
+          news_img: news_img,
+          news_body_es: news_body_es,
+          news_date: ne($('#news_date').val()),
+          news_source: ne($('#news_source').val()),
+          news_title_en : ne($('#news_title_en').val()),
+          news_body_en : ne($('#news_body_en').val()),
+          news_category : ne($('#news_category').val()),
+          news_range : ne($('#news_range').val()),
+          news_file :blobAsDataUrl
+        }).done(function(message){
+          message = JSON.parse(message);
+          if(message.conexion){
+            location.reload();
+          }else{
+            alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+          }
+        });
+      };
+
+      reader.readAsDataURL(recoveredBlob);
     };
 
-    reader.readAsDataURL(recoveredBlob);
-  };
 
-  xhr.open('GET', path);
-  xhr.send();
+     xhr.open('GET', path);
+     xhr.send();     
+   
+
+
+ }
+
 
 };
 
@@ -319,6 +350,11 @@ function PDFViewer(){
 }
 
 
+function isDefined(variable) {
+    return (typeof(window[variable]) == "undefined")?  false: true;
+}
+
+
 
 //show comment panel
 function ShowCommentPanel(){
@@ -328,6 +364,10 @@ function ShowCommentPanel(){
     $('#comment_panel_es').hide();
   }
 };
+
+
+
+
 //show english settings panel
 function ShowEnglishSettingPanel(){
   if ($('#english_content').css('display') == "none") {
@@ -340,12 +380,37 @@ function ShowEnglishSettingPanel(){
 
 
 
+
+
+
+
+
 function searchNews(idioma){
 
   var idm = idioma;
   var desde =  $("#desde").val();
   var hasta = $("#hasta").val();
   var categoria = $("#categoria").val();
+
+
+
+
+  if(idioma=='hoy'){
+
+    var fecha = new Date();
+    fecha.setDate( fecha.getDate() - 30 );
+    var ayer =    fecha.getFullYear()  + "/" + (fecha.getMonth() +1) + "/" + fecha.getDate();
+
+    var fecha1 = new Date();
+    fecha1.setDate( fecha1.getDate() );
+    var hoy =    fecha1.getFullYear()  + "/" + (fecha1.getMonth() +1) + "/" + fecha1.getDate();
+
+    var desde =  ayer;
+    var hasta =  hoy;
+
+  }
+
+
 
   $("#desde").val("");
   $("#hasta").val("");
@@ -358,78 +423,78 @@ function searchNews(idioma){
     categoria : categoria//$('#categoria').val()
   }).done(function(e){
     var news = JSON.parse(e);
-    console.log(news.contenido);
+    //console.log(news.contenido);
     $.each(news,function(i,n){
 
 
 
 
-            $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=delete_news("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
+      $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"ingles\")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=deleteNews("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
 
-                  if(n.news_det_priority>3){
+      if(n.news_det_priority>3){
 
-                    $("#col_derecha").append("\
-                    <div style='width:100%;margin-bottom:10px; font-size:20px; border-bottom: 2px solid #333; padding-bottom:15px; margin-bottom:15px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
-                    <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><br><br>\
-                    ");
-                  }
-
-
-                  if(n.news_det_priority<=3){
-
-                            if(n.news_det_image=='N/E'){
-                              $("#col_izquierda").append("\
-                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
-                              <hr>\
-                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><hr><br>\
-                              ");
-                            }else{
-                              $("#col_izquierda").append("\
-                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
-                              <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
-                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><hr>\
-                              ");
-                            }
-
-                  }
+        $("#col_derecha").append("\
+          <div style='width:100%;margin-bottom:10px; font-size:20px; border-bottom: 2px solid #333; padding-bottom:15px; margin-bottom:15px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+          <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><br><br>\
+          ");
+      }
 
 
+      if(n.news_det_priority<=3){
 
+        if(n.news_det_image=='N/E'){
+          $("#col_izquierda").append("\
+            <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+            <hr>\
+            <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><hr><br>\
+            ");
+        }else{
+          $("#col_izquierda").append("\
+            <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+            <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+            <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><hr>\
+            ");
+        }
 
-
-                $("#bodyTable_spanish").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=delete_news("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a> </td></tr>");
-
-                if(n.news_det_priority>3){
-
-                  $("#col_derecha_spanish").append("\
-                  <div style='width:100%;margin-bottom:10px; font-size:20px; border-bottom: 2px solid #333; padding-bottom:15px; margin-bottom:15px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
-                  <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><br><br>\
-                  ");
-                }
-
-
-                  if(n.news_det_priority<=3){
-
-                            if(n.news_det_image=='N/E'){
-                              $("#col_izquierda_spanish").append("\
-                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
-                              <hr>\
-                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr><br>\
-                              ");
-                            }else{
-                              $("#col_izquierda_spanish").append("\
-                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
-                              <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
-                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr>\
-                              ");
-                            }
-
-                    }
+      }
 
 
 
 
-      });
+
+      $("#bodyTable_spanish").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"espanol\")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=deleteNews("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a> </td></tr>");
+
+      if(n.news_det_priority>3){
+
+        $("#col_derecha_spanish").append("\
+          <div style='width:100%;margin-bottom:10px; font-size:20px; border-bottom: 2px solid #333; padding-bottom:15px; margin-bottom:15px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+          <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><br><br>\
+          ");
+      }
+
+
+      if(n.news_det_priority<=3){
+
+        if(n.news_det_image=='N/E'){
+          $("#col_izquierda_spanish").append("\
+            <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+            <hr>\
+            <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr><br>\
+            ");
+        }else{
+          $("#col_izquierda_spanish").append("\
+            <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+            <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+            <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr>\
+            ");
+        }
+
+      }
+
+
+
+
+    });
 
 
 
@@ -440,97 +505,107 @@ function searchNews(idioma){
 
 function volver_atras_busqueda(){
 
-    $('#vistaprevia_individual').hide();
+  $('#vistaprevia_individual').hide();
 
-    $('#divTable').show();
-    $('#vistaprevia').show();
-    $('#divTableTitle').show();
-    $('#botonesSearch').show();
-    $('#opcionesSearch').show();
+  $('#divTable').show();
+  $('#vistaprevia').show();
+  $('#divTableTitle').show();
+  $('#botonesSearch').show();
+  $('#opcionesSearch').show();
 }
 
 function editar_news(x){
-      localStorage.setItem("new_id",x);
-      window.location.href = "load.html";
+  localStorage.setItem("new_id",x);
+  window.location.href = "load.html";
 
 }
 
 
 
-function searchNewsIndividual(new_id){
+function searchNewsIndividual(new_id,idiomax){
+
+
+var idm = idiomax
+
+console.log(idm);
+
+  $('#vistaprevia_individual').show();
+
+  $('#divTable').hide();
+  $('#vistaprevia').hide();
+  $('#divTableTitle').hide();
+  $('#botonesSearch').hide();
+  $('#opcionesSearch').hide();
+
+
+  $('#col_izquierda_individual div').remove();
+  $('#col_izquierda_spanish_individual div').remove();
+
+  $.post("../controller/news_detail_controller.php",{
+    router : "news_view",
+    news_id : new_id
+  }).done(function(e){
+    var news_detail = JSON.parse(e);
+
+    $.each(news_detail.contenido, function(i,n){
 
 
 
 
-    $('#vistaprevia_individual').show();
+      $.each(n.news_det_file, function(x,y){
 
-    $('#divTable').hide();
-    $('#vistaprevia').hide();
-    $('#divTableTitle').hide();
-    $('#botonesSearch').hide();
-    $('#opcionesSearch').hide();
-
-
-    $('#col_izquierda_individual div').remove();
-    $('#col_izquierda_spanish_individual div').remove();
-
-    $.post("../controller/news_detail_controller.php",{
-      router : "news_view",
-      news_id : new_id
-    }).done(function(e){
-      var news_detail = JSON.parse(e);
-
-                $.each(news_detail.contenido, function(i,n){
-
-          
+        if(y.news_file_archive==""){
+          $('#pdf_view2').hide();
+        }else{
+         $('#pdf_view2').show();
+         $('#pdf_view2').attr('src',y.news_file_archive);
+       }  
+     });
 
 
-                          $.each(n.news_det_file, function(x,y){
+                          //console.log(n.news_det_file);
 
-                                    if(y.news_file_archive==""){
-                                    $('#pdf_view2').hide();
-                                    }else{
-                                       $('#pdf_view2').show();
-                                       $('#pdf_view2').attr('src',y.news_file_archive);
-                                    }  
-                          });
+                          if(idm=="ingles"){
+
+                                  if(n.news_det_image=='N/E'){
+                                    $("#col_izquierda_individual").append("\
+                                      <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+                                      \
+                                      <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div>\
+                                      ");
+                                  }else{
+                                    $("#col_izquierda_individual").append("\
+                                      <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+                                      <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+                                      <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div>\
+                                      ");
+                                  }
+
+                          }
 
 
-                          console.log(n.news_det_file);
+                               if(idm=="espanol"){
 
-                            if(n.news_det_image=='N/E'){
-                              $("#col_izquierda_individual").append("\
-                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
-                              \
-                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div>\
-                              ");
-                            }else{
-                              $("#col_izquierda_individual").append("\
-                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
-                              <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
-                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div>\
-                              ");
+                                $('#col_izquierda_spanish_individual').show();
+
+                                                      if(n.news_det_image=='N/E'){
+                                                        $("#col_izquierda_spanish_individual").append("\
+                                                          <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+                                                          <hr>\
+                                                          <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr><br>\
+                                                          ");
+                                                      }else{
+                                                        $("#col_izquierda_spanish_individual").append("\
+                                                          <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+                                                          <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+                                                          <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr>\
+                                                          ");
+                                                      }
                             }
 
+                        });
 
-                            if(n.news_det_image=='N/E'){
-                              $("#col_izquierda_spanish_individual").append("\
-                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
-                              <hr>\
-                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr><br>\
-                              ");
-                            }else{
-                              $("#col_izquierda_spanish_individual").append("\
-                              <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
-                              <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
-                              <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr>\
-                              ");
-                            }
-
-
-                });
-
-      });
+  });
 
 }
 
@@ -558,213 +633,247 @@ function verSearch(){
   $("#ver_registro").hide();
   $("#vistaprevia").hide();
 
-	 $("#ver_consulta").click(function() {
-       $("#container_principal").hide();
-       $("#consulta").show();
-       $("#ver_registro").show();
-       $("#ver_consulta").hide();
-       $("#ver_save").hide();
-       $("#vistaprevia").show();
+  $("#ver_consulta").click(function() {
+   $("#container_principal").hide();
+   $("#consulta").show();
+   $("#ver_registro").show();
+   $("#ver_consulta").hide();
+   $("#ver_save").hide();
+   $("#vistaprevia").show();
 
-       $("#ver_tbl_spanish").hide();
-       $("#ver_tbl_english").hide();
-       $("#ver_sem_spanish").hide();
-       $("#ver_sem_english").hide();
-       $("#tableReporte").hide();
-       $("#vistaprevia").hide();
-       $("#ver_index").hide();
-
-
-   });
-
-   $("#desde").change(function() {
-       $("#container_principal").hide();
-       $("#consulta").show();
-       $("#ver_registro").show();
-       $("#ver_consulta").hide();
-       $("#ver_save").hide();
-       $("#vistaprevia").show();
-
-       $("#ver_tbl_spanish").hide();
-       $("#ver_tbl_english").hide();
-       $("#ver_sem_spanish").hide();
-       $("#ver_sem_english").hide();
-       $("#tableReporte").hide();
-       $("#vistaprevia").hide();
+   $("#ver_tbl_spanish").hide();
+   $("#ver_tbl_english").hide();
+   $("#ver_sem_spanish").hide();
+   $("#ver_sem_english").hide();
+   $("#tableReporte").hide();
+   $("#vistaprevia").hide();
+   $("#ver_index").hide();
 
 
-   });
+ });
+
+  $("#desde").change(function() {
+   $("#container_principal").hide();
+   $("#consulta").show();
+   $("#ver_registro").show();
+   $("#ver_consulta").hide();
+   $("#ver_save").hide();
+   $("#vistaprevia").show();
+
+   $("#ver_tbl_spanish").hide();
+   $("#ver_tbl_english").hide();
+   $("#ver_sem_spanish").hide();
+   $("#ver_sem_english").hide();
+   $("#tableReporte").hide();
+   $("#vistaprevia").hide();
 
 
-   $("#hasta").change(function() {
-       $("#container_principal").hide();
-       $("#consulta").show();
-       $("#ver_registro").show();
-       $("#ver_consulta").hide();
-       $("#ver_save").hide();
-       $("#vistaprevia").show();
-
-       $("#ver_tbl_spanish").hide();
-       $("#ver_tbl_english").hide();
-       $("#ver_sem_spanish").hide();
-       $("#ver_sem_english").hide();
-       $("#tableReporte").hide();
-       $("#vistaprevia").hide();
+ });
 
 
-   });
+  $("#hasta").change(function() {
+   $("#container_principal").hide();
+   $("#consulta").show();
+   $("#ver_registro").show();
+   $("#ver_consulta").hide();
+   $("#ver_save").hide();
+   $("#vistaprevia").show();
+
+   $("#ver_tbl_spanish").hide();
+   $("#ver_tbl_english").hide();
+   $("#ver_sem_spanish").hide();
+   $("#ver_sem_english").hide();
+   $("#tableReporte").hide();
+   $("#vistaprevia").hide();
 
 
-
-
-   $("#ver_registro").click(function() {
-       $("#container_principal").show();
-       $("#consulta").hide();
-       $("#ver_registro").hide();
-       $("#ver_consulta").show();
-       $("#ver_save").show();
-       $("#vistaprevia").hide();
-
-   });
-
-
-   $("#searchButtom1").click(function() {
-
-     $("#ver_tbl_spanish").show();
-     $("#ver_tbl_english").show();
-     $("#ver_sem_spanish").show();
-     $("#ver_sem_english").show();
-     $("#ver_sem_english").show();
-     $("#container_principal").hide();
-     $("#consulta").show();
-     $("#ver_registro").hide();
-     $("#ver_consulta").show();
-     $("#ver_save").hide();
-     $("#vistaprevia").show();
-     $("#col_derecha_spanish").show();
-     $("#col_izquierda_spanish").show();
-     $("#bodyTable_spanish").hide();
-     $("#col_derecha").hide();
-     $("#col_izquierda").hide();
-     $("#bodyTable").hide();
-     $("#tableReporte").hide();
-     $('#divTableTitle h4').remove();
-
-     $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol  ( Semanario )</h4>")
-
-   });
-
-
-
-   $("#ver_tbl_spanish").click(function() {
-       $("#container_principal").hide();
-       $("#consulta").show();
-       $("#ver_registro").hide();
-       $("#ver_consulta").show();
-       $("#ver_save").hide();
-       $("#vistaprevia").hide();
-       $("#col_derecha_spanish").hide();
-       $("#col_izquierda_spanish").hide();
-       $("#bodyTable_spanish").show();
-       $("#col_derecha").hide();
-       $("#col_izquierda").hide();
-       $("#bodyTable").hide();
-       $("#tableReporte").show();
-       $('#divTableTitle h4').remove();
-       $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol ( Tabla )</h4>")
-
-   });
-
-   $("#ver_tbl_english").click(function() {
-       $("#container_principal").hide();
-       $("#consulta").show();
-       $("#ver_registro").hide();
-       $("#ver_consulta").show();
-       $("#ver_save").hide();
-       $("#vistaprevia").hide();
-       $("#col_derecha_spanish").hide();
-       $("#col_izquierda_spanish").hide();
-       $("#bodyTable_spanish").hide();
-       $("#col_derecha").hide();
-       $("#col_izquierda").hide();
-       $("#bodyTable").show();
-       $("#tableReporte").show();
-       $('#divTableTitle h4').remove();
-
-       $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Results in English ( Table )</h4>")
-
-   });
-
-   $("#ver_sem_spanish").click(function() {
-       $("#container_principal").hide();
-       $("#consulta").show();
-       $("#ver_registro").hide();
-       $("#ver_consulta").show();
-       $("#ver_save").hide();
-       $("#vistaprevia").show();
-       $("#col_derecha_spanish").show();
-       $("#col_izquierda_spanish").show();
-       $("#bodyTable_spanish").hide();
-       $("#col_derecha").hide();
-       $("#col_izquierda").hide();
-       $("#bodyTable").hide();
-       $("#tableReporte").hide();
-       $('#divTableTitle h4').remove();
-
-       $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol  ( Semanario )</h4>")
-
-   });
-
-   $("#ver_sem_english").click(function() {
-     $("#container_principal").hide();
-     $("#consulta").show();
-     $("#ver_registro").hide();
-     $("#ver_consulta").show();
-     $("#ver_save").hide();
-     $("#vistaprevia").show();
-     $("#col_derecha_spanish").hide();
-     $("#col_izquierda_spanish").hide();
-     $("#bodyTable_spanish").hide();
-     $("#col_derecha").show();
-     $("#col_izquierda").show();
-     $("#bodyTable").hide();
-     $("#tableReporte").hide();
-     $('#divTableTitle h4').remove();
-     $('#divTableTitle').append("<h4 style='font-size: 1.5rem;' >  Results in English  ( Semanario )</h4>")
-
-   });
+ });
 
 
 
 
+  $("#ver_registro").click(function() {
+   $("#container_principal").show();
+   $("#consulta").hide();
+   $("#ver_registro").hide();
+   $("#ver_consulta").show();
+   $("#ver_save").show();
+   $("#vistaprevia").hide();
+
+ });
+
+
+  $("#searchButtom1").click(function() {
+
+   $("#ver_tbl_spanish").show();
+   $("#ver_tbl_english").show();
+   $("#ver_sem_spanish").show();
+   $("#ver_sem_english").show();
+   $("#ver_sem_english").show();
+
+   $("#container_principal").hide();
+   $("#consulta").show();
+   $("#ver_registro").hide();
+   $("#ver_consulta").show();
+   $("#ver_save").hide();
+   $("#vistaprevia").hide();
+   $("#col_derecha_spanish").hide();
+   $("#col_izquierda_spanish").hide();
+   $("#bodyTable_spanish").show();
+   $("#col_derecha").hide();
+   $("#col_izquierda").hide();
+   $("#bodyTable").hide();
+   $("#tableReporte").show();
+   $('#divTableTitle h4').remove();
+   $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol ( Tabla )</h4>")
+
+
+
+
+ });
+
+
+
+  $("#ver_tbl_spanish").click(function() {
+   $("#container_principal").hide();
+   $("#consulta").show();
+   $("#ver_registro").hide();
+   $("#ver_consulta").show();
+   $("#ver_save").hide();
+   $("#vistaprevia").hide();
+   $("#col_derecha_spanish").hide();
+   $("#col_izquierda_spanish").hide();
+   $("#bodyTable_spanish").show();
+   $("#col_derecha").hide();
+   $("#col_izquierda").hide();
+   $("#bodyTable").hide();
+   $("#tableReporte").show();
+   $('#divTableTitle h4').remove();
+   $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol ( Tabla )</h4>")
+
+ });
+
+  $("#ver_tbl_english").click(function() {
+   $("#container_principal").hide();
+   $("#consulta").show();
+   $("#ver_registro").hide();
+   $("#ver_consulta").show();
+   $("#ver_save").hide();
+   $("#vistaprevia").hide();
+   $("#col_derecha_spanish").hide();
+   $("#col_izquierda_spanish").hide();
+   $("#bodyTable_spanish").hide();
+   $("#col_derecha").hide();
+   $("#col_izquierda").hide();
+   $("#bodyTable").show();
+   $("#tableReporte").show();
+   $('#divTableTitle h4').remove();
+
+   $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Results in English ( Table )</h4>")
+
+ });
+
+  $("#ver_sem_spanish").click(function() {
+   $("#container_principal").hide();
+   $("#consulta").show();
+   $("#ver_registro").hide();
+   $("#ver_consulta").show();
+   $("#ver_save").hide();
+   $("#vistaprevia").show();
+   $("#col_derecha_spanish").show();
+   $("#col_izquierda_spanish").show();
+   $("#bodyTable_spanish").hide();
+   $("#col_derecha").hide();
+   $("#col_izquierda").hide();
+   $("#bodyTable").hide();
+   $("#tableReporte").hide();
+   $('#divTableTitle h4').remove();
+
+   $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol  ( Semanario )</h4>")
+
+ });
+
+  $("#ver_sem_english").click(function() {
+   $("#container_principal").hide();
+   $("#consulta").show();
+   $("#ver_registro").hide();
+   $("#ver_consulta").show();
+   $("#ver_save").hide();
+   $("#vistaprevia").show();
+   $("#col_derecha_spanish").hide();
+   $("#col_izquierda_spanish").hide();
+   $("#bodyTable_spanish").hide();
+   $("#col_derecha").show();
+   $("#col_izquierda").show();
+   $("#bodyTable").hide();
+   $("#tableReporte").hide();
+   $('#divTableTitle h4').remove();
+   $('#divTableTitle').append("<h4 style='font-size: 1.5rem;' >  Results in English  ( Semanario )</h4>")
+
+ });
+
+
+}
 
 function updateNews(){
-  var news_body_html = $('#news_body_es').html();
-  var news_body_es = $('#news_body_es').text();
-  $.post( "../controller/news_detail_controller.php", {
-    router : "update",
-    news_title_es: ne($('#news_title_es').val()),
-    news_body_es: news_body_es,
-    news_date: ne($('#news_date').val()),
-    news_source: ne($('#news_source').val()),
-    news_title_en : ne($('#news_title_en').val()),
-    news_body_en : ne($('#news_body_en').val()),
-    news_category : ne($('#news_category').val()),
-    news_range : ne($('#news_range').val()),
-    news_id :  localStorage.getItem("new_id")
 
-  }).done(function(message){
-    message = JSON.parse(message);
-    if(message.conexion){
-      alert('Update Success!');
-      location.reload();
-    }else{
-      alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
-    }
-  });
+  //alert('soy  un editar');
+
+//console.log($('#news_category').val());
+
+console.log(localStorage.getItem("category_id"));
+
+if($('#news_category').val()==null){
+ $('#news_category').val(localStorage.getItem("category_id"))  ;
 }
 
 
 
 
+
+var news_body_html = $('#news_body_es').html();
+var news_body_es = $('#news_body_es').text();
+$.post( "../controller/news_detail_controller.php", {
+  router : "update",
+  news_id : localStorage.getItem("new_id"),
+  news_title_es: ne($('#news_title_es').val()),
+  news_body_es: news_body_es,
+  news_date: ne($('#news_date').val()),
+  news_source: ne($('#news_source').val()),
+  news_title_en : ne($('#news_title_en').val()),
+  news_body_en : ne($('#news_body_en').val()),
+  news_category : $('#news_category').val(),
+  news_range : ne($('#news_range').val())
+
+}).done(function(message){
+  message = JSON.parse(message);
+
+  console.log(message);
+  console.log('unicornio azul');
+
+  if(message.conexion){
+    alert('Update Success!');
+    location.reload();
+  }else{
+    alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+  }
+});
+}
+
+
+
+
+function deleteNews(news_id){
+  $.post( "../controller/news_detail_controller.php", {
+    router : "delete",
+    news_id : news_id,
+  }).done(function(message){
+    message = JSON.parse(message);
+    if(message.conexion){
+      alert('Deleted Success!');
+      location.reload();
+    }else{
+      alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+    }
+  });
 }
