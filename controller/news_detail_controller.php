@@ -8,6 +8,17 @@ require '../model/news_category.php';
 require '../model/news_type.php';
 require '../model/news_files.php';
 
+
+
+
+
+
+
+
+
+
+
+
 if ($_POST['router'] == 'create') {
   $content     = new GetContents();
   $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null,null);
@@ -48,13 +59,18 @@ if ($_POST['router'] == 'create') {
   echo json_encode($news_id);
 }
 
+
+
+
+
+
 if ($_POST['router'] == "list") {
   $category = new NewsCategory(null, null, null);
   $type     = new NewsType(null, null, null);
 
   echo json_encode(array("category" => $category->selectAllNewsCategory(),
-  "type"                          => $type->selectAllNewsType()
-));
+    "type"                          => $type->selectAllNewsType()
+    ));
 }
 
 if ($_POST['router'] == "view_index_titles") {
@@ -153,7 +169,6 @@ if ($_POST['router'] == "view_index_titles") {
       $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null,null);
       $files_l  = new NewsFiles(null,null,null);
       $path = "/home/annralf/Documentos/Noticias2010/";
-
       $dir = opendir($path);
       $files = array();
       while ($current = readdir($dir)){
@@ -182,7 +197,6 @@ if ($_POST['router'] == "view_index_titles") {
         $files_l->setNewsFileName('news_'.$date);
         $files_l->setNewsFileArchive($news_file);
         $file_id = $files_l->saveNewsFiles();
-
         $news_detail->setNewsDetDate($date);
         $news_detail->setNewsDetImage($img);
         $news_detail->setNewsDetSource($source);
@@ -196,6 +210,4 @@ if ($_POST['router'] == "view_index_titles") {
         $news_id = $news_detail->saveNewsDetail();
 
       }
-
-
   }
