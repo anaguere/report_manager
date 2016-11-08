@@ -91,11 +91,11 @@ class LawDetail extends Connector{
 			return Connector::InsertIn($this->attr_connector,$this->table_name,$this->law_detail);
 		}
 	public function updateLawDetail($law_file_id){
-			$law_file_id = array("law_file_id",$law_file_id);
+			$law_file_id = array("law_det_id",$law_file_id);
 			return Connector::UpdateIn($this->attr_connector,$this->table_name,$this->law_detail,$law_file_id);
 		}
 	public function deleteLawDetail($law_file_id){
-			return Connector::DeleteIn($this->attr_connector,$this->table_name,"law_file_id",$law_file_id);
+			return Connector::DeleteIn($this->attr_connector,$this->table_name,"law_det_id",$law_file_id);
 		}
 	public function selectAllLawDetail(){
 		 return Connector::SelectIn($this->attr_connector,$this->table_name,$this->field,$this->value);
