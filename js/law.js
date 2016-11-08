@@ -354,7 +354,6 @@ function addSearch(){
     }).done(function(e){
 
       var laws = JSON.parse(e);
-
       print_tableLeyes(laws.contenido);
 
     });
@@ -421,3 +420,37 @@ function updateLawDetail(){
   xhr.open('GET', path);
   xhr.send();
 };
+
+function updateLaw(law_id){
+  $.post( "../controller/law_detail_controller.php", {
+    router : "update",
+    law_id : law_id,
+    law_gaceta: ne($('#law_gaceta').val()),
+    law_date: $('#law_date').val(),
+    law_name: ne(),
+    law_type: ne(),
+  }).done(function(message){
+    message = JSON.parse(message);
+    if(message.conexion){
+      alert('Update Success!');
+      location.reload();
+    }else{
+      alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+    }
+  });
+}
+
+function deleteNews(law_id){
+  $.post( "../controller/law_detail_controller.php", {
+    router : "delete",
+    law_id : law_id,
+  }).done(function(message){
+    message = JSON.parse(message);
+    if(message.conexion){
+      alert('Deleted Success!');
+      location.reload();
+    }else{
+      alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+    }
+  });
+}
