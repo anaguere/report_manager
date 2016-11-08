@@ -447,6 +447,7 @@
                      preview();
                      verSearch();
                      verificar_edicion();
+                    // masiveLoad();
 
                   //searchNews();
 
@@ -554,7 +555,7 @@ if(localStorage.getItem("new_id")>0){
 
             console.log(n.news_det_category[0].news_cat_id);
 
-            localStorage.setItem("category_id",n.news_det_category[0].news_cat_id);  
+            localStorage.setItem("category_id",n.news_det_category[0].news_cat_id);
 
 
              $("#news_title_es").val(n.news_det_tit);
@@ -585,7 +586,7 @@ if(localStorage.getItem("new_id")>0){
                                     }else{
                                        $('#pdf_view').show();
                                        $('#pdf_view').attr('src',y.news_file_archive);
-                                    }  
+                                    }
                           });
 
 

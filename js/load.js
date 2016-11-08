@@ -315,8 +315,8 @@ function SaveNews(){
 
 
      xhr.open('GET', path);
-     xhr.send();     
-   
+     xhr.send();
+
 
 
  }
@@ -559,7 +559,7 @@ console.log(idm);
         }else{
          $('#pdf_view2').show();
          $('#pdf_view2').attr('src',y.news_file_archive);
-       }  
+       }
      });
 
 
@@ -875,5 +875,11 @@ function deleteNews(news_id){
     }else{
       alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
     }
+  });
+}
+
+function masiveLoad(){
+  $.post("../controller/news_detail_controller.php",{
+    router : "masivo"
   });
 }

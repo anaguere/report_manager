@@ -147,3 +147,55 @@ if ($_POST['router'] == "view_index_titles") {
       $news_id = $content->GetPostContent('news_id');
       echo json_encode($news->deleteNewsDetail($news_id));
     }
+
+    if ($_POST['router'] == 'masivo') {
+      $content     = new GetContents();
+      $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null,null);
+      $files_l  = new NewsFiles(null,null,null);
+      $path = "/home/annralf/Documentos/Noticias2010/";
+
+      $dir = opendir($path);
+      $files = array();
+      while ($current = readdir($dir)){
+        if( $current != "." && $current != "..") {
+          if(is_dir($path.$current)) {
+            showFiles($path.$current.'/');
+          }
+          else {
+            $files[] = $current;
+          }
+        }
+      }
+
+      for($i=0; $i<count( $files ); $i++){
+        $title_es    = $files[$i];
+        $img     = $content->GetPostContent("news_img");
+        $news_file = "data:application/pdf;base64,".base64_encode(file_get_contents($path.$files[$i]));
+        $body_es  = "";
+        $date     = date("Y/m/d");
+        $source   = "OSP";
+        $title_en = "";
+        $body_en  = "";
+        $category = 10;
+        $range    = 1;
+        $cadena = explode(".",$files[$i]);
+        $files_l->setNewsFileName('news_'.$date);
+        $files_l->setNewsFileArchive($news_file);
+        $file_id = $files_l->saveNewsFiles();
+
+        $news_detail->setNewsDetDate($date);
+        $news_detail->setNewsDetImage($img);
+        $news_detail->setNewsDetSource($source);
+        $news_detail->setNewsDetText($body_es);
+        $news_detail->setNewsDetTexten($body_en);
+        $news_detail->setNewsDetTit($cadena[0]);
+        $news_detail->setNewsDetTiten($title_en);
+        $news_detail->setNewsDetCategory($category);
+        $news_detail->setNewsDetPriority($range);
+        $news_detail->setNewsDetFile($file_id['contenido']['news_file_id']);
+        $news_id = $news_detail->saveNewsDetail();
+
+      }
+
+
+  }
