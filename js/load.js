@@ -880,3 +880,6 @@ function deleteNews(news_id){
     }
   });
 }
+
+
+
