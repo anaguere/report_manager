@@ -273,6 +273,7 @@ function SaveNews(){
 
   }else{
 
+    $("#cortina").css('display','block');
     var law_list = new Array();
 
     var xhr = new XMLHttpRequest;
@@ -304,7 +305,9 @@ function SaveNews(){
           message = JSON.parse(message);
           if(message.conexion){
             location.reload();
+            $("#cortina").css('display','none');
           }else{
+            $("#cortina").css('display','none');
             alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
           }
         });
@@ -320,7 +323,7 @@ function SaveNews(){
 
 
  }
-
+$("#cortina").css('display','none');
 
 };
 
