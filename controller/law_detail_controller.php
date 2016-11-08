@@ -23,11 +23,13 @@ if ($_POST['router'] == "create") {
     $law_det_date   = $content->GetPostContent('law_date');
     $law_det_gaceta = $content->GetPostContent('law_gaceta');
     for ($i = 0; $i < count($laws_req); $i++) {
-        $laws        = new LawDetail(null, null, null, null, null, null);
-        $law_details = explode(",", $laws_req[$i]);
+        $laws        = new LawDetail(null,null,null,null,null,null);
+        #$law_details = explode(",", $laws_req[$i]);
+        $val = substr($laws_req[$i],0,-2);
+        $val2 = substr($laws_req[$i],-1);
         $laws->setLawDetDate($law_det_date);
-        $laws->setLawDetName($law_details[0]);
-        $laws->setLawDetType($law_details[1]);
+        $laws->setLawDetName($val);
+        $laws->setLawDetType($val2);
         $laws->setLawFileId($law_file_id['contenido']['news_file_id']);
         $laws->setLawGacetaNumber($law_det_gaceta);
         $resul = $laws->saveLawDetail();
