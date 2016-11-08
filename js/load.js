@@ -264,8 +264,8 @@ function SaveNews(){
     var law_list = new Array();
   /* SI TRAE EL ID DE EDICION ENTONCES EJECUTA OTRA FUNCION */
 
-  if(localStorage.getItem("new_id")>0){
-
+  if(typeof localStorage.getItem("new_id") !== 'undefined'){
+    alert('lol');
     updateNews();
 
     /* SINO TRAE ID ENTONCES JECUTA EL REGISTRO COMO NUEVO  */
@@ -450,7 +450,7 @@ function searchNews(idioma){
 
 
 
-      $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"ingles\")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=deleteNews("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
+      $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26' title='Edit news'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"ingles\")'  class='fa fa-eye tam26' title='Preview'></a> <!--a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a--> <a onclick=deleteNews("+n.news_det_id+") title='Delete news'> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
 
       if(n.news_det_priority>3){
 
@@ -838,7 +838,7 @@ function verSearch(){
 
 function updateNews(){
 
-  //alert('soy  un editar');
+  alert('soy  un editar');
 
 //console.log($('#news_category').val());
 
@@ -857,19 +857,19 @@ var news_body_es = $('#news_body_es').text();
 $.post( "../controller/news_detail_controller.php", {
   router : "update",
   news_id : localStorage.getItem("new_id"),
-  news_title_es: ne($('#news_title_es').val()),
+  news_title_es: $('#news_title_es').val(),
   news_body_es: news_body_es,
-  news_date: ne($('#news_date').val()),
-  news_source: ne($('#news_source').val()),
-  news_title_en : ne($('#news_title_en').val()),
-  news_body_en : ne($('#news_body_en').val()),
+  news_date: $('#news_date').val(),
+  news_source: $('#news_source').val(),
+  news_title_en : $('#news_title_en').val(),
+  news_body_en : $('#news_body_en').val(),
   news_category : $('#news_category').val(),
-  news_range : ne($('#news_range').val())
+  news_range : $('#news_range').val()
 
 }).done(function(message){
+  localStorage.getItem("new_id")
   message = JSON.parse(message);
-
-  console.log(message);
+  //console.log(message);
   console.log('unicornio azul');
 
   if(message.conexion){
