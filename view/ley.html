@@ -288,6 +288,90 @@
 
          var nl = 0;
          var path;
+
+
+
+        
+         function verificar_edicion(){
+         
+         
+         if(localStorage.getItem("law_id")>0){
+         
+         laws_id = localStorage.getItem("law_id");
+         
+         
+         $.post("../controller/law_detail_controller.php",
+         {router:"law_view",
+         laws_id : laws_id
+         }).done(function(data){
+         var laws_det = JSON.parse(data);
+         $.each(laws_det.contenido,function(i,n){
+                  
+         localStorage.setItem("category_id",n.news_det_category[0].news_cat_id);  
+         
+         $("#news_title_es").val(n.news_det_tit);
+         $("#news_date").val(n.news_det_date);
+         $(".div_news_category :input ").val(n.news_det_category[0].news_cat_id);
+         $(".div_news_range :input ").val(n.news_det_priority);
+         // $("#news_title_es").val(n.news_det_id);
+         $("#news_source").val(n.news_det_source);
+         //    $("#news_title_es").val(n.news_det_category);
+         //    $("#news_title_es").val(n.news_det_image);
+         $("#news_title_en").val(n.news_det_tit_en);
+         $("#news_body_en").val(n.news_det_text_en);
+         //$("#news_title_es").val(n.news_det_text);
+
+
+         $.each(n.news_det_category,function(x,z){
+
+
+                         $(".div_news_category :input ").val( z.news_cat_name );
+
+                         });
+         
+         
+                         $('#h5_title').text(n.news_det_tit);
+                         $('#news_month_prev').text( n.news_det_date+'.-');
+                         $('#news_date_prev').text( n.news_det_date);
+                         $('#news_source_prev').text(n.news_det_source);
+         
+                        $.each(n.news_det_file, function(x,y){
+             
+                                  if(y.news_file_archive==""){
+                                  $('#pdf_view').hide();
+                                  }else{
+                                     $('#pdf_view').show();
+                                     $('#pdf_view').attr('src',y.news_file_archive);
+                                  }  
+                        });
+         
+                 });
+         
+         
+         });
+         
+
+         $('#encabezado_vistaprevia').show();
+         
+         }else{
+      
+         }
+         
+         
+         }
+
+
+
+
+
+
+
+
+
+
+
+
+
       </script>
    </body>
 </html>

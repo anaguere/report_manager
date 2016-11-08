@@ -107,14 +107,16 @@ function IndexViewTitles(){
   }
 
 
+
+
   function print_tableNews(news){
 
     $("#bodyTable tr").remove();
-
     $.each(news,function(i,l){
-
     });
+
   }
+
 
 
 
@@ -146,8 +148,6 @@ function IndexViewTitles(){
         $('#law_comentario_prev_001').text(n.law_det_name);
 
 
-
-
         $.each(n.law_file_id, function(x,y){
           $('#pdf_view_1').attr('src',y.news_file_archive);
           //  console.log(y.news_file_archive);
@@ -156,16 +156,6 @@ function IndexViewTitles(){
     });
 
   }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -273,11 +263,12 @@ function SaveNews(){
 
   }else{
 
-    $("#cortina").css('display','block');
     var law_list = new Array();
 
     var xhr = new XMLHttpRequest;
     xhr.responseType = 'blob';
+
+
 
     xhr.onload = function() {
       var recoveredBlob = xhr.response;
@@ -285,6 +276,8 @@ function SaveNews(){
       var reader = new FileReader;
 
       reader.onload = function() {
+
+        $("#cortina").css('display','block');
         var blobAsDataUrl = reader.result;
         var news_body_html = $('#news_body_es').html();
         var news_img = $(news_body_html).contents().find("img").attr("src");
@@ -316,11 +309,10 @@ function SaveNews(){
       reader.readAsDataURL(recoveredBlob);
     };
 
+//console.log(path);
 
-     xhr.open('GET', path);
-     xhr.send();
-
-
+   //  xhr.open('GET', path);
+   //  xhr.send();
 
  }
 $("#cortina").css('display','none');
@@ -707,13 +699,11 @@ function verSearch(){
 
 
   $("#searchButtom1").click(function() {
-
    $("#ver_tbl_spanish").show();
    $("#ver_tbl_english").show();
    $("#ver_sem_spanish").show();
    $("#ver_sem_english").show();
    $("#ver_sem_english").show();
-
    $("#container_principal").hide();
    $("#consulta").show();
    $("#ver_registro").hide();
@@ -729,10 +719,6 @@ function verSearch(){
    $("#tableReporte").show();
    $('#divTableTitle h4').remove();
    $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol ( Tabla )</h4>")
-
-
-
-
  });
 
 
@@ -818,14 +804,12 @@ function verSearch(){
 
 }
 
+
+
 function updateNews(){
-
-  //alert('soy  un editar');
-
+//alert('soy  un editar');
 //console.log($('#news_category').val());
-
 console.log(localStorage.getItem("category_id"));
-
 if($('#news_category').val()==null){
  $('#news_category').val(localStorage.getItem("category_id"))  ;
 }

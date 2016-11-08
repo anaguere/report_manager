@@ -13,7 +13,6 @@ function InitSelector(){
     var data = JSON.parse(e);
     $.each(data,function(i,n){
       $.each(n.contenido,function(y,f){
-        $('#law_type').append("<option value="+f.law_type_id+">"+f.law_type_name+"</option>");
         $('#categoria').append("<option value="+f.law_type_id+">"+f.law_type_name+"</option>");
         $('select').material_select();
       });
