@@ -899,6 +899,7 @@ function deleteNews(news_id){
   });
 }
 
+
 function masiveLoad(){
   $.post("../controller/news_detail_controller.php",{
     router : "masivo"
