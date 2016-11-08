@@ -12,7 +12,7 @@
          <a href="#" class="brand-logo left" style="margin-top:-10px">[ News ] </a>
          <ul id="nav-mobile" class="right hide-on-med-and-down" >
 
-            <li><a href="home.html">
+            <li><a href="home.html" title="Home">
                <span class="livicon"  style=""   data-hovercolor="white"
                data-color="white" data-name="remove" data-size="34">
             </span></a>
@@ -31,15 +31,16 @@
 <div class="container " id="consulta" style=" width: 90%" >
    <div class="row  s12 white" style="padding:10px;  margin-top:10px; ">
       <div class="row" id="opcionesSearch" style="padding-left: 10px;">
-         <div class="col s3 " style="padding:10px; padding-top:25px" >
-            <select name="categoria" id="categoria" >
-             <option value="" selected=""></option>  
+         <div class="col s5 " style="padding:10px; padding-top:25px" >
+            <select name="categoria" id="categoria">
+             <option value="" disabled selected>Search by category</option>
             </select>
             <label>CATEGORY</label>
 
          </div>
-         <div class="col s2 " style="padding:10px; padding-top:25px" >
+         <!--div class="col s2 " style="padding:10px; padding-top:25px" >
             <select name="year" id="year" >
+              <option value="" disabled selected>Search by year</option>
                <option value="2008" >2008</option>
                <option value="2009" >2009</option>
                <option value="2010" >2010</option>
@@ -52,37 +53,37 @@
             </select>
             <label>YEAR</label>
 
-         </div>
+         </div-->
          <div class="col s2 " style="padding:10px" >
             <div class="input-field  col s12 " style="">
-               <input  type="date" class="datepicker"  id="desde"></input>
-               <label for="desde">DESDE</label>
+               <input  type="date" class="datepicker"  id="desde" placeholder="Choose start date"></input>
+               <label for="desde">FROM</label>
             </div>
          </div>
          <div class="col s2 " style="padding:10px" >
             <div class="input-field  col s12 " style="">
-               <input type="date" class="datepicker" id="hasta"></input>
-               <label for="hasta">HASTA</label>
+               <input type="date" class="datepicker" id="hasta" placeholder="Choose final date"></input>
+               <label for="hasta">TO</label>
             </div>
          </div>
          <div class="col s3"  style="padding-top:25px; padding-left:20px"  >
-            <a  id="searchButtom1" onclick="searchNews()" class="waves-effect waves-light btn red">Search</a>
+            <a  id="searchButtom1" onclick="searchNews()" class="waves-effect waves-light btn red" title="Search">Search</a>
          </div>
       </div>
 
 
       <div class="row" id="botonesSearch" style="background: #999999; height: 50px;    padding-top: 6px;">
          <div class="col s3 "  style=" padding-left:10px"  >
-            <a  id="ver_sem_english" class="waves-effect waves-light btn red">Semanario English</a>
+            <a  id="ver_sem_english" class="waves-effect waves-light btn red" title="View by english report">English Report</a>
          </div>
          <div class="col s3 "  style=" padding-left:10px"  >
-            <a  id="ver_sem_spanish"   class="waves-effect waves-light btn orange">Semanario Espa&ntilde;ol</a>
+            <a  id="ver_sem_spanish"   class="waves-effect waves-light btn orange" title="View spanish report">Spanish report</a>
          </div>
          <div class="col s3 "  style="padding-left:10px"  >
-            <a  id="ver_tbl_english" class="waves-effect waves-light btn red">Listado English</a>
+            <a  id="ver_tbl_english" class="waves-effect waves-light btn red" title="View by english index"> English index</a>
          </div>
          <div class="col s3 "  style=" padding-left:10px"  >
-            <a  id="ver_tbl_spanish"   class="waves-effect waves-light btn orange">Listado Espa&ntilde;ol</a>
+            <a  id="ver_tbl_spanish"   class="waves-effect waves-light btn orange" title="View by spanish index">Spanish index</a>
          </div>
       </div>
       <div id="divTableTitle" style="background: #fff; color: #333; letter-spacing: 1px; height: 50px; padding-top:1px; padding-left: 5px; margin-top: -10px ">
@@ -91,10 +92,10 @@
          <table class="bordered" id="tableReporte"  >
             <thead>
                <tr>
-                  <th data-field="date" style="width:150px">Date</th>
-                  <th data-field="category" style="width:150px">Category</th>
-                  <th data-field="detalle">Comentary</th>
-                  <th data-field="actions">Acciones</th>
+                  <th data-field="date" style="width:150px">News Date</th>
+                  <th data-field="category" style="width:250px">News Category</th>
+                  <th data-field="detalle">News Titular</th>
+                  <th data-field="actions">Actions</th>
                </tr>
             </thead>
             <tbody id="bodyTable">
@@ -194,7 +195,7 @@
 
                           console.log(modal, trigger);
                        },
-                       complete: function() { 
+                       complete: function() {
 
                         } // Callback for Modal close
                      }

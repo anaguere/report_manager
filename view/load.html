@@ -37,35 +37,35 @@
             <a href="#" class="brand-logo left" style="margin-top:-10px">[ News ] </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down" >
                <li>
-                  <a href="consulta.html" class="">
+                  <a href="consulta.html" class="" title="Search News">
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="search" data-size="34"></span>
                   </a>
                </li>
                <li>
-                  <a id="ver_registro" href="load.html" >
+                  <a id="ver_registro" href="load.html">
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="plus" data-size="34"></span>
                   </a>
                </li>
                <li>
-                  <a id="ver_upload"  class="modal-trigger waves-effect waves-light " href="#modal1"  >
+                  <a id="ver_upload"  class="modal-trigger waves-effect waves-light " href="#modal1"  title="Upload File" >
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="cloud-down" data-size="34"></span>
                   </a>
                </li>
-               <li><a  id="ver_index" href="#" data-activates="slide-out" class="bottom0010">
+               <!--li><a  id="ver_index" href="#" data-activates="slide-out" class="bottom0010">
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="folders" data-size="34">
                   </span></a>
-               </li>
-               <li><a  id="ver_save" href="#" onclick="SaveNews()"  >
+               </li-->
+               <li><a  id="ver_save" href="#" onclick="SaveNews()" title="Save News"  >
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="save" data-size="34">
                   </span>
                   </a>
                </li>
-               <li><a href="home.html">
+               <li><a href="home.html" title="Home">
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="remove" data-size="34">
                   </span></a>
@@ -84,7 +84,7 @@
                   <form action="#">
                      <div class="file-field input-field">
                         <div class="btn">
-                           <span>File</span>
+                           <span title ="Select File">File</span>
                            <input onclick="PDFViewer()" type="file">
                         </div>
                         <div class="file-path-wrapper">
@@ -107,7 +107,7 @@
       <div class="container s12"  id="container_principal" style="width: 100%;padding-left:5px">
 
          <div class="row col s12" style=" width: 100%;" >
-            
+
 
             <div class="row col s12">
                <ul class="tabs" style="">
@@ -122,24 +122,24 @@
             <div  id="panel0001" class="row col s12" style="margin-top:0px; font-weight:bold; color:#000 ">
                <div class="  card-panel   grey lighten-4"  style="height:300px">
                   <div class="input-field  col s5 "  style="margin-right: 10px ">
-                     <textarea class="materialize-textarea" class="validate" id="news_title_es" placeholder="*" ></textarea>
+                     <textarea class="materialize-textarea" class="validate" id="news_title_es" placeholder="*" title="News spanish name"></textarea>
                      <label for="news_title_es">SPANISH TITLE</label>
                   </div>
                   <div class="input-field  col s6 " >
-                     <textarea class="materialize-textarea" class="validate" id="news_source" placeholder="*" > </textarea>
+                     <textarea class="materialize-textarea" class="validate" id="news_source" placeholder="*" title="News source"> </textarea>
                      <label for="new_source">SOURCE</label>
                   </div>
                   <div class="input-field  col s2 form01"  style="margin-right: 10px ">
-                     <input type="date" class="datepicker" id="news_date" placeholder="*"></input>
+                     <input type="date" class="datepicker" id="news_date" placeholder="*" title="News date"></input>
                      <label for="news_date">NEWS DATE</label>
                   </div>
                   <div class="input-field col s7 form01 div_news_category" style="margin-right: 10px ">
-                     <select id="news_category">
+                     <select id="news_category" title="News category selection">
                      </select>
                      <label>CATEGORY</label>
                   </div>
                   <div class="input-field col s2 form01 div_news_range">
-                     <select id="news_range" >
+                     <select id="news_range" title="News priority value" >
                         <option value="5">5</option>
                         <option value="4">4</option>
                         <option value="3">3</option>
@@ -153,11 +153,11 @@
             <div  id="panel0003" class="row col s12" style="display:none; margin-top:0px; font-weight:bold; color:#000 ">
                <div class="  card-panel   grey lighten-4"  style="height:300px">
                   <div class="input-field  col s12 form01" style="">
-                     <input type="text" class="validate" id="news_title_en" placeholder="*"></input>
+                     <input type="text" class="validate" id="news_title_en" placeholder="*" title="News english name"></input>
                      <label for="news_title_en">ENGLISH TITLE</label>
                   </div>
                   <div class="input-field  col s12 form01">
-                     <textarea class="materialize-textarea" id="news_body_en" name="news_body_en" placeholder="*"></textarea>
+                     <textarea class="materialize-textarea" id="news_body_en" name="news_body_en" placeholder="*" title="News english version"></textarea>
                      <label for="news_boy_en">NEWS ENGLISH VERSION:</label>
                   </div>
                   <!--div class="input-field  col s12 form01" style="margin-bottom:30px">
@@ -209,51 +209,51 @@
                    $('#panel_menu0001_1').css("display","none");
                    $('#panel_menu0001_2').css("display","none");
                   }
-                  
-                  
-                  
-                  
+
+
+
+
                   function menuLoad(){
-                  
-                  
-                  
+
+
+
                   $( "#menu0002" ).click(function() {
                     $('#index_english').css("display","none");
                     $('#index_spanish').css("display","none");
                     void_menu();
-                  
+
                   });
-                  
-                  
+
+
                   $( "#menu0004" ).click(function() {
                     $('#index_english').css("display","none");
                     $('#index_spanish').css("display","none");
                     void_menu();
                     $('#panel_menu0004').css("display","block");
                   });
-                  
+
                   $( "#menu0003" ).click(function() {
                     $('#index_english').css("display","none");
                     $('#index_spanish').css("display","none");
                     void_menu();
                   });
-                  
-                  
+
+
                   $( "#menu0001" ).click(function() {
                     $('#index_english').css("display","inline-block");
                     $('#index_spanish').css("display","inline-block");
                   });
-                  
-                  
-                  
+
+
+
                   $("#index_english" ).click(function(){
                    $('#panel_menu0001_1').css("display","block");
                    $('#panel_menu0001_2').css("display","none");
                   });
-                  
-                  
-                  
-                  
+
+
+
+
                   $("#index_spanish").click(function(){
                     $('#panel_menu0001_1').css("display","none");
                     $('#panel_menu0001_2').css("display","block");
@@ -416,12 +416,12 @@
                preview();
                verSearch();
                verificar_edicion();
-         
+
             //searchNews();
-         
-         
-         
-         
+
+
+
+
             $('.modal').modal({
                   dismissible: true, // Modal can be dismissed by clicking outside of the modal
                   opacity: 1, // Opacity of modal background
@@ -430,102 +430,102 @@
                   starting_top: '10%', // Starting top style attribute
                   ending_top: '10%', // Ending top style attribute
                   ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-         
+
                     console.log(modal, trigger);
                  },
                  complete: function() {
-         
-         
+
+
                   } // Callback for Modal close
                }
                );
-         
+
             $( "#close_vistaprevia" ).click(function() {
              $('#panel_vistaprevia').hide();
              $('#container_principal').show();
           });
-         
-         
+
+
             $( "#vista_previa" ).click(function() {
              $('#panel_vistaprevia').show();
              $('#container_principal').hide();
           });
-         
-         
+
+
             $( "#ver_upload" ).click(function() {
-         
+
              $('#panel0004').hide();
              $('#encabezado_vistaprevia').hide();
              $('#panel0006').show();
-         
+
           });
-         
-         
-         
-         
-         
+
+
+
+
+
             $(".bottom0010").sideNav();
-         
+
             $( "#bottom0001" ).click(function() {
              $('#panel0002').hide();
              $('#panel0003').hide();
              $('#panel0001').show();
           });
-         
-         
+
+
             $( "#bottom0003" ).click(function() {
              $('#panel0001').hide();
              $('#panel0002').hide();
              $('#panel0003').show();
           });
-         
-         
+
+
             $( "#bottom0004" ).click(function() {
              $('#panel0005').hide();
              $('#panel0006').hide();
              $('#panel0004').show();
           });
-         
+
             $( "#bottom0005" ).click(function() {
              $('#panel0004').hide();
              $('#panel0006').hide();
              $('#panel0005').show();
-         
+
           });
-         
+
             $( "#bottom0006" ).click(function() {
              $('#panel0004').hide();
              $('#panel0005').hide();
              $('#panel0006').show();
-         
+
           });
             $(".carousel.carousel-slider").carousel({full_width: true});
-         
-         
+
+
          });
-         
-         
+
+
          function verificar_edicion(){
-         
-         
+
+
          if(localStorage.getItem("new_id")>0){
-         
+
          news_id = localStorage.getItem("new_id");
-         
-         
-         
+
+
+
          $.post("../controller/news_detail_controller.php",
          {router:"news_view",
          news_id : news_id
          }).done(function(data){
          var news_det = JSON.parse(data);
          $.each(news_det.contenido,function(i,n){
-         
+
          console.log(n.news_det_category[0].news_cat_id);
-         
-         localStorage.setItem("category_id",n.news_det_category[0].news_cat_id);  
-         
-         
+
+         localStorage.setItem("category_id",n.news_det_category[0].news_cat_id);
+
+
          $("#news_title_es").val(n.news_det_tit);
          $("#news_date").val(n.news_det_date);
          $(".div_news_category :input ").val(n.news_det_category[0].news_cat_id);
@@ -541,50 +541,50 @@
          $(".div_news_category :input ").val( z.news_cat_name );
 
          });
-         
-         
+
+
          $('#h5_title').text(n.news_det_tit);
          $('#news_month_prev').text( n.news_det_date+'.-');
          $('#news_date_prev').text( n.news_det_date);
          $('#news_source_prev').text(n.news_det_source);
-         
+
                     $.each(n.news_det_file, function(x,y){
-         
+
                               if(y.news_file_archive==""){
                               $('#pdf_view').hide();
                               }else{
                                  $('#pdf_view').show();
                                  $('#pdf_view').attr('src',y.news_file_archive);
-                              }  
+                              }
                     });
-         
-         
-         
-         
-         
+
+
+
+
+
          });
-         
-         
+
+
          });
-         
-         
-         
+
+
+
          $('#encabezado_vistaprevia').show();
-         
-         
-         
-         
-         
+
+
+
+
+
          }else{
-         
-         
-         
-         
+
+
+
+
          }
-         
-         
+
+
          }
-         
+
       </script>
    </body>
 </html>
