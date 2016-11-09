@@ -77,21 +77,66 @@ if ($_POST['router'] == "view_law_names") {
   }
   echo json_encode($new);
 }
+
+
 if ($_POST['router'] == "conditionalSearch") {
+
+
+
   $law       = new LawDetail(null, null, null, null, null, null);
   $content = new GetContents();
   $desde  = $content->GetPostContent('desde');
   $hasta  = $content->GetPostContent('hasta');
   $gaceta  = $content->GetPostContent('gaceta');
   $categoria  = $content->GetPostContent('categoria');
+  $anio = $content->GetPostContent('anio');
   $fields = array();
-  $fields[law_det_type] = (int)$categoria;
-  $fields[law_gaceta_number] = $gaceta;
-  if($desde != "" && $hasta != ""){
+  $final = array();
+  $final['contenido'] = array();
+  array_push($final,$result['conexion']);
+  if ($gaceta !== "") {
+    # code...
+    $fields[law_gaceta_number] = $gaceta;
+  }
+  if ($categoria !== "") {
+    # code...
+    $fields[law_det_type] = (int)$categoria;
+  }
+  if($desde !== "" && $hasta !== ""){
     $fields[law_det_date] = array ($desde,$hasta);
   }
-  echo json_encode($law->RangeSearchLawDetail($fields));
+  $result = $law->RangeSearchLawDetail($fields);
+  #handling array options
+  foreach ($result['contenido'] as $key => $value) {
+    $array = array();
+    $type = new LawType(null,$value['law_det_type'],null);
+    $type_names =$type->selectAllLawType();
+    $value['law_det_type'] = $type_names['contenido'][0]['law_type_name'];
+    foreach ($value as $det => $val) {
+      $array[$det] = ($det == "law_type_name") ? $type_names['contenido'][0]['law_type_name'] : $val ;
+    }
+    if($anio !== ""){
+      $date = date('Y', strtotime($value['law_det_date']));
+      if ($date == $anio) {
+      # code...
+        array_push($final['contenido'],$array);
+    }}else{
+      array_push($final['contenido'],$array);
+    }
+  }
+  usort($final['contenido'], function ($a, $b)
+  {
+    return $a['law_det_date'] > $b['law_det_date'];
+  });
+  echo json_encode($final);
 }
+
+
+
+
+
+
+
 
 if ($_POST['router'] == 'update') {
   $content = new GetContents();

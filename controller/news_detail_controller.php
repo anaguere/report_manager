@@ -111,7 +111,8 @@ if ($_POST['router'] == "view_index_titles") {
       $content = new GetContents();
       $desde = $content->GetPostContent('desde');
       $hasta = $content->GetPostContent('hasta');
-      $categoria = (int)$content->GetPostContent('categoria');
+      $categoria = $content->GetPostContent('categoria');
+      $anio = $content->GetPostContent('anio');
       $field = array();
       $field['news_det_category'] = $categoria;
       if($desde != "" && $hasta != ""){
@@ -128,7 +129,15 @@ if ($_POST['router'] == "view_index_titles") {
         foreach ($value as $det => $val) {
           $array[$det] = ($det == "news_det_category") ? $cat_names['contenido'][0]['news_cat_name'] : $val ;
         }
-        array_push($final,$array);
+        $date = date('Y', strtotime($value['news_det_date']));
+        if ($anio !== "") {
+          # code...
+          if ($date == $anio) {
+            array_push($final,$array);
+          }
+        }else{
+          array_push($final,$array);
+        }
       }
       echo json_encode($final);
     }
