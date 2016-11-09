@@ -130,6 +130,8 @@ if ($_POST['router'] == "view_index_titles") {
           $array[$det] = ($det == "news_det_category") ? $cat_names['contenido'][0]['news_cat_name'] : $val ;
         }
         $date = date('Y', strtotime($value['news_det_date']));
+        array_push($final,$array);
+
         if ($anio !== "") {
           # code...
           if ($date == $anio) {

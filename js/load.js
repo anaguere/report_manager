@@ -83,6 +83,7 @@ function IndexViewTitles(){
       var desde =  $("#desde").val();
       var hasta = $("#hasta").val();
       var categoria = $("#categoria").val();
+      var anio = $("#year").val();
 
       $("#desde").val("");
       $("#hasta").val("");
@@ -93,7 +94,8 @@ function IndexViewTitles(){
        router : "conditionalSearch",
        desde: desde,
        hasta: hasta,
-       categoria: categoria
+       categoria: categoria,
+       anio : anio
      }).done(function(e){
 
        var news = JSON.parse(e);
@@ -249,17 +251,15 @@ function preview(){
 }
 //Sending news to database
 function SaveNews(){
-
-  if(typeof path !== 'undefined'){
-    var law_list = new Array();
   /* SI TRAE EL ID DE EDICION ENTONCES EJECUTA OTRA FUNCION */
 
   if(typeof localStorage.getItem("new_id") !== 'undefined'){
-    alert('lol');
     updateNews();
 
     /* SINO TRAE ID ENTONCES JECUTA EL REGISTRO COMO NUEVO  */
   }else{
+    if(typeof path !== 'undefined'){
+      var law_list = new Array();
 
     var law_list = new Array();
 
@@ -306,45 +306,39 @@ function SaveNews(){
 
       reader.readAsDataURL(recoveredBlob);
     };
-// <<<<<<< HEAD
-//
-// //console.log(path);
-//
-//    //  xhr.open('GET', path);
-//    //  xhr.send();
-//
-// =======
+
      xhr.open('GET', path);
      xhr.send();
+ }  else{
+       var news_body_html = $('#news_body_es').html();
+       var news_img = $(news_body_html).contents().find("img").attr("src");
+       var news_body_es = $('#news_body_es').text();
+       $.post( "../controller/news_detail_controller.php", {
+         router : "create",
+         news_title_es: ne($('#news_title_es').val()),
+         news_img: news_img,
+         news_body_es: news_body_es,
+         news_date: ne($('#news_date').val()),
+         news_source: ne($('#news_source').val()),
+         news_title_en : ne($('#news_title_en').val()),
+         news_body_en : ne($('#news_body_en').val()),
+         news_category : ne($('#news_category').val()),
+         news_range : ne($('#news_range').val()),
+         news_file :""
+       }).done(function(message){
+         message = JSON.parse(message);
+         if(message.conexion){
+           location.reload();
+         }else{
+           alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+         }
+       });
+
  }
 $("#cortina").css('display','none');
-}else{
-    var news_body_html = $('#news_body_es').html();
-    var news_img = $(news_body_html).contents().find("img").attr("src");
-    var news_body_es = $('#news_body_es').text();
-    $.post( "../controller/news_detail_controller.php", {
-      router : "create",
-      news_title_es: ne($('#news_title_es').val()),
-      news_img: news_img,
-      news_body_es: news_body_es,
-      news_date: ne($('#news_date').val()),
-      news_source: ne($('#news_source').val()),
-      news_title_en : ne($('#news_title_en').val()),
-      news_body_en : ne($('#news_body_en').val()),
-      news_category : ne($('#news_category').val()),
-      news_range : ne($('#news_range').val()),
-      news_file :""
-    }).done(function(message){
-      message = JSON.parse(message);
-      if(message.conexion){
-        location.reload();
-      }else{
-        alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
-      }
-    });
+}
   }
 
-};
 
 //Searching detail news
 /*function searchNews(news_id){
@@ -413,6 +407,7 @@ function searchNews(idioma){
   var desde =  $("#desde").val();
   var hasta = $("#hasta").val();
   var categoria = $("#categoria").val();
+  var anio = $("#year").val();
 
 
 
@@ -442,7 +437,8 @@ function searchNews(idioma){
     router:"range_search",
     desde : desde,//$('#desde').val(),
     hasta : hasta,//$('#hasta').val(),
-    categoria : categoria//$('#categoria').val()
+    categoria : categoria,//$('#categoria').val()
+    anio : anio
   }).done(function(e){
     var news = JSON.parse(e);
     //console.log(news.contenido);
