@@ -133,6 +133,10 @@ if ($_POST['router'] == "view_index_titles") {
       echo json_encode($final);
     }
 
+
+
+    
+
     if ($_POST['router'] == "update") {
       $content = new GetContents();
       $news_id = $content->GetPostContent('news_id');

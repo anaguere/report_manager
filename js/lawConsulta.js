@@ -61,8 +61,10 @@ function addSearch(){
      router : "conditionalSearch",
      desde: desde,
      hasta: hasta,
-     categoria: categoria
+     categoria: categoria,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
    }).done(function(e){
+          $("#cargando").hide();
 
      var news = JSON.parse(e);
 
@@ -101,9 +103,11 @@ function vista_previa_news(law_id){
 
   $.post("../controller/law_detail_controller.php",{
     router : "law_view",
-    law_id : law_id
+    law_id : law_id,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
   }).done(function(e){
     var law_detail = JSON.parse(e);
+          $("#cargando").hide();
 
     $.each(law_detail.contenido, function(i,n){
 
@@ -135,8 +139,11 @@ function searchNews(news_id){
 
   $.post("../controller/news_detail_controller.php",
     {router:"news_view",
-    news_id : news_id
+    news_id : news_id,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
   }).done(function(data){
+              $("#cargando").hide();
+
     var news_det = JSON.parse(data);
     $.each(news_det.contenido,function(i,n){
       $("#news_title_es").val(n.news_det_tit);
@@ -270,9 +277,8 @@ function searchLaw(idioma){
   var categoria = $("#categoria").val();
 
   $("#bodyTable tr").remove();
-  $("#col_izquierda div").remove();
-  $("#col_izquierda iframe").remove();
-  $("#col_izquierda hr").remove();
+  $("#sub_col_izquierda").remove();
+
 
   if(idioma=='hoy'){
 
@@ -291,34 +297,40 @@ function searchLaw(idioma){
 
 
 
-  $("#desde").val("");
-  $("#hasta").val("");
-  $("#categoria").val("");
-  $("#gaceta").val("");
-
   $.post("../controller/law_detail_controller.php",{
     router:"conditionalSearch",
     desde : desde,//$('#desde').val(),
     hasta : hasta,//$('#hasta').val(),
     categoria : categoria,//$('#categoria').val()
-    gaceta : gaceta//$('#categoria').val()
+    gaceta : gaceta,//$('#categoria').val()
+    function(){ $("#cargando").show();  }//$('#categoria').val()
   }).done(function(e){
+              $("#cargando").hide();
+
     var laws = JSON.parse(e);
     //console.log(news.contenido);
     $.each(laws.contenido,function(i,n){
+    $("#bodyTable").show();
 
-      console.log(n);
+
+      if(localStorage.getItem("user")=="admin"){
+         $("#bodyTable").append("<tr style='width:100px' id="+n.law_det_id+" ><td>"+n.law_det_date+"</td><td>"+n.law_gaceta_number+"</td><td>"+n.law_det_name+"</td><td style='width:150px'><a  onclick='editar_law("+n.law_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchlawIndividual("+n.law_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=deletelaw("+n.law_det_id+")> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
+      }else{
+      $("#bodyTable").append("<tr style='width:100px' id="+n.law_det_id+" ><td>"+n.law_det_date+"</td><td>"+n.law_gaceta_number+"</td><td>"+n.law_det_name+"</td><td style='width:150px'> <a  onclick='searchlawIndividual("+n.law_det_id+")'  class='fa fa-eye tam26' ></a> </td></tr>");
+      }
 
 
-     $("#bodyTable").append("<tr style='width:100px' id="+n.law_det_id+" ><td>"+n.law_det_date+"</td><td>"+n.law_gaceta_number+"</td><td>"+n.law_det_name+"</td><td style='width:150px'><a  onclick='editar_law("+n.law_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchlawIndividual("+n.law_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.law_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=deletelaw("+n.law_det_id+")> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
+
 
       $("#col_izquierda").append("\
-        <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.law_gaceta_number+"</div>\
-        <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.law_det_date+".- </b>"+n.law_det_name+"</div><hr>\
-        <hr><iframe id=\"pdf_view2\" width=\"100%\" height=\"100px\"></iframe>\
-        <br>\
+        <div id='sub_col_izquierda' style='margin: 30px; 0px;' ><div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.law_gaceta_number+"</div>\
+        <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.law_det_date+".- </b>"+n.law_det_name+"</div>\
+        <iframe style='border:none' id=\"pdf_view2\" width=\"100%\" height=\"100px\"></iframe>\
+        </div>\
         "); 
-   
+
+
+
     });
 
 
@@ -330,18 +342,20 @@ function searchLaw(idioma){
 function volver_atras_busqueda(){
 
   $('#vistaprevia_individual').hide();
-
   $('#divTable').show();
   $('#vistaprevia').show();
   $('#divTableTitle').show();
   $('#botonesSearch').show();
   $('#opcionesSearch').show();
+
 }
 
-function editar_law(x){
-  localStorage.setItem("ley_id",x);
-  window.location.href = "ley.html";
 
+
+function editar_law(x){
+  localStorage.setItem("law_id",x);
+  window.location.href = "ley.html";
+  
 }
 
 
@@ -357,33 +371,35 @@ function searchlawIndividual(law_id){
   $('#botonesSearch').hide();
   $('#opcionesSearch').hide();
 
-
+  $('#pdf_law_individual').attr('src','');
   $('#col_izquierda_individual div').remove();
   $('#col_izquierda_spanish_individual div').remove();
 
   $.post("../controller/law_detail_controller.php",{
     router : "law_view",
-    law_id : law_id
+    law_id : law_id,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
   }).done(function(e){
+              $("#cargando").hide();
+
     var laws_detail = JSON.parse(e);
 
 
     $.each(laws_detail.contenido, function(i,n){
 
-                console.log(n);
 
                 $.each(n.law_file_id, function(x,y){
                    
-                     $('#pdf_view2').show();
-                     $('#pdf_view2').attr('src',y.news_file_archive);
+                     $('#pdf_law_individual').show();
+                     $('#pdf_law_individual').attr('src',y.news_file_archive);
                    
                  });
 
 
 
       $("#col_izquierda_individual").append("\
-        <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.law_det_name+"</div>\
-        <div style='width:100%;margin-bottom:10px; text-align:justify;'>ss<b>"+n.law_det_date+".- </b>"+n.law_gaceta_number+"</div>\
+        <div style='width:100%;margin-bottom:10px; font-size:22px; font-weigth:bold; line-height: 22px'>"+n.law_det_name+"</div>\
+        <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.law_det_date+".- </b>"+n.law_gaceta_number+"</div>\
         ");
 
     });
@@ -413,163 +429,16 @@ function searchlawIndividual(law_id){
 
 function verSearch(){
 
-  $("#ver_registro").hide();
   $("#vistaprevia").hide();
 
-  $("#ver_consulta").click(function() {
-   $("#container_principal").hide();
-   $("#consulta").show();
-   $("#ver_registro").show();
-   $("#ver_consulta").hide();
-   $("#ver_save").hide();
-   $("#vistaprevia").show();
-
-   $("#ver_tbl_spanish").hide();
-   $("#ver_tbl_english").hide();
-   $("#ver_sem_spanish").hide();
-   $("#ver_sem_english").hide();
-   $("#tableReporte").hide();
-   $("#vistaprevia").hide();
-   $("#ver_index").hide();
-
-
- });
-
-  $("#desde").change(function() {
-   $("#container_principal").hide();
-   $("#consulta").show();
-   $("#ver_registro").show();
-   $("#ver_consulta").hide();
-   $("#ver_save").hide();
-   $("#vistaprevia").show();
-
-   $("#ver_tbl_spanish").hide();
-   $("#ver_tbl_english").hide();
-   $("#ver_sem_spanish").hide();
-   $("#ver_sem_english").hide();
-   $("#tableReporte").hide();
-   $("#vistaprevia").hide();
-
-
- });
-
-
-  $("#hasta").change(function() {
-   $("#container_principal").hide();
-   $("#consulta").show();
-   $("#ver_registro").show();
-   $("#ver_consulta").hide();
-   $("#ver_save").hide();
-   $("#vistaprevia").show();
-
-   $("#ver_tbl_spanish").hide();
-   $("#ver_tbl_english").hide();
-   $("#ver_sem_spanish").hide();
-   $("#ver_sem_english").hide();
-   $("#tableReporte").hide();
-   $("#vistaprevia").hide();
-
-
- });
-
-
-
-
-  $("#ver_registro").click(function() {
-   $("#container_principal").show();
-   $("#consulta").hide();
-   $("#ver_registro").hide();
-   $("#ver_consulta").show();
-   $("#ver_save").show();
-   $("#vistaprevia").hide();
-
- });
-
-
   $("#searchButtom1").click(function() {
-   $("#ver_tbl_spanish").show();
-   $("#ver_tbl_english").show();
-   $("#ver_sem_spanish").show();
-   $("#ver_sem_english").show();
-   $("#ver_sem_english").show();
+
    $("#container_principal").hide();
    $("#consulta").show();
-   $("#ver_registro").hide();
-   $("#ver_consulta").show();
-   $("#ver_save").hide();
-   $("#vistaprevia").hide();
-   $("#col_derecha_spanish").hide();
-   $("#col_izquierda_spanish").hide();
-   $("#bodyTable_spanish").show();
-   $("#col_derecha").hide();
-   $("#col_izquierda").hide();
-   $("#bodyTable").hide();
    $("#tableReporte").show();
-   $('#divTableTitle h4').remove();
-   $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol ( Tabla )</h4>")
- });
 
+   });
 
-
-  $("#ver_tbl_spanish").click(function() {
-   $("#container_principal").hide();
-   $("#consulta").show();
-   $("#ver_registro").hide();
-   $("#ver_consulta").show();
-   $("#ver_save").hide();
-   $("#vistaprevia").hide();
-   $("#col_derecha_spanish").hide();
-   $("#col_izquierda_spanish").hide();
-   $("#bodyTable_spanish").show();
-   $("#col_derecha").hide();
-   $("#col_izquierda").hide();
-   $("#bodyTable").hide();
-   $("#tableReporte").show();
-   $('#divTableTitle h4').remove();
-   $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Resultados en Espa&ntilde;ol ( Tabla )</h4>")
-
- });
-
-  $("#ver_tbl_english").click(function() {
-   $("#container_principal").hide();
-   $("#consulta").show();
-   $("#ver_registro").hide();
-   $("#ver_consulta").show();
-   $("#ver_save").hide();
-   $("#vistaprevia").hide();
-   $("#col_derecha_spanish").hide();
-   $("#col_izquierda_spanish").hide();
-   $("#bodyTable_spanish").hide();
-   $("#col_derecha").hide();
-   $("#col_izquierda").hide();
-   $("#bodyTable").show();
-   $("#tableReporte").show();
-   $('#divTableTitle h4').remove();
-
-   $('#divTableTitle').append("<h4 style='font-size: 1.5rem;'> Results in English ( Table )</h4>")
-
- });
-
-
-
-  $("#ver_sem_english").click(function() {
-   $("#container_principal").hide();
-   $("#consulta").show();
-   $("#ver_registro").hide();
-   $("#ver_consulta").show();
-   $("#ver_save").hide();
-   $("#vistaprevia").show();
-   $("#col_derecha_spanish").hide();
-   $("#col_izquierda_spanish").hide();
-   $("#bodyTable_spanish").hide();
-   $("#col_derecha").show();
-   $("#col_izquierda").show();
-   $("#bodyTable").hide();
-   $("#tableReporte").hide();
-   $('#divTableTitle h4').remove();
-   $('#divTableTitle').append("<h4 style='font-size: 1.5rem;' >  Results in English  ( Semanario )</h4>")
-
- });
 
 
 }

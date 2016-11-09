@@ -120,6 +120,8 @@ function preView(){
 
 
 function saveLaw(){
+
+
   var law_list = new Array();
   var xhr = new XMLHttpRequest;
   xhr.responseType = 'blob';
@@ -145,8 +147,11 @@ function saveLaw(){
         law_gaceta : $('#law_gaceta').val(),
         'laws[]' : law_list,
         law_file_title : $('#law_file_title').val(),
-        law_file : blobAsDataUrl
+        law_file : blobAsDataUrl,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
       }).done(function(e){
+              $("#cargando").hide();
+
         var message = JSON.parse(e);
         if(message.conexion){
           location.reload();
@@ -166,8 +171,11 @@ function saveLaw(){
 function searchLaws(law_id){
   $.post("../controller/law_detail_controller.php",{
     router : "law_view",
-    law_id : law_id
+    law_id : law_id,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
   }).done(function(e){
+          $("#cargando").hide();
+
     var law_detail = JSON.parse(e);
     $.each(law_detail.contenido, function(i,n){
       console.log(n);
@@ -188,8 +196,11 @@ function vista_previa_ley(law_id){
 
   $.post("../controller/law_detail_controller.php",{
     router : "law_view",
-    law_id : law_id
+    law_id : law_id,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
   }).done(function(e){
+          $("#cargando").hide();
+
     var law_detail = JSON.parse(e);
 
     $.each(law_detail.contenido, function(i,n){
@@ -231,9 +242,11 @@ function editar_ley(law_id){
 
   $.post("../controller/law_detail_controller.php",{
     router : "law_view",
-    law_id : law_id
+    law_id : law_id,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
   }).done(function(e){
     var law_detail = JSON.parse(e);
+      $("#cargando").hide();
 
 
     $.each(law_detail.contenido, function(i,n){
@@ -350,8 +363,10 @@ function addSearch(){
       desde: desde,
       hasta: hasta,
       gaceta: gaceta,
-      categoria: categoria
+      categoria: categoria,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
     }).done(function(e){
+      $("#cargando").hide();
 
       var laws = JSON.parse(e);
       print_tableLeyes(laws.contenido);
@@ -390,9 +405,16 @@ function verSearch(){
   });
 }
 //----------------- Law update function -------------------------
+/*
 function updateLawDetail(){
+
+  law_id = localStorage.getItem("law_id");
+
+  alert(law_id);
+
   var xhr = new XMLHttpRequest;
   xhr.responseType = 'blob';
+
 
   xhr.onload = function() {
     var recoveredBlob = xhr.response;
@@ -419,16 +441,33 @@ function updateLawDetail(){
 
   xhr.open('GET', path);
   xhr.send();
-};
+};*/
 
-function updateLaw(law_id){
+
+
+
+
+function updateLaw(){
+
+law_id = localStorage.getItem("law_id");
+
+/*
+alert( $("#law_name_"+law_id).text());
+alert( $('#law_date').val() );
+alert( $('#law_gaceta').val());
+alert( $("#law_type_text_"+law_id).text());
+*/
+
+
+
+
   $.post( "../controller/law_detail_controller.php", {
     router : "update",
     law_id : law_id,
     law_gaceta: ne($('#law_gaceta').val()),
     law_date: $('#law_date').val(),
-    law_name: ne(),
-    law_type: ne(),
+    law_name: ne($("#law_name_"+law_id).text()),
+    law_type: ne($("#law_type_text_"+law_id).text()),
   }).done(function(message){
     message = JSON.parse(message);
     if(message.conexion){
@@ -438,7 +477,13 @@ function updateLaw(law_id){
       alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
     }
   });
+
+
 }
+
+
+
+
 
 function deleteNews(law_id){
   $.post( "../controller/law_detail_controller.php", {

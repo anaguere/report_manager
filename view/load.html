@@ -8,7 +8,7 @@
    </head>
    <body>
 
-      <div  id="cortina" style="    background: #901414;
+<div  id="cargando" style="    background: #901414;
          width: 100%;
          height: 3000px;
          position: fixed;
@@ -21,7 +21,7 @@
             ">
             <div class="spinner-layer spinner-red-only">
                <div class="circle-clipper left">
-                  <div class="circle" style="border-width: 30px;"></div>
+                  <div class="circle" style="border-width: 3px;"></div>
                </div>
                <div class="gap-patch">
                   <div class="circle" ></div>
@@ -31,7 +31,9 @@
                </div>
             </div>
          </div>
-      </div>
+         <h3 style="color: white "> Loading ...</h3>
+
+</div>
       <nav>
          <div class="nav-wrapper nav_color" style="">
             <a href="#" class="brand-logo left" style="margin-top:-10px">[ News ] </a>
@@ -107,8 +109,8 @@
 
             <div class="row col s12">
                <ul class="tabs" style="">
-                  <li class="tab col s3"><a id="bottom0001" class="active"  href="#">Info Basic</a></li>
-                  <li class="tab col s3"><a id="bottom0003" href="#">English Version</a></li>
+                  <li class="tab col s3 orange darken-3"><a id="bottom0001" class="active"  href="#">Info Basic</a></li>
+                  <li class="tab col s3 orange darken-3"><a id="bottom0003" href="#">English Version</a></li>
                </ul>
             </div>
 
@@ -166,9 +168,9 @@
          <div class="row col s12" style="padding:10px; margin-top:-10px">
             <div class="container col s12">
                <ul class="tabs" style="">
-                  <li class="tab col s3"><a id="bottom0004"   href="#">Paste [ News ]</a></li>
+                  <li class="tab col s3 orange darken-3 " ><a id="bottom0004"   href="#">Paste [ News ]</a></li>
                   <!--li class="tab col s3"><a id="bottom0005"  href="#">Files</a></li-->
-                  <li class="tab col s3"><a id="bottom0006"  href="#" class="active"> Viewer </a></li>
+                  <li class="tab col s3 orange darken-3"><a id="bottom0006"  href="#" class="active"> Viewer </a></li>
                </ul>
             </div>
             <div id="panel0004" class="  card-panel   grey lighten-4"  style="display:none; height:2000px; margin-top:45px;">
@@ -415,8 +417,11 @@
          
             //searchNews();
          
-         
-         
+        if(localStorage.getItem("user")=="admin"){
+
+        }else{
+              window.location="sesion.html";
+        }
          
             $('.modal').modal({
                   dismissible: true, // Modal can be dismissed by clicking outside of the modal

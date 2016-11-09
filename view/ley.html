@@ -31,7 +31,15 @@
                   <span class="livicon"  style=""   data-hovercolor="white"
                      data-color="white" data-name="save" data-size="34"></span>
                   </a>
+
+                  <a  id="ver_editar" style="display:none" href="#" onclick="updateLaw()"  >
+                  <span class="livicon"  style=""   data-hovercolor="white"
+                     data-color="white" data-name="save" data-size="34"></span>
+                  </a>
                </li>
+
+
+
                <li>
                   <a href="../index.html">
                   <span class="livicon"  style=""   data-hovercolor="white"
@@ -42,6 +50,33 @@
             </ul>
          </div>
       </nav>
+
+<div  id="cargando" style="    background: #901414;
+         width: 100%;
+         height: 3000px;
+         position: fixed;
+         top: 0px;
+         left: 0px;
+         z-index: 100;
+         opacity: 0.9; display: none; text-align: center; padding-top:200px">
+         <div class="preloader-wrapper big active" style="    width: 200px;
+            height: 200px;
+            ">
+            <div class="spinner-layer spinner-red-only">
+               <div class="circle-clipper left">
+                  <div class="circle" style="border-width: 3px;"></div>
+               </div>
+               <div class="gap-patch">
+                  <div class="circle" ></div>
+               </div>
+               <div class="circle-clipper right">
+                  <div class="circle"></div>
+               </div>
+            </div>
+         </div>
+         <h3 style="color: white "> Loading ...</h3>
+
+</div>
 
 
       <div class="container " id="consulta" style="display:none; width: 90%" >
@@ -89,10 +124,10 @@
       </div>
 
       <div class="row s12" id="registro" >
-         <div class="container col s6" style="padding:30px" id="registro_p1">
+         <div class="container col s5" style="padding:30px" id="registro_p1">
             <div class="container col s12">
                <ul class="tabs" style="">
-                  <li class="tab col s3" ><a  id="bottom0002"  class="active"   href="#">New law</a></li>
+                  <li class="tab col s3 orange darken-3" ><a  id="bottom0002"  class="active"   href="#">New law</a></li>
                </ul>
             </div>
             <div  id="panel0001" class="container col s12" style="margin-top:10px; display:none; font-weight:bold; color:#000 ">
@@ -157,10 +192,10 @@
                </div>
             </div>
          </div>
-         <div class="container col s6" style="padding:30px; margin-top:-10px" id="registro_p2">
+         <div class="container col s7" style="padding:30px; margin-top:-10px" id="registro_p2">
             <div class="container col s12">
                <ul class="tabs" style="">
-                  <li class="tab col s3"><a id="bottom0005"  href="#" class="active">preview</a></li>
+                  <li class="tab col s3 orange darken-3"><a id="bottom0005"  href="#" class="active">preview</a></li>
                </ul>
             </div>
             <div id="panel0005" class="  card-panel   grey lighten-4"  style="height:1500px; margin-top:65px;">
@@ -177,9 +212,7 @@
                   <div class="container col s12">
                      <div id="law_preview">
                         <div>
-                           <h4 style="text-align: center;">PRESIDENCIA DE LA REP&Uacute;BLICA DECRETOS CON RANGO, VALOR Y FUERZA DE LEY</h4>
-                           <p id="law_year" style="text-align: center;font-size:22px; font-weight:bold"></p>
-                           <div class="row" id="law_detail_prev" style="padding-left:30px;word-wrap: break-word; font-weight:bold ; letter-spacing:1px;">
+                           <div class="row" id="law_detail_prev" style="padding-left:30px;word-wrap: break-word; font-weight:bold ; font-size:22px; letter-spacing:1px;">
                               <span id="law_gaceta_prev" ></span> &nbsp;&nbsp; <span id="law_date_prev"></span>
                            </div>
                         </div>
@@ -252,7 +285,7 @@
            searchLawNames();
            addSearch();
            verSearch();
-
+           verificar_edicion();
 
            $(".bottom0010").sideNav();
            $( "#bottom0001" ).click(function() {
@@ -293,78 +326,95 @@
          var path;
 
 
+        if(localStorage.getItem("user")=="admin"){
+
+        }else{
+              window.location="sesion.html";
+        }
+         
+        
+
+    function verificar_edicion(){
+
+           
+         if(localStorage.getItem("law_id")>0){
+
+                          $('#botonmodal1').hide();
+                          $('#ver_editar').show();
+
+                          $('#law_file_title').attr('readonly','readonly');
+                          $('#law_file_title').css('color','black');
+
+                          $('#ver_save').hide();
+                          $('#botonmodal1').hide();
+                          laws_id = localStorage.getItem("law_id");
+                          llenar_campos_ley(laws_id);
+
+
+         }
 
         
-         function verificar_edicion(){
-         
-         
-         if(localStorage.getItem("law_id")>0){
-         
-         laws_id = localStorage.getItem("law_id");
-         
-         
-         $.post("../controller/law_detail_controller.php",
-         {router:"law_view",
-         laws_id : laws_id
-         }).done(function(data){
-         var laws_det = JSON.parse(data);
-         $.each(laws_det.contenido,function(i,n){
-                  
-         localStorage.setItem("category_id",n.news_det_category[0].news_cat_id);  
-         
-         $("#news_title_es").val(n.news_det_tit);
-         $("#news_date").val(n.news_det_date);
-         $(".div_news_category :input ").val(n.news_det_category[0].news_cat_id);
-         $(".div_news_range :input ").val(n.news_det_priority);
-         // $("#news_title_es").val(n.news_det_id);
-         $("#news_source").val(n.news_det_source);
-         //    $("#news_title_es").val(n.news_det_category);
-         //    $("#news_title_es").val(n.news_det_image);
-         $("#news_title_en").val(n.news_det_tit_en);
-         $("#news_body_en").val(n.news_det_text_en);
-         //$("#news_title_es").val(n.news_det_text);
-
-
-         $.each(n.news_det_category,function(x,z){
-
-
-                         $(".div_news_category :input ").val( z.news_cat_name );
-
-                         });
-         
-         
-                         $('#h5_title').text(n.news_det_tit);
-                         $('#news_month_prev').text( n.news_det_date+'.-');
-                         $('#news_date_prev').text( n.news_det_date);
-                         $('#news_source_prev').text(n.news_det_source);
-         
-                        $.each(n.news_det_file, function(x,y){
-             
-                                  if(y.news_file_archive==""){
-                                  $('#pdf_view').hide();
-                                  }else{
-                                     $('#pdf_view').show();
-                                     $('#pdf_view').attr('src',y.news_file_archive);
-                                  }  
-                        });
-         
-                 });
-         
-         
-         });
-         
-
-         $('#encabezado_vistaprevia').show();
-         
-         }else{
-      
-         }
-         
-         
-         }
+    }
 
 
 
+    function llenar_campos_ley(law_id){
+
+
+      $.post("../controller/law_detail_controller.php",{
+        router : "law_view",
+        law_id : law_id
+      }).done(function(e){
+        var law_detail = JSON.parse(e);
+
+
+        $.each(law_detail.contenido, function(i,n){
+
+                d = new Date(n.law_det_date);
+                $('#law_gaceta_prev').text(n.law_gaceta_number);
+                $('#law_date_prev').text(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
+                $('#law_year').text(d.getFullYear());
+                $('#law_comentario_prev').text(n.law_det_name);
+
+
+                $('#law_date').val(n.law_det_date);
+                $('#law_gaceta').val(n.law_gaceta_number);
+
+                $.each(n.law_det_type, function(t,r){
+                  categoria_id     =   r.law_type_id;
+                  categoria_nombre =   r.law_type_name;
+                });
+
+
+                var nl = n.law_det_id;
+
+              $("#news_comment_es").append("<p font-size:12px; font-weight:400; width:95%; height:60px;' id='law_name_"+nl+"' data-law_name_="+nl+">"+n.law_det_name+"</p>\
+              <div class='col s12' id='div"+nl+"' style='margin-bottom:20px; border-top:1px solid #999; height:40px; padding-top:10px'>\
+              <div style='float:left; width:100px;height:40px'> <a href=\"#modal2\" onclick='editLawName(\"#law_name_"+nl+"\",\"#selected"+nl+"\","+nl+")'><i style='font-size:28px; color:green' class='fa fa-pencil-square'></i></a>\
+              &nbsp; \
+              <a onclick='deleteLawName(\"#law_name_"+nl+"\",\"#div"+nl+"\",\"#vp"+nl+"\")' ><i   style='font-size:28px; color:red' class='fa fa-minus-square'></i></a></div>\
+              <div style='float: left;    width: 200px;    height: 40px;    letter-spacing: 1px;    font-size: 24px;    margin-top: -5px;    color: #666;  text-align: left;' id='law_type_text_"+nl+"' data-type_"+nl+"= "+categoria_id+">"+categoria_nombre+"</div>\
+              </div><br><br>");
+
+              $('#law_detail_prev').after("<p id='vp"+nl+"' style='padding-left:20px'><br> "+n.law_det_name+"</p>");
+
+
+
+              $.each(n.law_file_id, function(x,y){
+                $('#law_file_title').val(y.news_file_name);
+                $('#pdf_view').attr('src',y.news_file_archive);
+              });
+
+          InitSelector();
+
+
+
+        });
+
+
+      });
+
+    }
 
 
 

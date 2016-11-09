@@ -9,133 +9,214 @@
 <body>
  <nav>
   <div class="nav-wrapper nav_color" style="">
-   <a href="#" class="brand-logo left" style="margin-top:-10px">[ News ] </a>
+   <a href="#" class="brand-logo left" style="margin-top:-10px">[ Leyes ] </a>
    <ul id="nav-mobile" class="right hide-on-med-and-down" >
 
-    <li><a href="home.html">
+    <li>
+
+    <a id="goback" href="home.html">
      <span class="livicon"  style=""   data-hovercolor="white"
      data-color="white" data-name="remove" data-size="34">
    </span></a>
+
+    <a id="gobackViewer" href="homecn.html">
+     <span class="livicon"  style=""   data-hovercolor="white"
+     data-color="white" data-name="remove" data-size="34">
+   </span></a>
+
+
  </li>
 </ul>
 </div>
 </nav>
 
 
+<div  id="cargando" style="    background: #901414;
+         width: 100%;
+         height: 3000px;
+         position: fixed;
+         top: 0px;
+         left: 0px;
+         z-index: 100;
+         opacity: 0.9; display: none; text-align: center; padding-top:200px">
+         <div class="preloader-wrapper big active" style="    width: 200px;
+            height: 200px;
+            ">
+            <div class="spinner-layer spinner-red-only">
+               <div class="circle-clipper left">
+                  <div class="circle" style="border-width: 3px;"></div>
+               </div>
+               <div class="gap-patch">
+                  <div class="circle" ></div>
+               </div>
+               <div class="circle-clipper right">
+                  <div class="circle"></div>
+               </div>
+            </div>
+         </div>
+         <h3 style="color: white "> Loading ...</h3>
 
-
-
-
-
-
-<div class="container " id="consulta" style=" width: 90%" >
- <div class="row  s12 white" style="padding:10px;  margin-top:10px; ">
-  <div class="row" id="opcionesSearch" style="padding-left: 10px;">
-   <div class="col s3 " style="padding:10px; padding-top:25px" >
-    <select name="categoria" id="categoria" >
-     <option value="" selected=""></option>  
-   </select>
-   <label>CATEGORY</label>
-
- </div>
- <div class="col s2 " style="padding:10px; " >
-
-  <div class="input-field  col s12 " style="">
-   <input  type="text"  id="gaceta"></input>
-   <label for="desde">GACETA</label>
- </div>
-
-</div>
-<div class="col s2 " style="padding:10px" >
-  <div class="input-field  col s12 " style="">
-   <input  type="date" class="datepicker"  id="desde"></input>
-   <label for="desde">DESDE</label>
- </div>
-</div>
-<div class="col s2 " style="padding:10px" >
-  <div class="input-field  col s12 " style="">
-   <input type="date" class="datepicker" id="hasta"></input>
-   <label for="hasta">HASTA</label>
- </div>
-</div>
-<div class="col s3"  style="padding-top:25px; padding-left:20px"  >
-  <a  id="searchButtom1" onclick="searchLaw('ingles')" class="waves-effect waves-light btn red">Search</a>
-</div>
 </div>
 
 
-<div class="row" id="botonesSearch" style="background: #999999; height: 50px;    padding-top: 6px;">
- <div class="col s3 "  style=" padding-left:10px"  >
-</div>
+<div class="container " id="consulta" style=" width: 100%" >
+   <div class="row  s12 white" style="padding:10px;  margin-top:10px; ">
 
-<div class="col s3 "  style=" padding-left:10px"  >
-  <a   onclick="ver_listado_law()"  id="ver_sem_spanish"   class="waves-effect waves-light btn orange">Semanario Espa&ntilde;ol</a>
-</div>
+         <div class="col s12 "  style=" padding-left:10px"  >
+         
+         <img src="../logo.png" width="500px">
 
-<div class="col s3 "  style=" padding-left:10px"  >
-  <a  id="ver_tbl_spanish" onclick="ver_tabla_law()"  class="waves-effect waves-light btn orange">Listado Espa&ntilde;ol</a>
-</div>
-</div>
-<div id="divTableTitle" style="background: #fff; color: #333; letter-spacing: 1px; height: 50px; padding-top:1px; padding-left: 5px; margin-top: -10px ">
-</div>
-<div id="divTable" style="width:100%; height:400px;  overflow: scroll; padding:10px; margin-top: -20px; border-bottom:2px solid #777">
- <table class="bordered" id="tableReporte"  >
-  <thead>
-   <tr>
-    <th data-field="date" style="width:150px">Date</th>
-    <th data-field="category" style="width:150px">Category</th>
-    <th data-field="detalle">Comentary</th>
-    <th data-field="actions">Acciones</th>
-  </tr>
-</thead>
-<tbody id="bodyTable">
-</tbody>
-</table>
-</div>
+         </div>
 
-
-<div class="row s12" id="vistaprevia" style=" width:100%; display:none;  "  >
- <div class="container col s12" >
-  <div  class="  card-panel white"  style="margin-top:0px; float:left; margin: 0 auto;">
-   <div class="container col s12" style="margin-left: 60px; margin-right: 40px;  height:auto;" >
-    <div style="width:100%;" >
-     <h4>China CAMC Engineering Co., Ltd</h4>
-     <HR style="margin-left:0px; width:90%">
-      <BR> <BR>
+      <div class="row" id="opcionesSearch" style="padding-left: 10px;">
+         <div class="col s3 " style="padding:10px; padding-top:25px" >
+            <select name="categoria" id="categoria" >
+               <option value="" selected=""></option>
+            </select>
+            <label>CATEGORY</label>
+         </div>
+         <div class="col s2 " style="padding:10px; " >
+            <div class="input-field  col s12 " style="">
+               <input  type="text"  id="gaceta"></input>
+               <label for="desde">GACETA</label>
+            </div>
+         </div>
+         <div class="col s2 " style="padding:10px" >
+            <div class="input-field  col s12 " style="">
+               <input  type="date" class="datepicker"  id="desde"></input>
+               <label for="desde">DESDE</label>
+            </div>
+         </div>
+         <div class="col s2 " style="padding:10px" >
+            <div class="input-field  col s12 " style="">
+               <input type="date" class="datepicker" id="hasta"></input>
+               <label for="hasta">HASTA</label>
+            </div>
+         </div>
+         <div class="col s3"  style="padding-top:25px; padding-left:20px"  >
+            <a  id="searchButtom1" onclick="searchLaw('ingles')" class="waves-effect waves-light btn red">Search</a>
+         </div>
       </div>
-      <div style="width:1000px; padding-top:20px; padding-left:20px; font-size:14px; padding-right:40px; border:0px solid #333; margin-right:20px; float:left" id="col_izquierda" >
+      <div class="row s12" id="botonesSearch" style=" height: 10px;    padding-top: 6px;">
+         
+
+         <div class="col s2 "  style=" display:none; padding-left:10px"  >
+            <a onclick="ver_listado_law()"  id=""  style="display: none"   class="waves-effect waves-light btn orange">Semanario Espa&ntilde;ol</a>
+         </div>
+         <div class="col s2 "  style=" display:none;  padding-left:10px"  >
+            <a onclick="ver_tabla_law()"  class="waves-effect waves-light btn orange">Listado Espa&ntilde;ol</a>
+         </div>
       </div>
-  </div>
-</div>
-</div>
-
-</div>
-
-<div class="row s12" id="vistaprevia_individual" style="display:none; width:100%; " >
-
- <div class="container col s12"  style="padding: 10px">
-  <a onclick="volver_atras_busqueda()"  class="waves-effect waves-light btn red">Back</a>
-</div>
-
-
-
-<div class="container col s12" >
-  <div  class="  card-panel white"  style="margin-top:0px; float:left; margin: 0 auto;">
-   <div class="container col s12" style="margin-left: 60px; margin-right: 40px;  height:auto;" >
-    <div style="width:700px; padding-top:20px; padding-left:20px; font-size:14px; padding-right:40px; border:0px solid #333; margin-right:20px; float:left" id="col_izquierda_individual" >
-    </div>
-    <iframe id="pdf_view2" width="90%" height="2000px"></iframe>
-
-
-  </div>
-</div>
-</div>
+   </div>
 </div>
 
 
 
 
-</div>
+
+<div class="container" style="width: 100%; background: white; height: 3000px; padding: 50px; padding-top:5px" >
+
+        <div  class="row s12" id="divTableTitle" style="background: #fff; color: #333; letter-spacing: 1px; height: 50px;">
+        </div>
+
+
+        <!-- VISTA TABLE  -->
+
+        <div class="row s12"  id="divTable" style="width:100%; height:400px; overflow: scroll;">
+           <table class="bordered" id="tableReporte"  >
+              <thead>
+                 <tr>
+                    <th data-field="date" style="width:150px">DATE</th>
+                    <th data-field="category" style="width:150px">GACETA</th>
+                    <th data-field="detalle">TITLE</th>
+                    <th data-field="actions" style="width: 150px"> SETTINGS </th>
+                 </tr>
+              </thead>
+              <tbody id="bodyTable"></tbody>
+           </table>
+        </div>
+
+        <!-- VISTA TABLE  -->
+
+
+
+        <!-- VISTA PREVIA -->
+
+        <div class="row s12" id="vistaprevia"   >
+
+
+                
+                    <HR style="margin-left:0px; width:90%">
+                    <BR> 
+               
+
+                     <div id="col_izquierda" >
+                     </div>
+
+
+             
+        </div>
+
+
+        <!-- VISTA PREVIA -->
+
+
+
+
+        <!-- VISTA PREVIA INDIVIDUAL -->
+
+        <div class="row s12" id="vistaprevia_individual" style="display:none; width:100%; " >
+           <div class="container col s12"  style="padding: 10px">
+              <a onclick="volver_atras_busqueda()"  class="waves-effect waves-light btn red">Back</a>
+           </div>
+           <div class="container col s12" >
+              <div  class="  card-panel white"  style="border:none; margin-top:0px; float:left; margin: 0 auto;">
+                 <div class="container col s12" style="margin-left: 60px; margin-right: 40px;  height:auto;" >
+                    <div style="width:700px; padding-top:20px; padding-left:20px; font-size:14px; padding-right:40px; border:0px solid #333; margin-right:20px; float:left" id="col_izquierda_individual" >
+                    </div>
+                    <iframe style="border:none; margin-top:20px" id="pdf_law_individual" width="90%" height="2000px"></iframe>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        <!-- VISTA PREVIA INDIVIDUAL -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -158,15 +239,34 @@
 <script src="../js/customizer.js"></script>
 <script type="text/javascript">
  $(document).ready(function(){
-   DatePicker();
-   InitSelect();
-                     //PDFViewer();
-                     IndexViewTitles();
-                     menuLoad();
+
+                     DatePicker();
+                     InitSelect();
                      preview();
                      verSearch();
-                     searchNews('hoy');
-                  //searchNews();
+                     searchLaw('hoy');
+        
+
+
+                  // SEGURIDAD 
+
+                  if(localStorage.getItem("user")=="viewer"){
+                  $('#gobackViewer').show();
+                  $('#goback').hide();
+                  }
+
+
+                  if(localStorage.getItem("user")=="admin"){
+                  $('#gobackViewer').hide();
+                  $('#goback').show();
+                  }
+
+                  // SEGURIDAD 
+
+
+
+
+
 
 
 
@@ -187,138 +287,26 @@
                       }
                       );
 
-                  $( "#close_vistaprevia" ).click(function() {
-                   $('#panel_vistaprevia').hide();
-                   $('#container_principal').show();
-                 });
-
-
-                  $( "#vista_previa" ).click(function() {
-                   $('#panel_vistaprevia').show();
-                   $('#container_principal').hide();
-                 });
-
-
-                  $( "#ver_upload" ).click(function() {
-
-                   $('#panel0004').hide();
-                   $('#encabezado_vistaprevia').hide();
-                   $('#panel0006').show();
-
-                 });
-
-
-
-
-
-                  $(".bottom0010").sideNav();
-
-                  $( "#bottom0001" ).click(function() {
-                   $('#panel0002').hide();
-                   $('#panel0003').hide();
-                   $('#panel0001').show();
-                 });
-
-
-                  $( "#bottom0003" ).click(function() {
-                   $('#panel0001').hide();
-                   $('#panel0002').hide();
-                   $('#panel0003').show();
-                 });
-
-
-                  $( "#bottom0004" ).click(function() {
-                   $('#panel0005').hide();
-                   $('#panel0006').hide();
-                   $('#panel0004').show();
-                 });
-
-                  $( "#bottom0005" ).click(function() {
-                   $('#panel0004').hide();
-                   $('#panel0006').hide();
-                   $('#panel0005').show();
-
-                 });
-
-                  $( "#bottom0006" ).click(function() {
-                   $('#panel0004').hide();
-                   $('#panel0005').hide();
-                   $('#panel0006').show();
-
-                 });
-                  $(".carousel.carousel-slider").carousel({full_width: true});
-
 
                 });
 
 
-              </script>
-              <script>
-               function void_menu(){
-                $('#panel_menu0001_1').css("display","none");
-                $('#panel_menu0001_2').css("display","none");
-              }
+
+                function ver_listado_law(){
+                   $("#container_principal").show();
+                   $("#vistaprevia").show();
+                   $("#divTable").hide();
+                 }
+
+               
+                 function ver_tabla_law(){
+                   $("#container_principal").show();
+                   $("#vistaprevia").hide();
+                   $("#divTable").show();
+                 }
 
 
-function ver_listado_law(){
-   $("#container_principal").show();
-   $("#vistaprevia").show();
-   $("#divTable").hide();
-}
-
-function ver_tabla_law(){
-   $("#container_principal").show();
-   $("#vistaprevia").hide();
-   $("#divTable").show();
-}
-
-
-              function menuLoad(){
-
-
-
-               $( "#menu0002" ).click(function() {
-                 $('#index_english').css("display","none");
-                 $('#index_spanish').css("display","none");
-                 void_menu();
-
-               });
-
-
-               $( "#menu0004" ).click(function() {
-                 $('#index_english').css("display","none");
-                 $('#index_spanish').css("display","none");
-                 void_menu();
-                 $('#panel_menu0004').css("display","block");
-               });
-
-               $( "#menu0003" ).click(function() {
-                 $('#index_english').css("display","none");
-                 $('#index_spanish').css("display","none");
-                 void_menu();
-               });
-
-
-               $( "#menu0001" ).click(function() {
-                 $('#index_english').css("display","inline-block");
-                 $('#index_spanish').css("display","inline-block");
-               });
-
-
-
-               $("#index_english" ).click(function(){
-                $('#panel_menu0001_1').css("display","block");
-                $('#panel_menu0001_2').css("display","none");
-              });
-
-
-
-
-               $("#index_spanish").click(function(){
-                 $('#panel_menu0001_1').css("display","none");
-                 $('#panel_menu0001_2').css("display","block");
-               });
-             }
+     
            </script>
 
 
