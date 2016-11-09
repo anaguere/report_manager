@@ -47,10 +47,11 @@ if ($_POST['router'] == "law_types") {
 
 
 if ($_POST['router'] == "law_view") {
-  $content = new GetContents();
-  $law_id  = $content->GetPostContent('law_id');
-  $law     = new LawDetail(null, $law_id, null, null, null, null);
-  echo json_encode($law->selectAllLawDetail());
+
+    $content = new GetContents();
+    $law_id  = $content->GetPostContent('law_id');
+    $law     = new LawDetail(null, $law_id, null, null, null, null);
+     echo json_encode($law->selectAllLawDetail());
 }
 
 
@@ -139,6 +140,9 @@ if ($_POST['router'] == "conditionalSearch") {
 
 
 if ($_POST['router'] == 'update') {
+
+
+
   $content = new GetContents();
   $id = $content->GetPostContent('law_id');
   $law       = new LawDetail(null,$id,null,null,null,null);

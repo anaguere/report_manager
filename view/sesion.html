@@ -2,31 +2,33 @@
 <html>
 <head>
 	<title></title>
-	<script src="../js/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
 
   <link rel="stylesheet" type="text/css" href="../css/materialize.css" media="screen,projection">
   
 </head>
-<body>
+<body style="background: #c62828">
 
     <div class="row" style="">
 
        <div class="container col s12" style="padding:100px; background-image: url('');">
 
 
-
-
           <div class="card" style="text-align:center; width:600px; margin: 0 auto">
-            <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="reunion-productiva.jpg">
+            <div class="card-image waves-effect waves-block waves-light" style="height:250px; padding-top: 50px;">
+                           <img src="../logo.png" width="400px">
+
           </div>
           <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">Iniciar Sesi&oacute;n<i class="fa fa-close right"></i></span>
+              <span class="card-title activator grey-text text-darken-4" style="font-weight:bold"> LOGIN <i class="fa fa-close right"></i></span>
               <!-- <p><a href="#">This is a link</a></p>-->
           </div>
           <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">Ingrese sus Datos de Acceso<i class="fa fa-close right"></i></span>
+             
+
+              <span class="card-title grey-text text-darken-4"><i class="fa fa-close right"></i></span>
+
+
 
               <div class="input-field  col s12 form01">
                 <input type="text"  id="user_inf_login"></input>
@@ -39,7 +41,9 @@
             </div>
 
             <div class="col s12 "  style="padding-top:25px; padding-left:10px"  >
-                <a  id="#" onclick="LoginUser()" class="waves-effect waves-light btn red">Continuar</a>
+                <a  style="font-weight:bold"  id="botonInicio" onclick="LoginUser()" class="waves-effect waves-light btn red">
+                  CONTINUE
+                </a>
            </div>
 
        </div>
@@ -50,12 +54,38 @@
 </div>
 
 </div>
-<script src="../js/raphael-min.js"></script>
-<script src="../js/livicons-customizer-1.4.js"></script>
-<script src="../js/customizer.js"></script>
+
+      <script src="../js/jquery.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+      <script src="../js/load.js"></script>
+      <script src="../js/raphael-min.js"></script>
+      <script src="../js/livicons-customizer-1.4.js"></script>
+      <script src="https://use.fontawesome.com/7b58a9f209.js"></script>
       <script>
 
         function LoginUser(){
+         localStorage.removeItem("user");
+
+
+            if  (( $('#user_inf_login').val()=="admin" ) && ( $('#user_inf_password').val()=="2016" )) {
+
+             localStorage.getItem("user","admin");
+              window.location="home.html";
+
+            }
+
+
+
+            if  (( $('#user_inf_login').val()=="user" ) && ( $('#user_inf_password').val()=="2017" )) {
+
+             localStorage.getItem("user","viewer");
+              window.location="homecn.html";
+            }
+
+
+
+
+          /*
           $.post("../controller/users_detail_controller.php",{
             router : "login_user",
             login_user : $('#user_inf_login').val(),
@@ -67,7 +97,10 @@
             }else{
               alert('User or password are wrong, please try again!');
             }
-          });
+          });*/
+
+
+
         }
 
 

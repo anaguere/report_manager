@@ -141,7 +141,7 @@ function IndexViewTitles(){
 
       $.each(law_detail.contenido, function(i,n){
 
-        console.log(n);
+  //      console.log(n);
 
         d = new Date(n.law_det_date);
         $('#law_gaceta_prev_001').text(n.law_gaceta_number);
@@ -158,8 +158,6 @@ function IndexViewTitles(){
     });
 
   }
-
-
 
 
 
@@ -204,8 +202,6 @@ function searchNews(news_id){
 
 
 function preview(){
-
-
 
   $('#news_body_es').focusout(function(){
 
@@ -260,49 +256,40 @@ function SaveNews(){
   }else{
     if(typeof path !== 'undefined'){
       var law_list = new Array();
-
-    var law_list = new Array();
-
-    var xhr = new XMLHttpRequest;
-    xhr.responseType = 'blob';
-
-
-
-    xhr.onload = function() {
-      var recoveredBlob = xhr.response;
-
-      var reader = new FileReader;
-
-      reader.onload = function() {
-
-        $("#cortina").css('display','block');
-        var blobAsDataUrl = reader.result;
-        var news_body_html = $('#news_body_es').html();
-        var news_img = $(news_body_html).contents().find("img").attr("src");
-        var news_body_es = $('#news_body_es').text();
-        $.post( "../controller/news_detail_controller.php", {
-          router : "create",
-          news_title_es: ne($('#news_title_es').val()),
-          news_img: news_img,
-          news_body_es: news_body_es,
-          news_date: ne($('#news_date').val()),
-          news_source: ne($('#news_source').val()),
-          news_title_en : ne($('#news_title_en').val()),
-          news_body_en : ne($('#news_body_en').val()),
-          news_category : ne($('#news_category').val()),
-          news_range : ne($('#news_range').val()),
-          news_file :blobAsDataUrl
-        }).done(function(message){
-          message = JSON.parse(message);
-          if(message.conexion){
-            location.reload();
-            $("#cortina").css('display','none');
-          }else{
-            $("#cortina").css('display','none');
-            alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
-          }
-        });
-      };
+      var xhr = new XMLHttpRequest;
+      xhr.responseType = 'blob';
+      xhr.onload = function() {
+        var recoveredBlob = xhr.response;
+        var reader = new FileReader;
+        reader.onload = function() {
+          $("#cortina").css('display','block');
+          var blobAsDataUrl = reader.result;
+          var news_body_html = $('#news_body_es').html();
+          var news_img = $(news_body_html).contents().find("img").attr("src");
+          var news_body_es = $('#news_body_es').text();
+          $.post( "../controller/news_detail_controller.php", {
+            router : "create",
+            news_title_es: ne($('#news_title_es').val()),
+            news_img: news_img,
+            news_body_es: news_body_es,
+            news_date: ne($('#news_date').val()),
+            news_source: ne($('#news_source').val()),
+            news_title_en : ne($('#news_title_en').val()),
+            news_body_en : ne($('#news_body_en').val()),
+            news_category : ne($('#news_category').val()),
+            news_range : ne($('#news_range').val()),
+            news_file :blobAsDataUrl
+          }).done(function(message){
+            message = JSON.parse(message);
+            if(message.conexion){
+              location.reload();
+              $("#cortina").css('display','none');
+            }else{
+              $("#cortina").css('display','none');
+              alert('Ha ocurrido un error al procesar la información, intente nuevamente!');
+            }
+          });
+        };
 
       reader.readAsDataURL(recoveredBlob);
     };
@@ -339,7 +326,6 @@ $("#cortina").css('display','none');
 }
   }
 
-
 //Searching detail news
 /*function searchNews(news_id){
 console.log(news_id);
@@ -367,7 +353,7 @@ function PDFViewer(){
 
 
 function isDefined(variable) {
-    return (typeof(window[variable]) == "undefined")?  false: true;
+  return (typeof(window[variable]) == "undefined")?  false: true;
 }
 
 
@@ -396,12 +382,69 @@ function ShowEnglishSettingPanel(){
 
 
 
-
-
-
-
-
 function searchNews(idioma){
+
+  var idm = idioma;
+  var desde =  $("#desde").val();
+  var hasta = $("#hasta").val();
+  var categoria = $("#categoria").val();
+
+
+
+
+  if(idioma=='hoy'){
+
+    var fecha = new Date();
+    fecha.setDate( fecha.getDate() - 30 );
+    var ayer =    fecha.getFullYear()  + "/" + (fecha.getMonth() +1) + "/" + fecha.getDate();
+
+    var fecha1 = new Date();
+    fecha1.setDate( fecha1.getDate() );
+    var hoy =    fecha1.getFullYear()  + "/" + (fecha1.getMonth() +1) + "/" + fecha1.getDate();
+
+    var desde =  ayer;
+    var hasta =  hoy;
+
+  }
+
+
+
+  $("#desde").val("");
+  $("#hasta").val("");
+  $("#categoria").val("");
+
+  $.post("../controller/news_detail_controller.php",{
+    router:"range_search",
+    desde : desde,//$('#desde').val(),
+    hasta : hasta,//$('#hasta').val(),
+    categoria : categoria,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
+  }).done(function(e){
+    var news = JSON.parse(e);
+    //console.log(news.contenido);
+    $.each(news,function(i,n){
+
+      $("#cargando").hide();
+
+      if(localStorage.getItem("user")=="admin"){
+          $("#bodyTable_spanish").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"espanol\")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=deleteNews("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a> </td></tr>");
+          $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"ingles\")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=deleteNews("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
+      }else{
+          $("#bodyTable_spanish").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit+"</td><td style='width:150px'> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"espanol\")'  class='fa fa-eye tam26' ></a>   </td></tr>");
+          $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"ingles\")'  class='fa fa-eye tam26' ></a>   </td></tr>");
+      }
+
+});
+
+
+
+});
+}
+
+
+
+/* esta funcion se trae los semanarios tambien */
+function searchNewsCompleto(idioma){
 
   var idm = idioma;
   var desde =  $("#desde").val();
@@ -438,85 +481,94 @@ function searchNews(idioma){
     desde : desde,//$('#desde').val(),
     hasta : hasta,//$('#hasta').val(),
     categoria : categoria,//$('#categoria').val()
-    anio : anio
+    anio : anio,
+function(){ $("#cargando").show();  }
   }).done(function(e){
     var news = JSON.parse(e);
     //console.log(news.contenido);
     $.each(news,function(i,n){
 
-
-
-
-      $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26' title='Edit news'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"ingles\")'  class='fa fa-eye tam26' title='Preview'></a> <!--a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a--> <a onclick=deleteNews("+n.news_det_id+") title='Delete news'> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
-
-      if(n.news_det_priority>3){
-
-        $("#col_derecha").append("\
-          <div style='width:100%;margin-bottom:10px; font-size:20px; border-bottom: 2px solid #333; padding-bottom:15px; margin-bottom:15px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
-          <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><br><br>\
-          ");
-      }
-
-
-      if(n.news_det_priority<=3){
-
-        if(n.news_det_image=='N/E'){
-          $("#col_izquierda").append("\
-            <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
-            <hr>\
-            <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><hr><br>\
-            ");
-        }else{
-          $("#col_izquierda").append("\
-            <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
-            <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
-            <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><hr>\
-            ");
-        }
-
-      }
+      $("#cargando").hide();
 
 
 
 
-
+     if(localStorage.getItem("user")=="admin"){
       $("#bodyTable_spanish").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"espanol\")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=deleteNews("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a> </td></tr>");
-
-      if(n.news_det_priority>3){
-
-        $("#col_derecha_spanish").append("\
-          <div style='width:100%;margin-bottom:10px; font-size:20px; border-bottom: 2px solid #333; padding-bottom:15px; margin-bottom:15px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
-          <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><br><br>\
-          ");
-      }
-
-
-      if(n.news_det_priority<=3){
-
-        if(n.news_det_image=='N/E'){
-          $("#col_izquierda_spanish").append("\
-            <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
-            <hr>\
-            <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr><br>\
-            ");
-        }else{
-          $("#col_izquierda_spanish").append("\
-            <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
-            <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
-            <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr>\
-            ");
-        }
-
-      }
+      $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'><a  onclick='editar_news("+n.news_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"ingles\")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a> <a onclick=deleteNews("+n.news_det_id+")> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
+    }else{
+     $("#bodyTable_spanish").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit+"</td><td style='width:150px'> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"espanol\")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+     $("#bodyTable").append("<tr style='width:100px' id="+n.news_det_id+" ><td>"+n.news_det_date+"</td><td>"+n.news_det_category+"</td><td>"+n.news_det_tit_en+"</td><td style='width:150px'> <a  onclick='searchNewsIndividual("+n.news_det_id+",\"ingles\")'  class='fa fa-eye tam26' ></a> <a onclick=print_ley("+n.news_det_id+")> <i class='fa fa-print tam26'></i> </a>  </td></tr>");
+    }
 
 
 
 
-    });
 
 
 
-  });
+
+   if(n.news_det_priority>3){
+
+    $("#col_derecha").append("\
+      <div style='width:100%;margin-bottom:10px; font-size:20px; border-bottom: 2px solid #333; padding-bottom:15px; margin-bottom:15px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+      <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><br><br>\
+      ");
+  }
+
+  if(n.news_det_priority<=3){
+
+    if(n.news_det_image=='N/E'){
+      $("#col_izquierda").append("\
+        <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+        <hr>\
+        <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><hr><br>\
+        ");
+    }else{
+      $("#col_izquierda").append("\
+        <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+        <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+        <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div><hr>\
+        ");
+    }
+
+  }
+
+
+
+
+
+
+  if(n.news_det_priority>3){
+
+    $("#col_derecha_spanish").append("\
+      <div style='width:100%;margin-bottom:10px; font-size:20px; border-bottom: 2px solid #333; padding-bottom:15px; margin-bottom:15px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+      <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><br><br>\
+      ");
+  }
+
+
+  if(n.news_det_priority<=3){
+
+    if(n.news_det_image=='N/E'){
+      $("#col_izquierda_spanish").append("\
+        <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+        <hr>\
+        <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr><br>\
+        ");
+    }else{
+      $("#col_izquierda_spanish").append("\
+        <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+        <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+        <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr>\
+        ");
+    }
+
+  }
+
+});
+
+});
 }
 
 
@@ -543,9 +595,9 @@ function editar_news(x){
 function searchNewsIndividual(new_id,idiomax){
 
 
-var idm = idiomax
+  var idm = idiomax
 
-console.log(idm);
+  console.log(idm);
 
   $('#vistaprevia_individual').show();
 
@@ -561,8 +613,12 @@ console.log(idm);
 
   $.post("../controller/news_detail_controller.php",{
     router : "news_view",
-    news_id : new_id
+    news_id : new_id,//$('#categoria').val()
+    function(){ $("#cargando").show();  }
   }).done(function(e){
+
+    $("#cargando").hide();
+
     var news_detail = JSON.parse(e);
 
     $.each(news_detail.contenido, function(i,n){
@@ -585,41 +641,41 @@ console.log(idm);
 
                           if(idm=="ingles"){
 
-                                  if(n.news_det_image=='N/E'){
-                                    $("#col_izquierda_individual").append("\
-                                      <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
-                                      \
-                                      <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div>\
-                                      ");
-                                  }else{
-                                    $("#col_izquierda_individual").append("\
-                                      <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
-                                      <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
-                                      <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div>\
-                                      ");
-                                  }
+                            if(n.news_det_image=='N/E'){
+                              $("#col_izquierda_individual").append("\
+                                <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+                                \
+                                <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div>\
+                                ");
+                            }else{
+                              $("#col_izquierda_individual").append("\
+                                <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit_en+"</div>\
+                                <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+                                <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text_en+"</div>\
+                                ");
+                            }
 
                           }
 
 
-                               if(idm=="espanol"){
+                          if(idm=="espanol"){
 
-                                $('#col_izquierda_spanish_individual').show();
+                            $('#col_izquierda_spanish_individual').show();
 
-                                                      if(n.news_det_image=='N/E'){
-                                                        $("#col_izquierda_spanish_individual").append("\
-                                                          <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
-                                                          <hr>\
-                                                          <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr><br>\
-                                                          ");
-                                                      }else{
-                                                        $("#col_izquierda_spanish_individual").append("\
-                                                          <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
-                                                          <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
-                                                          <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr>\
-                                                          ");
-                                                      }
+                            if(n.news_det_image=='N/E'){
+                              $("#col_izquierda_spanish_individual").append("\
+                                <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+                                <hr>\
+                                <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr><br>\
+                                ");
+                            }else{
+                              $("#col_izquierda_spanish_individual").append("\
+                                <div style='width:100%;margin-bottom:10px; font-size:20px; font-weigth:bold; line-height: 22px'>"+n.news_det_tit+"</div>\
+                                <div style='margin-top:20px; margin-bottom:10px'><img width='100%' src='data:application/png;base64,"+n.news_det_image+"'></div>\
+                                <div style='width:100%;margin-bottom:10px; text-align:justify;'><b>"+n.news_det_date+".- </b>"+n.news_det_text+"</div><hr>\
+                                ");
                             }
+                          }
 
                         });
 
@@ -724,9 +780,9 @@ function verSearch(){
   $("#searchButtom1").click(function() {
    $("#ver_tbl_spanish").show();
    $("#ver_tbl_english").show();
-   $("#ver_sem_spanish").show();
-   $("#ver_sem_english").show();
-   $("#ver_sem_english").show();
+   $("#ver_sem_spanish").hide();
+   $("#ver_sem_english").hide();
+   $("#ver_sem_english").hide();
    $("#container_principal").hide();
    $("#consulta").show();
    $("#ver_registro").hide();

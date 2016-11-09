@@ -11,7 +11,9 @@
          $(document).ready(function(){
          
            localStorage.removeItem("new_id");
-         
+           localStorage.setItem("user","admin");
+          localStorage.removeItem("law_id");
+
          
          // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
          $('.modal').modal({   
