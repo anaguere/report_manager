@@ -221,7 +221,7 @@ function vista_previa_ley(law_id){
         //  console.log(y.news_file_archive);
       });
 
-      
+
     });
   });
 
@@ -324,7 +324,7 @@ function searchLawNames(){
 
     var laws = JSON.parse(e);
 
-    console.log(laws);
+    //console.log(laws);
     print_tableLeyes(laws);
 
   });

@@ -2,15 +2,16 @@
 require '../libraries/get_contents.php';
 require '../model/connector.php';
 require '../model/law_detail.php';
+require '../model/news_detail.php';
 require '../model/news_comment.php';
 require '../model/client_list.php';
 require '../model/news_category.php';
 require '../model/news_type.php';
 require '../model/news_files.php';
-
+/*
 #if ($_POST['type'] == 'news') {
   # code...
-  $path = "/home/annralf/Documentos/2014/";
+  $path = "/home/annralf/Documentos/2012/PDF/";
   $dir = opendir($path);
   $files = array();
   while ($current = readdir($dir)){
@@ -23,7 +24,6 @@ require '../model/news_files.php';
       }
     }
   }
-
   for($i=0; $i<count( $files ); $i++){
     $files_law   = new NewsFiles(null, null, null);
     $laws_file = "data:application/pdf;base64,".base64_encode(file_get_contents($path.$files[$i]));
@@ -34,8 +34,8 @@ require '../model/news_files.php';
     $files_result = $files_law->saveNewsFiles();
 
     $laws        = new LawDetail(null,null,null,null,null,null);
-    $law_name = $laws_file_name;
-    $law_date = "2010-12-01";#date("Y/m/d");
+    $law_name = $laws_file_name;#"Leyes sancionadas 2016";
+    $law_date = "2012-01-01";#date("Y/m/d");
     $law_gaceta = "";
     $law_type = 1;
     $laws->setLawDetName($law_name);
@@ -44,15 +44,17 @@ require '../model/news_files.php';
     $laws->setLawDetType($law_type);
     $laws->setLawFileId($files_result['contenido']['news_file_id']);
     $laws->saveLawDetail();
+    echo $i." - ".$law_name."<br>";
 
-  }
+
+  }*/
 #}
-if ($_POST['type'] == 'laws') {
+#if ($_POST['type'] == 'laws') {
   # code...
   $content     = new GetContents();
   $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null,null);
   $files_l  = new NewsFiles(null,null,null);
-  $path = "/home/annralf/Documentos/2014/";
+  $path = "/home/annralf/Documentos/2011/";
   $dir = opendir($path);
   $files = array();
   while ($current = readdir($dir)){
@@ -94,4 +96,4 @@ if ($_POST['type'] == 'laws') {
     $news_id = $news_detail->saveNewsDetail();
 
   }
-}
+#}

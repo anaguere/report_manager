@@ -1,131 +1,111 @@
+<!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
 	<title></title>
-	<script src="js/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
 
   <link rel="stylesheet" type="text/css" href="css/materialize.css" media="screen,projection">
-  <script type="text/javascript">
 
-
-  $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal').modal({
-          dismissible: true, // Modal can be dismissed by clicking outside of the modal
-          opacity: 1
-      });
-});
-
-
-  </script>
 </head>
-<body>
+<body style="background: #c62828">
 
- <nav>
+    <div class="row" style="">
 
-
-  <div class="nav-wrapper nav_color" style=""><span class="livicon"  style=""   data-hovercolor="white"
-    data-color="white" data-name="home" data-size="34">
-</span>
-<a href="#" class="brand-logo left" style="margin-top:-10px"> &nbsp;&nbsp;Home</a>
-<ul id="nav-mobile" class="right hide-on-med-and-down" >
+       <div class="container col s12" style="padding:100px; background-image: url('');">
 
 
- <li><a href="view/user.html" >
-    <span class="livicon"  style=""   data-hovercolor="white"
-    data-color="white" data-name="users-add" data-size="34">
-</span></a></li>
+          <div class="card" style="text-align:center; width:600px; margin: 0 auto">
+            <div class="card-image waves-effect waves-block waves-light" style="height:250px; padding-top: 50px;">
+                           <img src="logo.png" width="400px">
+
+          </div>
+          <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4" style="font-weight:bold"> LOGIN <i class="fa fa-close right"></i></span>
+              <!-- <p><a href="#">This is a link</a></p>-->
+          </div>
+          <div class="card-reveal">
 
 
-<li><a href="view/sesion.html">
-    <span class="livicon"  style=""   data-hovercolor="white"
-    data-color="white" data-name="sign-out" data-size="34">
-</span></a></li>
+              <span class="card-title grey-text text-darken-4"><i class="fa fa-close right"></i></span>
 
 
 
+              <div class="input-field  col s12 form01">
+                <input type="text"  id="user_inf_login"></input>
+                <label for="user_inf_login">Login</label>
+            </div>
 
+            <div class="input-field  col s12 form01">
+                <input type="password"  id="user_inf_password"></input>
+                <label for="user_inf_password">Password</label>
+            </div>
 
-</ul>
-</div>
+            <div class="col s12 "  style="padding-top:25px; padding-left:10px"  >
+                <a  style="font-weight:bold"  id="botonInicio" onclick="LoginUser()" class="waves-effect waves-light btn red">
+                  CONTINUE
+                </a>
+           </div>
 
-</nav>
-
-
-
-<div class="row" style="">
-
-
-
-
-<div class="container col s12" style="padding:30px; margin-top:-10px">
-
-
-
-
-<div id="modal1" class=" blue-grey lighten-2" style="height:320px; overflow:hidden; padding-top:50px; margin-left:12%; margin-top:10%;">
-  <div class="modal-content">
-
-
-    <div class="  col s4 " style="height:300px; text-align:center">
-
-            <a href="view/load.html" class="waves-effect waves-light btn   red darken-4" style=" width:200px; height:200px" title="News section">
-                <br>
-
-                <span class="livicon"  style=""   data-hovercolor="white"
-                data-color="white" data-name="notebook" data-size="64">
-                    </span><br>
-               <h5>NEWS</h5>
-            </a>
-
-    </div>
-
-    <div class="  col s4  " style="height:300px; text-align:center">
-
-            <a href="view/ley.html" class="waves-effect waves-light btn b red darken-4 " style=" width:200px; height:200px" title="Laws section">
-                <br>
-
-                <span class="livicon"  style=""   data-hovercolor="white"
-                data-color="white" data-name="balance" data-size="64">
-                    </span><br>
-               <h5>LAWS</h5>
-            </a>
-
-    </div>
-
-    <div class="  col s4 " style="height:300px; text-align:center">
-
-            <a class="waves-effect waves-light btn  red darken-4 " style=" width:200px; height:200px" title="Finance section">
-                <br>
-
-                <span class="livicon"  style=""   data-hovercolor="white"
-                data-color="white" data-name="linechart" data-size="64">
-                    </span><br>
-               <h5>FINANCE</h5>
-            </a>
-
-    </div>
-
- </div>
-
-
-</div>
+       </div>
+   </div>
 
 
 
 </div>
+
 </div>
 
-<script src="js/raphael-min.js"></script>
-<script src="js/livicons-customizer-1.4.js"></script>
-<script src="js/customizer.js"></script>
+      <script src="js/jquery.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+      <script src="js/load.js"></script>
+      <script src="js/raphael-min.js"></script>
+      <script src="js/livicons-customizer-1.4.js"></script>
+      <script src="https://use.fontawesome.com/7b58a9f209.js"></script>
+      <script>
 
+        function LoginUser(){
+         localStorage.removeItem("user");
+
+
+            if  (( $('#user_inf_login').val()=="admin" ) && ( $('#user_inf_password').val()=="2016" )) {
+
+             localStorage.getItem("user","admin");
+              window.location="view/home.html";
+
+            }
+
+
+
+            if  (( $('#user_inf_login').val()=="user" ) && ( $('#user_inf_password').val()=="2017" )) {
+
+             localStorage.getItem("user","viewer");
+              window.location="view/homecn.html";
+            }
+
+
+
+
+          /*
+          $.post("controller/users_detail_controller.php",{
+            router : "login_user",
+            login_user : $('#user_inf_login').val(),
+            user_password :$('#user_inf_password').val()
+          }).done(function (e) {
+            message = JSON.parse(e);
+            if(message.conexion){
+              console.log(message);
+            }else{
+              alert('User or password are wrong, please try again!');
+            }
+          });*/
+
+
+
+        }
+
+
+
+
+      </script>
 </body>
 </html>
-=======
-<meta http-equiv="Refresh" content="0.1;url=view/home.html">
-</head>
->>>>>>> f5ded648d7e715c59f440e3ecfefa088122c3ba8

@@ -141,12 +141,16 @@ if ($_POST['router'] == "view_index_titles") {
           array_push($final,$array);
         }
       }
+      usort($final, function ($a, $b)
+      {
+        return $a['news_det_date'] > $b['news_det_date'];
+      });
       echo json_encode($final);
     }
 
 
 
-    
+
 
     if ($_POST['router'] == "update") {
       $content = new GetContents();

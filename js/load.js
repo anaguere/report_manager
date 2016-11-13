@@ -388,6 +388,7 @@ function searchNews(idioma){
   var desde =  $("#desde").val();
   var hasta = $("#hasta").val();
   var categoria = $("#categoria").val();
+  var anio = $("#year").val();
 
 
 
@@ -417,7 +418,8 @@ function searchNews(idioma){
     router:"range_search",
     desde : desde,//$('#desde').val(),
     hasta : hasta,//$('#hasta').val(),
-    categoria : categoria,//$('#categoria').val()
+    categoria : categoria,
+    anio : anio,//$('#categoria').val()
     function(){ $("#cargando").show();  }
   }).done(function(e){
     var news = JSON.parse(e);

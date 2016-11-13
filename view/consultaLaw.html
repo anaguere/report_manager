@@ -69,7 +69,7 @@
          </div>
 
       <div class="row" id="opcionesSearch" style="padding-left: 10px;">
-         <div class="col s3 " style="padding:10px; padding-top:25px" >
+         <div class="col s2 " style="padding:10px; padding-top:25px" >
             <select name="categoria" id="categoria" >
                <option value="" selected=""></option>
             </select>
@@ -81,6 +81,21 @@
                <label for="desde">GACETA</label>
             </div>
          </div>
+         <div class="col s2 " style="padding:10px; padding-top:25px" >
+          <select name="year" id="year" >
+           <option value="2008" >2008</option>
+           <option value="2009" >2009</option>
+           <option value="2010" >2010</option>
+           <option value="2011" >2011</option>
+           <option value="2012" >2012</option>
+           <option value="2013" >2013</option>
+           <option value="2014" >2014</option>
+           <option value="2015" >2015</option>
+           <option value="2016" >2016</option>
+         </select>
+         <label>YEAR</label>
+
+        </div>
          <div class="col s2 " style="padding:10px" >
             <div class="input-field  col s12 " style="">
                <input  type="date" class="datepicker"  id="desde"></input>
@@ -93,7 +108,7 @@
                <label for="hasta">HASTA</label>
             </div>
          </div>
-         <div class="col s3"  style="padding-top:25px; padding-left:20px"  >
+         <div class="col s2"  style="padding-top:25px; padding-left:20px"  >
             <a  id="searchButtom1" onclick="searchLaw('ingles')" class="waves-effect waves-light btn red">Search</a>
          </div>
       </div>
@@ -112,53 +127,10 @@
 
 
 
-<div class="container " id="consulta" style=" width: 90%" >
- <div class="row  s12 white" style="padding:10px;  margin-top:10px; ">
-  <div class="row" id="opcionesSearch" style="padding-left: 10px;">
-   <div class="col s2 " style="padding:10px; padding-top:25px" >
-    <select name="categoria" id="categoria" >
-     <option value="" selected=""></option>
-   </select>
-   <label>CATEGORY</label>
 
- </div>
- <div class="col s1 " style="padding:10px; " >
 
 <div class="container" style="width: 100%; background: white; height: 3000px; padding: 50px; padding-top:5px" >
 
-</div>
-<div class="col s2 " style="padding:10px; padding-top:25px" >
-   <select name="year" id="year" >
-     <option value="" disabled selected>Search by year</option>
-      <option value="2008" >2008</option>
-      <option value="2009" >2009</option>
-      <option value="2010" >2010</option>
-      <option value="2011" >2011</option>
-      <option value="2012" >2012</option>
-      <option value="2013" >2013</option>
-      <option value="2014" >2014</option>
-      <option value="2015" >2015</option>
-      <option value="2016" >2016</option>
-   </select>
-   <label>YEAR</label>
-
-</diV>
-<div class="col s2 " style="padding:10px" >
-  <div class="input-field  col s12 " style="">
-   <input  type="date" class="datepicker"  id="desde"></input>
-   <label for="desde">DESDE</label>
- </div>
-</div>
-<div class="col s2 " style="padding:10px" >
-  <div class="input-field  col s12 " style="">
-   <input type="date" class="datepicker" id="hasta"></input>
-   <label for="hasta">HASTA</label>
- </div>
-</div>
-<div class="col s3"  style="padding-top:25px; padding-left:20px"  >
-  <a  id="searchButtom1" onclick="searchLaw('ingles')" class="waves-effect waves-light btn red">Search</a>
-</div>
-</div>
         <div  class="row s12" id="divTableTitle" style="background: #fff; color: #333; letter-spacing: 1px; height: 50px;">
         </div>
 
@@ -237,6 +209,8 @@
 
 
 </div>
+
+
 
 
 

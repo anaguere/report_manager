@@ -51,6 +51,7 @@ function addSearch(){
     var desde =  $("#desde").val();
     var hasta = $("#hasta").val();
     var categoria = $("#categoria").val();
+    var anio = $("#year").val();
 
     $("#desde").val("");
     $("#hasta").val("");
@@ -61,7 +62,9 @@ function addSearch(){
      router : "conditionalSearch",
      desde: desde,
      hasta: hasta,
-     categoria: categoria,//$('#categoria').val()
+     categoria: categoria,
+     anio : anio,
+     //$('#categoria').val()
     function(){ $("#cargando").show();  }
    }).done(function(e){
           $("#cargando").hide();

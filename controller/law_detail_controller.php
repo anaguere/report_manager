@@ -51,7 +51,12 @@ if ($_POST['router'] == "law_view") {
     $content = new GetContents();
     $law_id  = $content->GetPostContent('law_id');
     $law     = new LawDetail(null, $law_id, null, null, null, null);
-     echo json_encode($law->selectAllLawDetail());
+    $result = $law->selectAllLawDetail();
+    usort($result['contenido'], function ($a, $b)
+    {
+      return $a['law_det_date'] > $b['law_det_date'];
+    });
+     echo json_encode($result);
 }
 
 
@@ -76,6 +81,10 @@ if ($_POST['router'] == "view_law_names") {
     $final['law_det_type']      = $type['contenido'][0]['law_type_name'];
     array_push($new, $final);
   }
+  usort($new, function ($a, $b)
+  {
+    return $a['law_det_date'] > $b['law_det_date'];
+  });
   echo json_encode($new);
 }
 
