@@ -5,16 +5,17 @@ class LawDetail extends Connector{
 	public $law_det_date;
 	public $law_det_id;
 	public $law_det_name;
+	public $law_det_name_en;
 	public $law_det_type;
 	public $law_file_id;
 	public $law_gaceta_number;
 
-	public function __construct($law_det_date,$law_det_id,$law_det_name,$law_det_type,$law_file_id,$law_gaceta_number){
+	public function __construct($law_det_date,$law_det_id,$law_det_name,$law_det_name_en,$law_det_type,$law_file_id,$law_gaceta_number){
 		$connector = Connector::ConexionBD();
 		$this->attr_connector = $connector['conexion'];
 		$this->table_name ="law_detail";
 		$seleccion;
-		if($law_det_date != null || $law_det_id != null || $law_det_name != null || $law_det_type != null || $law_file_id != null || $law_gaceta_number != null ){
+		if($law_det_date != null || $law_det_id != null || $law_det_name != null || $law_det_name_en != null || $law_det_type != null || $law_file_id != null || $law_gaceta_number != null ){
 			if(!is_null($law_det_date)){
 					$field = "law_det_date";
 					$value = $law_det_date;
@@ -26,6 +27,10 @@ class LawDetail extends Connector{
 			if(!is_null($law_det_name)){
 					$field = "law_det_name";
 					$value = $law_det_name;
+			}
+			if(!is_null($law_det_name_en)){
+					$field = "law_det_name_en";
+					$value = $law_det_name_en;
 			}
 			if(!is_null($law_det_type)){
 					$field = "law_det_type";
@@ -66,6 +71,13 @@ class LawDetail extends Connector{
 	public function setLawDetName($law_det_name){
 			$this->law_detail['law_det_name'] = $law_det_name;
 		}
+	public function getLawDetNameen(){
+			$this->law_detail['law_det_name_en'] = $this->objeto['contenido'][0]['law_det_name_en'];
+			return $this->law_det_name_en['law_det_name_en'];
+		}
+	public function setLawDetNameen($law_det_name_en){
+			$this->law_detail['law_det_name_en'] = $law_det_name_en;
+		}
 	public function getLawDetType(){
 			$this->law_detail['law_det_type'] = $this->objeto['contenido'][0]['law_det_type'];
 			return $this->law_det_type['law_det_type'];
@@ -90,12 +102,12 @@ class LawDetail extends Connector{
 	public function saveLawDetail(){
 			return Connector::InsertIn($this->attr_connector,$this->table_name,$this->law_detail);
 		}
-	public function updateLawDetail($law_file_id){
-			$law_file_id = array("law_det_id",$law_file_id);
-			return Connector::UpdateIn($this->attr_connector,$this->table_name,$this->law_detail,$law_file_id);
+	public function updateLawDetail($law_det_id){
+		$law_det_id = array("law_det_id",$law_det_id);
+			return Connector::UpdateIn($this->attr_connector,$this->table_name,$this->law_detail,$law_det_id);
 		}
-	public function deleteLawDetail($law_file_id){
-			return Connector::DeleteIn($this->attr_connector,$this->table_name,"law_det_id",$law_file_id);
+	public function deleteLawDetail($law_det_id){
+			return Connector::DeleteIn($this->attr_connector,$this->table_name,"law_det_id",$law_det_id);
 		}
 	public function selectAllLawDetail(){
 		 return Connector::SelectIn($this->attr_connector,$this->table_name,$this->field,$this->value);

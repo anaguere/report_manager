@@ -11,7 +11,7 @@
          <div class="nav-wrapper nav_color" style="">
             <a href="#" class="brand-logo left" style="margin-top:-10px"> [ Law ] </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down" >
-               
+
 
              <li>
                   <a href="consultaLaw.html" class="">
@@ -145,6 +145,10 @@
                   <textarea class="materialize-textarea" id="law_name"></textarea>
                   <label for="law_name">Law name:</label>
                   </div>
+                  <div class="input-field  col s12 form01" style="">
+                  <textarea class="materialize-textarea" id="law_name_en"></textarea>
+                  <label for="law_name_en">Law name english:</label>
+                  </div>
                </div>
                <div class="modal-footer">
                <a  id="addComment" class="waves-effect waves-light btn right modal-close ">ADD</a>
@@ -163,6 +167,10 @@
             <div class="input-field  col s12 form01" style="">
             <textarea class="materialize-textarea" id="law_name_edit" style="margin-top: 20px;"></textarea>
             <label for="law_name_edit">Law Name</label>
+            </div>
+            <div class="input-field  col s12 form01" style="">
+            <textarea class="materialize-textarea" id="law_name_en_edit" style="margin-top: 20px;"></textarea>
+            <label for="law_name_en_edit">Law Name Enlish</label>
             </div>
             </div>
             <div class="modal-footer">
@@ -331,12 +339,12 @@
         }else{
               window.location="sesion.html";
         }
-         
-        
+
+
 
     function verificar_edicion(){
 
-           
+
          if(localStorage.getItem("law_id")>0){
 
                           $('#botonmodal1').hide();
@@ -353,7 +361,7 @@
 
          }
 
-        
+
     }
 
 
@@ -389,6 +397,7 @@
                 var nl = n.law_det_id;
 
               $("#news_comment_es").append("<p font-size:12px; font-weight:400; width:95%; height:60px;' id='law_name_"+nl+"' data-law_name_="+nl+">"+n.law_det_name+"</p>\
+              <p font-size:12px; font-weight:400; width:95%; height:60px;' id='law_name_en"+nl+"' data-law_name_en="+nl+">"+n.law_det_name_en+"</p>\
               <div class='col s12' id='div"+nl+"' style='margin-bottom:20px; border-top:1px solid #999; height:40px; padding-top:10px'>\
               <div style='float:left; width:100px;height:40px'> <a href=\"#modal2\" onclick='editLawName(\"#law_name_"+nl+"\",\"#selected"+nl+"\","+nl+")'><i style='font-size:28px; color:green' class='fa fa-pencil-square'></i></a>\
               &nbsp; \

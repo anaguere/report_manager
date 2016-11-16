@@ -1,7 +1,7 @@
-<?php
-header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-header( 'Cache-Control: post-check=0, pre-check=0', false );
-header( 'Pragma: no-cache' );
+  <?php
+// header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+// header( 'Cache-Control: post-check=0, pre-check=0', false );
+// header( 'Pragma: no-cache' );
 require '../libraries/get_contents.php';
 require '../model/connector.php';
 require '../model/law_detail.php';
@@ -18,18 +18,17 @@ if ($_POST['router'] == "create") {
   $files->setNewsFileName($file_name);
   $law_file_id = $files->saveNewsFiles();
   $file_id     = $files->selectAllNewsFiles();
-  #echo "<iframe src='data:application/pdf;base64,".$test['contenido'][0]['news_file_id']."' width='200px' height='500px'></iframe>";
-  $laws_req       = $content->GetPostContent('laws');
+  $laws_name       = $content->GetPostContent('law_name');
+  $laws_name_en       = $content->GetPostContent('law_name_en');
+  $laws_type       = $content->GetPostContent('law_type');
   $law_det_date   = $content->GetPostContent('law_date');
   $law_det_gaceta = $content->GetPostContent('law_gaceta');
-  for ($i = 0; $i < count($laws_req); $i++) {
-    $laws        = new LawDetail(null,null,null,null,null,null);
-    #$law_details = explode(",", $laws_req[$i]);
-    $val = substr($laws_req[$i],0,-2);
-    $val2 = substr($laws_req[$i],-1);
+  for ($i = 0; $i < count($laws_name); $i++) {
+    $laws        = new LawDetail(null,null,null,null,null,null,null);
     $laws->setLawDetDate($law_det_date);
-    $laws->setLawDetName($val);
-    $laws->setLawDetType($val2);
+    $laws->setLawDetName($laws_name[$i]);
+    $laws->setLawDetNameEn($laws_name_en[$i]);
+    $laws->setLawDetType($laws_type[$i]);
     $laws->setLawFileId($law_file_id['contenido']['news_file_id']);
     $laws->setLawGacetaNumber($law_det_gaceta);
     $resul = $laws->saveLawDetail();
@@ -50,7 +49,7 @@ if ($_POST['router'] == "law_view") {
 
     $content = new GetContents();
     $law_id  = $content->GetPostContent('law_id');
-    $law     = new LawDetail(null, $law_id, null, null, null, null);
+    $law     = new LawDetail(null,$law_id,null,null,null,null,null);
     $result = $law->selectAllLawDetail();
     usort($result['contenido'], function ($a, $b)
     {
@@ -59,26 +58,25 @@ if ($_POST['router'] == "law_view") {
      echo json_encode($result);
 }
 
-
-
-
-
 if ($_POST['router'] == "view_law_names") {
-  $law       = new LawDetail(null, null, null, null, null, null);
-  $law_names = $law->selectOneTypeLawDetail(array("law_det_id", "law_det_name", "law_gaceta_number", "law_det_type","law_det_date"));
-  usort($law_names['contenido'], function ($a, $b)
-  {
-    return $a['law_det_name'] > $b['law_det_name'];
-  });
+  $law       = new LawDetail(null,null,null,null,null,null,null);
+  $law_names = $law->selectOneTypeLawDetail(array("law_det_id", "law_det_name","law_det_name_en", "law_gaceta_number", "law_det_type","law_det_date"));
+  #__________ Selection of law types__________________________
+  $law_type                   = new LawType(null, $val['law_det_type'], null);
+  $type                       = $law_type->selectAllLawType();
+  $type = $type['contenido'];
+  #__________Order Array and compare types ___________________
   $new = array();
   foreach ($law_names['contenido'] as $det => $val) {
-    $law_type                   = new LawType(null, $val['law_det_type'], null);
-    $type                       = $law_type->selectAllLawType();
     $final['law_det_id']        = $val['law_det_id'];
     $final['law_det_name']      = $val['law_det_name'];
+    $final['law_det_name_en']      = $val['law_det_name_en'];
     $final['law_gaceta_number'] = $val['law_gaceta_number'];
     $final['law_det_date'] = $val['law_det_date'];
-    $final['law_det_type']      = $type['contenido'][0]['law_type_name'];
+    $final['law_det_type_id'] = $val['law_det_type'];
+    foreach ($type as $key => $value) {
+      $final['law_det_type'] = ($value['law_type_id'] == $val['law_det_type']) ?  'N/E' : $value['law_type_name'] ;
+    }
     array_push($new, $final);
   }
   usort($new, function ($a, $b)
@@ -93,7 +91,7 @@ if ($_POST['router'] == "conditionalSearch") {
 
 
 
-  $law       = new LawDetail(null, null, null, null, null, null);
+  $law       = new LawDetail(null,null,null,null,null,null,null);
   $content = new GetContents();
   $desde  = $content->GetPostContent('desde');
   $hasta  = $content->GetPostContent('hasta');
@@ -149,27 +147,24 @@ if ($_POST['router'] == "conditionalSearch") {
 
 
 if ($_POST['router'] == 'update') {
-
-
-
   $content = new GetContents();
   $id = $content->GetPostContent('law_id');
-  $law       = new LawDetail(null,$id,null,null,null,null);
+  $law       = new LawDetail(null,$id,null,null,null,null,null);
   $gaceta = $content->GetPostContent('law_gaceta');
   $date = $content->GetPostContent('law_date');
   $name = $content->GetPostContent('law_name');
+  $name_en = $content->GetPostContent('law_name_en');
   $type = $content->GetPostContent('law_type');
   $law->setLawGacetaNumber($gaceta);
   $law->setLawDetDate($date);
   $law->setLawDetName($name);
+  $law->setLawDetNameEn($name_en);
   $law->setLawDetType($type);
-
   echo json_encode($law->updateLawDetail($id));
-
 }
 
 if ($_POST['router'] == 'delete') {
-  $law       = new LawDetail(null,null,null,null,null,null);
+  $law       = new LawDetail(null,null,null,null,null,null,null);
   $content = new GetContents();
   $id = $content->GetPostContent('law_id');
   echo json_encode($law->deleteLawDetail($id));

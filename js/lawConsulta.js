@@ -314,9 +314,9 @@ function searchLaw(idioma){
 
 
       if(localStorage.getItem("user")=="admin"){
-         $("#bodyTable").append("<tr style='width:100px' id="+n.law_det_id+" ><td>"+n.law_det_date+"</td><td>"+n.law_gaceta_number+"</td><td>"+n.law_det_name+"</td><td style='width:150px'><a  onclick='editar_law("+n.law_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchlawIndividual("+n.law_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=deletelaw("+n.law_det_id+")> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
+         $("#bodyTable").append("<tr style='width:100px' id="+n.law_det_id+" ><td>"+n.law_det_date+"</td><td>"+n.law_gaceta_number+"</td><td>"+n.law_det_name+"</td><td>"+n.law_det_name_en+"</td><td style='width:150px'><a  onclick='editar_law("+n.law_det_id+")'  class='fa fa-edit tam26'></a> <a  onclick='searchlawIndividual("+n.law_det_id+")'  class='fa fa-eye tam26' ></a> <a onclick=deletelaw("+n.law_det_id+")> <i class='fa fa-trash tam26'></i> </a>  </td></tr>");
       }else{
-      $("#bodyTable").append("<tr style='width:100px' id="+n.law_det_id+" ><td>"+n.law_det_date+"</td><td>"+n.law_gaceta_number+"</td><td>"+n.law_det_name+"</td><td style='width:150px'> <a  onclick='searchlawIndividual("+n.law_det_id+")'  class='fa fa-eye tam26' ></a> </td></tr>");
+      $("#bodyTable").append("<tr style='width:100px' id="+n.law_det_id+" ><td>"+n.law_det_date+"</td><td>"+n.law_gaceta_number+"</td><td>"+n.law_det_name+"</td><td>"+n.law_det_name_en+"</td><td style='width:150px'> <a  onclick='searchlawIndividual("+n.law_det_id+")'  class='fa fa-eye tam26' ></a> </td></tr>");
       }
 
 

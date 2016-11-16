@@ -8,211 +8,215 @@ require '../model/news_category.php';
 require '../model/news_type.php';
 require '../model/news_files.php';
 
-
-
-
-
-
-
-
-
-
-
-
 if ($_POST['router'] == 'create') {
-  $content     = new GetContents();
-  $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null,null);
-  $files  = new NewsFiles(null,null,null);
-  $news_file = $content->GetPostContent('news_file');
-  $title_es    = $content->GetPostContent("news_title_es");
-  $tmp_img     = $content->GetPostContent("news_img");
-  if (empty($tmp_img)) {
-    $img = "N/E";
-  } else {
-    $img = base64_encode(file_get_contents($tmp_img));
-  }
-  $body_es  = $content->GetPostContent("news_body_es");
-  $date     = $content->GetPostContent("news_date");
-  $source   = $content->GetPostContent("news_source");
-  $title_en = $content->GetPostContent("news_title_en");
-  $body_en  = $content->GetPostContent("news_body_en");
-  $category = $content->GetPostContent("news_category");
-  $range    = $content->GetPostContent("news_range");
+    $content     = new GetContents();
+    $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null);
+    $files       = new NewsFiles(null, null, null);
+    $news_file   = $content->GetPostContent('news_file');
+    $title_es    = $content->GetPostContent("news_title_es");
+    $tmp_img     = $content->GetPostContent("news_img");
+    if (empty($tmp_img)) {
+        $img = "N/E";
+    } else {
+        $img = base64_encode(file_get_contents($tmp_img));
+    }
+    $body_es  = $content->GetPostContent("news_body_es");
+    $date     = $content->GetPostContent("news_date");
+    $source   = $content->GetPostContent("news_source");
+    $title_en = $content->GetPostContent("news_title_en");
+    $body_en  = $content->GetPostContent("news_body_en");
+    $category = $content->GetPostContent("news_category");
+    $range    = $content->GetPostContent("news_range");
 
-  $files->setNewsFileName('news_'.$date);
-  $files->setNewsFileArchive($news_file);
-  $file_id = $files->saveNewsFiles();
+    $files->setNewsFileName('news_'.$date);
+    $files->setNewsFileArchive($news_file);
+    $file_id = $files->saveNewsFiles();
 
-  $news_detail->setNewsDetDate($date);
-  $news_detail->setNewsDetImage($img);
-  $news_detail->setNewsDetSource($source);
-  $news_detail->setNewsDetText($body_es);
-  $news_detail->setNewsDetTexten($body_en);
-  $news_detail->setNewsDetTit($title_es);
-  $news_detail->setNewsDetTiten($title_en);
-  $news_detail->setNewsDetCategory($category);
-  $news_detail->setNewsDetPriority($range);
-  $news_detail->setNewsDetFile($file_id['contenido']['news_file_id']);
+    $news_detail->setNewsDetDate($date);
+    $news_detail->setNewsDetImage($img);
+    $news_detail->setNewsDetSource($source);
+    $news_detail->setNewsDetText($body_es);
+    $news_detail->setNewsDetTexten($body_en);
+    $news_detail->setNewsDetTit($title_es);
+    $news_detail->setNewsDetTiten($title_en);
+    $news_detail->setNewsDetCategory($category);
+    $news_detail->setNewsDetPriority($range);
+    $news_detail->setNewsDetFile($file_id['contenido']['news_file_id']);
 
-  $news_id = $news_detail->saveNewsDetail();
+    $news_id = $news_detail->saveNewsDetail();
 
-  echo json_encode($news_id);
+    echo json_encode($news_id);
 }
 
-
-
-
-
-
 if ($_POST['router'] == "list") {
-  $category = new NewsCategory(null, null, null);
-  $type     = new NewsType(null, null, null);
+    $category = new NewsCategory(null, null, null);
 
-  echo json_encode(array("category" => $category->selectAllNewsCategory(),
-    "type"                          => $type->selectAllNewsType()
-    ));
+    echo json_encode(array("category" => $category->selectAllNewsCategory()));
+}
+
+if ($_POST['router'] == "view_news_names") {
+    #_____________________________Selection spanish list___________________________________
+    $news_list_es = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
+    $category     = new NewsCategory(null, null, null);
+    $news_es      = $news_list_es->selectOneTypeNewsDetail(array("news_det_id", "news_det_tit", "news_det_tit_en", "news_det_date", "news_det_category", "news_det_priority"));
+    $category     = $category->selectAllNewsCategory();
+    $result       = array();
+    foreach ($category['contenido'] as $key => $value) {
+        foreach ($news_es['contenido'] as $k   => $val) {
+            if ($value['news_cat_id'] == $val['news_det_category']) {
+                $res                      = array();
+                $res['news_det_id']       = $val['news_det_id'];
+                $res['news_det_tit']      = $val['news_det_tit'];
+                $res['news_det_tit_en']   = $val['news_det_tit_en'];
+                $res['news_det_date']     = $val['news_det_date'];
+                $res['news_det_category'] = $val['news_det_category'];
+                $res['news_det_cat_name'] = $value['news_cat_name'];
+                array_push($result, $res);
+            }
+        }
+    }
+    usort($result, function ($a, $b)
+    {
+            return $a['news_det_date'] > $b['news_det_date'];
+        });
+    echo json_encode($result);
 }
 
 if ($_POST['router'] == "view_index_titles") {
-  #_____________________________Selection spanish list___________________________________
-  $news_list_es = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
-  $title_es     = $news_list_es->selectOneTypeNewsDetail(array("news_det_tit", "news_det_id"));
-  for ($i = 97; $i <= 122; $i++) {
-    $spanish_list[chr($i)] = array();
-    foreach ($title_es['contenido'] as $title => $text) {
-      $tmp = array_filter(mb_split('[\W+\s]', strtolower($text['news_det_tit'])));
-      if (substr($tmp[0], 0, 1) == chr($i)) {
-        array_push($spanish_list[chr($i)], array($text['news_det_id'], $text['news_det_tit']));
-      }
-    }}
+    #_____________________________Selection spanish list___________________________________
+    $news_list_es = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null);
+    $title_es     = $news_list_es->selectOneTypeNewsDetail(array("news_det_tit", "news_det_id"));
+    for ($i = 97; $i <= 122; $i++) {
+        $spanish_list[chr($i)] = array();
+        foreach ($title_es['contenido'] as $title => $text) {
+            $tmp = array_filter(mb_split('[\W+\s]', strtolower($text['news_det_tit'])));
+            if (substr($tmp[0], 0, 1) == chr($i)) {
+                array_push($spanish_list[chr($i)], array($text['news_det_id'], $text['news_det_tit']));
+            }
+        }}
     #_____________________________Selection english list___________________________________
-    $news_list_en = new NewsDetail(null,null, null, null, null, null, null, null, null, null, null, null, null);
+    $news_list_en = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null, null, null);
     $title_es     = $news_list_en->selectOneTypeNewsDetail(array("news_det_tit_en", "news_det_id"));
     for ($i = 97; $i <= 122; $i++) {
-      $english_list[chr($i)] = array();
-      foreach ($title_es['contenido'] as $title => $text) {
-        $tmp = array_filter(mb_split('[\W+\s]', strtolower($text['news_det_tit_en'])));
-        if (substr($tmp[0], 0, 1) == chr($i)) {
-          array_push($english_list[chr($i)], array($text['news_det_id'], $text['news_det_tit_en']));
-        }
-      }}
-      echo json_encode(array("spanish_list" => $spanish_list, "english_list" => $english_list));
-    }
+        $english_list[chr($i)] = array();
+        foreach ($title_es['contenido'] as $title => $text) {
+            $tmp = array_filter(mb_split('[\W+\s]', strtolower($text['news_det_tit_en'])));
+            if (substr($tmp[0], 0, 1) == chr($i)) {
+                array_push($english_list[chr($i)], array($text['news_det_id'], $text['news_det_tit_en']));
+            }
+        }}
+    echo json_encode(array("spanish_list" => $spanish_list, "english_list" => $english_list));
+}
 
-    if ($_POST['router'] == "news_view") {
-      $content = new GetContents();
-      $news_id = (int)$content->GetPostContent("news_id");
-      $news    = new NewsDetail(null,null,null,$news_id,null,null,null,null,null,null,null);
-      echo json_encode($news->selectAllNewsDetail());
-    }
+if ($_POST['router'] == "news_view") {
+    $content = new GetContents();
+    $news_id = (int) $content->GetPostContent("news_id");
+    $news    = new NewsDetail(null, null, null, $news_id, null, null, null, null, null, null, null);
+    echo json_encode($news->selectAllNewsDetail());
+}
 
-    if ($_POST['router'] == "range_search") {
-      $news = new NewsDetail(null,null,null,null,null,null,null,null,null,null,null);
-      $content = new GetContents();
-      $desde = $content->GetPostContent('desde');
-      $hasta = $content->GetPostContent('hasta');
-      $categoria = $content->GetPostContent('categoria');
-      $anio = $content->GetPostContent('anio');
-      $field = array();
-      $field['news_det_category'] = $categoria;
-      if($desde != "" && $hasta != ""){
-        $field['news_det_date'] = array($desde,$hasta);
-      }
-      $result = $news->RangeSearchNewsDetail($field);
-      #-------------Searrch categories ----------------------------
-      $final = array();
-      foreach ($result['contenido'] as $key => $value) {
-        $array = array();
-        $category = new NewsCategory(null, $value['news_det_category'], null);
-        $cat_names =$category->selectAllNewsCategory();
+if ($_POST['router'] == "range_search") {
+    $news                       = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null);
+    $content                    = new GetContents();
+    $desde                      = $content->GetPostContent('desde');
+    $hasta                      = $content->GetPostContent('hasta');
+    $categoria                  = $content->GetPostContent('categoria');
+    $anio                       = $content->GetPostContent('anio');
+    $field                      = array();
+    $field['news_det_category'] = $categoria;
+    if ($desde != "" && $hasta != "") {
+        $field['news_det_date'] = array($desde, $hasta);
+    }
+    $result = $news->RangeSearchNewsDetail($field);
+    #-------------Searrch categories ----------------------------
+    $final = array();
+    foreach ($result['contenido'] as $key => $value) {
+        $array                      = array();
+        $category                   = new NewsCategory(null, $value['news_det_category'], null);
+        $cat_names                  = $category->selectAllNewsCategory();
         $value['news_det_category'] = $cat_names['contenido'][0]['news_cat_name'];
         foreach ($value as $det => $val) {
-          $array[$det] = ($det == "news_det_category") ? $cat_names['contenido'][0]['news_cat_name'] : $val ;
+            $array[$det] = ($det == "news_det_category")?$cat_names['contenido'][0]['news_cat_name']:$val;
         }
         $date = date('Y', strtotime($value['news_det_date']));
-        array_push($final,$array);
+        array_push($final, $array);
 
         if ($anio !== "") {
-          # code...
-          if ($date == $anio) {
-            array_push($final,$array);
-          }
-        }else{
-          array_push($final,$array);
+            # code...
+            if ($date == $anio) {
+                array_push($final, $array);
+            }
+        } else {
+            array_push($final, $array);
         }
-      }
-      usort($final, function ($a, $b)
-      {
-        return $a['news_det_date'] > $b['news_det_date'];
-      });
-      echo json_encode($final);
     }
+    usort($final, function ($a, $b)
+    {
+            return $a['news_det_date'] > $b['news_det_date'];
+        });
+    echo jsonEncode($final);
+}
 
+if ($_POST['router'] == "update") {
+    $content  = new GetContents();
+    $news_id  = $content->GetPostContent('news_id');
+    $news     = new NewsDetail(null, null, null, $news_id, null, null, null, null, null, null, null);
+    $title_es = $content->GetPostContent("news_title_es");
+    $body_es  = $content->GetPostContent("news_body_es");
+    $date     = $content->GetPostContent("news_date");
+    $source   = $content->GetPostContent("news_source");
+    $title_en = $content->GetPostContent("news_title_en");
+    $body_en  = $content->GetPostContent("news_body_en");
+    $category = $content->GetPostContent("news_category");
+    $range    = $content->GetPostContent("news_range");
 
+    $news->setNewsDetDate($date);
+    $news->setNewsDetSource($source);
+    $news->setNewsDetText($body_es);
+    $news->setNewsDetTexten($body_en);
+    $news->setNewsDetTit($title_es);
+    $news->setNewsDetTiten($title_en);
+    $news->setNewsDetCategory($category);
+    $news->setNewsDetPriority($range);
+    echo json_encode($news->updateNewsDetail($news_id));
+}
 
+if ($_POST['router'] == 'delete') {
+    $news    = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null);
+    $content = new GetContents();
+    $news_id = $content->GetPostContent('news_id');
+    echo json_encode($news->deleteNewsDetail($news_id));
+}
 
-
-    if ($_POST['router'] == "update") {
-      $content = new GetContents();
-      $news_id = $content->GetPostContent('news_id');
-      $news = new NewsDetail(null,null,null,$news_id,null,null,null,null,null,null,null);
-      $title_es = $content->GetPostContent("news_title_es");
-      $body_es  = $content->GetPostContent("news_body_es");
-      $date     = $content->GetPostContent("news_date");
-      $source   = $content->GetPostContent("news_source");
-      $title_en = $content->GetPostContent("news_title_en");
-      $body_en  = $content->GetPostContent("news_body_en");
-      $category = $content->GetPostContent("news_category");
-      $range    = $content->GetPostContent("news_range");
-
-      $news->setNewsDetDate($date);
-      $news->setNewsDetSource($source);
-      $news->setNewsDetText($body_es);
-      $news->setNewsDetTexten($body_en);
-      $news->setNewsDetTit($title_es);
-      $news->setNewsDetTiten($title_en);
-      $news->setNewsDetCategory($category);
-      $news->setNewsDetPriority($range);
-      echo json_encode($news->updateNewsDetail($news_id));
-    }
-
-    if($_POST['router'] == 'delete'){
-      $news = new NewsDetail(null,null,null,null,null,null,null,null,null,null,null);
-      $content = new GetContents();
-      $news_id = $content->GetPostContent('news_id');
-      echo json_encode($news->deleteNewsDetail($news_id));
-    }
-
-    if ($_POST['router'] == 'masivo') {
-      $content     = new GetContents();
-      $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null,null);
-      $files_l  = new NewsFiles(null,null,null);
-      $path = "/home/annralf/Documentos/Noticias2010/";
-      $dir = opendir($path);
-      $files = array();
-      while ($current = readdir($dir)){
-        if( $current != "." && $current != "..") {
-          if(is_dir($path.$current)) {
-            showFiles($path.$current.'/');
-          }
-          else {
-            $files[] = $current;
-          }
+if ($_POST['router'] == 'masivo') {
+    $content     = new GetContents();
+    $news_detail = new NewsDetail(null, null, null, null, null, null, null, null, null, null, null);
+    $files_l     = new NewsFiles(null, null, null);
+    $path        = "/home/annralf/Documentos/Noticias2010/";
+    $dir         = opendir($path);
+    $files       = array();
+    while ($current = readdir($dir)) {
+        if ($current != "." && $current != "..") {
+            if (is_dir($path.$current)) {
+                showFiles($path.$current.'/');
+            } else {
+                $files[] = $current;
+            }
         }
-      }
+    }
 
-      for($i=0; $i<count( $files ); $i++){
-        $title_es    = $files[$i];
-        $img     = $content->GetPostContent("news_img");
+    for ($i = 0; $i < count($files); $i++) {
+        $title_es  = $files[$i];
+        $img       = $content->GetPostContent("news_img");
         $news_file = "data:application/pdf;base64,".base64_encode(file_get_contents($path.$files[$i]));
-        $body_es  = "";
-        $date     = date("Y/m/d");
-        $source   = "OSP";
-        $title_en = "";
-        $body_en  = "";
-        $category = 10;
-        $range    = 1;
-        $cadena = explode(".",$files[$i]);
+        $body_es   = "";
+        $date      = date("Y/m/d");
+        $source    = "OSP";
+        $title_en  = "";
+        $body_en   = "";
+        $category  = 10;
+        $range     = 1;
+        $cadena    = explode(".", $files[$i]);
         $files_l->setNewsFileName('news_'.$date);
         $files_l->setNewsFileArchive($news_file);
         $file_id = $files_l->saveNewsFiles();
@@ -228,5 +232,5 @@ if ($_POST['router'] == "view_index_titles") {
         $news_detail->setNewsDetFile($file_id['contenido']['news_file_id']);
         $news_id = $news_detail->saveNewsDetail();
 
-      }
-  }
+    }
+}
