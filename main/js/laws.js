@@ -54,6 +54,7 @@ function getAllYearLaws(){
 
 function getNewsByYear(year) {
   $('#pdf').hide();
+  $('#pdf_edit').hide();
   $('.list-news-det').empty().show();
   var law_list = JSON.parse(localStorage.getItem('law_list'));
   var list = " ";
