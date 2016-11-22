@@ -400,9 +400,14 @@ $('#list_options_laws').append(card);
 
   });
 }
-$(document).ready(function(){
 
+function validateSession(){
+  if (typeof(sessionStorage.login) === "undefined" && typeof(sessionStorage.user_name) === "undefined") {
+      location = "login.html";
+  } 
+}
+$(document).ready(function(){
+validateSession();
 getAllNews();
-priorNews();
 getAllYearView();
 });

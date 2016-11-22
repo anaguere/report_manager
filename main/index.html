@@ -55,10 +55,16 @@
             <a href="news_view.html">NEWS</a>
           </li>
           <li>
-            <a href="#laws">LAWS</a>
+            <a href="law_view.html">LAWS</a>
+          </li>
+          <li>
+            <a href="report_view.html">REPORTS</a>
           </li>
           <li>
             <a href="#finance">FINANCE</a>
+          </li>
+          <li>
+            <a onclick="logoutUser()">LOGOUT</a>
           </li>
         </ul>
       </div>
@@ -84,7 +90,10 @@
                 <a  href="news_view.html" class="btn btn-default btn-lg"><span class="network-name"><u>News</u></span></a>
               </li>
               <li>
-                <a  href="#laws" class="btn btn-default btn-lg"><span class="network-name"><u>Laws</u></span></a>
+                <a  href="law_view.html" class="btn btn-default btn-lg"><span class="network-name"><u>Laws</u></span></a>
+              </li>
+              <li>
+                <a  href="report_view.html" class="btn btn-default btn-lg"><span class="network-name"><u>Reports</u></span></a>
               </li>
               <li>
                 <a href="#finance" class="btn btn-default btn-lg"> <span class="network-name"><u>Finance</u></span></a>
@@ -103,7 +112,7 @@
 
   <!-- Page Content -->
 
-  <a  name="news"></a>
+  <!--a  name="news"></a>
 
   <div class="row" style="background: white; padding-top: 100px; padding-bottom: 100px">
 
@@ -141,8 +150,8 @@
         </div>
         <div class="card-block" name="list_options" id="list_options" >
           <div id="accordion" role="tablist" aria-multiselectable="false" >
-            <!-- Category end-->
-          </div>
+            < Category end-->
+          <!--/div>
         </div>
       </div>
 </div>
@@ -156,10 +165,10 @@
 
 
     </div>
-    <!-- /.container -->
-  </div>
+    </.container -->
+  <!--/div-->
   <!-- /.content-section-a -->
-  <a  name="laws"></a>
+  <!--a  name="laws"></a>
   <div class="content-section-b" style=" overflow:scroll; height: 800px">
 
 
@@ -205,9 +214,9 @@
 
 
     </div>
-    <!-- /.container -->
+    </.container -->
 
-  </div>
+  <!--/div-->
   <!-- /.content-section-b -->
 
 
@@ -222,11 +231,11 @@
             </li>
             <li class="footer-menu-divider">&sdot;</li>
             <li>
-              <a href="#about">News</a>
+              <a href="news_view.html">News</a>
             </li>
             <li class="footer-menu-divider">&sdot;</li>
             <li>
-              <a href="#services">Laws</a>
+              <a href="law_view.html">Laws</a>
             </li>
             <li class="footer-menu-divider">&sdot;</li>
             <li>
@@ -248,6 +257,7 @@
   <!-- Bootstrap Core JavaScript -->
   <script src="js/bootstrap.min.js"></script>
   <script src="js/news.js"></script>
+  <script src="js/user.js"></script>
 </body>
 
 </html>

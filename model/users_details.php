@@ -6,15 +6,16 @@ class UsersDetails extends Connector{
 	public $user_inf_id;
 	public $user_inf_login;
 	public $user_inf_mail;
-	public $user_inf_national_ID;
+	public $user_inf_national_id;
 	public $user_inf_password;
+	public $user_inf_type;
 
-	public function __construct($user_inf_full_name,$user_inf_id,$user_inf_login,$user_inf_mail,$user_inf_national_ID,$user_inf_password){
+	public function __construct($user_inf_full_name,$user_inf_id,$user_inf_login,$user_inf_mail,$user_inf_national_id,$user_inf_password,$user_inf_type){
 		$connector = Connector::ConexionBD();
 		$this->attr_connector = $connector['conexion'];
 		$this->table_name ="users_details";
 		$seleccion;
-		if($user_inf_full_name != null || $user_inf_id != null || $user_inf_login != null || $user_inf_mail != null || $user_inf_national_ID != null || $user_inf_password != null ){
+		if($user_inf_full_name != null || $user_inf_id != null || $user_inf_login != null || $user_inf_mail != null || $user_inf_national_id != null || $user_inf_password != null || $user_inf_type != null ){
 			if(!is_null($user_inf_full_name)){
 					$field = "user_inf_full_name";
 					$value = $user_inf_full_name;
@@ -31,13 +32,17 @@ class UsersDetails extends Connector{
 					$field = "user_inf_mail";
 					$value = $user_inf_mail;
 			}
-			if(!is_null($user_inf_national_ID)){
-					$field = "user_inf_national_ID";
-					$value = $user_inf_national_ID;
+			if(!is_null($user_inf_national_id)){
+					$field = "user_inf_national_id";
+					$value = $user_inf_national_id;
 			}
 			if(!is_null($user_inf_password)){
 					$field = "user_inf_password";
 					$value = $user_inf_password;
+			}
+			if(!is_null($user_inf_type)){
+					$field = "user_inf_type";
+					$value = $user_inf_type;
 			}
 			$this->objeto = Connector::SelectIn($this->attr_connector, $this->table_name, $field, $value);
 		}
@@ -73,12 +78,12 @@ class UsersDetails extends Connector{
 	public function setUserInfMail($user_inf_mail){
 			$this->users_details['user_inf_mail'] = $user_inf_mail;
 		}
-	public function getUserInfNationalID(){
-			$this->users_details['user_inf_national_ID'] = $this->objeto['contenido'][0]['user_inf_national_ID'];
-			return $this->user_inf_national_ID['user_inf_national_ID'];
+	public function getUserInfNationalid(){
+			$this->users_details['user_inf_national_id'] = $this->objeto['contenido'][0]['user_inf_national_id'];
+			return $this->user_inf_national_id['user_inf_national_id'];
 		}
-	public function setUserInfNationalID($user_inf_national_ID){
-			$this->users_details['user_inf_national_ID'] = $user_inf_national_ID;
+	public function setUserInfNationalid($user_inf_national_id){
+			$this->users_details['user_inf_national_id'] = $user_inf_national_id;
 		}
 	public function getUserInfPassword(){
 			$this->users_details['user_inf_password'] = $this->objeto['contenido'][0]['user_inf_password'];
@@ -86,6 +91,13 @@ class UsersDetails extends Connector{
 		}
 	public function setUserInfPassword($user_inf_password){
 			$this->users_details['user_inf_password'] = $user_inf_password;
+		}
+	public function getUserInfType(){
+			$this->users_details['user_inf_type'] = $this->objeto['contenido'][0]['user_inf_type'];
+			return $this->user_inf_type['user_inf_type'];
+		}
+	public function setUserInfType($user_inf_type){
+			$this->users_details['user_inf_type'] = $user_inf_type;
 		}
 	public function saveUsersDetails(){
 			return Connector::InsertIn($this->attr_connector,$this->table_name,$this->users_details);
@@ -106,5 +118,9 @@ class UsersDetails extends Connector{
 	public function RangeSearchUsersDetails($fields){
 		 return Connector::RangeSearch($this->attr_connector,$this->table_name,$fields);
 }
+	public function SearchUser($login, $password){
+		$sql = "SELECT * FROM users_details WHERE user_inf_login = 'test' AND user_inf_password = ".md5("test")."";
+		return Connector::Querys($this->attr_connector,$sql);
+	}
 }
 ?>

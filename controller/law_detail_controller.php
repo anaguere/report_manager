@@ -75,7 +75,10 @@ if ($_POST['router'] == "view_law_names") {
     $final['law_det_date'] = $val['law_det_date'];
     $final['law_det_type_id'] = $val['law_det_type'];
     foreach ($type as $key => $value) {
-      $final['law_det_type'] = ($value['law_type_id'] == $val['law_det_type']) ?  'N/E' : $value['law_type_name'] ;
+      if ($value['law_type_id'] == $val['law_det_type']) {
+        # code...
+        $final['law_det_type'] = $value['law_type_name'];
+      }
     }
     array_push($new, $final);
   }
