@@ -170,14 +170,37 @@ if ($_POST['router'] == "update") {
     $category = $content->GetPostContent("news_category");
     $range    = $content->GetPostContent("news_range");
 
-    $news->setNewsDetDate($date);
-    $news->setNewsDetSource($source);
-    $news->setNewsDetText($body_es);
-    $news->setNewsDetTexten($body_en);
-    $news->setNewsDetTit($title_es);
-    $news->setNewsDetTiten($title_en);
-    $news->setNewsDetCategory($category);
-    $news->setNewsDetPriority($range);
+    if($date != "")  {
+      $news->setNewsDetDate($date);
+    }
+    if ($source != "") {
+      # code...
+      $news->setNewsDetSource($source);
+    }
+    if ($body_es != "") {
+      # code...
+      $news->setNewsDetText($body_es);
+    }
+    if ($body_en != "") {
+      # code...
+      $news->setNewsDetTexten($body_en);
+    }
+    if ($title_es != "") {
+      # code...
+      $news->setNewsDetTit($title_es);
+    }
+    if ($title_en != "") {
+      # code...
+      $news->setNewsDetTiten($title_en);
+    }
+    if ($category != "") {
+      # code...
+      $news->setNewsDetCategory($category);
+    }
+    if ($range != "") {
+      # code...
+      $news->setNewsDetPriority($range);
+    }
     echo json_encode($news->updateNewsDetail($news_id));
 }
 

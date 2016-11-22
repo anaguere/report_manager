@@ -18,7 +18,7 @@ function getAllNews(){
   });
 }
 
-function priorNews(){
+/*function priorNews(){
     var result = JSON.parse(localStorage.getItem('news_list'));
     var cant = result.length;
     var news_sel_id = Math.floor(Math.random() * cant);
@@ -82,7 +82,7 @@ card += "</div>";
 $('#list_options').append(card);
 
   });
-}
+}*/
 //*********************************************************** NEWS new view ******************************************************************
 function getAllYearView(){
   $('#list_name').text('News by year');
@@ -109,6 +109,8 @@ $('.list-items ul').append(card);
 }
 
 function getAllCategoryView(){
+  $('#pdf').hide();
+  $('#pdf_edit').hide();
   $('#list_name').text('News by category');
   $('.list-items ul').empty();
   result = JSON.parse(localStorage.getItem('news_category'));
@@ -140,6 +142,7 @@ function getNewsByYear(year) {
 }
 
 function getNewsByCategory(category) {
+  $('#pdf_edit').hide();
   $('#pdf').hide();
   $('.list-news-det').empty().show();
   var news_list = JSON.parse(localStorage.getItem('news_list'));
@@ -148,6 +151,11 @@ function getNewsByCategory(category) {
     if(n.news_det_category == category){
       list += "<li class='news-list' title='Open "+n.news_det_tit+"' onclick='getNews("+n.news_det_id+")'>";
       list += "<strong>"+n.news_det_cat_name+"</strong>";
+      list += "<div style='marging-left:100px'>\
+                <i title='Law preview' class='fa fa-eye' onclick='getNews("+n.news_det_id+")' style='padding-left=5px; cursor=pointer;'></i>\
+                <i title='Edit news information' class='fa fa-pencil-square-o' onclick='getNewsEdit("+n.news_det_id+")' style='padding-left=5px; cursor=pointer;'></i>\
+                <i title='Delete news' class='fa fa-trash' style='padding-left=5px; cursor=pointer;' onclick='deleteNews("+n.law_det_id+")'></i>\
+              </div>";
       list += "<h4>"+n.news_det_tit+"</h4>";
       list += "</li>";
     }
@@ -406,6 +414,71 @@ function validateSession(){
       location = "login.html";
   } 
 }
+
+//***************************************** Admin functions ***********************************************
+function getNewsEdit(news_id) {
+  $('#pdf').hide();
+  $('.list-news-det').hide();
+  $('#pdf_edit').show();
+  $.post("../controller/news_detail_controller.php",{
+    router : "news_view",
+    news_id : news_id, 
+    function(){ $("#cargando").show()}
+  }).done(function(e){
+      var result = JSON.parse(e);
+      $('#news_name').val(result.contenido[0].news_det_tit);
+      $('#news_date').val(result.contenido[0].news_det_date);
+      $('#pdf_view_edit').attr('src',result.contenido[0].news_det_file[0].news_file_archive);
+      $('#save_edit').attr('onclick','getNewsUpdate('+result.contenido[0].news_det_id+')')
+      var news_types = JSON.parse(localStorage.getItem('news_category'));
+      $.each(news_types,function(i,n){
+        $.each(n.contenido,function(j,k){
+          $('#news_type').append("<option value='"+k.news_cat_id+"'>"+k.news_cat_name+"</option>");
+        });
+      });
+      $("#cargando").hide();
+
+  });
+}
+
+function getNewsUpdate(news_id) {
+
+  $.post("../controller/news_detail_controller.php",{
+    router : "update",
+    news_id : news_id,
+    news_title_es : $('#news_name').val(),
+    news_date : $('#news_date').val(),
+    news_category : $('#news_type').val(),
+  }).done(function(e){
+      var result = JSON.parse(e)
+      if (result.conexion) {
+        alert('Successful');
+        location.reload();
+      }else{
+        alert('Having something wrong, please try again!');
+      }
+  });
+}
+
+function cancelNewsUpdate(){
+  location.reload();
+}
+
+function deleteLaw(news_id){
+  $.post("../controller/news_detail_controller.php",{
+    router : 'delete',
+    news_id : news_id
+  }).done(function(e){
+    var result = JSON.parse(e);
+    if(result.conexion){
+      alert('Delete successful');
+    }else{
+        alert('Having something wrong, please try again!');
+    }
+    location.reload();
+  });
+}
+
 $(document).ready(function(){
 validateSession();
 getAllNews();

@@ -1,0 +1,430 @@
+/*
+ * Start Bootstrap - Landing Page (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+ body,
+ html {
+    width: 100%;
+    height: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 ,
+p,
+li{
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.topnav {
+    font-size: 14px;
+}
+
+.lead {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.login {
+   background-color: black; width: 300px; height: 200px;
+}
+
+.intro-header {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(../img/news-header.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.intro-header_user {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(../img/news-header.jpg) no-repeat center center;
+    background-size: cover;
+    height: 200px;
+}
+
+
+.intro-header_law {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(../img/law_header.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.intro-header_report {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(../img/report_header.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.intro-message_admin {
+    position: relative;
+    padding-top: 5%;
+ 
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+
+.intro-message > h1 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 5em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+
+    ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+
+    .intro-divider {
+        width: 100%;
+    }
+}
+
+
+.menu-header {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    height: 700px;
+}
+.menu{
+    display: block;
+    position: relative;
+}
+ .list-items {
+    content: " ";
+    margin-top: 80px;
+    position: absolute;
+    width: 300px;
+    background-color: #FF0000;
+    margin-left: -10%;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px #888888;
+}
+.title{
+    margin-left: 50px;
+    padding-top: 20px;
+    color: white;
+    font-size: 20px;
+    font-style: italic;
+}
+ul{
+    margin-top: 50px;
+    list-style-type: none;
+}
+.tag-list{
+    text-align: right;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-right: 20px;
+    color: white;
+    height: 70px;
+    border-color: white;
+    border-style: solid;
+    border-width:  0 0 2px 0;
+}
+
+.tag-list:hover{
+    border-style: outset;
+    border-color: black;
+    text-decoration-line: underline;
+    font-size: 20px;
+    cursor:pointer;
+
+}
+
+.list-news-years{
+    content: " ";
+    margin-top: 100px;
+    background-color: #CFD8DC;
+    margin-left: 12%;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 10px 10px 5px #888888;
+}
+.list-main{
+    content: " ";
+    margin-top: 100px;
+    background-color: #CFD8DC;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 10px 10px 5px #888888;
+}
+.list-news-det{
+    margin-left: 5%;
+}
+
+.news-list > strong{
+    font-style: italic;
+    font-size: 12px;
+}
+.news-list > h4{
+    margin-left: 30px;
+    font-style: oblique;
+    text-transform: uppercase;
+}
+.news-list{
+    border-color: #90A4AE;
+    border-style: solid;
+    border-width:  0 0 1px 0;
+}
+.news-list:hover{
+    border-color: #90A4AE;
+    border-style: outset;
+    border-width:  0 2px 2px 0;
+}
+
+.pdf_view{
+    content: " ";
+    height: 100vh;
+    width: 90%;
+    margin-left: 5%;
+    background-color:  #90A4AE;
+}
+.pdf_header{
+    text-align: right;
+    color: #424242;
+}
+
+.base_header{
+    text-align: right;
+    color: #424242;
+    margin-left: -200px;
+}
+.cargando{
+    background: #fff;
+    width: 100%;
+    height: 3000px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    opacity: 0.9; 
+    display: none; 
+    text-align: center; 
+    padding-top:200px;
+    cursor:wait;
+}
+
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.content-section-a {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+    height:100vh;
+}
+
+.content-section-b {
+    padding: 50px 0;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    height:100vh;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.section-heading-spacer {
+    float: left;
+    width: 200px;
+    border-top: 3px solid #e7e7e7;
+}
+
+.banner {
+    padding: 100px 0;
+    color: #f8f8f8;
+    background: url(../img/banner-bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.banner h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 3em;
+}
+
+.banner ul {
+    margin-bottom: 0;
+}
+
+.banner-social-buttons {
+    float: right;
+    margin-top: 0;
+}
+
+@media(max-width:1199px) {
+    ul.banner-social-buttons {
+        float: left;
+        margin-top: 15px;
+    }
+}
+
+@media(max-width:767px) {
+    .banner h2 {
+        margin: 0;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+        font-size: 3em;
+    }
+
+    ul.banner-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.banner-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+footer {
+    padding: 50px 0;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+
+
+h2 a{
+  color: darkred;
+}
+
+a{
+    color: darkred;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover{
+    color: red;
+    text-decoration: none;
+
+}
+
+.nav-link{
+    font-size: 22px;
+}
+
+
+.section-heading {
+     margin-bottom: 10px;
+}
+
+.card-header h5 a{
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+
+.card-header h5 a:hover , .card-header h5 a:active{
+  text-decoration: none;
+}
+
+.new .card-header:hover{
+    background: darkred;
+    color: white;
+    border-bottom: 2px solid #999;
+
+}
+
+
+.card-header h5 a:hover {
+color: white;
+}
+
+
+.card-header h5 {
+    padding-left: 10px;
+    padding-bottom:  10px;
+        padding-top: 15px;
+}
+
+
+.card{
+    width: 600px;
+    background: #fff;
+
+}
+
+.card-header{
+    margin-bottom: 5px
+}
+
+.card-block{
+        padding-bottom: 10px;
+        text-transform: uppercase;
+        cursor: pointer;
+}
+
+.card-block:hover{
+      background: #f5f5f5;
+}
+
+ul .nav a {
+    color: white;
+}
+
+
+.ley.nav-tabs>li>a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    font-size: 16px;
+}
